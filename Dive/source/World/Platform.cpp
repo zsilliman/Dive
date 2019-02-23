@@ -40,6 +40,7 @@ void Platform::parallaxTranslate(float reference_x, float reference_y, float ref
 	//Compute distance between y coordinates
 	float dist = reference_y - _node->getPositionY();
 	//Essentially draw a line with slope -1/500 with y-intercept at 1
+	//I think this should be changed, but we should discuss how platform speed changes with distance(along y-axis) from the player
 	float relative_speed = 1 - (dist / 500);
 	//Set bounds on the speed
 	if (relative_speed < 0)
