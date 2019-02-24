@@ -12,7 +12,7 @@ class PlatformMap
 protected:
 	
 	vector<shared_ptr<Platform>> layers;
-	int _map_size = 0;
+	int _map_size = 0, _x_start = 0, _x_end = 0;
 
 public:
 
@@ -36,6 +36,6 @@ public:
 
 	void parallaxTranslatePlatforms(Vec2 reference, float reference_dx);
 
-	void setMapSize(int map_size);
+	void setMapSize(int x_start, int x_end);
 
 };

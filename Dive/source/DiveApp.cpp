@@ -250,5 +250,5 @@ void DiveApp::buildScene() {
 	//Add the platform map to the scene
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
-	_platform_map->setMapSize(1200);
+	_platform_map->setMapSize(0, 1200);
 }

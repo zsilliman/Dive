@@ -26,7 +26,7 @@ void PlatformMap::setPosition(float x, float y) {
 }
 
 void PlatformMap::addPlatform(shared_ptr<Platform> platform) {
-	platform->setMapSize(_map_size);
+	platform->setMapSize(_x_start, _x_end);
 	layers.push_back(platform);
 	_node->addChild(platform->_node);
 }
@@ -50,9 +50,11 @@ void PlatformMap::parallaxTranslatePlatforms(Vec2 reference, float reference_dx)
 	}
 }
 
-void PlatformMap::setMapSize(int map_size) {
-	_map_size = map_size;
+void PlatformMap::setMapSize(int x_start, int x_end) {
+	_map_size = x_end-x_start;
+	_x_start = x_start;
+	_x_end = x_end;
 	for (int i = 0; i < layers.size(); i++) {
-		layers[i]->setMapSize(map_size);
+		layers[i]->setMapSize(x_start, x_end);
 	}
 }

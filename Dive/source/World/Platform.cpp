@@ -38,10 +38,10 @@ void Platform::updatePosition() {
 
 void Platform::parallaxTranslate(float reference_x, float reference_y, float reference_dx) {
 	//Compute distance between y coordinates
-	float dist = reference_y - _node->getPositionY();
+	float dist = abs(reference_y - _node->getPositionY());
 	//Essentially draw a line with slope -1/500 with y-intercept at 1
 	//I think this should be changed, but we should discuss how platform speed changes with distance(along y-axis) from the player
-	float relative_speed = 1 - (dist / 500);
+	float relative_speed = 1 / (1+dist/500);
 	//Set bounds on the speed
 	if (relative_speed < 0)
 		relative_speed = 0;
@@ -61,16 +61,20 @@ void Platform::parallaxTranslate(float reference_x, float reference_y, float ref
 	if (_map_size > 1) {
 		//This part is still kind of faulty, but whatever
 		//This makes the positions jump back to simulate an infinite world
-		//It has a weird bunch of modulos. a%b sometimes returns negative
-		//So I had to do (b + (a%b)) % b
-		position.x = (_map_size + ((int)position.x % _map_size)) % _map_size;
+		if (position.x > _x_end)
+			position.x -= _map_size;
+		else if (position.x < _x_start)
+			position.x += _map_size;
+		//position.x = (_map_size + ((int)(position.x + _x_start) % _map_size)) % _map_size;
 	}
 	//Set the position to the newly computed one
 	_body->setPosition(position);
 }
 
-void Platform::setMapSize(int map_size) { 
-	_map_size = map_size;
-	if (map_size > 1)
-		_initial_pos.x = (_map_size + ((int)_initial_pos.x % _map_size)) % _map_size;
+void Platform::setMapSize(int x_start, int x_end) { 
+	_map_size = x_end-x_start;
+	_x_start = x_start;
+	_x_end = x_end;
+	//if (_map_size > 1)
+	//	_initial_pos.x = (_map_size + ((int)(_initial_pos.x + x_start) % _map_size)) % _map_size;
 }
