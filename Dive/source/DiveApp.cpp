@@ -134,7 +134,7 @@ void DiveApp::update(float timestep) {
 	//if (mouse->buttonDown().hasLeft()) {
 	_player->push_direction(mouse->pointerPosition());
 	//}
-	CULog(std::to_string(timestep).c_str());
+    CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
 	_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
 
@@ -231,13 +231,33 @@ void DiveApp::buildScene() {
 		//Allocate
 		shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
 		//Set starting location
-		p->setInitialPosition(200 + i * 100, i * 100);
+		p->setInitialPosition(-200 + i * 100, i * 100);
 		//Set size (texture is 16x16px)
-		p->setScale(16, 2);
+		p->setScale(30, 2);
 		//Initialize physics
 		p->initPhysics(_world);
 		//Add it to the map
 		_platform_map->addPlatform(p);
+        
+        shared_ptr<Platform> p2 = Platform::allocWithTexture(platform_tex);
+        //Set starting location
+        p2->setInitialPosition(200 + i * 100, i * 100);
+        //Set size (texture is 16x16px)
+        p2->setScale(10, 2);
+        //Initialize physics
+        p2->initPhysics(_world);
+        //Add it to the map
+        _platform_map->addPlatform(p2);
+        
+        shared_ptr<Platform> p3 = Platform::allocWithTexture(platform_tex);
+        //Set starting location
+        p3->setInitialPosition(600 + i * 100, i * 100);
+        //Set size (texture is 16x16px)
+        p3->setScale(30, 2);
+        //Initialize physics
+        p3->initPhysics(_world);
+        //Add it to the map
+        _platform_map->addPlatform(p3);
 	}
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
@@ -250,5 +270,5 @@ void DiveApp::buildScene() {
 	//Add the platform map to the scene
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
-	_platform_map->setMapSize(0, 1200);
+	_platform_map->setMapSize(10, 1000);
 }
