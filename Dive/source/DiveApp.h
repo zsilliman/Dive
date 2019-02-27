@@ -60,13 +60,16 @@ protected:
 	/** A reference to the player */
 	std::shared_ptr<Player> _player;
     
-    std::shared_ptr<cugl::BoxObstacle>    _goalDoor;
+    std::shared_ptr<cugl::BoxObstacle> _goalDoor;
     std::shared_ptr<cugl::Label> _winnode;
+    std::shared_ptr<PolygonNode> sprite;
 
     /** A countdown used to move the logo */
     int  _countdown;
     
     bool _complete;
+    
+    float scale;
 
     
     /** 
