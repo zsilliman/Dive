@@ -155,9 +155,11 @@ void DiveApp::update(float timestep) {
     size *= GAME_WIDTH/size.width;
 
 	cugl::Mouse* mouse = Input::get<cugl::Mouse>();
-	//if (mouse->buttonDown().hasLeft()) {
-	_player->push_direction(mouse->pointerPosition(), _platform_map);
-	//}
+	if (mouse->buttonDown().hasLeft()) {
+		_player->setPushDestination(mouse->pointerPosition(), _platform_map);
+		//push_direction(mouse->pointerPosition(), _platform_map);
+	}
+	_player->pushToDestination();
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
 	_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
