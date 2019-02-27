@@ -13,17 +13,18 @@ void Player::setScale(float x, float y) {
 	_node->setScale(x, y);
 }
 
-void Player::setPosition(float x, float y) {
-	_node->setPositionX(x);
-	_node->setPositionY(y);
+//Note that init physics must be called first
+void Player::setPhysicsPosition(float x, float y) {
+	_body->setPosition(x, y);
 }
 
 //This is how the player follows the mouse
-void Player::push_direction(Vec2 mouse_pos) {
+void Player::push_direction(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map) {
 	//Convert from screen to local coordinates
-	Vec2 local_pos = _node->screenToNodeCoords(mouse_pos);
+	Vec2 local_pos = platform_map->_node->screenToNodeCoords(mouse_pos) - _body->getPosition();
 	//This is so the center of the node is attracted to the click location
-	local_pos -= Vec2(_node->getWidth() / (2.0f*_node->getScaleX()), _node->getHeight() / (2.0f*_node->getScaleY()));
+	//local_pos -= Vec2(_node->getWidth() / (2.0f*_node->getScaleX()), _node->getHeight() / (2.0f*_node->getScaleY()));
+	local_pos -= Vec2(_body->getWidth() / 2, _body->getHeight() / 2);
 	//Prevent the push if the click location is too close to the node
 	if (local_pos.length() < accelleration*(1.0f/20.0f))
 		return;

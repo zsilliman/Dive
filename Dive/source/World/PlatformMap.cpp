@@ -58,3 +58,13 @@ void PlatformMap::setMapSize(int x_start, int x_end) {
 		layers[i]->setMapSize(x_start, x_end);
 	}
 }
+
+void PlatformMap::anchorCameraTo(float x, float y, float _player_screen_x, float _player_screen_y) {
+	_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	_node->setPositionX(-x + _player_screen_x);
+	_node->setPositionY(-y + _player_screen_y);
+}
+
+void PlatformMap::anchorCameraTo(Vec2 position, Vec2 player_screen_pos) {
+	anchorCameraTo(position.x, position.y, player_screen_pos.x, player_screen_pos.y);
+}
