@@ -12,7 +12,8 @@ class Player : public cugl::CapsuleObstacle {
 
 protected:
 	shared_ptr<BoxObstacle> _body;
-	Vec2 linear_velocity;
+	Vec2 _destination;
+	bool _dest_active = false;
 	float accelleration = 30;
 	float max_speed = 150;
 
@@ -28,7 +29,15 @@ public:
 
 	Vec2 getPhysicsPosition() { return _body->getPosition(); }
 
-	void push_direction(Vec2 dir, shared_ptr<PlatformMap> platform_map);
+	Vec2 get_push_destination() { return _destination; }
+
+	void Player::push(Vec2 force);
+
+	void setPushDestination(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map);
+
+	void pushToDestination();
+
+	void pushDirection(Vec2 dir, shared_ptr<PlatformMap> platform_map);
 
 	void initPhysics(shared_ptr<ObstacleWorld> world);
 
