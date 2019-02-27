@@ -1,11 +1,13 @@
 #pragma once
 
 #include <cugl/cugl.h>
+#include <cugl/2d/physics/CUBoxObstacle.h>
+#include <cugl/2d/physics/CUCapsuleObstacle.h>
 
 using namespace cugl;
 using namespace std;
 
-class Player {
+class Player : public cugl::CapsuleObstacle {
 
 protected:
 	shared_ptr<BoxObstacle> _body;

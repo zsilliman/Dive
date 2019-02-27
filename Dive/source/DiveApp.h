@@ -32,6 +32,8 @@
 #include <cugl/cugl.h>
 #include "World/PlatformMap.h"
 #include "World/Player.h"
+#include <Box2D/Dynamics/b2Fixture.h>
+
 
 /**
  * Class for a simple Hello World style application
@@ -57,9 +59,15 @@ protected:
 
 	/** A reference to the player */
 	std::shared_ptr<Player> _player;
+    
+    std::shared_ptr<cugl::BoxObstacle>    _goalDoor;
+    std::shared_ptr<cugl::Label> _winnode;
 
     /** A countdown used to move the logo */
     int  _countdown;
+    
+    bool _complete;
+
     
     /** 
      * Internal helper to build the scene graph.
@@ -69,6 +77,8 @@ protected:
      * have become standard in most game engines.
      */
     void buildScene();
+    
+    void reset();
     
 public:
     /**
@@ -115,6 +125,10 @@ public:
      * causing the application to be deleted.
      */
     virtual void onShutdown() override;
+    
+    void beginContact(b2Contact* contact);
+    
+    void setComplete(bool value);
     
     /**
      * The method called to update the application data.

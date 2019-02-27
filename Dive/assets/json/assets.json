@@ -27,7 +27,10 @@
 			"magfilter":"linear",
 			"wrapS":    "clamp",
 			"wrapT":    "clamp"
-		}
+		},
+        "goal": {
+            "file":      "textures/goaldoor.png"
+        }
 	},
 	"fonts": {
 		"charlemagne": {

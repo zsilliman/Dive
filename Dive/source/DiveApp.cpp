@@ -35,6 +35,9 @@
 #include <cstdlib>
 #include <ctime>
 
+#include <Box2D/Dynamics/Contacts/b2Contact.h>
+#include <Box2D/Collision/b2Collision.h>
+
 // This keeps us from having to write cugl:: all the time
 using namespace cugl;
 
@@ -42,6 +45,12 @@ using namespace cugl;
 #define TIME_STEP 60
 // This is adjusted by screen aspect ratio to get the height
 #define GAME_WIDTH 1024
+
+#define GOAL_TEXTURE    "goal"
+#define MESSAGE_FONT    "charlemagne"
+#define WIN_MESSAGE     "VICTORY!"
+#define WIN_COLOR       Color4::YELLOW
+#define EXIT_COUNT      240
 
 /**
  * The method called after OpenGL is initialized, but before running the application.
@@ -81,6 +90,21 @@ void DiveApp::onStartup() {
     Input::activate<Mouse>();
 	Input::activate<Keyboard>();
 #endif
+    
+    //define rect bounds of the physics engine
+    cugl::Rect phys_bounds = cugl::Rect();
+    phys_bounds.origin.x = -1000;
+    phys_bounds.origin.y = -1000;
+    phys_bounds.size.width = 2000;
+    phys_bounds.size.height = 2000;
+    
+    //Create physics world
+    _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 0));
+    
+    _world->onBeginContact = [this](b2Contact* contact) {
+        beginContact(contact);
+    };
+    
     
     // Build the scene from these assets
     buildScene();
@@ -140,6 +164,12 @@ void DiveApp::update(float timestep) {
 
 	_player->updatePosition();
 	_platform_map->updatePlatformPositions();
+    
+    if (_countdown > 0) {
+        _countdown--;
+    } else if (_countdown == 0) {
+        reset();
+    }
 }
 
 /**
@@ -154,6 +184,34 @@ void DiveApp::update(float timestep) {
 void DiveApp::draw() {
     // This takes care of begin/end
     _scene->render(_batch);
+}
+
+void DiveApp::setComplete(bool value) {
+    bool change = _complete != value;
+    _complete = value;
+    if (value && change) {
+        _winnode->setVisible(true);
+        _countdown = EXIT_COUNT;
+    } else if (!value) {
+        _winnode->setVisible(false);
+        _countdown = -1;
+    }
+}
+
+void DiveApp::beginContact(b2Contact* contact) {
+    b2Fixture* fix1 = contact->GetFixtureA();
+    b2Fixture* fix2 = contact->GetFixtureB();
+    
+    b2Body* body1 = fix1->GetBody();
+    b2Body* body2 = fix2->GetBody();
+    
+    Obstacle* bd1 = (Obstacle*)body1->GetUserData();
+    Obstacle* bd2 = (Obstacle*)body2->GetUserData();
+    
+    if((bd1 == _player.get() && bd2 == _goalDoor.get()) ||
+       (bd1 == _goalDoor.get() && bd2 == _player.get())) {
+        setComplete(true);
+    }
 }
 
 /**
@@ -185,7 +243,7 @@ void DiveApp::buildScene() {
             this->quit();
         }
     });
-    
+
     // Find the safe area, adapting to the iPhone X
     Rect safe = getSafeArea();
     safe.origin *= scale;
@@ -210,16 +268,38 @@ void DiveApp::buildScene() {
 
 	// A REALLY MESS JUMBLE OF CODE THAT INITIALIZES THE WORLD
 
-	//define rect bounds of the physics engine
-	cugl::Rect phys_bounds = cugl::Rect();
-	phys_bounds.origin.x = -1000;
-	phys_bounds.origin.y = -1000;
-	phys_bounds.size.width = 2000;
-	phys_bounds.size.height = 2000;
-
-	//Create physics world
-	_world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 0));
-
+    //Goal Setup
+    
+    _winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
+    _winnode->setAnchor(Vec2::ANCHOR_CENTER);
+    _winnode->setPosition(size.width/2,size.height/2);
+    _winnode->setForeground(WIN_COLOR);
+    _scene -> addChild(_winnode,3);
+    setComplete(false);
+    
+    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
+    std::shared_ptr<PolygonNode> sprite;
+    std::shared_ptr<WireNode> draw;
+    
+    // Create obstacle
+    Vec2 goalPos = Vec2(50,20);
+    Size goalSize(image->getSize().width/(scale+2),
+                  image->getSize().height/(scale+2));
+    _goalDoor = BoxObstacle::alloc(goalPos,goalSize);
+    
+    // Set the physics attributes
+    _goalDoor->setBodyType(b2_staticBody);
+    _goalDoor->setDensity(0.0f);
+    _goalDoor->setFriction(0.0f);
+    _goalDoor->setRestitution(0.0f);
+    _goalDoor->setSensor(true);
+    
+    // Add the scene graph nodes to this object
+    sprite = PolygonNode::allocWithTexture(image);
+    _world->addObstacle(_goalDoor);
+    sprite->setPosition(_goalDoor->getPosition()*scale);
+    _scene->addChild(sprite, 0);
+    
 	//Load texture of the platforms
 	std::shared_ptr<Texture> platform_tex = _assets->get<Texture>("blank");
 
@@ -228,36 +308,48 @@ void DiveApp::buildScene() {
 
 	//Create some platforms
 	for (int i = 0; i < 5; i++) {
-		//Allocate
-		shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
-		//Set starting location
-		p->setInitialPosition(-200 + i * 100, i * 100);
-		//Set size (texture is 16x16px)
-		p->setScale(30, 2);
-		//Initialize physics
-		p->initPhysics(_world);
-		//Add it to the map
-		_platform_map->addPlatform(p);
-        
-        shared_ptr<Platform> p2 = Platform::allocWithTexture(platform_tex);
-        //Set starting location
-        p2->setInitialPosition(200 + i * 100, i * 100);
-        //Set size (texture is 16x16px)
-        p2->setScale(10, 2);
-        //Initialize physics
-        p2->initPhysics(_world);
-        //Add it to the map
-        _platform_map->addPlatform(p2);
-        
-        shared_ptr<Platform> p3 = Platform::allocWithTexture(platform_tex);
-        //Set starting location
-        p3->setInitialPosition(600 + i * 100, i * 100);
-        //Set size (texture is 16x16px)
-        p3->setScale(30, 2);
-        //Initialize physics
-        p3->initPhysics(_world);
-        //Add it to the map
-        _platform_map->addPlatform(p3);
+        if (i > 0){
+            //Allocate
+            shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
+            //Set starting location
+            p->setInitialPosition(-200 + i * 100, i * 100);
+            //Set size (texture is 16x16px)
+            p->setScale(30, 2);
+            //Initialize physics
+            p->initPhysics(_world);
+            //Add it to the map
+            _platform_map->addPlatform(p);
+            
+            shared_ptr<Platform> p2 = Platform::allocWithTexture(platform_tex);
+            //Set starting location
+            p2->setInitialPosition(200 + i * 100, i * 100);
+            //Set size (texture is 16x16px)
+            p2->setScale(10, 2);
+            //Initialize physics
+            p2->initPhysics(_world);
+            //Add it to the map
+            _platform_map->addPlatform(p2);
+            
+            shared_ptr<Platform> p3 = Platform::allocWithTexture(platform_tex);
+            //Set starting location
+            p3->setInitialPosition(600 + i * 100, i * 100);
+            //Set size (texture is 16x16px)
+            p3->setScale(30, 2);
+            //Initialize physics
+            p3->initPhysics(_world);
+            //Add it to the map
+            _platform_map->addPlatform(p3);
+        }else {
+            shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
+            //Set starting location
+            p->setInitialPosition(-200 + i * 100, i * 100);
+            //Set size (texture is 16x16px)
+            p->setScale(150, 2);
+            //Initialize physics
+            p->initPhysics(_world);
+            //Add it to the map
+            _platform_map->addPlatform(p);
+        }
 	}
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
@@ -271,4 +363,12 @@ void DiveApp::buildScene() {
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
 	_platform_map->setMapSize(10, 1000);
+}
+
+
+void DiveApp::reset() {
+    _world->clear();
+    _scene->removeAllChildren();
+    setComplete(false);
+    buildScene();
 }
