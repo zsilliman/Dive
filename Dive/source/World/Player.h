@@ -13,6 +13,7 @@ class Player : public cugl::CapsuleObstacle {
 protected:
 	shared_ptr<BoxObstacle> _body;
 	Vec2 _destination;
+	bool _dest_active = false;
 	float accelleration = 30;
 	float max_speed = 150;
 

@@ -155,6 +155,7 @@ void DiveApp::update(float timestep) {
     size *= GAME_WIDTH/size.width;
 
 	cugl::Mouse* mouse = Input::get<cugl::Mouse>();
+	mouse->setPointerAwareness(cugl::Mouse::PointerAwareness::DRAG);
 	if (mouse->buttonDown().hasLeft()) {
 		_player->setPushDestination(mouse->pointerPosition(), _platform_map);
 		//push_direction(mouse->pointerPosition(), _platform_map);
@@ -162,7 +163,7 @@ void DiveApp::update(float timestep) {
 	_player->pushToDestination();
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
-	_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
+	_platform_map->parallaxTranslatePlatforms(_player->getPhysicsPosition(), _player->getdX(timestep));
 
 	_platform_map->updatePlatformPositions();
 	//Centers map around the player
@@ -361,7 +362,7 @@ void DiveApp::buildScene() {
 	_player->_node->setPosition(Vec2(size.width/2, size.height/2));
 	//Initialize all of its physics properties and add it to the physics world
 	_player->initPhysics(_world);
-	_player->setPhysicsPosition(420, 420);
+	_player->setPhysicsPosition(420, 500);
 	//Add player to the _platform_map, just makes relative positions easier
 	_scene->addChild(_player->_node);
 	//Add the platform map to the scene
