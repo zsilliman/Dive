@@ -31,7 +31,7 @@ public:
 
 	Vec2 get_push_destination() { return _destination; }
 
-	void Player::push(Vec2 force);
+    void push(Vec2 force);
 
 	void setPushDestination(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map);
 

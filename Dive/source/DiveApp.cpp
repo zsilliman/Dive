@@ -170,8 +170,8 @@ void DiveApp::update(float timestep) {
 	_platform_map->anchorCameraTo(_player->getPhysicsPosition(), _player->_node->getPosition());
     
 //    sprite->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-//    sprite -> setPosition(-_player->getPhysicsPosition().x + _player->_node->getWorldPosition().x , -_player->getPhysicsPosition().y + _player->_node->getWorldPosition().y);
-//    
+//    sprite->setPosition(_goalDoor->getPosition()*scale);
+
     if (_countdown > 0) {
         _countdown--;
     } else if (_countdown == 0) {
