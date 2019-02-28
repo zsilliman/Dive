@@ -223,7 +223,6 @@ void DiveApp::setComplete(bool value) {
 }
 
 void DiveApp::beginContact(b2Contact* contact) {
-    CULog("Contact Detected");
     b2Fixture* fix1 = contact->GetFixtureA();
     b2Fixture* fix2 = contact->GetFixtureB();
     
@@ -232,7 +231,7 @@ void DiveApp::beginContact(b2Contact* contact) {
     
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
-    
+
     if((bd1->getName().compare(_player->getBodyName()) && bd2 == _goalDoor->_body.get()) ||
        (bd1 == _goalDoor->_body.get() && bd2->getName().compare(_player->getBodyName()))) {
         CULog("Goal Contact");
@@ -317,7 +316,7 @@ void DiveApp::buildScene() {
 
 	//Create some platforms
 	for (int i = 0; i < 5; i++) {
-        if (i > 0){
+        if (i > 1){
             //Allocate
             shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
             //Set starting location
@@ -348,7 +347,7 @@ void DiveApp::buildScene() {
             p3->initPhysics(_world);
             //Add it to the map
             _platform_map->addPlatform(p3);
-        }else {
+        }else if (i == 0) {
             shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
             //Set starting location
             p->setInitialPosition(-200 + i * 100, i * 100);
@@ -360,30 +359,6 @@ void DiveApp::buildScene() {
             _platform_map->addPlatform(p);
         }
 	}
-    
-    
-    float GOAL_POS[] = {10, 30};
-    Vec2 goalPos = ((Vec2)GOAL_POS);
-    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
-//    Size goalSize = image->getSize()/scale;
-    
-    
-//    std::shared_ptr<PolygonNode> sprite = PolygonNode::allocWithTexture(image);
-    
-//    _goalDoor = BoxObstacle::alloc(goalPos,goalSize);
-
-    // Set the physics attributes
-//    _goalDoor->setBodyType(b2_staticBody);
-//    _goalDoor->setDensity(0.0f);
-//    _goalDoor->setFriction(0.0f);
-//    _goalDoor->setRestitution(0.0f);
-//    _goalDoor->setSensor(true);
-//    _world->addObstacle(_goalDoor);
-    
-  
-    
-//    sprite->setPosition();
-//    _scene->addChild(sprite,0);
     
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
@@ -407,11 +382,10 @@ void DiveApp::buildScene() {
 	//Add player to the _platform_map, just makes relative positions easier
 	_platform_map->_node->addChild(_urchin->_node);
 
-	
-
-	//Add the platform map to the scene
     
-    
+    float GOAL_POS[] = {10, 60};
+    Vec2 goalPos = ((Vec2)GOAL_POS);
+    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
     _goalDoor = Goal::allocWithTexture(image);
     //    Vec2 spritePos = _goalDoor->getPosition()*scale;
     //    _goalDoor->_node->setPosition(Vec2(size.width/2, size.height/2));
@@ -419,7 +393,6 @@ void DiveApp::buildScene() {
     _goalDoor->initPhysics(_world);
     _platform_map->addPlatform(_goalDoor);
 
-    
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
 	_platform_map->setMapSize(10, 1000);
