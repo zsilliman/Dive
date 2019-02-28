@@ -32,6 +32,7 @@
 #include <cugl/cugl.h>
 #include "World/PlatformMap.h"
 #include "World/Player.h"
+#include "World/Urchin.h"
 #include <Box2D/Dynamics/b2Fixture.h>
 
 
@@ -59,6 +60,8 @@ protected:
 
 	/** A reference to the player */
 	std::shared_ptr<Player> _player;
+	/** A reference to the sea urchin */
+	std::shared_ptr<Urchin> _urchin;
     
     std::shared_ptr<cugl::BoxObstacle>    _goalDoor;
     std::shared_ptr<cugl::Label> _winnode;

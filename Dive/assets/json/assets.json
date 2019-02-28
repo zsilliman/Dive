@@ -30,6 +30,9 @@
 		},
         "goal": {
             "file":      "textures/goaldoor.png"
+        },
+        "urchin": {
+            "file":      "textures/urchin.png"
         }
 	},
 	"fonts": {

@@ -51,6 +51,10 @@ using namespace cugl;
 #define WIN_MESSAGE     "VICTORY!"
 #define WIN_COLOR       Color4::YELLOW
 #define EXIT_COUNT      240
+/** The key for the win door texture in the asset manager */
+#define URCHIN_TEXTURE "urchin"
+
+
 
 /**
  * The method called after OpenGL is initialized, but before running the application.
@@ -99,13 +103,15 @@ void DiveApp::onStartup() {
     phys_bounds.size.height = 2000;
     
     //Create physics world
-    _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 0));
-    
-    _world->onBeginContact = [this](b2Contact* contact) {
+    _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 66.0f));
+	auto grav = _world->getGravity().toString();
+	CULog("GRAVITY: %s", grav.c_str());
+	_world->onBeginContact = [this](b2Contact* contact) {
         beginContact(contact);
     };
-    
-    
+	_world->setGravity(Vec2(0, -4.9));
+	CULog("GRAVITY part 2: %s", grav.c_str());
+
     // Build the scene from these assets
     buildScene();
 
@@ -162,6 +168,7 @@ void DiveApp::update(float timestep) {
 	_player->pushToDestination();
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
+	_urchin->update(timestep);
 	_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
 
 	_platform_map->updatePlatformPositions();
@@ -216,6 +223,8 @@ void DiveApp::beginContact(b2Contact* contact) {
         setComplete(true);
     }
 }
+
+
 
 /**
  * Internal helper to build the scene graph.
@@ -306,6 +315,8 @@ void DiveApp::buildScene() {
 	//Load texture of the platforms
 	std::shared_ptr<Texture> platform_tex = _assets->get<Texture>("blank");
 
+	//load texture for sea urchin
+	std::shared_ptr<Texture> urchin_tex = _assets->get<Texture>(URCHIN_TEXTURE);
 	//Create the platform map
 	_platform_map = PlatformMap::alloc();
 
@@ -364,11 +375,27 @@ void DiveApp::buildScene() {
 	_player->setPhysicsPosition(420, 420);
 	//Add player to the _platform_map, just makes relative positions easier
 	_scene->addChild(_player->_node);
+
+
+	//Create the sea urchin set some basic stuff
+	_urchin = Urchin::allocWithTexture(urchin_tex);
+	//_player->setPosition(420, 420);
+	//_urchin->setScale(1, 1);
+	_urchin->_node->setPosition(150, 420);
+	//Initialize all of its physics properties and add it to the physics world
+	_urchin->initPhysics(_world);
+	_urchin->setPhysicsPosition((size.width / 2) + 150, size.height / 2);
+	//Add player to the _platform_map, just makes relative positions easier
+	_scene->addChild(_urchin->_node);
+
+	
+
 	//Add the platform map to the scene
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
 	_platform_map->setMapSize(10, 1000);
 }
+
 
 
 void DiveApp::reset() {
