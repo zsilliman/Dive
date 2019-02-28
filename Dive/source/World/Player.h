@@ -8,13 +8,13 @@
 using namespace cugl;
 using namespace std;
 
-class Player : public cugl::CapsuleObstacle {
+class Player {
 
 protected:
 	shared_ptr<BoxObstacle> _body;
 	Vec2 _destination;
 	bool _dest_active = false;
-	float accelleration = 30;
+	float accelleration = 800;
 	float max_speed = 150;
 
 public:
@@ -42,6 +42,8 @@ public:
 	void initPhysics(shared_ptr<ObstacleWorld> world);
 
 	void updatePosition();
+
+	string getBodyName() { return _body->getName(); }
 
 	float getdX(float timestep) const { return _body->getLinearVelocity().x * timestep; }
 

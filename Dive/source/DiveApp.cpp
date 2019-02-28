@@ -169,8 +169,9 @@ void DiveApp::update(float timestep) {
 	_player->pushToDestination();
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
+	_urchin->updatePosition();
 
-	_urchin->update(timestep);
+	//_urchin->update(timestep);
 	//_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
 
 	_platform_map->parallaxTranslatePlatforms(_player->getPhysicsPosition(), _player->getdX(timestep));
@@ -226,8 +227,8 @@ void DiveApp::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
-    if((bd1 == _player.get() && bd2 == _goalDoor.get()) ||
-       (bd1 == _goalDoor.get() && bd2 == _player.get())) {
+    if((bd1->getName().compare(_player->getBodyName()) && bd2 == _goalDoor.get()) ||
+       (bd1 == _goalDoor.get() && bd2->getName().compare(_player->getBodyName()))) {
         setComplete(true);
     }
 }
@@ -371,7 +372,6 @@ void DiveApp::buildScene() {
 	}
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
-	//_player->setPosition(420, 420);
 	_player->setScale(4, 4);
 	_player->_node->setPosition(Vec2(size.width/2, size.height/2));
 	//Initialize all of its physics properties and add it to the physics world
@@ -384,13 +384,13 @@ void DiveApp::buildScene() {
 	//Create the sea urchin set some basic stuff
 	_urchin = Urchin::allocWithTexture(urchin_tex);
 	//_player->setPosition(420, 420);
-	//_urchin->setScale(1, 1);
+	_urchin->setScale(0.7f, 0.7f);
 	_urchin->_node->setPosition(150, 420);
 	//Initialize all of its physics properties and add it to the physics world
 	_urchin->initPhysics(_world);
 	_urchin->setPhysicsPosition((size.width / 2) + 150, size.height / 2);
 	//Add player to the _platform_map, just makes relative positions easier
-	_scene->addChild(_urchin->_node);
+	_platform_map->_node->addChild(_urchin->_node);
 
 	
 

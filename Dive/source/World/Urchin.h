@@ -8,12 +8,12 @@
 using namespace cugl;
 using namespace std;
 
-class Urchin : public cugl::CapsuleObstacle {
+class Urchin {
 
 protected:
-	shared_ptr<BoxObstacle> _body;
+	shared_ptr<WheelObstacle> _body;
 	Vec2 _destination;
-	float accelleration = 30;
+	float accelleration = 60;
 	float max_speed = 150;
 
 public:

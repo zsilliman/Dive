@@ -7,7 +7,7 @@ using namespace std;
 
 // Physics constants for initialization
 /** Density of non-urchin objects */
-#define BASIC_DENSITY       0.0f
+#define BASIC_DENSITY       0.01f
 /** Density of the urchin objects */
 #define URCHIN_DENSITY       1.0f
 /** Friction of non-urchin objects */
@@ -15,7 +15,7 @@ using namespace std;
 /** Friction of the urchin objects */
 #define URCHIN_FRICTION      0.2f
 /** Angular damping of the urchin objects */
-#define URCHIN_DAMPING       1.0f
+#define URCHIN_DAMPING       0.0f
 /** Collision restitution for all objects */
 #define BASIC_RESTITUTION   0.1f
 
@@ -77,7 +77,7 @@ void Urchin::push(Vec2 force) {
 //}
 
 void Urchin::initPhysics(shared_ptr<ObstacleWorld> world) {
-	_body = BoxObstacle::alloc(Vec2(_node->getPositionX(), _node->getPositionY()), Size(_node->getWidth(), _node->getHeight()));
+	_body = WheelObstacle::alloc(_node->getPosition(), _node->getTexture()->getWidth() * _node->getScaleX()/2);
 	_body->setBodyType(b2BodyType::b2_dynamicBody);
 	// Set the physics attributes
 	_body->setDensity(URCHIN_DENSITY);
@@ -85,7 +85,7 @@ void Urchin::initPhysics(shared_ptr<ObstacleWorld> world) {
 	_body->setAngularDamping(URCHIN_DAMPING);
 	_body->setRestitution(BASIC_RESTITUTION);
 	_body->setLinearDamping(10);
-	//_body->setGravityScale(-4.9f);
+	_body->setGravityScale(300);
 	world->addObstacle(_body);
 }
 
