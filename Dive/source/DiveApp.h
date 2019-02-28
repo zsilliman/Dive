@@ -63,13 +63,16 @@ protected:
 	/** A reference to the sea urchin */
 	std::shared_ptr<Urchin> _urchin;
     
-    std::shared_ptr<cugl::BoxObstacle>    _goalDoor;
+    std::shared_ptr<cugl::BoxObstacle> _goalDoor;
     std::shared_ptr<cugl::Label> _winnode;
+    std::shared_ptr<PolygonNode> sprite;
 
     /** A countdown used to move the logo */
     int  _countdown;
     
     bool _complete;
+    
+    float scale;
 
     
     /** 

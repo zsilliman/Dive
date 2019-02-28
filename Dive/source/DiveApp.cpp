@@ -34,7 +34,7 @@
 // Add support for simple random number generation
 #include <cstdlib>
 #include <ctime>
-
+#include "World/Player.h""
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Collision/b2Collision.h>
 
@@ -161,6 +161,7 @@ void DiveApp::update(float timestep) {
     size *= GAME_WIDTH/size.width;
 
 	cugl::Mouse* mouse = Input::get<cugl::Mouse>();
+	mouse->setPointerAwareness(cugl::Mouse::PointerAwareness::DRAG);
 	if (mouse->buttonDown().hasLeft()) {
 		_player->setPushDestination(mouse->pointerPosition(), _platform_map);
 		//push_direction(mouse->pointerPosition(), _platform_map);
@@ -168,13 +169,20 @@ void DiveApp::update(float timestep) {
 	_player->pushToDestination();
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
+
 	_urchin->update(timestep);
-	_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
+	//_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
+
+	_platform_map->parallaxTranslatePlatforms(_player->getPhysicsPosition(), _player->getdX(timestep));
+
 
 	_platform_map->updatePlatformPositions();
 	//Centers map around the player
 	_platform_map->anchorCameraTo(_player->getPhysicsPosition(), _player->_node->getPosition());
     
+//    sprite->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+//    sprite->setPosition(_goalDoor->getPosition()*scale);
+
     if (_countdown > 0) {
         _countdown--;
     } else if (_countdown == 0) {
@@ -235,7 +243,7 @@ void DiveApp::beginContact(b2Contact* contact) {
  */
 void DiveApp::buildScene() {
     Size  size  = getDisplaySize();
-    float scale = GAME_WIDTH/size.width;
+    scale = GAME_WIDTH/size.width;
     size *= scale;
     
     // Create a button.  A button has an up image and a down image
@@ -286,31 +294,27 @@ void DiveApp::buildScene() {
     _winnode->setAnchor(Vec2::ANCHOR_CENTER);
     _winnode->setPosition(size.width/2,size.height/2);
     _winnode->setForeground(WIN_COLOR);
+    _winnode->setVisible(false);
     _scene -> addChild(_winnode,3);
     setComplete(false);
-    
+
+    float GOAL_POS[] = {20, -100};
+    Vec2 goalPos = ((Vec2)GOAL_POS);
     std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
-    std::shared_ptr<PolygonNode> sprite;
-    std::shared_ptr<WireNode> draw;
-    
-    // Create obstacle
-    Vec2 goalPos = Vec2(50,20);
-    Size goalSize(image->getSize().width/(scale+2),
-                  image->getSize().height/(scale+2));
+    Size goalSize = image->getSize()/scale;
+    std::shared_ptr<PolygonNode> sprite = PolygonNode::allocWithTexture(image);
+
     _goalDoor = BoxObstacle::alloc(goalPos,goalSize);
-    
+
     // Set the physics attributes
     _goalDoor->setBodyType(b2_staticBody);
     _goalDoor->setDensity(0.0f);
     _goalDoor->setFriction(0.0f);
     _goalDoor->setRestitution(0.0f);
     _goalDoor->setSensor(true);
-    
-    // Add the scene graph nodes to this object
-    sprite = PolygonNode::allocWithTexture(image);
     _world->addObstacle(_goalDoor);
     sprite->setPosition(_goalDoor->getPosition()*scale);
-    _scene->addChild(sprite, 0);
+    _scene->addChild(sprite,0);
     
 	//Load texture of the platforms
 	std::shared_ptr<Texture> platform_tex = _assets->get<Texture>("blank");
@@ -372,7 +376,7 @@ void DiveApp::buildScene() {
 	_player->_node->setPosition(Vec2(size.width/2, size.height/2));
 	//Initialize all of its physics properties and add it to the physics world
 	_player->initPhysics(_world);
-	_player->setPhysicsPosition(420, 420);
+	_player->setPhysicsPosition(420, 500);
 	//Add player to the _platform_map, just makes relative positions easier
 	_scene->addChild(_player->_node);
 

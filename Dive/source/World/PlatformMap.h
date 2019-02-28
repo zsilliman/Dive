@@ -38,8 +38,7 @@ public:
 
 	void setMapSize(int x_start, int x_end);
 
-	void anchorCameraTo(float x, float y, float viewport_width, float viewport_height);
+    void anchorCameraTo(float x, float y, float viewport_width, float viewport_height);
 
 	void anchorCameraTo(Vec2 position, Vec2 viewport);
-
 };

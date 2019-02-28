@@ -41,6 +41,9 @@ void Player::push(Vec2 force) {
 
 //This is how the player follows the mouse
 void Player::pushDirection(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map) {
+	//Return immediately if no destination has been set
+	if (!_dest_active)
+		return;
 	//Convert from screen to local coordinates
 	Vec2 local_pos = platform_map->_node->screenToNodeCoords(mouse_pos) - _body->getPosition();
 	//This is so the center of the node is attracted to the click location
@@ -51,6 +54,7 @@ void Player::pushDirection(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map)
 }
 
 void Player::setPushDestination(Vec2 mouse_pos, shared_ptr<PlatformMap> platform_map) {
+	_dest_active = true;
 	_destination = platform_map->_node->screenToNodeCoords(mouse_pos);
 }
 
