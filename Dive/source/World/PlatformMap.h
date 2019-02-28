@@ -2,6 +2,7 @@
 
 #include <cugl/cugl.h>
 #include "Platform.h"
+#include "Goal.h"
 
 using namespace cugl;
 using namespace std;
@@ -12,6 +13,8 @@ class PlatformMap
 protected:
 	
 	vector<shared_ptr<Platform>> layers;
+    vector<shared_ptr<Goal>> goal_layers;
+
 	int _map_size = 0, _x_start = 0, _x_end = 0;
 
 public:
@@ -27,10 +30,12 @@ public:
 	void setPosition(float x, float y);
 
 	void addPlatform(shared_ptr<Platform> platform);
+    
+    void addPlatform(shared_ptr<Goal> goal);
 
 	void addToScene(shared_ptr<Scene> scene) { scene->addChild(_node); }
 
-	void updatePlatformPositions();
+	void updatePlatformPositions(float dt);
 
 	void parallaxTranslatePlatforms(float reference_x, float reference_y, float reference_dx);
 

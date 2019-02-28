@@ -34,5 +34,5 @@ public:
 	void parallaxTranslate(float reference_x, float reference_y, float reference_dx);
 
 	void setMapSize(int x_start, int x_end);
-
+    
 };

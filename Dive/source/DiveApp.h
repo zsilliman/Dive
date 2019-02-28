@@ -30,8 +30,13 @@
 #ifndef __HELLO_APP_H__
 #define __HELLO_APP_H__
 #include <cugl/cugl.h>
+#include <Box2D/Dynamics/b2WorldCallbacks.h>
+#include <Box2D/Dynamics/b2Fixture.h>
+#include <vector>
 #include "World/PlatformMap.h"
 #include "World/Player.h"
+#include "World/Goal.h"
+
 #include <Box2D/Dynamics/b2Fixture.h>
 
 
@@ -60,9 +65,9 @@ protected:
 	/** A reference to the player */
 	std::shared_ptr<Player> _player;
     
-    std::shared_ptr<cugl::BoxObstacle> _goalDoor;
+    std::shared_ptr<Goal> _goalDoor;
     std::shared_ptr<cugl::Label> _winnode;
-    std::shared_ptr<PolygonNode> sprite;
+    std::shared_ptr<PolygonNode> node;
 
     /** A countdown used to move the logo */
     int  _countdown;
@@ -130,6 +135,7 @@ public:
     virtual void onShutdown() override;
     
     void beginContact(b2Contact* contact);
+    void endContact(b2Contact* contact);
     
     void setComplete(bool value);
     

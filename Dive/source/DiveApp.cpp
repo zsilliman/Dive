@@ -34,9 +34,11 @@
 // Add support for simple random number generation
 #include <cstdlib>
 #include <ctime>
-#include "Player.h"
+#include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Collision/b2Collision.h>
+#include "Player.h"
+#include "Goal.h"
 
 // This keeps us from having to write cugl:: all the time
 using namespace cugl;
@@ -100,11 +102,17 @@ void DiveApp::onStartup() {
     
     //Create physics world
     _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 0));
-    
+    _world->activateCollisionCallbacks(true);
+
     _world->onBeginContact = [this](b2Contact* contact) {
         beginContact(contact);
     };
     
+    _world->onEndContact = [this](b2Contact* contact) {
+        endContact(contact);
+    };
+    
+    _complete = false;
     
     // Build the scene from these assets
     buildScene();
@@ -165,12 +173,9 @@ void DiveApp::update(float timestep) {
 	_world->update(timestep);
 	_platform_map->parallaxTranslatePlatforms(_player->getPhysicsPosition(), _player->getdX(timestep));
 
-	_platform_map->updatePlatformPositions();
+	_platform_map->updatePlatformPositions(timestep);
 	//Centers map around the player
 	_platform_map->anchorCameraTo(_player->getPhysicsPosition(), _player->_node->getPosition());
-    
-//    sprite->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-//    sprite->setPosition(_goalDoor->getPosition()*scale);
 
     if (_countdown > 0) {
         _countdown--;
@@ -215,11 +220,14 @@ void DiveApp::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
-    if((bd1 == _player.get() && bd2 == _goalDoor.get()) ||
-       (bd1 == _goalDoor.get() && bd2 == _player.get())) {
+    if((bd1 == _player.get() && bd2 == _goalDoor->_body.get()) ||
+       (bd1 == _goalDoor->_body.get() && bd2 == _player.get())) {
         setComplete(true);
     }
 }
+
+
+void DiveApp::endContact(b2Contact* contact) {}
 
 /**
  * Internal helper to build the scene graph.
@@ -284,24 +292,6 @@ void DiveApp::buildScene() {
     _winnode->setVisible(false);
     _scene -> addChild(_winnode,3);
     setComplete(false);
-
-    float GOAL_POS[] = {20, -100};
-    Vec2 goalPos = ((Vec2)GOAL_POS);
-    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
-    Size goalSize = image->getSize()/scale;
-    std::shared_ptr<PolygonNode> sprite = PolygonNode::allocWithTexture(image);
-
-    _goalDoor = BoxObstacle::alloc(goalPos,goalSize);
-
-    // Set the physics attributes
-    _goalDoor->setBodyType(b2_staticBody);
-    _goalDoor->setDensity(0.0f);
-    _goalDoor->setFriction(0.0f);
-    _goalDoor->setRestitution(0.0f);
-    _goalDoor->setSensor(true);
-    _world->addObstacle(_goalDoor);
-    sprite->setPosition(_goalDoor->getPosition()*scale);
-    _scene->addChild(sprite,0);
     
 	//Load texture of the platforms
 	std::shared_ptr<Texture> platform_tex = _assets->get<Texture>("blank");
@@ -354,6 +344,31 @@ void DiveApp::buildScene() {
             _platform_map->addPlatform(p);
         }
 	}
+    
+    
+    float GOAL_POS[] = {10, 30};
+    Vec2 goalPos = ((Vec2)GOAL_POS);
+    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
+//    Size goalSize = image->getSize()/scale;
+    
+    
+//    std::shared_ptr<PolygonNode> sprite = PolygonNode::allocWithTexture(image);
+    
+//    _goalDoor = BoxObstacle::alloc(goalPos,goalSize);
+
+    // Set the physics attributes
+//    _goalDoor->setBodyType(b2_staticBody);
+//    _goalDoor->setDensity(0.0f);
+//    _goalDoor->setFriction(0.0f);
+//    _goalDoor->setRestitution(0.0f);
+//    _goalDoor->setSensor(true);
+//    _world->addObstacle(_goalDoor);
+    
+  
+    
+//    sprite->setPosition();
+//    _scene->addChild(sprite,0);
+    
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
 	//_player->setPosition(420, 420);
@@ -365,6 +380,16 @@ void DiveApp::buildScene() {
 	//Add player to the _platform_map, just makes relative positions easier
 	_scene->addChild(_player->_node);
 	//Add the platform map to the scene
+    
+    
+    _goalDoor = Goal::allocWithTexture(image);
+    //    Vec2 spritePos = _goalDoor->getPosition()*scale;
+    //    _goalDoor->_node->setPosition(Vec2(size.width/2, size.height/2));
+    _goalDoor->setInitialPosition(goalPos.x, goalPos.y);
+    _goalDoor->initPhysics(_world);
+    _platform_map->addPlatform(_goalDoor);
+
+    
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
 	_platform_map->setMapSize(10, 1000);
