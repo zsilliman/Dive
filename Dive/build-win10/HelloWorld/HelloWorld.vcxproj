@@ -190,6 +190,7 @@
     <ClInclude Include="..\..\source\World\Platform.h" />
     <ClInclude Include="..\..\source\World\PlatformMap.h" />
     <ClInclude Include="..\..\source\World\Player.h" />
+    <ClInclude Include="..\..\source\World\Urchin.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -198,6 +199,7 @@
     <ClCompile Include="..\..\source\World\Platform.cpp" />
     <ClCompile Include="..\..\source\World\PlatformMap.cpp" />
     <ClCompile Include="..\..\source\World\Player.cpp" />
+    <ClCompile Include="..\..\source\World\Urchin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HelloWorld.rc" />
