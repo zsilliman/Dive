@@ -240,9 +240,14 @@ void DiveApp::beginContact(b2Contact* contact) {
 
     if((bd1->getName().compare(_player->getBodyName()) && bd2 == _goalDoor->_body.get()) ||
        (bd1 == _goalDoor->_body.get() && bd2->getName().compare(_player->getBodyName()))) {
-        CULog("Goal Contact");
-        setComplete(true);
+        CULog("%s",bd2->getName().c_str());
+        CULog("%s",bd1->getName().c_str());
+        if (bd2->getName() == "player" || bd1->getName() == "player"){
+            CULog("Goal Contact");
+            setComplete(true);
+        }
     }
+        
 }
 
 
@@ -399,16 +404,16 @@ void DiveApp::buildScene() {
     //Add player to the _platform_map, just makes relative positions easier
     _platform_map->_node->addChild(_enemy->_node);
 
-    
+    //Need to fix later
     float GOAL_POS[] = {10, 60};
     Vec2 goalPos = ((Vec2)GOAL_POS);
     std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
     _goalDoor = Goal::allocWithTexture(image);
     //    Vec2 spritePos = _goalDoor->getPosition()*scale;
     //    _goalDoor->_node->setPosition(Vec2(size.width/2, size.height/2));
-    _goalDoor->setInitialPosition(goalPos.x, goalPos.y);
-    _goalDoor->initPhysics(_world);
-    _platform_map->addPlatform(_goalDoor);
+//    _goalDoor->setInitialPosition(goalPos.x, goalPos.y);
+//    _goalDoor->initPhysics(_world);
+//    _platform_map->addPlatform(_goalDoor);
 
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
