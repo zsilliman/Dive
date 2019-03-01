@@ -37,6 +37,7 @@
 #include "World/Player.h"
 #include "World/Goal.h"
 #include "World/Urchin.h"
+#include "Enemy.h"
 #include <Box2D/Dynamics/b2Fixture.h>
 
 /**
@@ -65,6 +66,8 @@ protected:
 	std::shared_ptr<Player> _player;
 	/** A reference to the sea urchin */
 	std::shared_ptr<Urchin> _urchin;
+    /** A reference to the enemy */
+    std::shared_ptr<Enemy> _enemy;
     
     std::shared_ptr<Goal> _goalDoor;
     std::shared_ptr<cugl::Label> _winnode;

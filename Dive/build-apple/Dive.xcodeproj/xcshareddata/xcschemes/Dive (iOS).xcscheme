@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBBF18901D74904A008E2001"
-               BuildableName = "HelloWorld (Mac).app"
-               BlueprintName = "HelloWorld (Mac)"
-               ReferencedContainer = "container:HelloWorld.xcodeproj">
+               BlueprintIdentifier = "EB74548B1D74D75C002FBAE6"
+               BuildableName = "Dive (iOS).app"
+               BlueprintName = "Dive (iOS)"
+               ReferencedContainer = "container:Dive.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -32,10 +32,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBBF18901D74904A008E2001"
-            BuildableName = "HelloWorld (Mac).app"
-            BlueprintName = "HelloWorld (Mac)"
-            ReferencedContainer = "container:HelloWorld.xcodeproj">
+            BlueprintIdentifier = "EB74548B1D74D75C002FBAE6"
+            BuildableName = "Dive (iOS).app"
+            BlueprintName = "Dive (iOS)"
+            ReferencedContainer = "container:Dive.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -55,10 +55,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBBF18901D74904A008E2001"
-            BuildableName = "HelloWorld (Mac).app"
-            BlueprintName = "HelloWorld (Mac)"
-            ReferencedContainer = "container:HelloWorld.xcodeproj">
+            BlueprintIdentifier = "EB74548B1D74D75C002FBAE6"
+            BuildableName = "Dive (iOS).app"
+            BlueprintName = "Dive (iOS)"
+            ReferencedContainer = "container:Dive.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -74,10 +74,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBBF18901D74904A008E2001"
-            BuildableName = "HelloWorld (Mac).app"
-            BlueprintName = "HelloWorld (Mac)"
-            ReferencedContainer = "container:HelloWorld.xcodeproj">
+            BlueprintIdentifier = "EB74548B1D74D75C002FBAE6"
+            BuildableName = "Dive (iOS).app"
+            BlueprintName = "Dive (iOS)"
+            ReferencedContainer = "container:Dive.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

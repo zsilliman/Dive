@@ -15,9 +15,7 @@
 		EB0FF61B2016EFC500517030 /* textures in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9BA1D7498D2002FE78B /* textures */; };
 		EB0FF61C2016EFC500517030 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9B81D7498C9002FE78B /* fonts */; };
 		EB0FF61D2016F06000517030 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B41D74952A002FE78B /* main.cpp */; };
-		EB0FF61E2016F06000517030 /* HelloApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B21D74952A002FE78B /* HelloApp.cpp */; };
 		EB0FF63B2016F42F00517030 /* libcugl-sim.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0FF6152016EF4F00517030 /* libcugl-sim.a */; };
-		EB2BE9B51D74952A002FE78B /* HelloApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B21D74952A002FE78B /* HelloApp.cpp */; };
 		EB2BE9B61D74952A002FE78B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B41D74952A002FE78B /* main.cpp */; };
 		EB2BE9B91D7498C9002FE78B /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9B81D7498C9002FE78B /* fonts */; };
 		EB2BE9BB1D7498D2002FE78B /* textures in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9BA1D7498D2002FE78B /* textures */; };
@@ -71,7 +69,6 @@
 		EB7454AC1D74D846002FBAE6 /* Landscape.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A81D74D846002FBAE6 /* Landscape.storyboard */; };
 		EB7454AD1D74D846002FBAE6 /* Portrait.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A91D74D846002FBAE6 /* Portrait.storyboard */; };
 		EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B41D74952A002FE78B /* main.cpp */; };
-		EB7454AF1D74D891002FBAE6 /* HelloApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EB2BE9B21D74952A002FE78B /* HelloApp.cpp */; };
 		EB7454D01D750623002FBAE6 /* textures in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9BA1D7498D2002FE78B /* textures */; };
 		EB7454D11D750623002FBAE6 /* fonts in Resources */ = {isa = PBXBuildFile; fileRef = EB2BE9B81D7498C9002FE78B /* fonts */; };
 		EBBF189B1D74904A008E2001 /* Mac.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EBBF189A1D74904A008E2001 /* Mac.xcassets */; };
@@ -80,6 +77,19 @@
 		EBC1471C1E27F0BB005494CE /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC1471B1E27F0BB005494CE /* ImageIO.framework */; };
 		EBFE7C051E19B496001007C2 /* json in Resources */ = {isa = PBXBuildFile; fileRef = EBFE7C041E19B496001007C2 /* json */; };
 		EBFE7C091E19B4AC001007C2 /* json in Resources */ = {isa = PBXBuildFile; fileRef = EBFE7C041E19B496001007C2 /* json */; };
+		EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
+		EF396FB42228CCF200FE0998 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
+		EF396FC12228CDE300FE0998 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB82228CDE200FE0998 /* PlatformMap.cpp */; };
+		EF396FC22228CDE300FE0998 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB82228CDE200FE0998 /* PlatformMap.cpp */; };
+		EF396FC32228CDE300FE0998 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB92228CDE200FE0998 /* Player.cpp */; };
+		EF396FC42228CDE300FE0998 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB92228CDE200FE0998 /* Player.cpp */; };
+		EF396FC52228CDE300FE0998 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBC2228CDE200FE0998 /* Platform.cpp */; };
+		EF396FC62228CDE300FE0998 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBC2228CDE200FE0998 /* Platform.cpp */; };
+		EF396FC72228CDE300FE0998 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBD2228CDE300FE0998 /* Urchin.cpp */; };
+		EF396FC82228CDE300FE0998 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBD2228CDE300FE0998 /* Urchin.cpp */; };
+		EF396FC92228CDE300FE0998 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBE2228CDE300FE0998 /* Goal.cpp */; };
+		EF396FCA2228CDE300FE0998 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FBE2228CDE300FE0998 /* Goal.cpp */; };
+		EF396FD52228DF4400FE0998 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FD32228DF4400FE0998 /* Enemy.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,9 +118,7 @@
 
 /* Begin PBXFileReference section */
 		EB0FF5082016E4A700517030 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
-		EB0FF5FC2016EF4F00517030 /* HelloWorld(Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloWorld(Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB2BE9B21D74952A002FE78B /* HelloApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = HelloApp.cpp; sourceTree = "<group>"; };
-		EB2BE9B31D74952A002FE78B /* HelloApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HelloApp.h; sourceTree = "<group>"; };
+		EB0FF5FC2016EF4F00517030 /* Dive (Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dive (Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE9B41D74952A002FE78B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		EB2BE9B81D7498C9002FE78B /* fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = fonts; sourceTree = "<group>"; };
 		EB2BE9BA1D7498D2002FE78B /* textures */ = {isa = PBXFileReference; lastKnownFileType = folder; path = textures; sourceTree = "<group>"; };
@@ -144,18 +152,32 @@
 		EB4266BE21F6927E00A9DE61 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/MobileCoreServices.framework; sourceTree = DEVELOPER_DIR; };
 		EB4266CD21F692DD00A9DE61 /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.1.sdk/System/Library/Frameworks/AudioUnit.framework; sourceTree = DEVELOPER_DIR; };
 		EB4EB19D1E3404F3007BCF09 /* CUGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CUGL.xcodeproj; path = "../cugl/build-apple/CUGL.xcodeproj"; sourceTree = "<group>"; };
-		EB74548C1D74D75C002FBAE6 /* HelloWorld (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloWorld (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EB74548C1D74D75C002FBAE6 /* Dive (iOS).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dive (iOS).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB7454A61D74D846002FBAE6 /* iOS-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "iOS-Info.plist"; sourceTree = "<group>"; };
 		EB7454A71D74D846002FBAE6 /* iOS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = iOS.xcassets; sourceTree = "<group>"; };
 		EB7454A81D74D846002FBAE6 /* Landscape.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Landscape.storyboard; sourceTree = "<group>"; };
 		EB7454A91D74D846002FBAE6 /* Portrait.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Portrait.storyboard; sourceTree = "<group>"; };
-		EBBF18911D74904A008E2001 /* HelloWorld (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "HelloWorld (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		EBBF18911D74904A008E2001 /* Dive (Mac).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dive (Mac).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EBBF189A1D74904A008E2001 /* Mac.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Mac.xcassets; sourceTree = "<group>"; };
 		EBBF189F1D74904A008E2001 /* Mac-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mac-Info.plist"; sourceTree = "<group>"; };
 		EBC147141E27F07C005494CE /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		EBC147191E27F0A8005494CE /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		EBC1471B1E27F0BB005494CE /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		EBFE7C041E19B496001007C2 /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
+		EF396FAE2228CCF200FE0998 /* DiveApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiveApp.h; sourceTree = "<group>"; };
+		EF396FB02228CCF200FE0998 /* DiveApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiveApp.cpp; sourceTree = "<group>"; };
+		EF396FB72228CDE200FE0998 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Player.h; path = World/Player.h; sourceTree = "<group>"; };
+		EF396FB82228CDE200FE0998 /* PlatformMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PlatformMap.cpp; path = World/PlatformMap.cpp; sourceTree = "<group>"; };
+		EF396FB92228CDE200FE0998 /* Player.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Player.cpp; path = World/Player.cpp; sourceTree = "<group>"; };
+		EF396FBA2228CDE200FE0998 /* Goal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Goal.h; path = World/Goal.h; sourceTree = "<group>"; };
+		EF396FBB2228CDE200FE0998 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Platform.h; path = World/Platform.h; sourceTree = "<group>"; };
+		EF396FBC2228CDE200FE0998 /* Platform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Platform.cpp; path = World/Platform.cpp; sourceTree = "<group>"; };
+		EF396FBD2228CDE300FE0998 /* Urchin.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Urchin.cpp; path = World/Urchin.cpp; sourceTree = "<group>"; };
+		EF396FBE2228CDE300FE0998 /* Goal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Goal.cpp; path = World/Goal.cpp; sourceTree = "<group>"; };
+		EF396FBF2228CDE300FE0998 /* Urchin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Urchin.h; path = World/Urchin.h; sourceTree = "<group>"; };
+		EF396FC02228CDE300FE0998 /* PlatformMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlatformMap.h; path = World/PlatformMap.h; sourceTree = "<group>"; };
+		EF396FCF2228DA2000FE0998 /* Enemy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		EF396FD32228DF4400FE0998 /* Enemy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Enemy.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -323,9 +345,9 @@
 		EBBF18921D74904A008E2001 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				EBBF18911D74904A008E2001 /* HelloWorld (Mac).app */,
-				EB74548C1D74D75C002FBAE6 /* HelloWorld (iOS).app */,
-				EB0FF5FC2016EF4F00517030 /* HelloWorld(Sim).app */,
+				EBBF18911D74904A008E2001 /* Dive (Mac).app */,
+				EB74548C1D74D75C002FBAE6 /* Dive (iOS).app */,
+				EB0FF5FC2016EF4F00517030 /* Dive (Sim).app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -347,9 +369,21 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				EF396FB02228CCF200FE0998 /* DiveApp.cpp */,
+				EF396FAE2228CCF200FE0998 /* DiveApp.h */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
-				EB2BE9B31D74952A002FE78B /* HelloApp.h */,
-				EB2BE9B21D74952A002FE78B /* HelloApp.cpp */,
+				EF396FBE2228CDE300FE0998 /* Goal.cpp */,
+				EF396FBA2228CDE200FE0998 /* Goal.h */,
+				EF396FBC2228CDE200FE0998 /* Platform.cpp */,
+				EF396FBB2228CDE200FE0998 /* Platform.h */,
+				EF396FB82228CDE200FE0998 /* PlatformMap.cpp */,
+				EF396FC02228CDE300FE0998 /* PlatformMap.h */,
+				EF396FB92228CDE200FE0998 /* Player.cpp */,
+				EF396FB72228CDE200FE0998 /* Player.h */,
+				EF396FBD2228CDE300FE0998 /* Urchin.cpp */,
+				EF396FBF2228CDE300FE0998 /* Urchin.h */,
+				EF396FCF2228DA2000FE0998 /* Enemy.h */,
+				EF396FD32228DF4400FE0998 /* Enemy.cpp */,
 			);
 			name = Source;
 			path = ../source;
@@ -358,9 +392,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		EB0FF5FB2016EF4F00517030 /* HelloWorld(Sim) */ = {
+		EB0FF5FB2016EF4F00517030 /* Dive (Sim) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB0FF6162016EF4F00517030 /* Build configuration list for PBXNativeTarget "HelloWorld(Sim)" */;
+			buildConfigurationList = EB0FF6162016EF4F00517030 /* Build configuration list for PBXNativeTarget "Dive (Sim)" */;
 			buildPhases = (
 				EB0FF5F82016EF4F00517030 /* Sources */,
 				EB0FF5F92016EF4F00517030 /* Frameworks */,
@@ -370,14 +404,14 @@
 			);
 			dependencies = (
 			);
-			name = "HelloWorld(Sim)";
+			name = "Dive (Sim)";
 			productName = "HelloWorld (Sim)";
-			productReference = EB0FF5FC2016EF4F00517030 /* HelloWorld(Sim).app */;
+			productReference = EB0FF5FC2016EF4F00517030 /* Dive (Sim).app */;
 			productType = "com.apple.product-type.application";
 		};
-		EB74548B1D74D75C002FBAE6 /* HelloWorld (iOS) */ = {
+		EB74548B1D74D75C002FBAE6 /* Dive (iOS) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EB7454A01D74D75C002FBAE6 /* Build configuration list for PBXNativeTarget "HelloWorld (iOS)" */;
+			buildConfigurationList = EB7454A01D74D75C002FBAE6 /* Build configuration list for PBXNativeTarget "Dive (iOS)" */;
 			buildPhases = (
 				EB7454881D74D75C002FBAE6 /* Sources */,
 				EB7454891D74D75C002FBAE6 /* Frameworks */,
@@ -387,14 +421,14 @@
 			);
 			dependencies = (
 			);
-			name = "HelloWorld (iOS)";
+			name = "Dive (iOS)";
 			productName = "HelloWorld (iOS)";
-			productReference = EB74548C1D74D75C002FBAE6 /* HelloWorld (iOS).app */;
+			productReference = EB74548C1D74D75C002FBAE6 /* Dive (iOS).app */;
 			productType = "com.apple.product-type.application";
 		};
-		EBBF18901D74904A008E2001 /* HelloWorld (Mac) */ = {
+		EBBF18901D74904A008E2001 /* Dive (Mac) */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = EBBF18A21D74904A008E2001 /* Build configuration list for PBXNativeTarget "HelloWorld (Mac)" */;
+			buildConfigurationList = EBBF18A21D74904A008E2001 /* Build configuration list for PBXNativeTarget "Dive (Mac)" */;
 			buildPhases = (
 				EBBF188D1D74904A008E2001 /* Sources */,
 				EBBF188E1D74904A008E2001 /* Frameworks */,
@@ -404,9 +438,9 @@
 			);
 			dependencies = (
 			);
-			name = "HelloWorld (Mac)";
+			name = "Dive (Mac)";
 			productName = "HelloWorld (Mac)";
-			productReference = EBBF18911D74904A008E2001 /* HelloWorld (Mac).app */;
+			productReference = EBBF18911D74904A008E2001 /* Dive (Mac).app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -415,7 +449,7 @@
 		EBBF18891D74904A008E2001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Game Design Initiative at Cornell";
 				TargetAttributes = {
 					EB0FF5FB2016EF4F00517030 = {
@@ -425,14 +459,14 @@
 					};
 					EB74548B1D74D75C002FBAE6 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = G6P7H83FK6;
+						DevelopmentTeam = 2R2SQSPH3U;
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
-			buildConfigurationList = EBBF188C1D74904A008E2001 /* Build configuration list for PBXProject "HelloWorld" */;
+			buildConfigurationList = EBBF188C1D74904A008E2001 /* Build configuration list for PBXProject "Dive" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -451,9 +485,9 @@
 			);
 			projectRoot = "";
 			targets = (
-				EBBF18901D74904A008E2001 /* HelloWorld (Mac) */,
-				EB74548B1D74D75C002FBAE6 /* HelloWorld (iOS) */,
-				EB0FF5FB2016EF4F00517030 /* HelloWorld(Sim) */,
+				EBBF18901D74904A008E2001 /* Dive (Mac) */,
+				EB74548B1D74D75C002FBAE6 /* Dive (iOS) */,
+				EB0FF5FB2016EF4F00517030 /* Dive (Sim) */,
 			);
 		};
 /* End PBXProject section */
@@ -530,7 +564,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB0FF61D2016F06000517030 /* main.cpp in Sources */,
-				EB0FF61E2016F06000517030 /* HelloApp.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -538,8 +571,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF396FC82228CDE300FE0998 /* Urchin.cpp in Sources */,
+				EF396FC42228CDE300FE0998 /* Player.cpp in Sources */,
+				EF396FC22228CDE300FE0998 /* PlatformMap.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
-				EB7454AF1D74D891002FBAE6 /* HelloApp.cpp in Sources */,
+				EF396FCA2228CDE300FE0998 /* Goal.cpp in Sources */,
+				EF396FB42228CCF200FE0998 /* DiveApp.cpp in Sources */,
+				EF396FC62228CDE300FE0998 /* Platform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -547,8 +585,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF396FD52228DF4400FE0998 /* Enemy.cpp in Sources */,
+				EF396FC72228CDE300FE0998 /* Urchin.cpp in Sources */,
+				EF396FC32228CDE300FE0998 /* Player.cpp in Sources */,
+				EF396FC12228CDE300FE0998 /* PlatformMap.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
-				EB2BE9B51D74952A002FE78B /* HelloApp.cpp in Sources */,
+				EF396FC92228CDE300FE0998 /* Goal.cpp in Sources */,
+				EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */,
+				EF396FC52228CDE300FE0998 /* Platform.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,7 +626,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(STATIC_LIB)";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.sim.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.sim.Dive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -615,7 +659,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = "$(STATIC_LIB)";
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.sim.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.sim.Dive;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -632,6 +676,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -639,7 +684,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.ios.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.ios.Dive;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -654,6 +699,7 @@
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				ENABLE_BITCODE = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -661,7 +707,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.ios.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.ios.Dive;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -677,14 +723,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -726,14 +782,24 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = NO;
 				CLANG_ENABLE_OBJC_ARC = NO;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = NO;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "-";
@@ -764,11 +830,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.Dive;
 			};
 			name = Debug;
 		};
@@ -776,18 +843,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
-				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.HelloWorld;
+				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.Dive;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		EB0FF6162016EF4F00517030 /* Build configuration list for PBXNativeTarget "HelloWorld(Sim)" */ = {
+		EB0FF6162016EF4F00517030 /* Build configuration list for PBXNativeTarget "Dive (Sim)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB0FF60F2016EF4F00517030 /* Debug */,
@@ -796,7 +864,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EB7454A01D74D75C002FBAE6 /* Build configuration list for PBXNativeTarget "HelloWorld (iOS)" */ = {
+		EB7454A01D74D75C002FBAE6 /* Build configuration list for PBXNativeTarget "Dive (iOS)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EB7454A11D74D75C002FBAE6 /* Debug */,
@@ -805,7 +873,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBBF188C1D74904A008E2001 /* Build configuration list for PBXProject "HelloWorld" */ = {
+		EBBF188C1D74904A008E2001 /* Build configuration list for PBXProject "Dive" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EBBF18A01D74904A008E2001 /* Debug */,
@@ -814,7 +882,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		EBBF18A21D74904A008E2001 /* Build configuration list for PBXNativeTarget "HelloWorld (Mac)" */ = {
+		EBBF18A21D74904A008E2001 /* Build configuration list for PBXNativeTarget "Dive (Mac)" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				EBBF18A31D74904A008E2001 /* Debug */,

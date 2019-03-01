@@ -33,6 +33,9 @@
         },
         "urchin": {
             "file":      "textures/urchin.png"
+        },
+        "enemy":{
+            "file":      "textures/urchin.png"
         }
 	},
 	"fonts": {

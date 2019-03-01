@@ -9,13 +9,13 @@ using namespace std;
 /** Density of non-urchin objects */
 #define BASIC_DENSITY       0.01f
 /** Density of the urchin objects */
-#define URCHIN_DENSITY       1.0f
+#define URCHIN_DENSITY      1.0f
 /** Friction of non-urchin objects */
 #define BASIC_FRICTION      0.1f
 /** Friction of the urchin objects */
-#define URCHIN_FRICTION      0.2f
+#define URCHIN_FRICTION     0.2f
 /** Angular damping of the urchin objects */
-#define URCHIN_DAMPING       0.0f
+#define URCHIN_DAMPING      0.0f
 /** Collision restitution for all objects */
 #define BASIC_RESTITUTION   0.1f
 

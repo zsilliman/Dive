@@ -178,6 +178,12 @@ void DiveApp::update(float timestep) {
     CULog("%s", std::to_string(timestep).c_str());
 	_world->update(timestep);
 	_urchin->updatePosition();
+    
+    if (_enemy -> getPhysicsPosition().subtract(_player -> getPhysicsPosition()).length() < 500){
+        CULog("TRUE");
+        _enemy -> push(_player -> getPhysicsPosition().negate());
+    }
+    _enemy->updatePosition();
 
 	//_urchin->update(timestep);
 	//_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
@@ -381,6 +387,17 @@ void DiveApp::buildScene() {
 	_urchin->setPhysicsPosition((size.width / 2) + 150, size.height / 2);
 	//Add player to the _platform_map, just makes relative positions easier
 	_platform_map->_node->addChild(_urchin->_node);
+    
+    //temporary enemy create
+    _enemy = Enemy::allocWithTexture(urchin_tex);
+    //_player->setPosition(420, 420);
+    _enemy->setScale(0.7f, 0.7f);
+    _enemy->_node->setPosition(150, 420);
+    //Initialize all of its physics properties and add it to the physics world
+    _enemy->initPhysics(_world);
+    _enemy->setPhysicsPosition((size.width / 2) + 120, size.height / 2 + 200);
+    //Add player to the _platform_map, just makes relative positions easier
+    _platform_map->_node->addChild(_enemy->_node);
 
     
     float GOAL_POS[] = {10, 60};
