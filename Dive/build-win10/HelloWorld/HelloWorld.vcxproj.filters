@@ -19,6 +19,12 @@
     <Filter Include="Source Files\World">
       <UniqueIdentifier>{7f2d5d26-5a66-4a6d-9376-5b22634c11e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Entities">
+      <UniqueIdentifier>{8e685636-c1cb-48f0-ac1d-8d7983f21731}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Entities">
+      <UniqueIdentifier>{553cfb1a-2462-415b-b518-5d41a6c783b1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -30,14 +36,26 @@
     <ClInclude Include="..\..\source\World\PlatformMap.h">
       <Filter>Header Files\World</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\World\Player.h">
-      <Filter>Header Files\World</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\DiveApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\World\Urchin.h">
+    <ClInclude Include="..\..\source\Entities\Enemy.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Entities\Entity.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Entities\Player.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Entities\Urchin.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\World\Goal.h">
       <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\GameState.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,14 +68,26 @@
     <ClCompile Include="..\..\source\World\Platform.cpp">
       <Filter>Source Files\World</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\World\Player.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\DiveApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\World\Urchin.cpp">
+    <ClCompile Include="..\..\source\Entities\Enemy.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Entities\Entity.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Entities\Player.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Entities\Urchin.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\World\Goal.cpp">
       <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\GameState.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

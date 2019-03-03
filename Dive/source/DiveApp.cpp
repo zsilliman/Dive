@@ -37,8 +37,8 @@
 #include <Box2D/Dynamics/b2World.h>
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Collision/b2Collision.h>
-#include "Player.h"
-#include "Goal.h"
+#include "Entities/Player.h"
+#include "World/Goal.h"
 
 // This keeps us from having to write cugl:: all the time
 using namespace cugl;
@@ -46,7 +46,7 @@ using namespace cugl;
 // The number of frames before moving the logo to a new position
 #define TIME_STEP 60
 // This is adjusted by screen aspect ratio to get the height
-#define GAME_WIDTH 1024
+#define GAME_WIDTH 5
 
 #define GOAL_TEXTURE    "goal"
 #define MESSAGE_FONT    "charlemagne"
@@ -103,7 +103,7 @@ void DiveApp::onStartup() {
     phys_bounds.size.height = 2000;
     
     //Create physics world
-    _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 66.0f));
+    _world = cugl::ObstacleWorld::alloc(phys_bounds, Vec2(0, 0.1f));
     _world->activateCollisionCallbacks(true);
 
     auto grav = _world->getGravity().toString();
@@ -111,7 +111,7 @@ void DiveApp::onStartup() {
     _world->onBeginContact = [this](b2Contact* contact) {
         beginContact(contact);
     };
-    _world->setGravity(Vec2(0, -4.9));
+    _world->setGravity(Vec2(0, -0.049));
     CULog("GRAVITY part 2: %s", grav.c_str());
     
     _world->onEndContact = [this](b2Contact* contact) {
@@ -171,19 +171,20 @@ void DiveApp::update(float timestep) {
 	cugl::Mouse* mouse = Input::get<cugl::Mouse>();
 	mouse->setPointerAwareness(cugl::Mouse::PointerAwareness::DRAG);
 	if (mouse->buttonDown().hasLeft()) {
-		_player->setPushDestination(mouse->pointerPosition(), _platform_map);
+		_player->pushToDestination(mouse->pointerPosition(), _platform_map);
 		//push_direction(mouse->pointerPosition(), _platform_map);
 	}
-	_player->pushToDestination();
-    CULog("%s", std::to_string(timestep).c_str());
+	CULog((_enemy->getPhysicsPosition() - _player->getPhysicsPosition()).toString().c_str());
+	if ((_enemy->getPhysicsPosition() - _player->getPhysicsPosition()).length() < 5)
+		_enemy->pushToDestination(_player->getPhysicsPosition());
 	_world->update(timestep);
-	_urchin->updatePosition();
+	_urchin->updateNodePosition();
     
-    if (_enemy -> getPhysicsPosition().subtract(_player -> getPhysicsPosition()).length() < 500){
-        CULog("TRUE");
-        _enemy -> push(_player -> getPhysicsPosition().negate());
-    }
-    _enemy->updatePosition();
+    //if ((_enemy -> getPhysicsPosition() - _player -> getPhysicsPosition()).length() < 500){
+    //    _enemy -> push(_player -> getPhysicsPosition().negate().normalize().scale(500));
+    //}
+    _enemy->updateNodePosition();
+	_player->updateNodePosition();
 
 	//_urchin->update(timestep);
 	//_platform_map->parallaxTranslatePlatforms(_player->_node->getPosition(), _player->getdX(timestep));
@@ -192,8 +193,7 @@ void DiveApp::update(float timestep) {
 
 	_platform_map->updatePlatformPositions(timestep);
 
-	//Centers map around the player
-	_platform_map->anchorCameraTo(_player->getPhysicsPosition(), _player->_node->getPosition());
+	_platform_map->anchorCameraToY(_player->_node->getPosition().y, size.height/2);
 
     if (_countdown > 0) {
         _countdown--;
@@ -238,16 +238,13 @@ void DiveApp::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
 
-    if((bd1->getName().compare(_player->getBodyName()) && bd2 == _goalDoor->_body.get()) ||
-       (bd1 == _goalDoor->_body.get() && bd2->getName().compare(_player->getBodyName()))) {
-        CULog("%s",bd2->getName().c_str());
-        CULog("%s",bd1->getName().c_str());
-        if (bd2->getName() == "player" || bd1->getName() == "player"){
-            CULog("Goal Contact");
-            setComplete(true);
-        }
+    if((bd1->getName().compare(_player->getBodyName()) == 0 && bd2->getName().compare(_goalDoor->getBodyName()) == 0) ||               // && bd2 == _goalDoor->_body.get()) ||
+       (bd2->getName().compare(_player->getBodyName()) == 0 && bd1->getName().compare(_goalDoor->getBodyName()) == 0)) {        // bd1 == _goalDoor->_body.get()
+        CULog("Goal Contact");
+		CULog(_player->getBodyName().c_str());
+		CULog(_player->getBodyName().c_str());
+        setComplete(true);
     }
-        
 }
 
 
@@ -294,7 +291,8 @@ void DiveApp::buildScene() {
     
     // Position the button in the bottom right corner
     button->setAnchor(Vec2::ANCHOR_CENTER);
-    button->setPosition(size.width-(bsize.width+rOffset)/2,(bsize.height+bOffset)/2);
+    button->setPosition(size.width-(bsize.width*button->getScaleX())/2,(bsize.height*button->getScaleY())/2);
+	button->setScale(0.5f / up->getWidth());
 
     _scene->addChild(button);
     
@@ -331,9 +329,9 @@ void DiveApp::buildScene() {
             //Allocate
             shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
             //Set starting location
-            p->setInitialPosition(-200 + i * 100, i * 100);
+            p->setInitialPosition(-2 + i * 1, i * 1);
             //Set size (texture is 16x16px)
-            p->setScale(30, 2);
+            p->setScale(0.30f, 0.02f);
             //Initialize physics
             p->initPhysics(_world);
             //Add it to the map
@@ -341,9 +339,9 @@ void DiveApp::buildScene() {
             
             shared_ptr<Platform> p2 = Platform::allocWithTexture(platform_tex);
             //Set starting location
-            p2->setInitialPosition(200 + i * 100, i * 100);
+            p2->setInitialPosition(2 + i * 1, i * 1);
             //Set size (texture is 16x16px)
-            p2->setScale(10, 2);
+            p2->setScale(0.10f, 0.02f);
             //Initialize physics
             p2->initPhysics(_world);
             //Add it to the map
@@ -351,9 +349,9 @@ void DiveApp::buildScene() {
             
             shared_ptr<Platform> p3 = Platform::allocWithTexture(platform_tex);
             //Set starting location
-            p3->setInitialPosition(600 + i * 100, i * 100);
+            p3->setInitialPosition(6 + i * 1, i * 1);
             //Set size (texture is 16x16px)
-            p3->setScale(30, 2);
+            p3->setScale(0.30f, 0.02f);
             //Initialize physics
             p3->initPhysics(_world);
             //Add it to the map
@@ -361,9 +359,9 @@ void DiveApp::buildScene() {
         }else if (i == 0) {
             shared_ptr<Platform> p = Platform::allocWithTexture(platform_tex);
             //Set starting location
-            p->setInitialPosition(-200 + i * 100, i * 100);
+            p->setInitialPosition(-2 + i * 1, i * 1);
             //Set size (texture is 16x16px)
-            p->setScale(150, 2);
+            p->setScale(1.5f, 0.02f);
             //Initialize physics
             p->initPhysics(_world);
             //Add it to the map
@@ -373,51 +371,50 @@ void DiveApp::buildScene() {
     
 	//Create the player set some basic stuff
 	_player = Player::allocWithTexture(platform_tex);
-	_player->setScale(4, 4);
-	_player->_node->setPosition(Vec2(size.width/2, size.height/2));
+	_player->setScale(.04, .04);
+	_player->_node->setPosition(4.20f, 5.00f);
 	//Initialize all of its physics properties and add it to the physics world
 	_player->initPhysics(_world);
-	_player->setPhysicsPosition(420, 500);
 	//Add player to the _platform_map, just makes relative positions easier
-	_scene->addChild(_player->_node);
+	_platform_map->_node->addChild(_player->_node);
 
 
 	//Create the sea urchin set some basic stuff
 	_urchin = Urchin::allocWithTexture(urchin_tex);
 	//_player->setPosition(420, 420);
-	_urchin->setScale(0.7f, 0.7f);
-	_urchin->_node->setPosition(150, 420);
+	_urchin->setScale(0.007f, 0.007f);
+	_urchin->_node->setPosition(1.50f, 4.20f);
 	//Initialize all of its physics properties and add it to the physics world
 	_urchin->initPhysics(_world);
-	_urchin->setPhysicsPosition((size.width / 2) + 150, size.height / 2);
+	_urchin->setPhysicsPosition((size.width / 2) + 1.5f, size.height / 2);
 	//Add player to the _platform_map, just makes relative positions easier
 	_platform_map->_node->addChild(_urchin->_node);
     
     //temporary enemy create
     _enemy = Enemy::allocWithTexture(urchin_tex);
     //_player->setPosition(420, 420);
-    _enemy->setScale(0.7f, 0.7f);
-    _enemy->_node->setPosition(150, 420);
+    _enemy->setScale(0.007f, 0.007f);
+    _enemy->_node->setPosition(1.50f, 4.20f);
     //Initialize all of its physics properties and add it to the physics world
     _enemy->initPhysics(_world);
-    _enemy->setPhysicsPosition((size.width / 2) + 120, size.height / 2 + 200);
     //Add player to the _platform_map, just makes relative positions easier
     _platform_map->_node->addChild(_enemy->_node);
 
-    //Need to fix later
-    float GOAL_POS[] = {10, 60};
-    Vec2 goalPos = ((Vec2)GOAL_POS);
-    std::shared_ptr<Texture> image = _assets->get<Texture>(GOAL_TEXTURE);
-    _goalDoor = Goal::allocWithTexture(image);
+    
+    float GOAL_POS[] = {0.10f, 0.60f};
+	Vec2 goalPos = Vec2(0.1f, 0.6f);
+    std::shared_ptr<Texture> goal_texture = _assets->get<Texture>(GOAL_TEXTURE);
+    _goalDoor = Goal::allocWithTexture(goal_texture);
+	_goalDoor->setScale(0.5f / goal_texture->getWidth(), 0.5f / goal_texture->getHeight());
     //    Vec2 spritePos = _goalDoor->getPosition()*scale;
     //    _goalDoor->_node->setPosition(Vec2(size.width/2, size.height/2));
-//    _goalDoor->setInitialPosition(goalPos.x, goalPos.y);
-//    _goalDoor->initPhysics(_world);
-//    _platform_map->addPlatform(_goalDoor);
+    _goalDoor->setInitialPosition(goalPos.x, goalPos.y);
+    _goalDoor->initPhysics(_world);
+    _platform_map->addPlatform(_goalDoor);
 
 	_platform_map->addToScene(_scene);
 	//This sets the size of the "circle" so platforms teleport to the start
-	_platform_map->setMapSize(10, 1000);
+	_platform_map->setMapSize(0, 15);
 }
 
 

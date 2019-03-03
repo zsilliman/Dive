@@ -129,7 +129,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(OutDir);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>CUGL.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>CUGL.lib;SDL2.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/IGNORE:4099 %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -187,19 +187,27 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\DiveApp.h" />
+    <ClInclude Include="..\..\source\Entities\Enemy.h" />
+    <ClInclude Include="..\..\source\Entities\Entity.h" />
+    <ClInclude Include="..\..\source\Entities\Player.h" />
+    <ClInclude Include="..\..\source\Entities\Urchin.h" />
+    <ClInclude Include="..\..\source\GameState.h" />
+    <ClInclude Include="..\..\source\World\Goal.h" />
     <ClInclude Include="..\..\source\World\Platform.h" />
     <ClInclude Include="..\..\source\World\PlatformMap.h" />
-    <ClInclude Include="..\..\source\World\Player.h" />
-    <ClInclude Include="..\..\source\World\Urchin.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\DiveApp.cpp" />
+    <ClCompile Include="..\..\source\Entities\Enemy.cpp" />
+    <ClCompile Include="..\..\source\Entities\Entity.cpp" />
+    <ClCompile Include="..\..\source\Entities\Player.cpp" />
+    <ClCompile Include="..\..\source\Entities\Urchin.cpp" />
+    <ClCompile Include="..\..\source\GameState.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\World\Goal.cpp" />
     <ClCompile Include="..\..\source\World\Platform.cpp" />
     <ClCompile Include="..\..\source\World\PlatformMap.cpp" />
-    <ClCompile Include="..\..\source\World\Player.cpp" />
-    <ClCompile Include="..\..\source\World\Urchin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HelloWorld.rc" />

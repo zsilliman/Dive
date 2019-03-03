@@ -32,4 +32,6 @@ public:
     void setMapSize(int x_start, int x_end);
     
     void parallaxTranslate(float reference_x, float reference_y, float reference_dx);
+
+	string getBodyName();
 };

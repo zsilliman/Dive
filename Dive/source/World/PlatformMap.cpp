@@ -88,6 +88,11 @@ void PlatformMap::anchorCameraTo(float x, float y, float _player_screen_x, float
 	_node->setPositionY(-y + _player_screen_y);
 }
 
+void PlatformMap::anchorCameraToY(float y, float screen_y) {
+	_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	_node->setPositionY(-y + screen_y);
+}
+
 void PlatformMap::anchorCameraTo(Vec2 position, Vec2 player_screen_pos) {
 	anchorCameraTo(position.x, position.y, player_screen_pos.x, player_screen_pos.y);
 }

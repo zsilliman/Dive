@@ -34,8 +34,8 @@
 using namespace cugl;
 
 // These really only apply if the game is windowed (not on mobile device)
-#define GAME_WIDTH 1024
-#define GAME_HEIGHT 576
+#define GAME_WIDTH  400 //1024
+#define GAME_HEIGHT 600 //576
 
 /**
  * The main entry point of any CUGL application.
@@ -56,7 +56,7 @@ int main(int argc, char * argv[]) {
     app.setName("Dive");
     
     // The name of your studio (for organizing save files)
-    app.setOrganization("GDIAC");
+    app.setOrganization("Singularity");
 
     // Set the window properties (Only applies to OS X/Windows Desktop)
     app.setSize(GAME_WIDTH, GAME_HEIGHT);

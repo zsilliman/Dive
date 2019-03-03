@@ -34,10 +34,10 @@
 #include <Box2D/Dynamics/b2Fixture.h>
 #include <vector>
 #include "World/PlatformMap.h"
-#include "World/Player.h"
+#include "Entities/Player.h"
 #include "World/Goal.h"
-#include "World/Urchin.h"
-#include "Enemy.h"
+#include "Entities/Urchin.h"
+#include "Entities/Enemy.h"
 #include <Box2D/Dynamics/b2Fixture.h>
 
 /**

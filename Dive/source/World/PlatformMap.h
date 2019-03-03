@@ -46,4 +46,6 @@ public:
     void anchorCameraTo(float x, float y, float viewport_width, float viewport_height);
 
 	void anchorCameraTo(Vec2 position, Vec2 viewport);
+
+	void anchorCameraToY(float y, float screen_y);
 };

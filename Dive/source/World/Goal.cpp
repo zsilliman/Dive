@@ -26,6 +26,7 @@ void Goal::initPhysics(shared_ptr<ObstacleWorld> world) {
     _body->setFriction(0.0f);
     _body->setRestitution(0.0f);
     _body->setSensor(true);
+	_body->setName("goal");
     world->addObstacle(_body);
 }
 
@@ -64,8 +65,6 @@ void Goal::parallaxTranslate(float reference_x, float reference_y, float referen
     _body->setPosition(position);
 }
 
-
-
 void Goal::updatePosition(float dt) {
     _node->setPosition(_body->getPosition());
     _node->setAngle(_body->getAngle());
@@ -77,4 +76,8 @@ void Goal::setMapSize(int x_start, int x_end) {
     _x_end = x_end;
     //if (_map_size > 1)
     //    _initial_pos.x = (_map_size + ((int)(_initial_pos.x + x_start) % _map_size)) % _map_size;
+}
+
+string Goal::getBodyName() {
+	return _body->getName();
 }
