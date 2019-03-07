@@ -192,9 +192,19 @@
     <ClInclude Include="..\..\source\Entities\Player.h" />
     <ClInclude Include="..\..\source\Entities\Urchin.h" />
     <ClInclude Include="..\..\source\GameState.h" />
+    <ClInclude Include="..\..\source\Scenes\GameScene.h" />
+    <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
+    <ClInclude Include="..\..\source\Util.h" />
+    <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\ViewController.h" />
     <ClInclude Include="..\..\source\World\Goal.h" />
     <ClInclude Include="..\..\source\World\Platform.h" />
     <ClInclude Include="..\..\source\World\PlatformMap.h" />
+    <ClInclude Include="..\..\source\World\GridRow.h" />
+    <ClInclude Include="..\..\source\World\GridMap.h" />
+    <ClInclude Include="..\..\source\World\TiledTexture.h" />
     <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -205,9 +215,17 @@
     <ClCompile Include="..\..\source\Entities\Urchin.cpp" />
     <ClCompile Include="..\..\source\GameState.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
+    <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp" />
     <ClCompile Include="..\..\source\World\Goal.cpp" />
     <ClCompile Include="..\..\source\World\Platform.cpp" />
     <ClCompile Include="..\..\source\World\PlatformMap.cpp" />
+    <ClCompile Include="..\..\source\World\GridRow.cpp" />
+    <ClCompile Include="..\..\source\World\GridMap.cpp" />
+    <ClCompile Include="..\..\source\World\TiledTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="HelloWorld.rc" />

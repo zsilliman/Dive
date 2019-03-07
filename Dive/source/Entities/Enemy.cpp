@@ -11,27 +11,10 @@
 using namespace cugl;
 using namespace std;
 
-shared_ptr<Enemy> Enemy::allocWithTexture(shared_ptr<Texture> texture) {
-    shared_ptr<Enemy> enemy = make_shared<Enemy>();
-    enemy->_node = PolygonNode::allocWithTexture(texture);
-    return enemy;
-}
-
-void Enemy::initPhysics(shared_ptr<ObstacleWorld> world) {
-    _body = WheelObstacle::alloc(_node->getPosition(), _node->getTexture()->getWidth() * _node->getScaleX()/2);
-    _body->setBodyType(b2BodyType::b2_dynamicBody);
-    // Set the physics attributes
-    _body->setDensity(URCHIN_DENSITY);
-    _body->setFriction(ENEMY_FRICTION);
-    _body->setAngularDamping(URCHIN_DAMPING);
-    _body->setRestitution(BASIC_RESTITUTION);
-	_body->setInertia(0.0f);
-	_body->setLinearDamping(0.1f);
-	_body->setGravityScale(0.3f);
-	_body->setName("enemy");
-
-	accelleration = 1.5f;
-	max_speed = 0.8f;
-
-    world->addObstacle(_body);
+shared_ptr<Enemy> Enemy::alloc(Vec2 start_pos) {
+	shared_ptr<Enemy> enemy = make_shared<Enemy>();
+	enemy->_position.set(start_pos);
+	enemy->setCanFloat(false);
+	enemy->_current_direction = Direction::RIGHT;
+	return enemy;
 }

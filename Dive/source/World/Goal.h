@@ -11,7 +11,6 @@ class Goal {
 protected:
     Vec2 _initial_pos = Vec2(0, 0);
     int _map_size = 0, _x_start = 0, _x_end = 0;
-
     
 public:
     //This needs to be put into a separate View class but whatever

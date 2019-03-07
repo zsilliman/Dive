@@ -25,6 +25,18 @@
     <Filter Include="Source Files\Entities">
       <UniqueIdentifier>{553cfb1a-2462-415b-b518-5d41a6c783b1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Scenes">
+      <UniqueIdentifier>{bd1e78eb-8d1f-4c50-b1b8-e1a22791a8e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Scenes">
+      <UniqueIdentifier>{97972582-0433-4ddb-ba0d-1d8dd1a8fe3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ViewControllers">
+      <UniqueIdentifier>{7ec8cce5-15cb-4723-8d84-d572dbcdaaaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\ViewControllers">
+      <UniqueIdentifier>{06ccd313-8948-4276-a000-047b69f96de5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="resource.h">
@@ -55,6 +67,36 @@
       <Filter>Header Files\World</Filter>
     </ClInclude>
     <ClInclude Include="..\..\source\GameState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scenes\GameScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Scenes\LoadingScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\World\TiledTexture.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\World\GridMap.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\World\GridRow.h">
+      <Filter>Header Files\World</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\ViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -88,6 +130,30 @@
     </ClCompile>
     <ClCompile Include="..\..\source\GameState.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scenes\GameScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\World\TiledTexture.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\World\GridRow.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\World\GridMap.cpp">
+      <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

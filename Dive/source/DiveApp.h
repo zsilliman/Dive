@@ -30,15 +30,9 @@
 #ifndef __HELLO_APP_H__
 #define __HELLO_APP_H__
 #include <cugl/cugl.h>
-#include <Box2D/Dynamics/b2WorldCallbacks.h>
-#include <Box2D/Dynamics/b2Fixture.h>
+#include "Scenes/GameScene.h"
+#include "Scenes/LoadingScene.h"
 #include <vector>
-#include "World/PlatformMap.h"
-#include "Entities/Player.h"
-#include "World/Goal.h"
-#include "Entities/Urchin.h"
-#include "Entities/Enemy.h"
-#include <Box2D/Dynamics/b2Fixture.h>
 
 /**
  * Class for a simple Hello World style application
@@ -51,46 +45,17 @@ protected:
     /** The loaders to (synchronously) load in assets */
     std::shared_ptr<cugl::AssetManager> _assets;
 
-    /** A scene graph, used to display our 2D scenes */
-    std::shared_ptr<cugl::Scene> _scene;
-    /** A 3152 style SpriteBatch to render the scene */
-    std::shared_ptr<cugl::SpriteBatch>  _batch;
-	
-	/** A reference to the map that all the platforms are put on */
-	std::shared_ptr<PlatformMap> _platform_map;
+	/** spritebatch used to render the scenes */
+	std::shared_ptr<cugl::SpriteBatch> _batch;
 
-	/** A reference to the physics world that all the platforms and player are put on */
-	std::shared_ptr<cugl::ObstacleWorld> _world;
-
-	/** A reference to the player */
-	std::shared_ptr<Player> _player;
-	/** A reference to the sea urchin */
-	std::shared_ptr<Urchin> _urchin;
-    /** A reference to the enemy */
-    std::shared_ptr<Enemy> _enemy;
+	/** The controller for the game screen */
+	GameScene _gameplay;
+	/** The controller for the loading screen */
+	LoadingScene _loading;
     
-    std::shared_ptr<Goal> _goalDoor;
-    std::shared_ptr<cugl::Label> _winnode;
-    std::shared_ptr<PolygonNode> node;
-
-    /** A countdown used to move the logo */
-    int  _countdown;
-    
-    bool _complete;
+    bool _loaded;
     
     float scale;
-
-    
-    /** 
-     * Internal helper to build the scene graph.
-     *
-     * Scene graphs are not required.  You could manage all scenes just like
-     * you do in 3152.  However, they greatly simplify scene management, and
-     * have become standard in most game engines.
-     */
-    void buildScene();
-    
-    void reset();
     
 public:
     /**
@@ -102,7 +67,7 @@ public:
      * of initialization from the constructor allows main.cpp to perform
      * advanced configuration of the application before it starts.
      */
-    DiveApp() : Application(), _countdown(-1) {}
+    DiveApp() : Application() {}
     
     /**
      * Disposes of this application, releasing all resources.
@@ -137,11 +102,6 @@ public:
      * causing the application to be deleted.
      */
     virtual void onShutdown() override;
-    
-    void beginContact(b2Contact* contact);
-    void endContact(b2Contact* contact);
-    
-    void setComplete(bool value);
     
     /**
      * The method called to update the application data.

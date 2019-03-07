@@ -1,8 +1,6 @@
 #pragma once
 
 #include <cugl/cugl.h>
-#include <cugl/2d/physics/CUBoxObstacle.h>
-#include <cugl/2d/physics/CUCapsuleObstacle.h>
 #include "Entity.h"
 
 using namespace cugl;
@@ -10,10 +8,14 @@ using namespace std;
 
 class Player : public Entity {
 
+protected:
+
+	Direction _current_direction = Direction::RIGHT;
+
 public:
 	
-	static shared_ptr<Player> allocWithTexture(shared_ptr<Texture> texture);
+	Direction getCurrentDirection();
 
-	void initPhysics(shared_ptr<ObstacleWorld> world);
+	static shared_ptr<Player> alloc(Vec2 start_pos);
 
 };
