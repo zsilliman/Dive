@@ -1,3 +1,7 @@
+// Entity.h
+// A general class tha represents an in-game entity.
+// An entity has a position, and a boolean that represents whether it falls while not on a platform.
+
 #pragma once
 
 #include <cugl/cugl.h>
