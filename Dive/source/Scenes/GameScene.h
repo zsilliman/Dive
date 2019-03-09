@@ -19,8 +19,8 @@
 #define __SD_GAME_SCENE_H__
 #include <cugl/cugl.h>
 #include "GameState.h"
-#include "ViewControllers/GridMapViewController.h"
-#include "ViewControllers/PlayerViewController.h"
+#include "../ViewControllers/GridMapViewController.h"
+#include "../ViewControllers/PlayerViewController.h"
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
