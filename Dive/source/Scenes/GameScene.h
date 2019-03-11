@@ -1,6 +1,5 @@
 //
-//  SDGameScene.h
-//  Ship Demo
+//  GameScene.h
 //
 //  This is the most important class in this demo.  This class manages the
 //  gameplay for this demo.  It is a relativeluy simple class as we are not
@@ -105,7 +104,7 @@ public:
      * Resets the status of the game so that we can play again.
      */
     void reset();
-
+    
 };
 
 #endif /* __SD_GAME_SCENE_H__ */

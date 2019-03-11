@@ -1,6 +1,5 @@
 //
-//  SDGameScene.h
-//  Ship Demo
+//  GameScene.cpp
 //
 //  This is the most important class in this demo.  This class manages the
 //  gameplay for this demo.  It is a relativeluy simple class as we are not
@@ -47,6 +46,8 @@ using namespace std;
  */
 bool GameScene::init(const shared_ptr<AssetManager>& assets) {
 	Size size = Application::get()->getDisplaySize();
+//    CULog("height is: %d", size.getIHeight());
+//    CULog("width is: %d", size.getIWidth());
 	size *= SCENE_WIDTH / size.width;
 
 	_gamestate = GameState::allocEmpty();
@@ -121,8 +122,8 @@ void GameScene::buildScene() {
 	_player_vc = PlayerViewController::alloc(_gamestate, texture, size);
 	addChild(_player_vc->getNode());
 
-	CULog("Player Pos:");
-	CULog(_player_vc->getPosition().toString().c_str());
+//    CULog("Player Pos:");
+//    CULog(_player_vc->getPosition().toString().c_str());
 }
 
 void GameScene::reset() {

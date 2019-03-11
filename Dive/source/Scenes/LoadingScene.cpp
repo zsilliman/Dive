@@ -1,6 +1,5 @@
 //
-//  SDLoadingScene.cpp
-//  Ship Demo
+//  LoadingScene.cpp
 //
 //  This module provides a very barebones loading screen.  Most of the time you
 //  will not need a loading screen, because the assets will load so fast.  But
@@ -21,7 +20,7 @@ using namespace cugl;
 /** The ID for the button listener */
 #define LISTENER_ID 1
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 1024
+#define SCENE_WIDTH 1000
 
 #pragma mark -
 #pragma mark Constructors

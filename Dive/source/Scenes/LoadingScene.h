@@ -1,6 +1,5 @@
 //
-//  SDLoadingScene.h
-//  Ship Demo
+//  LoadingScene.h
 //
 //  This module provides a very barebones loading screen.  Most of the time you
 //  will not need a loading screen, because the assets will load so fast.  But
@@ -14,10 +13,9 @@
 //  Author: Walker White
 //  Version: 1/10/18
 //
-#ifndef __SD_LOADING_SCENE_H__
-#define __SD_LOADING_SCENE_H__
+#ifndef __LOADING_SCENE_H__
+#define __LOADING_SCENE_H__
 #include <cugl/cugl.h>
-
 
 /**
  * This class is a simple loading screen for asychronous asset loading.
@@ -107,4 +105,4 @@ public:
     bool isPending( ) const;
 };
 
-#endif /* __SD_LOADING_SCENE_H__ */
+#endif /* __LOADING_SCENE_H__ */

@@ -415,12 +415,12 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EF396FB02228CCF200FE0998 /* DiveApp.cpp */,
-				EF396FAE2228CCF200FE0998 /* DiveApp.h */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
+				EF660E04223357A600A7432C /* Util.h */,
+				EF396FAE2228CCF200FE0998 /* DiveApp.h */,
+				EF396FB02228CCF200FE0998 /* DiveApp.cpp */,
 				EF660E06223357A600A7432C /* GameState.h */,
 				EF660E03223357A600A7432C /* GameState.cpp */,
-				EF660E04223357A600A7432C /* Util.h */,
 				EF660DFA223357A600A7432C /* Entities */,
 				EF660E0F223357A700A7432C /* Scenes */,
 				EF660E07223357A600A7432C /* ViewControllers */,
@@ -463,9 +463,9 @@
 			isa = PBXGroup;
 			children = (
 				EF660E10223357A700A7432C /* GameScene.h */,
+				EF660E13223357A700A7432C /* GameScene.cpp */,
 				EF660E11223357A700A7432C /* LoadingScene.h */,
 				EF660E12223357A700A7432C /* LoadingScene.cpp */,
-				EF660E13223357A700A7432C /* GameScene.cpp */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
