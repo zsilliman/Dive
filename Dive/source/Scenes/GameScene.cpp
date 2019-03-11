@@ -172,15 +172,6 @@ void GameScene::buildScene() {
 	addChild(_worldnode, 0);
 
 	_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
-<<<<<<< HEAD
-	addChild(_map_vc->getNode());
-
-	_player_vc = PlayerViewController::alloc(_gamestate, texture, size);
-	addChild(_player_vc->getNode());
-
-//    CULog("Player Pos:");
-//    CULog(_player_vc->getPosition().toString().c_str());
-=======
 	addChild(_map_vc->getNode(),0);
 
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
@@ -250,7 +241,6 @@ void GameScene::buildScene() {
     addChild(_winnode, 3);*/
     
     Application::get()->setClearColor(Color4f::CORNFLOWER);
->>>>>>> a4bfe73ba5affe8cdfeaaf5f3a61834136f4d2c1
 }
 
 void GameScene::reset() {
