@@ -40,6 +40,9 @@ protected:
     // Gamestate contains all necessary models
 	std::shared_ptr<GameState> _gamestate;
     
+
+	std::shared_ptr<cugl::Node> _worldnode; 
+
 	float scale;
 
     // COUPLED VIEW + CONTROLLERS

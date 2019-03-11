@@ -114,15 +114,22 @@ void GameScene::buildScene() {
 	_gamestate->_player = Player::alloc(Vec2(0, 0));
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
-
+	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
+	//mine
+	std::shared_ptr<Texture> image = _assets->get<Texture>("background");
+	_worldnode = PolygonNode::allocWithTexture(image);
+	_worldnode->setName("world");
+	_worldnode->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
+	addChild(_worldnode, 0);
+	//end mine
 	_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode());
 
-	_player_vc = PlayerViewController::alloc(_gamestate, texture, size);
+	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
 	addChild(_player_vc->getNode());
 
-	CULog("Player Pos:");
-	CULog(_player_vc->getPosition().toString().c_str());
+	//CULog("Player Pos:");
+	//CULog(_player_vc->getPosition().toString().c_str());
 }
 
 void GameScene::reset() {

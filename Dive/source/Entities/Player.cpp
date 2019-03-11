@@ -14,3 +14,13 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos) {
 Direction Player::getCurrentDirection() {
 	return _current_direction;
 }
+
+Direction Player::swapCurrentDirection() {
+	if (_current_direction == Direction::RIGHT) {
+		_current_direction = Direction::LEFT;
+	}
+	else {
+		_current_direction = Direction::RIGHT;
+	}
+	return _current_direction;
+}
