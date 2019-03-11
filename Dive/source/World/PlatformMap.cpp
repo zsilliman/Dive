@@ -13,7 +13,6 @@ shared_ptr<PlatformMap> PlatformMap::alloc() {
 	shared_ptr<PlatformMap> map = make_shared<PlatformMap>();
 	map->_node = Node::alloc();
 	map->layers = {};
-    map->goal_layers = {};
 	return map;
 }
 
@@ -32,19 +31,9 @@ void PlatformMap::addPlatform(shared_ptr<Platform> platform) {
 	_node->addChild(platform->_node);
 }
 
-void PlatformMap::addPlatform(shared_ptr<Goal> goal) {
-    goal->setMapSize(_x_start, _x_end);
-    goal_layers.push_back(goal);
-    _node->addChild(goal->_node);
-}
-
 void PlatformMap::updatePlatformPositions(float dt) {
 	for (int i = 0; i < layers.size(); i++) {
 		layers[i]->updatePosition();
-	}
-    
-    for (int i = 0; i < goal_layers.size(); i++) {
-        goal_layers[i]->updatePosition(dt);
     }
 }
 
@@ -53,20 +42,12 @@ void PlatformMap::parallaxTranslatePlatforms(float reference_x, float reference_
 	for (int i = 0; i < layers.size(); i++) {
 		layers[i]->parallaxTranslate(reference_x, reference_y, reference_dx);
 	}
-    
-    for (int i = 0; i < goal_layers.size(); i++) {
-        goal_layers[i]->parallaxTranslate(reference_x, reference_y, reference_dx);
-    }
 }
 
 void PlatformMap::parallaxTranslatePlatforms(Vec2 reference, float reference_dx) {
 	for (int i = 0; i < layers.size(); i++) {
 		layers[i]->parallaxTranslate(reference.x, reference.y, reference_dx);
 	}
-    
-    for (int i = 0; i < goal_layers.size(); i++) {
-        goal_layers[i]->parallaxTranslate(reference.x, reference.y, reference_dx);
-    }
 }
 
 void PlatformMap::setMapSize(int x_start, int x_end) {
@@ -76,10 +57,6 @@ void PlatformMap::setMapSize(int x_start, int x_end) {
 	for (int i = 0; i < layers.size(); i++) {
 		layers[i]->setMapSize(x_start, x_end);
 	}
-    
-    for (int i = 0; i < goal_layers.size(); i++) {
-        goal_layers[i]->setMapSize(x_start, x_end);
-    }
 }
 
 void PlatformMap::anchorCameraTo(float x, float y, float _player_screen_x, float _player_screen_y) {

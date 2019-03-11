@@ -21,6 +21,7 @@
 #include "GameState.h"
 #include "../ViewControllers/GridMapViewController.h"
 #include "../ViewControllers/PlayerViewController.h"
+#include "../ViewControllers/GoalViewController.h"
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
@@ -46,6 +47,10 @@ protected:
 	/** controller that manages how the user controls world translations */
 	std::shared_ptr<GridMapViewController> _map_vc;
 	std::shared_ptr<PlayerViewController> _player_vc;
+    std::shared_ptr<GoalViewController> _goal_vc;
+    std::shared_ptr<cugl::Label> _winnode;
+    bool _complete;
+    int _countdown;
 
 	int frame_counter = 0;
 
@@ -88,6 +93,10 @@ public:
      * @return true if the controller is initialized properly, false otherwise.
      */
     bool init(const std::shared_ptr<cugl::AssetManager>& assets);
+    
+    bool isComplete( ) const { return _complete; }
+    
+    void setComplete(bool value);
 
     
 #pragma mark -
