@@ -4,15 +4,12 @@
 void UrchinViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void UrchinViewController::update(shared_ptr<GameState> state) {
-	CULog("Urchin Update:");
 	Vec2 start_pos = state->_urchins[_urchin_index]->getPosition();
 	if (canMove(state, Direction::DOWN))
 		fall(state);
 	Vec2 tile_pos = state->_urchins[_urchin_index]->getPosition();
-	CULog(tile_pos.toString().c_str());
 	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth());
 	_node->setPosition(map_pos);
-	CULog(_node->getPosition().toString().c_str());
 }
 
 void UrchinViewController::dispose() {}

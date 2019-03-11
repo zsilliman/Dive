@@ -1,12 +1,12 @@
 {
 	"textures": {
-		"claw": {
-			"file":      "textures/Claw.png",
-            "wrapS":     "clamp",
-            "wrapT":     "clamp",
-            "minfilter": "linear",
-            "magfilter": "linear"
-		},
+		"icon": {
+            "file":     "textures/dive_icon.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
         "play": {
             "file":      "textures/play.png",
             "wrapS":     "clamp",
@@ -41,9 +41,9 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
-                        "texture"  : "claw",
+                        "texture"  : "icon",
                         "anchor"   : [0.5,0.5],
-                        "scale"    : 0.4
+                        "scale"    : 0.6
                     },
                     "layout" : {
                         "x_anchor" : "center",
@@ -59,7 +59,7 @@
                                 "visible"  : false,
                                 "pushsize" : true,
                                 "anchor"   : [0.5,0.5],
-                                "scale"    : 1.85
+                                "scale"    : 1.3
                             },
                             "children" : {
                                 "up"       : {

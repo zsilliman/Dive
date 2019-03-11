@@ -14,6 +14,10 @@ bool Entity::canFloat() { return _can_float; }
 
 void Entity::setCanFloat(bool floats) { _can_float = floats; }
 
+void Entity::reset() {
+	_position.set(_start_pos);
+}
+
 void Entity::move(Direction direction, int map_width) {
 	//CULog("position before x, y %d %d", _position.x, _position.y);
 	switch (direction)

@@ -23,10 +23,10 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 		}
 	}
 	Vec2 tile_pos = state->_player->getPosition();
-	//CULog(tile_pos.toString().c_str());
-	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth());
+	float grid_size = _display.width / state->_map->getColumnCount();
+	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, grid_size);
 	_node->setPosition(map_pos);
-	//CULog(_node->getPosition().toString().c_str());
+	_node->setVisible(true);
 }
 
 void PlayerViewController::dispose() {}
@@ -56,7 +56,19 @@ bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direct
 		new_x = Util::mod(position.x + 1, width);
 		return state->_map->getBlock(position.y, new_x) <= -1;
 	}
+	return state->_map->getBlock(position.y, position.x) <= -1;
+}
 
+bool PlayerViewController::hitEnemy(shared_ptr<GameState> state) {
+	for (int i = 0; i < state->_urchins.size(); i++) {
+		if (state->_urchins[i]->getPosition().equals(state->_player->getPosition()))
+			return true;
+	}
+	return false;
+}
+
+bool PlayerViewController::hitGoal(shared_ptr<GameState> state) {
+	return state->_goal_door->getPosition().equals(state->_player->getPosition());
 }
 
 bool PlayerViewController::isBlocked(shared_ptr<GameState> state) {

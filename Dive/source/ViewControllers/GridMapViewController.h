@@ -18,6 +18,8 @@ public:
 
 	void update(shared_ptr<GameState> state) override;
 
+	void updateRows(shared_ptr<GameState> state);
+
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;
 
 	void dispose() override;

@@ -20,6 +20,7 @@ protected:
 	//Fall once per world step
 	bool _can_float = false;
 	Vec2 _position = Vec2();
+	Vec2 _start_pos = Vec2();
 
 public:
 
@@ -30,5 +31,7 @@ public:
 	Vec2 getPosition();
 
 	void move(Direction direction, int map_width);
+
+	void reset();
     
 };

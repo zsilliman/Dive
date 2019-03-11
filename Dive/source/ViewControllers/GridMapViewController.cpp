@@ -31,6 +31,12 @@ void GridMapViewController::update(shared_ptr<GameState> state) {
 	_node->setPositionY(node_pos);
 }
 
+void GridMapViewController::updateRows(shared_ptr<GameState> state) {
+	for (int i = 0; i < _rows.size(); i++) {
+		_rows[i]->update(state);
+	}
+}
+
 void GridMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {
 	for (int i = 0; i < _rows.size(); i++) {
 		_rows[i]->draw(batch, state);

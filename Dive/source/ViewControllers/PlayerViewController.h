@@ -28,6 +28,10 @@ public:
 
 	void fall(shared_ptr<GameState> state);
 
+	bool hitEnemy(shared_ptr<GameState> state);
+
+	bool hitGoal(shared_ptr<GameState> state);
+
 	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
 
 };

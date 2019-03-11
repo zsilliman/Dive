@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"claw": {
-			"file":     "textures/Claw.png",
+		"icon": {
+			"file":     "textures/dive_icon.png",
 			"minfilter":"nearest",
 			"magfilter":"linear",
 			"wrapS":    "clamp",
