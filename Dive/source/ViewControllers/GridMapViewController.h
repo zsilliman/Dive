@@ -1,8 +1,8 @@
 #pragma once
 
 #include "ViewController.h"
-#include "World/TiledTexture.h"
-#include "ViewControllers/GridRowViewController.h"
+#include "../World/TiledTexture.h"
+#include "GridRowViewController.h"
 
 using namespace cugl;
 using namespace std;

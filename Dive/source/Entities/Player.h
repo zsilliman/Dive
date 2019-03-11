@@ -1,3 +1,7 @@
+// Player.h
+// Represents the player.
+// The player's default behavior is: dives (when possible).
+
 #pragma once
 
 #include <cugl/cugl.h>

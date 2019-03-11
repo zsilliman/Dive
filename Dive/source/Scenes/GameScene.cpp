@@ -33,6 +33,11 @@ using namespace std;
 #pragma mark -
 #pragma mark Constructors
 
+#define WIN_MESSAGE     "VICTORY!"
+/** The color of the win message */
+#define WIN_COLOR       Color4::YELLOW
+#define EXIT_COUNT      100
+#define MESSAGE_FONT    "charlemagne"
 
 /**
  * Initializes the controller contents, and starts the game
@@ -73,6 +78,8 @@ void GameScene::dispose() {
         removeAllChildren();
 		_map_vc->dispose();
 		_player_vc->dispose();
+        _goal_vc->dispose();
+        _winnode->dispose();
         _active = false;
     }
 }
@@ -95,8 +102,28 @@ void GameScene::update(float timestep) {
 		CULog("STEP");
 		_player_vc->update(_gamestate);
 		frame_counter = 0;
+        //_goal_vc->update(_gamestate);
 	}
+    
+    if (_countdown > 0) {
+        _countdown--;
+    } else if (_countdown == 0) {
+        reset();
+    }
 }
+
+void GameScene::setComplete(bool value) {
+    bool change = _complete != value;
+    _complete = value;
+    if (value && change) {
+        _winnode->setVisible(true);
+        _countdown = EXIT_COUNT;
+    } else if (!value) {
+        _winnode->setVisible(false);
+        _countdown = -1;
+    }
+}
+
 
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
@@ -112,7 +139,10 @@ void GameScene::buildScene() {
 
 	_gamestate->_map = GridMap::parseFromJSON("levels/sample_level.json", _assets);
 	_gamestate->_player = Player::alloc(Vec2(0, 0));
+    _gamestate->_goal_door = Goal::alloc(Vec2(0,0));
+    
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
+    shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	//mine
@@ -127,13 +157,58 @@ void GameScene::buildScene() {
 
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
 	addChild(_player_vc->getNode());
+    
+    //_goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
+    //addChild(_goal_vc->getNode());
+    
+    /*_winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
+    _winnode->setAnchor(Vec2::ANCHOR_CENTER);
+    _winnode->setPosition(size.width/2.0f,size.height/2.0f);
+    _winnode->setForeground(WIN_COLOR);
+    setComplete(false);
+    addChild(_winnode,3);
+
 
 	//CULog("Player Pos:");
 	//CULog(_player_vc->getPosition().toString().c_str());
+
+	CULog("Player Pos:");
+	CULog(_player_vc->getPosition().toString().c_str());
+    
+    
+    std::shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
+    std::shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
+    
+    Size bsize = up->getSize();
+    std::shared_ptr<Button> button = Button::alloc(PolygonNode::allocWithTexture(up),
+                                                   PolygonNode::allocWithTexture(down));
+    
+    // Create a callback function for the button
+    button->setName("close");
+    button->setListener([=] (const std::string& name, bool down) {
+        // Only quit when the button is released
+        if (!down) {
+            CULog("Goodbye!");
+            Application::get()->quit();
+        }
+    });
+    
+    button->setAnchor(Vec2::ANCHOR_CENTER);
+    button->setPosition(4.75,.2);
+    button->setScale(0.5f / up->getWidth());
+    
+    addChild(button);
+    
+    // We can only activate a button AFTER it is added to a scene
+    button->activate(1);
+    */
 }
 
 void GameScene::reset() {
-	//TODO
+    removeAllChildren();
 	_map_vc->reset();
 	_player_vc->reset();
+    _goal_vc->reset();
+    setComplete(false);
+    buildScene();
 }

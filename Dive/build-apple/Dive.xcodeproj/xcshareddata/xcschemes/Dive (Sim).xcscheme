@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "EBBF18061D7485D1008E2001"
-               BuildableName = "libcugl-mac.a"
-               BlueprintName = "cugl-mac"
-               ReferencedContainer = "container:CUGL.xcodeproj">
+               BlueprintIdentifier = "EB0FF5FB2016EF4F00517030"
+               BuildableName = "Dive (Sim).app"
+               BlueprintName = "Dive (Sim)"
+               ReferencedContainer = "container:Dive.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -29,6 +29,15 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
       </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "EB0FF5FB2016EF4F00517030"
+            BuildableName = "Dive (Sim).app"
+            BlueprintName = "Dive (Sim)"
+            ReferencedContainer = "container:Dive.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -42,15 +51,16 @@
       debugDocumentVersioning = "YES"
       debugServiceExtension = "internal"
       allowLocationSimulation = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBBF18061D7485D1008E2001"
-            BuildableName = "libcugl-mac.a"
-            BlueprintName = "cugl-mac"
-            ReferencedContainer = "container:CUGL.xcodeproj">
+            BlueprintIdentifier = "EB0FF5FB2016EF4F00517030"
+            BuildableName = "Dive (Sim).app"
+            BlueprintName = "Dive (Sim)"
+            ReferencedContainer = "container:Dive.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -60,15 +70,16 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
+      <BuildableProductRunnable
+         runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "EBBF18061D7485D1008E2001"
-            BuildableName = "libcugl-mac.a"
-            BlueprintName = "cugl-mac"
-            ReferencedContainer = "container:CUGL.xcodeproj">
+            BlueprintIdentifier = "EB0FF5FB2016EF4F00517030"
+            BuildableName = "Dive (Sim).app"
+            BlueprintName = "Dive (Sim)"
+            ReferencedContainer = "container:Dive.xcodeproj">
          </BuildableReference>
-      </MacroExpansion>
+      </BuildableProductRunnable>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

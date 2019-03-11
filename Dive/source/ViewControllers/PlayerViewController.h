@@ -2,7 +2,7 @@
 
 #include "GameState.h"
 #include "ViewController.h"
-#include "Entities/Entity.h"
+#include "../Entities/Entity.h"
 
 using namespace cugl;
 using namespace std;
