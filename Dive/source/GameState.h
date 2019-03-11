@@ -32,10 +32,13 @@ public:
 	/** Allocate gamestate, then manually set values */
 	static shared_ptr<GameState> allocEmpty();
 
-
 	/** Allocate gamestate from a file */
 	static shared_ptr<GameState> allocWithLevel(string level_asset, shared_ptr<AssetManager> assets);
 
 	void dispose();
+    
+    void reset();
+    
+    bool GoalCollision();
 
 };

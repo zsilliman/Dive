@@ -48,6 +48,8 @@ public:
 	//Translates a layer. Also translates other layers accordingly
 	void translate(int reference_offset);
 
+	void reset();
+
 	/*
 	 * Parse a map from a json file generated with map editor software named "Tiled"
 	 */

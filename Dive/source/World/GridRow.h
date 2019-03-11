@@ -45,4 +45,6 @@ public:
 	void translate(int reference_offset);
 
 	void setRelativeSpeed(float relative_speed);
+
+	void reset();
 };

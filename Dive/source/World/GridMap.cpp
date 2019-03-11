@@ -86,6 +86,12 @@ Vec2 GridMap::mapToTileCoords(float x, float y, float grid_size) {
 	return Vec2(col, row);
 }
 
+void GridMap::reset() {
+	for (int i = 0; i < _rows.size(); i++) {
+		_rows[i]->reset();
+	}
+}
+
 /*
 	* Parse a map from a json file generated with map editor software named "Tiled"
 	*/

@@ -1,7 +1,7 @@
 {
 	"textures": {
-		"claw": {
-			"file":     "textures/Claw.png",
+		"icon": {
+			"file":     "textures/dive_icon.png",
 			"minfilter":"nearest",
 			"magfilter":"linear",
 			"wrapS":    "clamp",
@@ -36,6 +36,15 @@
         },
         "enemy":{
             "file":      "textures/urchin.png"
+        },
+        "diver":{
+            "file":      "textures/diver.png"
+        },
+        "background":{
+            "file":      "textures/temp_background_light.jpg"
+        },
+        "platform1":{
+            "file":      "textures/platform1.png"
         }
 	},
 	"fonts": {

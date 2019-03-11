@@ -7,10 +7,11 @@
 using namespace cugl;
 using namespace std;
 
-class PlayerViewController : public ViewController {
+class UrchinViewController : public ViewController {
 
 protected:
 	Size _display;
+	int _urchin_index;
 
 public:
 
@@ -24,14 +25,8 @@ public:
 
 	bool canMove(shared_ptr<GameState> state, Direction direction);
 
-	bool isBlocked(shared_ptr<GameState> state);
-
 	void fall(shared_ptr<GameState> state);
 
-	bool hitEnemy(shared_ptr<GameState> state);
-
-	bool hitGoal(shared_ptr<GameState> state);
-
-	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
+	static shared_ptr<UrchinViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int urchin_index);
 
 };

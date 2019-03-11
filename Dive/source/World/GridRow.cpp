@@ -13,6 +13,10 @@ void print_vector(std::vector<int> lst, int offset) {
 	CULog(vec.c_str());
 }
 
+void GridRow::reset() {
+	offset = 0;
+}
+
 void GridRow::translate(int reference_offset) {
 	int n = data.size();
 	offset += _relative_speed * reference_offset;

@@ -16,5 +16,6 @@ shared_ptr<Enemy> Enemy::alloc(Vec2 start_pos) {
 	enemy->_position.set(start_pos);
 	enemy->setCanFloat(false);
 	enemy->_current_direction = Direction::RIGHT;
+	enemy->_start_pos.set(start_pos);
 	return enemy;
 }

@@ -16,6 +16,25 @@ void GridMapViewController::update(shared_ptr<GameState> state) {
 			_rows[i]->update(state);
 		}
 	}
+	//Camera Controller
+	Vec2 player_tile = state->_player->getPosition();
+	Vec2 player_pos = state->_map->tileToMapCoords(player_tile.y, player_tile.x, _grid_size);
+	float map_height = state->_map->getRowCount() * _grid_size;
+	float node_pos = -player_pos.y + _display.height / 2;
+	if (player_pos.y < -map_height + _display.height / 2) {
+		node_pos = map_height;
+	}
+	else if (player_pos.y > -_display.height / 2) {
+		//Top portion
+		node_pos = _display.height;
+	}
+	_node->setPositionY(node_pos);
+}
+
+void GridMapViewController::updateRows(shared_ptr<GameState> state) {
+	for (int i = 0; i < _rows.size(); i++) {
+		_rows[i]->update(state);
+	}
 }
 
 void GridMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {
@@ -29,7 +48,7 @@ void GridMapViewController::dispose() {
 }
 
 void GridMapViewController::reset() {
-
+    _node->removeAllChildren();
 }
 
 shared_ptr<GridMapViewController> GridMapViewController::alloc(shared_ptr<GameState> init_state) {
