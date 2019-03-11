@@ -7,15 +7,15 @@ void GoalViewController::update(shared_ptr<GameState> state) {
     Keyboard* keyboard = Input::get<Keyboard>();
     if (keyboard->keyPressed(KeyCode::ARROW_LEFT)) {
         CULog("left");
-        state->_goal_door->move(LEFT, state->_map->getColumnCount());
+        state->_goal_door->move(RIGHT_G, state->_map->getColumnCount());
         Vec2 tile_pos = state->_goal_door->getPosition();
         Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth()) + Vec2(0, _display.height);
         _node->setPosition(map_pos);
     }
     else if (keyboard->keyPressed(KeyCode::ARROW_RIGHT)) {
         CULog("right");
-        state->_goal_door->move(RIGHT, state->_map->getColumnCount());
-        Vec2 tile_pos = state->_player->getPosition();
+        state->_goal_door->move(LEFT_G, state->_map->getColumnCount());
+        Vec2 tile_pos = state->_goal_door->getPosition();
         Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth()) + Vec2(0, _display.height);
         _node->setPosition(map_pos);
     }
@@ -23,7 +23,9 @@ void GoalViewController::update(shared_ptr<GameState> state) {
 
 void GoalViewController::dispose() {}
 
-void GoalViewController::reset() {}
+void GoalViewController::reset() {
+    _node->removeAllChildren();
+}
 
 shared_ptr<GoalViewController> GoalViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
     shared_ptr<GoalViewController> goal_vc = make_shared<GoalViewController>();

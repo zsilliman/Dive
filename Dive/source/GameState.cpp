@@ -17,3 +17,10 @@ shared_ptr<GameState> GameState::allocWithLevel(string level_asset, shared_ptr<A
 void GameState::dispose() {
 		
 }
+
+void GameState::reset(){
+}
+
+bool GameState::GoalCollision(){
+    return _player->getPosition() == _goal_door->getPosition();
+}

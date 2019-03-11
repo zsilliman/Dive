@@ -31,5 +31,5 @@ void Entity::move(Direction direction, int map_width) {
 		_position.x = Util::mod(_position.x + 1, map_width);
 		break;
 	}
-	//CULog("position after x, y %d %d", _position.x, _position.y);
+
 }

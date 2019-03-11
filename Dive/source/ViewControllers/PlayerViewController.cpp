@@ -31,7 +31,9 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 
 void PlayerViewController::dispose() {}
 
-void PlayerViewController::reset() {}
+void PlayerViewController::reset() {
+    _node->removeAllChildren();
+}
 
 bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direction) {
 	int width = state->_map->getColumnCount();

@@ -15,6 +15,7 @@ Direction Player::getCurrentDirection() {
 	return _current_direction;
 }
 
+
 Direction Player::swapCurrentDirection() {
 	if (_current_direction == Direction::RIGHT) {
 		_current_direction = Direction::LEFT;
