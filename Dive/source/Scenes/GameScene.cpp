@@ -102,6 +102,9 @@ void GameScene::update(float timestep) {
 	if (frame_counter >= UPDATE_STEP) {
 		CULog("STEP");
 		_player_vc->update(_gamestate);
+		for (int i = 0; i < _urchin_vcs.size(); i++) {
+			_urchin_vcs[i]->update(_gamestate);
+		}
 		frame_counter = 0;
 
         //_goal_vc->update(_gamestate);
@@ -147,6 +150,9 @@ void GameScene::buildScene() {
 	_gamestate->_map = GridMap::parseFromJSON("levels/sample_level.json", _assets);
 	_gamestate->_player = Player::alloc(Vec2(0, 0));
     _gamestate->_goal_door = Goal::alloc(Vec2(0,21));
+	_gamestate->_urchins = {};
+	_gamestate->_urchins.push_back(Urchin::alloc(Vec2(0, 10)));
+	_gamestate->_urchins.push_back(Urchin::alloc(Vec2(8, 0)));
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
@@ -163,8 +169,18 @@ void GameScene::buildScene() {
 	addChild(_map_vc->getNode(),0);
 
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
-	addChild(_player_vc->getNode());
+	_map_vc->getNode()->addChild(_player_vc->getNode());
     
+
+	std::shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
+	_urchin_vcs = {};
+	shared_ptr<UrchinViewController> urchin_vc1 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
+	_map_vc->getNode()->addChild(urchin_vc1->getNode());
+	_urchin_vcs.push_back(urchin_vc1);
+	shared_ptr<UrchinViewController> urchin_vc2 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 1);
+	_map_vc->getNode()->addChild(urchin_vc2->getNode());
+	_urchin_vcs.push_back(urchin_vc2);
+
     //_goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
     //addChild(_goal_vc->getNode());
     
@@ -219,10 +235,10 @@ void GameScene::buildScene() {
     _winnode = Label::alloc("VICTORY!", _assets->get<Font>("charlemagne"));
     _winnode->setForeground(Color4::YELLOW);
     _winnode->setAnchor(Vec2::ANCHOR_CENTER);
-    _winnode->setPosition(2,1);
+    _winnode->setPosition(0,0);
     setComplete(false);
 
-    addChild(_winnode,3);
+    addChild(_winnode, 3);
     
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }

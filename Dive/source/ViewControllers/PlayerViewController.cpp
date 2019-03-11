@@ -24,7 +24,7 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	}
 	Vec2 tile_pos = state->_player->getPosition();
 	//CULog(tile_pos.toString().c_str());
-	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth()) + Vec2(0, _display.height);
+	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth());
 	_node->setPosition(map_pos);
 	//CULog(_node->getPosition().toString().c_str());
 }
@@ -86,7 +86,7 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	float scalex = grid_size / texture->getWidth();
 	float scaley = grid_size / texture->getHeight();
 	player_vc->_node->setScale(scalex, scaley);
-	player_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size) + Vec2(0,display.height));
+	player_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size));
 
 	return player_vc;
 }

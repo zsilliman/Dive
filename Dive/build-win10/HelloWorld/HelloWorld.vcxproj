@@ -195,9 +195,11 @@
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\Util.h" />
+    <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\UrchinViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\ViewController.h" />
     <ClInclude Include="..\..\source\World\Goal.h" />
     <ClInclude Include="..\..\source\World\Platform.h" />
@@ -217,9 +219,11 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\UrchinViewController.cpp" />
     <ClCompile Include="..\..\source\World\Goal.cpp" />
     <ClCompile Include="..\..\source\World\Platform.cpp" />
     <ClCompile Include="..\..\source\World\PlatformMap.cpp" />
