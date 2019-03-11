@@ -390,8 +390,8 @@ std::shared_ptr<Texture> Texture::getSubTexture(GLfloat minS, GLfloat maxS,
     // These values can be left alone.
     
     // Set the size information
-    result->_width  = (unsigned int)(maxS*source->_width-minS*source->_width);
-    result->_height = (unsigned int)(maxT*source->_height-minT*source->_height);
+    result->_width  = (unsigned int)((maxS-minS)*source->_width);
+    result->_height = (unsigned int)((maxT-minT)*source->_height);
     result->_minS = minS;
     result->_maxS = maxS;
     result->_minT = minT;

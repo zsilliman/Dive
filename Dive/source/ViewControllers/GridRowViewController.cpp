@@ -26,7 +26,7 @@ void GridRowViewController::dispose() {
 }
 
 void GridRowViewController::reset() {
-
+    _node->removeAllChildren();
 }
 
 void GridRowViewController::setTileSet(shared_ptr<TiledTexture> tilesheet) {
@@ -45,7 +45,7 @@ void GridRowViewController::init(shared_ptr<GameState> init_state, int row, floa
 		//Create the corresponding node in the scene
 		shared_ptr<PolygonNode> block_node;
 		if (block >= 0) {
-			shared_ptr<Texture> tile_texture = _tilesheet->getTile(block);
+            shared_ptr<Texture> tile_texture = _tilesheet->getTile(block);
 			block_node = PolygonNode::allocWithTexture(tile_texture);
 		}
 		else {

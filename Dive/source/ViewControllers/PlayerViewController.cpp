@@ -4,24 +4,36 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
-	CULog("Player Update:");
 	Vec2 start_pos = state->_player->getPosition();
-	CULog(std::to_string(canMove(state, Direction::DOWN)).c_str());
-	if (canMove(state, Direction::DOWN))
+	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
+	if (isBlocked(state)) {
+		CULog("should move but won't");
+		state->_player->move(Direction::RIGHT, state->_map->getColumnCount());
+	}
+
+	else if (canMove(state, Direction::DOWN)) {
 		fall(state);
+	}
 	else {
-		state->_player->move(state->_player->getCurrentDirection(), state->_map->getColumnCount());
+		int row = start_pos.y;
+		//CULog("current row %d row count %d", row, state->_map->getRowCount());
+		if (canMove(state, state->_player->getCurrentDirection()))
+		{
+			state->_player->move(state->_player->getCurrentDirection(), state->_map->getColumnCount());
+		}
 	}
 	Vec2 tile_pos = state->_player->getPosition();
-	CULog(tile_pos.toString().c_str());
+	//CULog(tile_pos.toString().c_str());
 	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, _node->getWidth()) + Vec2(0, _display.height);
 	_node->setPosition(map_pos);
-	CULog(_node->getPosition().toString().c_str());
+	//CULog(_node->getPosition().toString().c_str());
 }
 
 void PlayerViewController::dispose() {}
 
-void PlayerViewController::reset() {}
+void PlayerViewController::reset() {
+    _node->removeAllChildren();
+}
 
 bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direction) {
 	int width = state->_map->getColumnCount();
@@ -45,6 +57,16 @@ bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direct
 		return state->_map->getBlock(position.y, new_x) <= -1;
 	}
 
+}
+
+bool PlayerViewController::isBlocked(shared_ptr<GameState> state) {
+	int x = state->_player->getPosition().x;
+	int y = state->_player->getPosition().y;
+	CULog("x: %d y: %d", x, y);
+	CULog("block: %d", state->_map->getBlock(y, x));
+	bool val = state->_map->getBlock(y, x) >= 0;
+	CULog("VAL: %d", val);
+	return val;
 }
 
 void PlayerViewController::fall(shared_ptr<GameState> state) {

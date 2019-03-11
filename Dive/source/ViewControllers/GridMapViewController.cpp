@@ -29,7 +29,7 @@ void GridMapViewController::dispose() {
 }
 
 void GridMapViewController::reset() {
-
+    _node->removeAllChildren();
 }
 
 shared_ptr<GridMapViewController> GridMapViewController::alloc(shared_ptr<GameState> init_state) {

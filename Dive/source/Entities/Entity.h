@@ -30,5 +30,5 @@ public:
 	Vec2 getPosition();
 
 	void move(Direction direction, int map_width);
-
+    
 };

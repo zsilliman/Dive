@@ -24,6 +24,8 @@ public:
 
 	bool canMove(shared_ptr<GameState> state, Direction direction);
 
+	bool isBlocked(shared_ptr<GameState> state);
+
 	void fall(shared_ptr<GameState> state);
 
 	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);

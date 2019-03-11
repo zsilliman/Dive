@@ -10,3 +10,19 @@ shared_ptr<Goal> Goal::alloc(Vec2 start_pos) {
     return goal;
 }
 
+Vec2 Goal::getPosition() {
+    return Vec2(_position);
+}
+
+void Goal::move(Dir direction, int map_width) {
+    switch (direction)
+    {
+        case LEFT_G:
+            _position.x = Util::mod(_position.x - 1, map_width);
+            break;
+        case RIGHT_G:
+            _position.x = Util::mod(_position.x + 1, map_width);
+            break;
+    }
+}
+
