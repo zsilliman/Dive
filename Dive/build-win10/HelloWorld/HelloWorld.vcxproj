@@ -195,6 +195,7 @@
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\Util.h" />
+    <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp" />

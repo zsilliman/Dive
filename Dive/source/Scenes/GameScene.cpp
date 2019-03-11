@@ -78,7 +78,7 @@ void GameScene::dispose() {
         removeAllChildren();
 		_map_vc->dispose();
 		_player_vc->dispose();
-        //_goal_vc->dispose();
+        _goal_vc->dispose();
         _winnode->dispose();
         _active = false;
     }
@@ -97,7 +97,7 @@ void GameScene::dispose() {
  */
 void GameScene::update(float timestep) {
 	_map_vc->update(_gamestate);
-    //_goal_vc->update(_gamestate);
+    _goal_vc->update(_gamestate);
 	frame_counter++;
 	if (frame_counter >= UPDATE_STEP) {
 		CULog("STEP");
@@ -152,8 +152,8 @@ void GameScene::buildScene() {
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
-
-	std::shared_ptr<Texture> image = _assets->get<Texture>("background");
+	shared_ptr<Texture> image = _assets->get<Texture>("background");
+	
 	_worldnode = PolygonNode::allocWithTexture(image);
 	_worldnode->setName("world");
 	_worldnode->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
@@ -163,35 +163,16 @@ void GameScene::buildScene() {
 	addChild(_map_vc->getNode(),0);
 
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
-	addChild(_player_vc->getNode());
-    
-    //_goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
-    //addChild(_goal_vc->getNode());
-    
-    /*_winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-    _winnode->setAnchor(Vec2::ANCHOR_CENTER);
-    _winnode->setPosition(size.width/2.0f,size.height/2.0f);
-    _winnode->setForeground(WIN_COLOR);
-    setComplete(false);
-    addChild(_winnode,3);
-	_player_vc = PlayerViewController::alloc(_gamestate, texture, size);
 	addChild(_player_vc->getNode(),0);
     
     _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
     addChild(_goal_vc->getNode(),0);
-
-
-	//CULog("Player Pos:");
-	//CULog(_player_vc->getPosition().toString().c_str());
-
-	CULog("Player Pos:");
-	CULog(_player_vc->getPosition().toString().c_str());
     
-    std::shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
-    std::shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
+    shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
+    shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
     
     Size bsize = up->getSize();
-    std::shared_ptr<Button> button = Button::alloc(PolygonNode::allocWithTexture(up),
+    shared_ptr<Button> button = Button::alloc(PolygonNode::allocWithTexture(up),
                                                    PolygonNode::allocWithTexture(down));
     
     // Create a callback function for the button
@@ -213,7 +194,7 @@ void GameScene::buildScene() {
     // We can only activate a button AFTER it is added to a scene
     button->activate(1);
 
-    */
+  
 
     
     _winnode = Label::alloc("VICTORY!", _assets->get<Font>("charlemagne"));
@@ -230,7 +211,7 @@ void GameScene::buildScene() {
 void GameScene::reset() {
     _map_vc->reset();
     _player_vc->reset();
-    //_goal_vc->reset();
+    _goal_vc->reset();
     removeAllChildren();
     setComplete(false);
     buildScene();

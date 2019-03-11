@@ -99,6 +99,9 @@
     <ClInclude Include="..\..\source\Util.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -153,6 +156,9 @@
       <Filter>Source Files\ViewControllers</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp">
       <Filter>Source Files\ViewControllers</Filter>
     </ClCompile>
   </ItemGroup>
