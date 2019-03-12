@@ -7,6 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7650F3EC2236C1040079DF2D /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3E92236C1040079DF2D /* UrchinViewController.cpp */; };
+		7650F3ED2236C1040079DF2D /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3EB2236C1040079DF2D /* GoalViewController.cpp */; };
+		766CD9CE223825E30020E734 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E12223357A700A7432C /* LoadingScene.cpp */; };
+		766CD9D2223825EC0020E734 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E13223357A700A7432C /* GameScene.cpp */; };
+		766CD9D3223825F00020E734 /* Enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E02223357A600A7432C /* Enemy.cpp */; };
+		766CD9D4223825F50020E734 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
+		766CD9D5223825F70020E734 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E03223357A600A7432C /* GameState.cpp */; };
+		766CD9D6223825FA0020E734 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFC223357A600A7432C /* Entity.cpp */; };
+		766CD9D7223825FC0020E734 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFB223357A600A7432C /* Player.cpp */; };
+		766CD9D8223825FE0020E734 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFE223357A600A7432C /* Urchin.cpp */; };
+		766CD9D9223826070020E734 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3EB2236C1040079DF2D /* GoalViewController.cpp */; };
+		766CD9DA223826080020E734 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3EB2236C1040079DF2D /* GoalViewController.cpp */; };
+		766CD9DB2238260C0020E734 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3E92236C1040079DF2D /* UrchinViewController.cpp */; };
+		766CD9DC2238260C0020E734 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3E92236C1040079DF2D /* UrchinViewController.cpp */; };
+		766CD9DD223826100020E734 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E0D223357A700A7432C /* PlayerViewController.cpp */; };
+		766CD9DE223826120020E734 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E0B223357A700A7432C /* GridRowViewController.cpp */; };
+		766CD9DF223826140020E734 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E0A223357A700A7432C /* GridMapViewController.cpp */; };
+		766CD9E0223826170020E734 /* TiledTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E15223357A700A7432C /* TiledTexture.cpp */; };
+		766CD9E1223826190020E734 /* GridMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E17223357A700A7432C /* GridMap.cpp */; };
+		766CD9E22238261B0020E734 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1A223357A700A7432C /* Platform.cpp */; };
+		766CD9E32238261D0020E734 /* GridRow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1B223357A700A7432C /* GridRow.cpp */; };
+		766CD9E4223826210020E734 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1E223357A700A7432C /* Goal.cpp */; };
+		766CD9E5223826230020E734 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1F223357A700A7432C /* PlatformMap.cpp */; };
 		EB0FF5092016E4A700517030 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0FF5082016E4A700517030 /* CoreFoundation.framework */; };
 		EB0FF6172016EFB200517030 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A71D74D846002FBAE6 /* iOS.xcassets */; };
 		EB0FF6182016EFB200517030 /* Landscape.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A81D74D846002FBAE6 /* Landscape.storyboard */; };
@@ -139,6 +162,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7650F3E52236C1040079DF2D /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
+		7650F3E92236C1040079DF2D /* UrchinViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UrchinViewController.cpp; sourceTree = "<group>"; };
+		7650F3EA2236C1040079DF2D /* UrchinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrchinViewController.h; sourceTree = "<group>"; };
+		7650F3EB2236C1040079DF2D /* GoalViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoalViewController.cpp; sourceTree = "<group>"; };
 		EB0FF5082016E4A700517030 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		EB0FF5FC2016EF4F00517030 /* Dive (Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dive (Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE9B41D74952A002FE78B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -448,6 +475,10 @@
 		EF660E07223357A600A7432C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				7650F3EB2236C1040079DF2D /* GoalViewController.cpp */,
+				7650F3E52236C1040079DF2D /* GoalViewController.h */,
+				7650F3E92236C1040079DF2D /* UrchinViewController.cpp */,
+				7650F3EA2236C1040079DF2D /* UrchinViewController.h */,
 				EF660E0E223357A700A7432C /* ViewController.h */,
 				EF660E0C223357A700A7432C /* PlayerViewController.h */,
 				EF660E0D223357A700A7432C /* PlayerViewController.cpp */,
@@ -664,7 +695,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				766CD9E1223826190020E734 /* GridMap.cpp in Sources */,
+				766CD9D7223825FC0020E734 /* Player.cpp in Sources */,
+				766CD9E32238261D0020E734 /* GridRow.cpp in Sources */,
+				766CD9DD223826100020E734 /* PlayerViewController.cpp in Sources */,
+				766CD9E22238261B0020E734 /* Platform.cpp in Sources */,
+				766CD9D3223825F00020E734 /* Enemy.cpp in Sources */,
+				766CD9D5223825F70020E734 /* GameState.cpp in Sources */,
+				766CD9DE223826120020E734 /* GridRowViewController.cpp in Sources */,
+				766CD9D8223825FE0020E734 /* Urchin.cpp in Sources */,
+				766CD9D6223825FA0020E734 /* Entity.cpp in Sources */,
+				766CD9DA223826080020E734 /* GoalViewController.cpp in Sources */,
+				766CD9E4223826210020E734 /* Goal.cpp in Sources */,
 				EB0FF61D2016F06000517030 /* main.cpp in Sources */,
+				766CD9D2223825EC0020E734 /* GameScene.cpp in Sources */,
+				766CD9DC2238260C0020E734 /* UrchinViewController.cpp in Sources */,
+				766CD9DF223826140020E734 /* GridMapViewController.cpp in Sources */,
+				766CD9CE223825E30020E734 /* LoadingScene.cpp in Sources */,
+				766CD9D4223825F50020E734 /* DiveApp.cpp in Sources */,
+				766CD9E0223826170020E734 /* TiledTexture.cpp in Sources */,
+				766CD9E5223826230020E734 /* PlatformMap.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -674,6 +724,7 @@
 			files = (
 				EF660E2E223357A700A7432C /* GridMapViewController.cpp in Sources */,
 				EF660E2C223357A700A7432C /* GameState.cpp in Sources */,
+				766CD9D9223826070020E734 /* GoalViewController.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				EF660E40223357A700A7432C /* Goal.cpp in Sources */,
 				EF660E38223357A700A7432C /* TiledTexture.cpp in Sources */,
@@ -684,6 +735,7 @@
 				EF660E28223357A700A7432C /* Urchin.cpp in Sources */,
 				EF660E36223357A700A7432C /* GameScene.cpp in Sources */,
 				EF396FB42228CCF200FE0998 /* DiveApp.cpp in Sources */,
+				766CD9DB2238260C0020E734 /* UrchinViewController.cpp in Sources */,
 				EF660E3E223357A700A7432C /* GridRow.cpp in Sources */,
 				EF660E42223357A700A7432C /* PlatformMap.cpp in Sources */,
 				EF660E3A223357A700A7432C /* GridMap.cpp in Sources */,
@@ -702,6 +754,8 @@
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				EF660E3F223357A700A7432C /* Goal.cpp in Sources */,
 				EF660E37223357A700A7432C /* TiledTexture.cpp in Sources */,
+				7650F3ED2236C1040079DF2D /* GoalViewController.cpp in Sources */,
+				7650F3EC2236C1040079DF2D /* UrchinViewController.cpp in Sources */,
 				EF660E25223357A700A7432C /* Entity.cpp in Sources */,
 				EF660E33223357A700A7432C /* LoadingScene.cpp in Sources */,
 				EF660E29223357A700A7432C /* Enemy.cpp in Sources */,
