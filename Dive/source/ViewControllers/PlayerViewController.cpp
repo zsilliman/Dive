@@ -4,7 +4,7 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
-	Vec2 start_pos = state->_player->getPosition();
+	/*Vec2 start_pos = state->_player->getPosition();
 	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
 	if (isBlocked(state)) {
 		CULog("should move but won't");
@@ -26,7 +26,7 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	float grid_size = _display.width / state->_map->getColumnCount();
 	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, grid_size);
 	_node->setPosition(map_pos);
-	_node->setVisible(true);
+	_node->setVisible(true);*/
 }
 
 void PlayerViewController::dispose() {}
@@ -36,7 +36,7 @@ void PlayerViewController::reset() {
 }
 
 bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direction) {
-	int width = state->_map->getColumnCount();
+	/*int width = state->_map->getColumnCount();
 	int height = state->_map->getRowCount();
 
 	Vec2 position = state->_player->getPosition();
@@ -56,41 +56,43 @@ bool PlayerViewController::canMove(shared_ptr<GameState> state, Direction direct
 		new_x = Util::mod(position.x + 1, width);
 		return state->_map->getBlock(position.y, new_x) <= -1;
 	}
-	return state->_map->getBlock(position.y, position.x) <= -1;
+	return state->_map->getBlock(position.y, position.x) <= -1;*/
+	return false;
 }
 
 bool PlayerViewController::hitEnemy(shared_ptr<GameState> state) {
-	for (int i = 0; i < state->_urchins.size(); i++) {
+	/*for (int i = 0; i < state->_urchins.size(); i++) {
 		if (state->_urchins[i]->getPosition().equals(state->_player->getPosition()))
 			return true;
-	}
+	}*/
 	return false;
 }
 
 bool PlayerViewController::hitGoal(shared_ptr<GameState> state) {
-	return state->_goal_door->getPosition().equals(state->_player->getPosition());
+	return false; //state->_goal_door->getPosition().equals(state->_player->getPosition());
 }
 
 bool PlayerViewController::isBlocked(shared_ptr<GameState> state) {
-	int x = state->_player->getPosition().x;
+	/*int x = state->_player->getPosition().x;
 	int y = state->_player->getPosition().y;
 	CULog("x: %d y: %d", x, y);
 	CULog("block: %d", state->_map->getBlock(y, x));
 	bool val = state->_map->getBlock(y, x) >= 0;
 	CULog("VAL: %d", val);
-	return val;
+	return val;*/
+	return false;
 }
 
 void PlayerViewController::fall(shared_ptr<GameState> state) {
 	//Continuous downward force
-	if (state->_player->canFloat()) return;
+	/*if (state->_player->canFloat()) return;
 	if (canMove(state, Direction::DOWN))
-		state->_player->move(Direction::DOWN, state->_map->getColumnCount());
+		state->_player->move(Direction::DOWN, state->_map->getColumnCount());*/
 }
 
 shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
-	float grid_size = display.width / init_state->_map->getColumnCount();
+	/*float grid_size = display.width / init_state->_map->getColumnCount();
 	Vec2 start_pos = init_state->_player->getPosition();
 	player_vc->_node = PolygonNode::allocWithTexture(texture);
 	player_vc->_display = display;
@@ -98,7 +100,7 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	float scalex = grid_size / texture->getWidth();
 	float scaley = grid_size / texture->getHeight();
 	player_vc->_node->setScale(scalex, scaley);
-	player_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size));
+	player_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size));*/
 
 	return player_vc;
 }

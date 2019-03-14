@@ -27,7 +27,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 5
+#define SCENE_WIDTH 1
 
 #pragma mark -
 #pragma mark Constructors
@@ -76,11 +76,11 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
  */
 void GameScene::dispose() {
     if (_active) {
-        removeAllChildren();
-		_map_vc->dispose();
-		_player_vc->dispose();
-        _goal_vc->dispose();
-        _winnode->dispose();
+        //removeAllChildren();
+		//_map_vc->dispose();
+		//_player_vc->dispose();
+        //_goal_vc->dispose();
+        //_winnode->dispose();
         _active = false;
     }
 }
@@ -97,25 +97,28 @@ void GameScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameScene::update(float timestep) {
+	_world->update(timestep);
+	_map_vc->update(_gamestate);
+
+
 	if (!_complete) {
-		_map_vc->update(_gamestate);
 		//_goal_vc->update(_gamestate);
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
 			CULog("STEP");
-			_player_vc->update(_gamestate);
-			for (int i = 0; i < _urchin_vcs.size(); i++) {
-				_urchin_vcs[i]->update(_gamestate);
-			}
+			//_player_vc->update(_gamestate);
+			//for (int i = 0; i < _urchin_vcs.size(); i++) {
+			//	_urchin_vcs[i]->update(_gamestate);
+			//}
 			frame_counter = 0;
 		}
 
-		if (_gamestate->GoalCollision()) {
-			setComplete(true);
-		}
-		if (_player_vc->hitEnemy(_gamestate)) {
-			setComplete(true);
-		}
+		//if (_gamestate->GoalCollision()) {
+		//	setComplete(true);
+		//}
+		//if (_player_vc->hitEnemy(_gamestate)) {
+		//	setComplete(true);
+		//}
 	}
     if (_countdown > 0) {
         _countdown--;
@@ -150,28 +153,32 @@ void GameScene::buildScene() {
 
 	_gamestate = GameState::allocEmpty();
 
-	_gamestate->_map = GridMap::parseFromJSON("levels/sample_level.json", _assets);
-	_gamestate->_player = Player::alloc(Vec2(0, 0));
-    _gamestate->_goal_door = Goal::alloc(Vec2(3,30));
-	_gamestate->_urchins = {};
-	_gamestate->_urchins.resize(4);
-	_gamestate->_urchins[0] = Urchin::alloc(Vec2(4, 10));
-	_gamestate->_urchins[1] = Urchin::alloc(Vec2(8, 4));
-	_gamestate->_urchins[2] = Urchin::alloc(Vec2(6, 15));
-	_gamestate->_urchins[3] = Urchin::alloc(Vec2(7, 30));
+	Rect physics_bounds = Rect(-100, -100, 200, 200);
+	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -1));
+
+	shared_ptr<BoxObstacle> floor = BoxObstacle::alloc(Vec2(0, -.6), Size(25, 0.5));
+	floor->setBodyType(b2BodyType::b2_staticBody);
+	floor->setGravityScale(0);
+	_world->addObstacle(floor);
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	shared_ptr<Texture> image = _assets->get<Texture>("background");
-	
-	_worldnode = PolygonNode::allocWithTexture(image);
+
+	_gamestate->_map = PlatformMap::parseFromJSON("levels/sample_level.json", _assets);
+	_gamestate->_map->initPhysics(_world);
+
+	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);
+	addChild(_map_vc->getNode(), 1);
+
+	/*_worldnode = PolygonNode::allocWithTexture(image);
 	_worldnode->setName("world");
 	_worldnode->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
-	addChild(_worldnode, 0);
+	addChild(_worldnode, 0);*/
 
-	_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
+	/*_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode(),0);
 
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
@@ -204,7 +211,7 @@ void GameScene::buildScene() {
     addChild(_winnode,3);
     
     _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
-    addChild(_goal_vc->getNode(),0);
+    addChild(_goal_vc->getNode(),0);*/
     
     shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
     shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
@@ -244,12 +251,12 @@ void GameScene::buildScene() {
 }
 
 void GameScene::reset() {
-	_gamestate->reset();
-	_map_vc->updateRows(_gamestate);
+	//_gamestate->reset();
+	//_map_vc->updateRows(_gamestate);
 	//_map_vc->reset();
     //_player_vc->reset();
     //_goal_vc->reset();
     //removeAllChildren();
-    setComplete(false);
+    //setComplete(false);
     //buildScene();
 }

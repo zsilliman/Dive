@@ -1,7 +1,7 @@
 #include "GridMapViewController.h"
 
 void GridMapViewController::update(shared_ptr<GameState> state) {
-	Keyboard* keyboard = Input::get<Keyboard>();
+	/*Keyboard* keyboard = Input::get<Keyboard>();
 	if (keyboard->keyPressed(KeyCode::ARROW_LEFT)) {
 		CULog("left");
 		state->_map->translate(-1);
@@ -28,7 +28,7 @@ void GridMapViewController::update(shared_ptr<GameState> state) {
 		//Top portion
 		node_pos = _display.height;
 	}
-	_node->setPositionY(node_pos);
+	_node->setPositionY(node_pos);*/
 }
 
 void GridMapViewController::updateRows(shared_ptr<GameState> state) {
@@ -63,7 +63,7 @@ shared_ptr<GridMapViewController> GridMapViewController::alloc(shared_ptr<GameSt
 }
 
 void GridMapViewController::init(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> tilesheet, Size display) {
-	_node = Node::alloc();
+	/*_node = Node::alloc();
 	int rows = init_state->_map->getRowCount();
 	int cols = init_state->_map->getColumnCount();
 	float grid_size = display.width / cols;
@@ -77,5 +77,5 @@ void GridMapViewController::init(shared_ptr<GameState> init_state, shared_ptr<Ti
 		row_vc->addViewToNode(_node);
 		_rows.push_back(row_vc);
 	}
-	_node->setPosition(0, display.height);
+	_node->setPosition(0, display.height);*/
 }

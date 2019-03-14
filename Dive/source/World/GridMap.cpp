@@ -30,7 +30,7 @@ void GridMap::translate(int reference_offset) {
 }
 
 //Read custom properties from Tiled
-string getPropertyString(shared_ptr<JsonValue> properties, string key) {
+/*string getPropertyString(shared_ptr<JsonValue> properties, string key) {
 	for (int i = 0; i < properties->size(); i++) {
 		shared_ptr<JsonValue> prop = properties->get(i);
 		string jsonKey = prop->get("name")->asString();
@@ -40,10 +40,10 @@ string getPropertyString(shared_ptr<JsonValue> properties, string key) {
 	}
 	CULog("Could not read string property");
 	return "";
-}
+}*/
 
 //Read custom properties from Tiled
-int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
+/*int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
 	for (int i = 0; i < properties->size(); i++) {
 		shared_ptr<JsonValue> prop = properties->get(i);
 		string jsonKey = prop->get("name")->asString();
@@ -53,9 +53,9 @@ int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
 	}
 	CULog("Could not read integer property");
 	return -1;
-}
+}*/
 
-vector<int> getPropertyIntList(shared_ptr<JsonValue> properties, string key) {
+/*vector<int> getPropertyIntList(shared_ptr<JsonValue> properties, string key) {
 	for (int i = 0; i < properties->size(); i++) {
 		shared_ptr<JsonValue> prop = properties->get(i);
 		string jsonKey = prop->get("name")->asString();
@@ -66,7 +66,7 @@ vector<int> getPropertyIntList(shared_ptr<JsonValue> properties, string key) {
 	}
 	CULog("Could not read integer property");
 	return {};
-}
+}*/
 
 int GridMap::getRowCount() {
 	return _height;
@@ -98,7 +98,7 @@ void GridMap::reset() {
 shared_ptr<GridMap> GridMap::parseFromJSON(string file, shared_ptr<AssetManager> _assets) {
 	shared_ptr<GridMap> map = make_shared<GridMap>();
 
-	std::shared_ptr<JsonReader> reader = JsonReader::allocWithAsset(file);
+	/*std::shared_ptr<JsonReader> reader = JsonReader::allocWithAsset(file);
 	shared_ptr<JsonValue> json = reader->readJson();
 
 	//Tile sheet
@@ -138,6 +138,6 @@ shared_ptr<GridMap> GridMap::parseFromJSON(string file, shared_ptr<AssetManager>
 		}
 		map->_rows.push_back(row);
 	}
-
+	*/
 	return map;
 }

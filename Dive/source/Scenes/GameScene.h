@@ -18,10 +18,7 @@
 #define __SD_GAME_SCENE_H__
 #include <cugl/cugl.h>
 #include "GameState.h"
-#include "../ViewControllers/GridMapViewController.h"
-#include "../ViewControllers/PlayerViewController.h"
-#include "../ViewControllers/GoalViewController.h"
-#include "../ViewControllers/UrchinViewController.h"
+#include "../ViewControllers/PlatformMapViewController.h"
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
@@ -48,10 +45,8 @@ protected:
 
     // COUPLED VIEW + CONTROLLERS
 	/** controller that manages how the user controls world translations */
-	std::shared_ptr<GridMapViewController> _map_vc;
-	std::shared_ptr<PlayerViewController> _player_vc;
-    std::shared_ptr<GoalViewController> _goal_vc;
-	std::vector<shared_ptr<UrchinViewController>> _urchin_vcs;
+	std::shared_ptr<PlatformMapViewController> _map_vc;
+	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
     bool _complete;
     int _countdown;

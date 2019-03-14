@@ -8,8 +8,8 @@ TiledTexture::TiledTexture()
 
 TiledTexture::~TiledTexture()
 {
-	_tiles.clear();
-	_texture->dispose();
+	//_tiles.clear();
+	//_texture->dispose();
 }
 
 shared_ptr<Texture> TiledTexture::getTile(int i) {

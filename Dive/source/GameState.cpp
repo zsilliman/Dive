@@ -20,13 +20,13 @@ void GameState::dispose() {
 
 void GameState::reset(){
 	_map->reset();
-	_player->reset();
+	/*_player->reset();
 	_goal_door->reset();
 	for (int i = 0; i < _urchins.size(); i++) {
 		_urchins[i]->reset();
-	}
+	}*/
 }
 
 bool GameState::GoalCollision(){
-    return _player->getPosition() == _goal_door->getPosition();
+	return false;//_player->getPosition() == _goal_door->getPosition();
 }

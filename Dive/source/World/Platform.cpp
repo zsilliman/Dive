@@ -1,80 +1,198 @@
 #include "Platform.h"
+#include "../Util.h"
 
 using namespace cugl;
 using namespace std;
 
-shared_ptr<PolygonNode> _node;
 
-shared_ptr<Platform> Platform::parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets) {
-	return make_shared<Platform>();
+int getIndex(Vec2 pos, Vec2 map_dimen) {
+	return (int)((map_dimen.y - pos.y - 1) * map_dimen.x + pos.x);
 }
 
-shared_ptr<Platform> Platform::allocWithTexture(shared_ptr<Texture> texture) {
+/** Returns the location after moving either up,down,left or right */
+Vec2 getAdjacent(Vec2 d, Vec2 pos, Vec2 map_dimen) {
+	pos.x = Util::mod(pos.x + d.x, map_dimen.x);;
+	pos.y += d.y;
+
+	//Check for y is in bounds. If not, return -1 for out of bounds
+	if (pos.y < 0 || pos.y >= map_dimen.y) {
+		pos.y -= d.y;
+		return pos;
+	}
+	return pos;
+}
+
+/** Returns the value at the corresponding block or -1 if the value is out of bounds */
+int getAdjacentValue(vector<int>* grid, Vec2 d, Vec2 pos, Vec2 map_dimen) {
+	getAdjacent(d, pos, map_dimen);
+	int block = (*grid)[getIndex(pos, map_dimen)];
+
+	return block;
+}
+
+bool contains(vector<Vec2>* lst, Vec2 pos) {
+	vector<Vec2>& lst_ref = *lst;
+	for (int i = 0; i < lst_ref.size(); i++) {
+		if (lst_ref[i].equals(pos))
+			return true;
+	}
+	return false;
+}
+
+shared_ptr<Platform> Platform::allocWithGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen) {
 	shared_ptr<Platform> platform = make_shared<Platform>();
-	platform->_node = PolygonNode::allocWithTexture(texture);
+	platform->initGrid(grid, start, map_dimen);
 	return platform;
 }
 
-void Platform::setScale(float x, float y) {
-	_node->setScale(x, y);
-}
-
-void Platform::setInitialPosition(float x, float y) {
-	_node->setPositionX(x);
-	_node->setPositionY(y);
-	_initial_pos = Vec2(x, y);
-}
-
-void Platform::initPhysics(shared_ptr<ObstacleWorld> world) {
-	_body = BoxObstacle::alloc(Vec2(_node->getPositionX(), _node->getPositionY()), Size(_node->getWidth(), _node->getHeight()));
-	_body->setBodyType(b2BodyType::b2_kinematicBody);
-	world->addObstacle(_body);
-}
-
-void Platform::updatePosition() {
-	_node->setPosition(_body->getPosition());
-	_node->setAngle(_body->getAngle());
-}
-
-void Platform::parallaxTranslate(float reference_x, float reference_y, float reference_dx) {
-	//Compute distance between y coordinates
-	float dist = abs(reference_y - _node->getPositionY());
-	//Essentially draw a line with slope -1/500 with y-intercept at 1
-	//I think this should be changed, but we should discuss how platform speed changes with distance(along y-axis) from the player
-	float relative_speed = 1 + (-1.0f / 4.0f)*dist;     // 1 / (1+dist/500);
-	//Set bounds on the speed
-	if (relative_speed < 0)
-		relative_speed = 0;
-	if (relative_speed > 2)
-		relative_speed = 2;
-	//Set it so that it moves in the opposite direction of the player
-	relative_speed *= -1;
-	
-	//Compute position based on velocity in x direction
-	Vec2 position = _body->getPosition() + Vec2(reference_dx*relative_speed, 0);
-	
-	//Compute position based on the absolute x position of the player
-	//(TOGGLE THE BELOW CODE TO CHANGE BETWEEN THE TWO TYPES OF PARALLAX TRANSLATIONS)
-	//position.x = _initial_pos.x + relative_speed * reference_x;
-	
-	//Checks whether the jump is possible
-	if (_map_size > 1) {
-		//This part is still kind of faulty, but whatever
-		//This makes the positions jump back to simulate an infinite world
-		if (position.x > _x_end)
-			position.x -= _map_size;
-		else if (position.x < _x_start)
-			position.x += _map_size;
-		//position.x = (_map_size + ((int)(position.x + _x_start) % _map_size)) % _map_size;
+void Platform::initGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen) {
+	rec_init(grid, start, map_dimen);
+	//set all adjacent values to 0 to prevent overlap of platforms
+	for (int i = 0; i < adj_tiles.size(); i++) {
+		int index = getIndex(adj_tiles[i], map_dimen);
+		(*grid)[index] = 0;
 	}
-	//Set the position to the newly computed one
-	_body->setPosition(position);
 }
 
-void Platform::setMapSize(int x_start, int x_end) { 
-	_map_size = x_end-x_start;
-	_x_start = x_start;
-	_x_end = x_end;
-	//if (_map_size > 1)
-	//	_initial_pos.x = (_map_size + ((int)(_initial_pos.x + x_start) % _map_size)) % _map_size;
+/** DFS search of all neighboring tiles */
+void Platform::rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen) {
+	vector<int>& grid_ref = *grid;
+	Vec2 dir_buf[4] = { Vec2(1,0), Vec2(-1,0), Vec2(0,1), Vec2(0,-1) };
+
+	//Add current to list of visited
+	adj_tiles.push_back(current);
+	int blk = grid_ref[getIndex(current, map_dimen)];
+	adj_values.push_back(blk);
+
+	//Iterate over directions
+	for (int i = 0; i < 4; i++) {
+		Vec2 adj = getAdjacent(dir_buf[i], current, map_dimen);
+		int blk = grid_ref[getIndex(adj, map_dimen)];
+		//If the block exists and was not put in adj_tiles yet
+		if (blk > 0 && !contains(&adj_tiles, adj)) {
+			rec_init(grid, adj, map_dimen);
+		}
+	}
 }
+
+void Platform::parallaxTranslate(float reference_dx) {
+	setLinearVelocity(Vec2(reference_dx*_relative_speed, 0));
+}
+
+Vec2 Platform::getMinCorner() {
+	Vec2 min = Vec2(99999, 99999);
+	for (int i = 0; i < adj_tiles.size(); i++) {
+		if (min.x > adj_tiles[i].x)
+			min.x = adj_tiles[i].x;
+		if (min.y > adj_tiles[i].y)
+			min.y = adj_tiles[i].y;
+	}
+	return min;
+}
+
+Vec2 Platform::getMaxCorner() {
+	Vec2 min = Vec2(99999, 99999);
+	for (int i = 0; i < adj_tiles.size(); i++) {
+		if (min.x > adj_tiles[i].x)
+			min.x = adj_tiles[i].x;
+		if (min.y > adj_tiles[i].y)
+			min.y = adj_tiles[i].y;
+	}
+	return min;
+}
+
+Size Platform::getPlatformSize() {
+	Vec2 max = getMaxCorner();
+	Vec2 min = getMinCorner();
+	return Size(max - min);
+}
+
+void Platform::createFixtures() {
+	fixture_defs.resize(adj_tiles.size());
+	shapes.resize(adj_tiles.size());
+	fixtures.resize(adj_tiles.size());
+	Vec2 min_corner = getMinCorner();
+	for (int i = 0; i < adj_tiles.size(); i++) {
+		fixture_defs[i].density = PLATFORM_DENSITY;
+		fixture_defs[i].friction = PLATFORM_FRICTION;
+		fixture_defs[i].restitution = PLATFORM_RESTITUTION;
+
+		shapes[i] = b2PolygonShape();
+		Vec2 center = adj_tiles[i] - min_corner + Vec2(0.5, 0.5);
+		shapes[i].SetAsBox(0.5, 0.5, b2Vec2(center.x, center.y), 0);
+		fixture_defs[i].shape = &shapes[i];
+		fixtures[i] = _body->CreateFixture(&fixture_defs[i]);
+		setBodyType(b2BodyType::b2_staticBody);
+		setGravityScale(0);
+	}
+	setPosition(min_corner);
+	_initial_pos.set(min_corner);
+}
+
+void Platform::releaseFixtures() {
+	for (int i = 0; i < fixtures.size(); i++) {
+		_body->DestroyFixture(fixtures[i]);
+	}
+}
+
+void Platform::reset() {
+	setPosition(_initial_pos);
+	setAngle(0);
+}
+
+
+/*
+Polygon building algorithm. Ran into issues. Usefulness is tbd
+int Platform::countNeighbors(Vec2 map_dimen, Vec2 pos) {
+	vector<int>& grid_ref = *grid;
+	int count = 0;
+	//Compute blocks that surround given position
+	int top_right = getAdjacentValue(grid, Vec2(0,0), pos, map_dimen);
+	int bottom_right = getAdjacentValue(grid, Vec2(0, -1), pos, map_dimen);
+	int top_left = getAdjacentValue(grid, Vec2(-1, 0), pos, map_dimen);
+	int bottom_left = getAdjacentValue(grid, Vec2(-1, -1), pos, map_dimen);
+
+	//Count adjacent blocks
+	if (top_right >= 0) count++;
+	if (bottom_right >= 0) count++;
+	if (top_left >= 0) count++;
+	if (bottom_left >= 0) count++;
+
+	return count;
+}
+
+void Platform::buildPolygon(vector<int>* grid, Vec2 map_dimen) {
+	_poly = Poly2();
+	vector<Vec2> outline = {};
+	//Determine outline of platform
+	vector<Vec2> all_vertices = {};
+	//Step 1: Enumerate Vertices of all blocks
+	for (int i = 0; i < adj_tiles.size(); i++) {
+		//enumerate vertices of a single block
+		Vec2 bottom_left = adj_tiles[i];
+		Vec2 bottom_right = bottom_left + Vec2(1,0);
+		Vec2 top_left = bottom_left + Vec2(0,1);
+		Vec2 top_right = bottom_left + Vec2(1,1);
+		//add them to list of vertices
+		if (!contains(&all_vertices, bottom_left))
+			all_vertices.push_back(bottom_left);
+		if (!contains(&all_vertices, bottom_right))
+			all_vertices.push_back(bottom_right);
+		if (!contains(&all_vertices, top_left))
+			all_vertices.push_back(top_left);
+		if (!contains(&all_vertices, top_right))
+			all_vertices.push_back(top_right);
+	}
+	//Step 2: Filter out non-essential vertices
+	for (int i = 0; i < all_vertices.size(); i++) {
+		int neighbors = countNeighbors(map_dimen, all_vertices[i]);
+		if (neighbors == 1 || neighbors == 3) {
+			outline.push_back(all_vertices[i]);
+		}
+	}
+
+	//Step 3: reorder vertices (???)
+
+	_poly.set(outline);
+	_body = PolygonObstacle::alloc(_poly);
+}*/

@@ -6,7 +6,7 @@ void GridRowViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameS
 
 void GridRowViewController::update(shared_ptr<GameState> state) {
 	//Update textures of nodes
-	for (int col = 0; col < _blocks.size(); col++) {
+	/*for (int col = 0; col < _blocks.size(); col++) {
 		int block = state->_map->getBlock(_row_index, col);
 		if (block >= 0) {
 			//Set node to the new texture
@@ -18,7 +18,7 @@ void GridRowViewController::update(shared_ptr<GameState> state) {
 			//Make node invisible
 			_blocks[col]->setVisible(false);
 		}
-	}
+	}*/
 }
 
 void GridRowViewController::dispose() {
@@ -34,7 +34,7 @@ void GridRowViewController::setTileSet(shared_ptr<TiledTexture> tilesheet) {
 }
 
 void GridRowViewController::init(shared_ptr<GameState> init_state, int row, float grid_size) {
-	int cols = init_state->_map->getColumnCount();
+	/*int cols = init_state->_map->getColumnCount();
 	int rows = init_state->_map->getRowCount();
 	int tile_width = init_state->_map->getTileWidth();
 	int tile_height = init_state->_map->getTileHeight();
@@ -61,7 +61,7 @@ void GridRowViewController::init(shared_ptr<GameState> init_state, int row, floa
 		block_node->setScale(scalex, scaley);
 		_blocks.push_back(block_node);
 		_node->addChild(block_node);
-	}
+	}*/
 }
 
 shared_ptr<GridRowViewController> GridRowViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> tilesheet, int row_index, float grid_size) {

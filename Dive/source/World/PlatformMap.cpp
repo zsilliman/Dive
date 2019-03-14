@@ -4,72 +4,110 @@
 using namespace cugl;
 using namespace std;
 
-
-shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string filename, shared_ptr<AssetManager> _assets) {
-	return make_shared<PlatformMap>();
-}
-
 shared_ptr<PlatformMap> PlatformMap::alloc() {
 	shared_ptr<PlatformMap> map = make_shared<PlatformMap>();
-	map->_node = Node::alloc();
-	map->layers = {};
+	map->platforms = {};
 	return map;
 }
 
-void PlatformMap::setScale(float x, float y) {
-	_node->setScale(x, y);
-}
-
-void PlatformMap::setPosition(float x, float y) {
-	_node->setPositionX(x);
-	_node->setPositionY(y);
-}
-
 void PlatformMap::addPlatform(shared_ptr<Platform> platform) {
-	platform->setMapSize(_x_start, _x_end);
-	layers.push_back(platform);
-	_node->addChild(platform->_node);
+	platforms.push_back(platform);
 }
 
-void PlatformMap::updatePlatformPositions(float dt) {
-	for (int i = 0; i < layers.size(); i++) {
-		layers[i]->updatePosition();
-    }
-}
-
-
-void PlatformMap::parallaxTranslatePlatforms(float reference_x, float reference_y, float reference_dx) {
-	for (int i = 0; i < layers.size(); i++) {
-		layers[i]->parallaxTranslate(reference_x, reference_y, reference_dx);
+void PlatformMap::parallaxTranslatePlatforms(float reference_dx) {
+	for (int i = 0; i < platforms.size(); i++) {
+		platforms[i]->parallaxTranslate(reference_dx);
 	}
 }
 
-void PlatformMap::parallaxTranslatePlatforms(Vec2 reference, float reference_dx) {
-	for (int i = 0; i < layers.size(); i++) {
-		layers[i]->parallaxTranslate(reference.x, reference.y, reference_dx);
+void PlatformMap::reset() {
+	for (int i = 0; i < platforms.size(); i++) {
+		platforms[i]->reset();
 	}
 }
 
-void PlatformMap::setMapSize(int x_start, int x_end) {
-	_map_size = x_end-x_start;
-	_x_start = x_start;
-	_x_end = x_end;
-	for (int i = 0; i < layers.size(); i++) {
-		layers[i]->setMapSize(x_start, x_end);
+//Read custom properties from Tiled
+string getPropertyString(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			return prop->get("value")->asString();
+		}
 	}
+	CULog("Could not read string property");
+	return "";
 }
 
-void PlatformMap::anchorCameraTo(float x, float y, float _player_screen_x, float _player_screen_y) {
-	_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-	_node->setPositionX(-x + _player_screen_x);
-	_node->setPositionY(-y + _player_screen_y);
+//Read custom properties from Tiled
+int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			return prop->get("value")->asInt();
+		}
+	}
+	CULog("Could not read integer property");
+	return -1;
 }
 
-void PlatformMap::anchorCameraToY(float y, float screen_y) {
-	_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-	_node->setPositionY(-y + screen_y);
+vector<int> getPropertyIntList(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			string lst = prop->get("value")->asString();
+			return JsonValue::allocWithJson(lst)->asIntArray();
+		}
+	}
+	CULog("Could not read integer property");
+	return {};
 }
 
-void PlatformMap::anchorCameraTo(Vec2 position, Vec2 player_screen_pos) {
-	anchorCameraTo(position.x, position.y, player_screen_pos.x, player_screen_pos.y);
+/*
+* Parse a map from a json file generated with map editor software named "Tiled"
+*/
+shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<AssetManager> _assets) {
+	shared_ptr<PlatformMap> map = make_shared<PlatformMap>();
+
+	std::shared_ptr<JsonReader> reader = JsonReader::allocWithAsset(file);
+	shared_ptr<JsonValue> json = reader->readJson();
+
+	//Tile sheet
+	shared_ptr<JsonValue> properties = json->get("properties");
+	string tileasset = getPropertyString(properties, "asset");
+	vector<int> rel_speeds = getPropertyIntList(properties, "speeds");
+	shared_ptr<Texture> texture = _assets->get<Texture>(tileasset);
+
+	//Map properties
+	int tile_height = json->get("height")->asInt();
+	int tile_width = json->get("width")->asInt();
+	map->_height = tile_height;
+	map->_width = tile_width;
+
+	//Layer properties
+	shared_ptr<JsonValue> layers = json->get("layers");
+
+	//Grabs first layer
+	shared_ptr<JsonValue> tile_layer = layers->get(0);
+	shared_ptr<JsonValue> obj_layer = layers->get(0);
+	vector<int> data = tile_layer->get("data")->asIntArray();
+	Vec2 map_dimen = Vec2(tile_width, tile_height);
+
+	int blk_counter = 0;
+	for (int y = 0; y < tile_height; y++) {
+		for (int x = 0; x < tile_width; x++) {
+			int index = (tile_height - y - 1) * map->_width + x;
+			//If a block exists
+			if (data[index] > 0) {
+				//Create platform from this and adjacent blocks
+				Vec2 start = Vec2(x, y);
+				shared_ptr<Platform> platform = Platform::allocWithGrid(&data, start, map_dimen);
+				map->addPlatform(platform);
+			}
+		}
+	}
+
+	return map;
 }

@@ -198,6 +198,8 @@
     <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\PlatformMapViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\PlatformViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\UrchinViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\ViewController.h" />
@@ -222,6 +224,8 @@
     <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\PlatformMapViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\PlatformViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\UrchinViewController.cpp" />
     <ClCompile Include="..\..\source\World\Goal.cpp" />

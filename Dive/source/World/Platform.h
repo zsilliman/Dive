@@ -5,34 +5,49 @@
 using namespace cugl;
 using namespace std;
 
-class Platform
+#define PLATFORM_DENSITY 1
+#define PLATFORM_FRICTION 1
+#define PLATFORM_RESTITUTION 0.01
+
+
+
+class Platform : public SimpleObstacle
 {
 
 protected:
-	shared_ptr<BoxObstacle> _body;
-
 	Vec2 _initial_pos = Vec2(0, 0);
+	float _relative_speed = 1, _grid_size = 1;
+	//Useful for ignoring collisions between
+	int _platform_id = 0;
 
-	int _map_size = 0, _x_start = 0, _x_end = 0;
+	void rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen);
 
+	//Physics fields
+	vector<b2FixtureDef> fixture_defs = {};
+	vector<b2PolygonShape> shapes = {};
+	vector<b2Fixture*> fixtures = {};
 
 public:
-	shared_ptr<PolygonNode> _node;
+	vector<Vec2> adj_tiles = {};
+	vector<int> adj_values = {};
 
-	static shared_ptr<Platform> parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets);
+	void parallaxTranslate(float reference_dx);
 
-	static shared_ptr<Platform> allocWithTexture(shared_ptr<Texture> texture);
+	void initGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen);
 
-	void setScale(float x, float y);
+	Size getPlatformSize();
 
-	void setInitialPosition(float x, float y);
+	Vec2 getMinCorner();
 
-	void initPhysics(shared_ptr<ObstacleWorld> world);
+	Vec2 getMaxCorner();
 
-	void updatePosition();
+	void reset();
 
-	void parallaxTranslate(float reference_x, float reference_y, float reference_dx);
+	static shared_ptr<Platform> allocWithGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen);
 
-	void setMapSize(int x_start, int x_end);
+	//Override Physics Functions
+	void createFixtures() override;
+
+	void releaseFixtures() override;
     
 };
