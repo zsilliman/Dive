@@ -27,7 +27,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 1
+#define SCENE_WIDTH 12
 
 #pragma mark -
 #pragma mark Constructors
@@ -100,7 +100,6 @@ void GameScene::update(float timestep) {
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
 
-
 	if (!_complete) {
 		//_goal_vc->update(_gamestate);
 		frame_counter++;
@@ -140,7 +139,6 @@ void GameScene::setComplete(bool value) {
     }
 }
 
-
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -155,11 +153,6 @@ void GameScene::buildScene() {
 
 	Rect physics_bounds = Rect(-100, -100, 200, 200);
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -1));
-
-	shared_ptr<BoxObstacle> floor = BoxObstacle::alloc(Vec2(0, -.6), Size(25, 0.5));
-	floor->setBodyType(b2BodyType::b2_staticBody);
-	floor->setGravityScale(0);
-	_world->addObstacle(floor);
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
@@ -251,7 +244,7 @@ void GameScene::buildScene() {
 }
 
 void GameScene::reset() {
-	//_gamestate->reset();
+	_gamestate->reset();
 	//_map_vc->updateRows(_gamestate);
 	//_map_vc->reset();
     //_player_vc->reset();

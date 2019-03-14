@@ -9,14 +9,12 @@ using namespace std;
 #define PLATFORM_FRICTION 1
 #define PLATFORM_RESTITUTION 0.01
 
-
-
 class Platform : public SimpleObstacle
 {
 
 protected:
 	Vec2 _initial_pos = Vec2(0, 0);
-	float _relative_speed = 1, _grid_size = 1;
+	float _relative_speed = 1;
 	//Useful for ignoring collisions between
 	int _platform_id = 0;
 
@@ -35,6 +33,12 @@ public:
 
 	void initGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen);
 
+	void setRelativeSpeed(float relative_speed) { _relative_speed = relative_speed; }
+
+	float getRelativeSpeed() { return _relative_speed; }
+
+	Rect getPlatformRect();
+
 	Size getPlatformSize();
 
 	Vec2 getMinCorner();
@@ -42,6 +46,8 @@ public:
 	Vec2 getMaxCorner();
 
 	void reset();
+
+	shared_ptr<Platform> duplicate();
 
 	static shared_ptr<Platform> allocWithGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen);
 
