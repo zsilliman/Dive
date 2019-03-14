@@ -41,7 +41,7 @@ protected:
 	std::shared_ptr<GameState> _gamestate;
     
 
-	std::shared_ptr<cugl::Node> _worldnode; 
+	std::shared_ptr<cugl::Node> _worldnode;
 
 	float scale;
 
