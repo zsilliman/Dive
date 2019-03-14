@@ -105,7 +105,7 @@ void GameScene::update(float timestep) {
 		//_goal_vc->update(_gamestate);
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
-			CULog("STEP");
+//            CULog("STEP");
 			//_player_vc->update(_gamestate);
 			//for (int i = 0; i < _urchin_vcs.size(); i++) {
 			//	_urchin_vcs[i]->update(_gamestate);
@@ -168,9 +168,10 @@ void GameScene::buildScene() {
 	addChild(_map_vc->getNode(), 1);
     
     _player_vc = PlayerViewController::alloc(_gamestate,diver_texture,size);
-    addChild(_player_vc->getNode(),1);
-    _player_vc->setPosition(.06, 1.42);
+    _player_vc->setPosition(.13, 7);
     _player_vc->initPhysics(_world);
+    addChild(_player_vc->getNode(),1);
+
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
 	/*_worldnode = PolygonNode::allocWithTexture(image);

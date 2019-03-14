@@ -2,7 +2,7 @@
 
 #include <cugl/cugl.h>
 #include "World/PlatformMap.h"
-
+#include "Entities/Player.h"
 using namespace cugl;
 using namespace std;
 
@@ -12,9 +12,9 @@ public:
 
 	/** A reference to the map that all the platforms are put on */
 	shared_ptr<PlatformMap> _map;
-
-	/** A reference to the player
-	shared_ptr<Player> _player;
+    /** A reference to the player */
+    shared_ptr<Player> _player;
+	/**
 
 	A reference to the goal location 
 	shared_ptr<Goal> _goal_door;

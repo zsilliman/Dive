@@ -30,6 +30,8 @@
 		766CD9E32238261D0020E734 /* GridRow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1B223357A700A7432C /* GridRow.cpp */; };
 		766CD9E4223826210020E734 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1E223357A700A7432C /* Goal.cpp */; };
 		766CD9E5223826230020E734 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E1F223357A700A7432C /* PlatformMap.cpp */; };
+		76BEF277223AC02700FB11BA /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76BEF274223AC02600FB11BA /* PlatformViewController.cpp */; };
+		76BEF278223AC02700FB11BA /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 76BEF276223AC02600FB11BA /* PlatformMapViewController.cpp */; };
 		EB0FF5092016E4A700517030 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0FF5082016E4A700517030 /* CoreFoundation.framework */; };
 		EB0FF6172016EFB200517030 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A71D74D846002FBAE6 /* iOS.xcassets */; };
 		EB0FF6182016EFB200517030 /* Landscape.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A81D74D846002FBAE6 /* Landscape.storyboard */; };
@@ -166,6 +168,10 @@
 		7650F3E92236C1040079DF2D /* UrchinViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UrchinViewController.cpp; sourceTree = "<group>"; };
 		7650F3EA2236C1040079DF2D /* UrchinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrchinViewController.h; sourceTree = "<group>"; };
 		7650F3EB2236C1040079DF2D /* GoalViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoalViewController.cpp; sourceTree = "<group>"; };
+		76BEF270223AC02600FB11BA /* PlatformMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformMapViewController.h; sourceTree = "<group>"; };
+		76BEF274223AC02600FB11BA /* PlatformViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformViewController.cpp; sourceTree = "<group>"; };
+		76BEF275223AC02600FB11BA /* PlatformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformViewController.h; sourceTree = "<group>"; };
+		76BEF276223AC02600FB11BA /* PlatformMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformMapViewController.cpp; sourceTree = "<group>"; };
 		EB0FF5082016E4A700517030 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
 		EB0FF5FC2016EF4F00517030 /* Dive (Sim).app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Dive (Sim).app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB2BE9B41D74952A002FE78B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
@@ -475,6 +481,10 @@
 		EF660E07223357A600A7432C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				76BEF276223AC02600FB11BA /* PlatformMapViewController.cpp */,
+				76BEF270223AC02600FB11BA /* PlatformMapViewController.h */,
+				76BEF274223AC02600FB11BA /* PlatformViewController.cpp */,
+				76BEF275223AC02600FB11BA /* PlatformViewController.h */,
 				7650F3EB2236C1040079DF2D /* GoalViewController.cpp */,
 				7650F3E52236C1040079DF2D /* GoalViewController.h */,
 				7650F3E92236C1040079DF2D /* UrchinViewController.cpp */,
@@ -762,12 +772,14 @@
 				EF660E23223357A700A7432C /* Player.cpp in Sources */,
 				EF660E27223357A700A7432C /* Urchin.cpp in Sources */,
 				EF660E35223357A700A7432C /* GameScene.cpp in Sources */,
+				76BEF277223AC02700FB11BA /* PlatformViewController.cpp in Sources */,
 				EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */,
 				EF660E3D223357A700A7432C /* GridRow.cpp in Sources */,
 				EF660E41223357A700A7432C /* PlatformMap.cpp in Sources */,
 				EF660E39223357A700A7432C /* GridMap.cpp in Sources */,
 				EF660E31223357A700A7432C /* PlayerViewController.cpp in Sources */,
 				EF660E3B223357A700A7432C /* Platform.cpp in Sources */,
+				76BEF278223AC02700FB11BA /* PlatformMapViewController.cpp in Sources */,
 				EF660E2F223357A700A7432C /* GridRowViewController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

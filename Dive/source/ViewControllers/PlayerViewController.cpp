@@ -4,7 +4,15 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
-    _body->setLinearVelocity(.01,0);
+    if (_body->getX() > _display.width){
+        _body->setPosition(_display.width - _body->getX() + .2,_body->getY());
+    }
+    
+    if (_body->getX() < 0){
+        _body->setPosition(_body->getX() + _display.width + .2,_body->getY());
+    }
+    
+    _body->setLinearVelocity(1,-1);
     updateNodePosition();
 	/*Vec2 start_pos = state->_player->getPosition();
 	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
@@ -96,7 +104,8 @@ void PlayerViewController::fall(shared_ptr<GameState> state) {
 shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
     player_vc->_node = PolygonNode::allocWithTexture(texture);
-    player_vc->_node->setScale(0.0005f, 0.0005f);
+    player_vc->_node->setScale(0.001f, 0.001f);
+    player_vc->_display = display;
     
 	/*float grid_size = display.width / init_state->_map->getColumnCount();
 	Vec2 start_pos = init_state->_player->getPosition();
@@ -128,7 +137,7 @@ void PlayerViewController::updateNodePosition() {
 void PlayerViewController::initPhysics(shared_ptr<ObstacleWorld> world) {
     _body = WheelObstacle::alloc(Vec2(_node->getPositionX(), _node->getPositionY()), _node->getWidth() / 2);
     _body->setBodyType(b2BodyType::b2_dynamicBody);
-    _body->setLinearDamping(0.5f);
+    _body->setLinearDamping(1.0f);
     _body->setName("player");
     world->addObstacle(_body);
 }

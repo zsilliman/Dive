@@ -6,9 +6,9 @@ using namespace std;
 shared_ptr<Player> Player::alloc(Vec2 start_pos) {
 	shared_ptr<Player> player = make_shared<Player>();
 	player->_position.set(start_pos);
-	player->_current_direction = Direction::RIGHT;
+//    player->_current_direction = Direction::RIGHT;
 	player->_start_pos.set(start_pos);
-	player->setCanFloat(false);
+//    player->setCanFloat(false);
 	return player;
 }
 
