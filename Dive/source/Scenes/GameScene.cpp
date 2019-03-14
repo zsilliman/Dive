@@ -99,7 +99,7 @@ void GameScene::dispose() {
 void GameScene::update(float timestep) {
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
-
+    _player_vc->update(_gamestate);
 
 	if (!_complete) {
 		//_goal_vc->update(_gamestate);
@@ -172,6 +172,12 @@ void GameScene::buildScene() {
 
 	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode(), 1);
+    
+    _player_vc = PlayerViewController::alloc(_gamestate,diver_texture,size);
+    addChild(_player_vc->getNode(),1);
+    _player_vc->setPosition(.06, 1.42);
+    _player_vc->initPhysics(_world);
+//    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
 	/*_worldnode = PolygonNode::allocWithTexture(image);
 	_worldnode->setName("world");

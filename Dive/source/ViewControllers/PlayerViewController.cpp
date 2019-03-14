@@ -4,6 +4,8 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
+    _body->setLinearVelocity(.01,0);
+    updateNodePosition();
 	/*Vec2 start_pos = state->_player->getPosition();
 	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
 	if (isBlocked(state)) {
@@ -28,6 +30,7 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	_node->setPosition(map_pos);
 	_node->setVisible(true);*/
 }
+
 
 void PlayerViewController::dispose() {}
 
@@ -92,15 +95,40 @@ void PlayerViewController::fall(shared_ptr<GameState> state) {
 
 shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
+    player_vc->_node = PolygonNode::allocWithTexture(texture);
+    player_vc->_node->setScale(0.0005f, 0.0005f);
+    
 	/*float grid_size = display.width / init_state->_map->getColumnCount();
 	Vec2 start_pos = init_state->_player->getPosition();
 	player_vc->_node = PolygonNode::allocWithTexture(texture);
 	player_vc->_display = display;
 	player_vc->_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-	float scalex = grid_size / texture->getWidth();
-	float scaley = grid_size / texture->getHeight();
-	player_vc->_node->setScale(scalex, scaley);
+
 	player_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size));*/
 
 	return player_vc;
+}
+
+
+void PlayerViewController::setScale(float x, float y) {
+    _node->setScale(x, y);
+}
+
+//Note that init physics must be called first
+void PlayerViewController::setPhysicsPosition(float x, float y) {
+    _body->setPosition(x, y);
+    _node->setPosition(x, y);
+}
+
+void PlayerViewController::updateNodePosition() {
+    _node->setPosition(_body->getPosition());
+    _node->setAngle(_body->getAngle());
+}
+
+void PlayerViewController::initPhysics(shared_ptr<ObstacleWorld> world) {
+    _body = WheelObstacle::alloc(Vec2(_node->getPositionX(), _node->getPositionY()), _node->getWidth() / 2);
+    _body->setBodyType(b2BodyType::b2_dynamicBody);
+    _body->setLinearDamping(0.5f);
+    _body->setName("player");
+    world->addObstacle(_body);
 }

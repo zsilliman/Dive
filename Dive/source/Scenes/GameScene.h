@@ -19,6 +19,8 @@
 #include <cugl/cugl.h>
 #include "GameState.h"
 #include "../ViewControllers/PlatformMapViewController.h"
+#include "../ViewControllers/PlayerViewController.h"
+
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
@@ -46,6 +48,7 @@ protected:
     // COUPLED VIEW + CONTROLLERS
 	/** controller that manages how the user controls world translations */
 	std::shared_ptr<PlatformMapViewController> _map_vc;
+    std::shared_ptr<PlayerViewController> _player_vc;
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
     bool _complete;
