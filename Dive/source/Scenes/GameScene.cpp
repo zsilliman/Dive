@@ -27,7 +27,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 12
+#define SCENE_WIDTH 5
 
 #pragma mark -
 #pragma mark Constructors
