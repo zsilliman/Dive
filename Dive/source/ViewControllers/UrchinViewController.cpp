@@ -61,5 +61,32 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
 	urchin_vc->_node->setPosition(init_state->_map->tileToMapCoords(start_pos.y, start_pos.x, grid_size));
 	urchin_vc->_urchin_index = urchin_index;
 	*/
+	urchin_vc->_node = PolygonNode::allocWithTexture(texture);
+	urchin_vc->_node->setScale(0.005f, 0.005f);
+	//urchin_vc->_body->setGravityScale(-9.8f);
+	urchin_vc->_display = display;
 	return urchin_vc;
 }
+
+//Note that init physics must be called first
+void UrchinViewController::setPhysicsPosition(float x, float y) {
+	CULog("setting urchin physics");
+	_body->setPosition(x, y);
+	_node->setPosition(x, y);
+}
+
+void UrchinViewController::updateNodePosition() {
+	CULog("updating urchin node position");
+	_node->setPosition(_body->getPosition());
+	_node->setAngle(_body->getAngle());
+}
+
+void UrchinViewController::initPhysics(shared_ptr<ObstacleWorld> world) {
+	CULog("initializing urchin physics");
+	_body = WheelObstacle::alloc(Vec2(_node->getPositionX(), _node->getPositionY()), _node->getWidth() / 2);
+	_body->setBodyType(b2BodyType::b2_dynamicBody);
+	_body->setLinearDamping(1.0f);
+	_body->setName("urchin");
+	world->addObstacle(_body);
+}
+

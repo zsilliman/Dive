@@ -137,9 +137,6 @@
     <ClCompile Include="..\..\source\Entities\Urchin.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\World\Goal.cpp">
-      <Filter>Source Files\World</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\GameState.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -178,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\ViewControllers\PlatformViewController.cpp">
       <Filter>Source Files\ViewControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\World\Goal.cpp">
+      <Filter>Source Files\World</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

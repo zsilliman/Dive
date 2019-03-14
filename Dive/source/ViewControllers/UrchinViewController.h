@@ -12,6 +12,7 @@ class UrchinViewController : public ViewController {
 protected:
 	Size _display;
 	int _urchin_index;
+	shared_ptr<Obstacle> _body;
 
 public:
 
@@ -29,4 +30,9 @@ public:
 
 	static shared_ptr<UrchinViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int urchin_index);
 
+	void setPhysicsPosition(float x, float y);
+
+	void updateNodePosition();
+
+	void initPhysics(shared_ptr<ObstacleWorld> world);
 };

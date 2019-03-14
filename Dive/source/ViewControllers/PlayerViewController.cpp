@@ -11,9 +11,14 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
     if (_body->getX() < 0){
         _body->setPosition(_body->getX() + _display.width + .2,_body->getY());
     }
-    
-    _body->setLinearVelocity(1,-1);
+
+	
+    //new version:
+    _body->setLinearVelocity(1,0);
     updateNodePosition();
+
+
+	//old version:
 	/*Vec2 start_pos = state->_player->getPosition();
 	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
 	if (isBlocked(state)) {

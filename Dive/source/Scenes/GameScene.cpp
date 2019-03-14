@@ -100,6 +100,7 @@ void GameScene::update(float timestep) {
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
     _player_vc->update(_gamestate);
+	_urchin_vc->update(_gamestate);
 
 	if (!_complete) {
 		//_goal_vc->update(_gamestate);
@@ -153,16 +154,22 @@ void GameScene::buildScene() {
 	_gamestate = GameState::allocEmpty();
 
 	Rect physics_bounds = Rect(-100, -100, 200, 200);
-	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -1));
+	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
+	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
 	shared_ptr<Texture> image = _assets->get<Texture>("background");
 
 	_gamestate->_map = PlatformMap::parseFromJSON("levels/sample_level.json", _assets);
 	_gamestate->_map->initPhysics(_world);
+
+	_background = PolygonNode::allocWithTexture(image);
+	_background->setName("world");
+	_background->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
+	addChild(_background, 0);
 
 	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode(), 1);
@@ -172,12 +179,13 @@ void GameScene::buildScene() {
     _player_vc->initPhysics(_world);
     addChild(_player_vc->getNode(),1);
 
+	_urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
+	_urchin_vc->setPosition(2, 7);
+	_urchin_vc->initPhysics(_world);
+	addChild(_urchin_vc->getNode(), 1);
+
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
-	/*_worldnode = PolygonNode::allocWithTexture(image);
-	_worldnode->setName("world");
-	_worldnode->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
-	addChild(_worldnode, 0);*/
 
 	/*_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode(),0);
