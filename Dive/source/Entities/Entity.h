@@ -16,13 +16,21 @@ enum Direction {
 class Entity {
 
 protected:
-	//Whether entity falls if nothing is below it
-	//Fall once per world step
 	bool _can_float = false;
 	Vec2 _position = Vec2();
 	Vec2 _start_pos = Vec2();
 
+	bool overlapsLeftEdge(Rect entity_rect, Rect map_rect);
+
+	bool overlapsRightEdge(Rect entity_rect, Rect map_rect);
+
+	Rect getBoxRect(shared_ptr<BoxObstacle> box);
+
 public:
+
+	shared_ptr<BoxObstacle> _box, _box_dup;
+
+	void rotateEntity(Rect map_rect);
 
 	bool canFloat();
 
@@ -30,7 +38,19 @@ public:
 
 	Vec2 getPosition();
 
-	void move(Direction direction, int map_width);
+	void setPosition(Vec2 position);
+
+	void setLinearVelocity(Vec2 velocity) { 
+		_box->setLinearVelocity(velocity);
+		_box_dup->setLinearVelocity(velocity);
+	}
+
+	void initPhysics(shared_ptr<ObstacleWorld> world) {
+		world->addObstacle(_box);
+		world->addObstacle(_box_dup);
+	}
+
+	void initEntity(Vec2 pos, Vec2 size, Rect map_rect);
 
 	void reset();
     

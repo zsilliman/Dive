@@ -166,6 +166,9 @@ void GameScene::buildScene() {
 	_gamestate->_map = PlatformMap::parseFromJSON("levels/sample_level.json", _assets);
 	_gamestate->_map->initPhysics(_world);
 
+	_gamestate->_player = Player::alloc(Vec2(4, 31), Vec2(1,1), _gamestate->_map->getMapRect());
+	_gamestate->_player->initPhysics(_world);
+
 	_background = PolygonNode::allocWithTexture(image);
 	_background->setName("world");
 	_background->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
@@ -174,15 +177,13 @@ void GameScene::buildScene() {
 	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);
 	addChild(_map_vc->getNode(), 1);
     
-    _player_vc = PlayerViewController::alloc(_gamestate,diver_texture,size);
-    _player_vc->setPosition(.13, 7);
-    _player_vc->initPhysics(_world);
-    addChild(_player_vc->getNode(),1);
+	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
+    _map_vc->getNode()->addChild(_player_vc->getNode(),1);
 
 	_urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
 	_urchin_vc->setPosition(2, 7);
 	_urchin_vc->initPhysics(_world);
-	addChild(_urchin_vc->getNode(), 1);
+	_map_vc->getNode()->addChild(_urchin_vc->getNode(), 1);
 
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 

@@ -31,6 +31,7 @@ public:
 
 	const vector<shared_ptr<Platform>>& getPlatforms() { return platforms; };
 	const vector<shared_ptr<Platform>>& getPlatformDups() { return platform_dups; };
+	const Rect getMapRect() { return map_rect; }
 	const float getWidth() { return _width; }
 	const float getHeight() { return _height; }
 

@@ -9,6 +9,7 @@ using namespace std;
 class PlatformMapViewController : public ViewController {
 
 	vector<shared_ptr<PlatformViewController>> _platforms;
+	Size _display;
 	float _grid_size = 1;
 
 public:
