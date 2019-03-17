@@ -20,8 +20,8 @@ protected:
 	Rect map_rect;
 	string asset_name;
 
-	bool PlatformMap::overlapsLeftEdge(Rect platform_rect);
-	bool PlatformMap::overlapsRightEdge(Rect platform_rect);
+    bool overlapsLeftEdge(Rect platform_rect);
+	bool overlapsRightEdge(Rect platform_rect);
 
 public:
 
