@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		344BD8D6223DE108007792E6 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
 		7650F3EC2236C1040079DF2D /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3E92236C1040079DF2D /* UrchinViewController.cpp */; };
 		7650F3ED2236C1040079DF2D /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7650F3EB2236C1040079DF2D /* GoalViewController.cpp */; };
 		766CD9CE223825E30020E734 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E12223357A700A7432C /* LoadingScene.cpp */; };
@@ -100,7 +101,6 @@
 		EBC1471A1E27F0A8005494CE /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC147191E27F0A8005494CE /* CoreGraphics.framework */; };
 		EBC1471C1E27F0BB005494CE /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBC1471B1E27F0BB005494CE /* ImageIO.framework */; };
 		EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
-		EF396FB42228CCF200FE0998 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
 		EF660E23223357A700A7432C /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFB223357A600A7432C /* Player.cpp */; };
 		EF660E24223357A700A7432C /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFB223357A600A7432C /* Player.cpp */; };
 		EF660E25223357A700A7432C /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660DFC223357A600A7432C /* Entity.cpp */; };
@@ -604,6 +604,8 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = A8CZTHRJN9;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -741,10 +743,10 @@
 				EF660E26223357A700A7432C /* Entity.cpp in Sources */,
 				EF660E34223357A700A7432C /* LoadingScene.cpp in Sources */,
 				EF660E2A223357A700A7432C /* Enemy.cpp in Sources */,
+				344BD8D6223DE108007792E6 /* DiveApp.cpp in Sources */,
 				EF660E24223357A700A7432C /* Player.cpp in Sources */,
 				EF660E28223357A700A7432C /* Urchin.cpp in Sources */,
 				EF660E36223357A700A7432C /* GameScene.cpp in Sources */,
-				EF396FB42228CCF200FE0998 /* DiveApp.cpp in Sources */,
 				766CD9DB2238260C0020E734 /* UrchinViewController.cpp in Sources */,
 				EF660E3E223357A700A7432C /* GridRow.cpp in Sources */,
 				EF660E42223357A700A7432C /* PlatformMap.cpp in Sources */,
@@ -1019,11 +1021,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.Dive;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
@@ -1032,11 +1038,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
 				PRODUCT_BUNDLE_IDENTIFIER = edu.cornell.gdiac.mac.Dive;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};

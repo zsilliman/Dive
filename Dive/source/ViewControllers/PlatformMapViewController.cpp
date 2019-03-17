@@ -3,10 +3,27 @@
 void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
-	state->_map->parallaxTranslatePlatforms(1);
-	for (int i = 0; i < _platforms.size(); i++) {
-		_platforms[i]->update(state);
-	}
+    ///New changes--
+    Keyboard* keyboard = Input::get<Keyboard>();
+    if (keyboard->keyPressed(KeyCode::ARROW_LEFT)) {
+        CULog("left");
+        state->_map->parallaxTranslatePlatforms(-1);
+        for (int i = 0; i < _platforms.size(); i++) {
+            _platforms[i]->update(state);
+        }
+    }
+    else if (keyboard->keyPressed(KeyCode::ARROW_RIGHT)) {
+        CULog("right");
+        state->_map->parallaxTranslatePlatforms(1);
+        for (int i = 0; i < _platforms.size(); i++) {
+            _platforms[i]->update(state);
+        }
+    }
+    //previous code--
+//    state->_map->parallaxTranslatePlatforms(1);
+//    for (int i = 0; i < _platforms.size(); i++) {
+//        _platforms[i]->update(state);
+//    }
 	state->_map->rotatePlatforms();
 
 	//Camera Controller
