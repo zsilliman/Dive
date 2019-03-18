@@ -14,8 +14,8 @@
 //  Author: Walker White
 //  Version: 1/10/18
 //
-#ifndef __SD_GAME_SCENE_H__
-#define __SD_GAME_SCENE_H__
+#ifndef __GAME_SCENE_H__
+#define __GAME_SCENE_H__
 #include <cugl/cugl.h>
 #include "GameState.h"
 #include "../ViewControllers/PlatformMapViewController.h"
@@ -41,7 +41,6 @@ protected:
     // Gamestate contains all necessary models
 	std::shared_ptr<GameState> _gamestate;
     
-
 	std::shared_ptr<cugl::Node> _background;
 
 	float scale;
@@ -121,4 +120,4 @@ public:
     
 };
 
-#endif /* __SD_GAME_SCENE_H__ */
+#endif /* __GAME_SCENE_H__ */

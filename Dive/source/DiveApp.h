@@ -27,8 +27,8 @@
 //  Author: Walker White
 //  Version: 1/8/17
 //
-#ifndef __HELLO_APP_H__
-#define __HELLO_APP_H__
+#ifndef __DIVE_APP_H__
+#define __DIVE_APP_H__
 #include <cugl/cugl.h>
 #include "Scenes/GameScene.h"
 #include "Scenes/LoadingScene.h"
@@ -129,4 +129,4 @@ public:
     
 };
 
-#endif /* __HELLO_APP_H__ */
+#endif /* __DIVE_APP_H__ */

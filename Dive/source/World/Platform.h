@@ -14,7 +14,7 @@ class Platform : public SimpleObstacle
 
 protected:
 	Vec2 _initial_pos = Vec2(0, 0);
-	float _relative_speed = 2;
+	float _relative_speed = 120;
 	//Useful for ignoring collisions between
 	int _platform_id = 0;
 
