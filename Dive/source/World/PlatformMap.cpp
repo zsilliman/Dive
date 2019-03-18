@@ -69,6 +69,12 @@ void PlatformMap::rotatePlatforms() {
 		else if (overlapsRightEdge(cp_rect)) {
 			platforms[i]->setPosition(platform_dups[i]->getPosition() - Vec2(_width, 0));
 		}
+		else if (map_rect.contains(oc_rect)) {
+			platform_dups[i]->setPosition(platforms[i]->getPosition() + Vec2(_width, 0));
+		}
+		else if (map_rect.contains(cp_rect)) {
+			platforms[i]->setPosition(platform_dups[i]->getPosition() + Vec2(_width, 0));
+		}
 	}
 }
 
@@ -155,7 +161,7 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map
 				shared_ptr<Platform> platform_dup = platform->duplicate();
-				platform_dup->setPosition(platform->getPosition() + Vec2(map->_width, 0));
+				platform_dup->setPosition(platform->getPosition() + Vec2(2*map->_width, 0));
 				map->platform_dups.push_back(platform_dup);
 			}
 		}
