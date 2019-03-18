@@ -154,7 +154,9 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 				platform->setRelativeSpeed(speed_data[map->platforms.size()]);
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map
-				map->platform_dups.push_back(platform->duplicate());
+				shared_ptr<Platform> platform_dup = platform->duplicate();
+				platform_dup->setPosition(platform->getPosition() + Vec2(map->_width, 0));
+				map->platform_dups.push_back(platform_dup);
 			}
 		}
 	}
