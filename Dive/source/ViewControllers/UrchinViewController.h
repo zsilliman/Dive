@@ -11,8 +11,13 @@ class UrchinViewController : public ViewController {
 
 protected:
 	Size _display;
-	int _urchin_index;
-	shared_ptr<Obstacle> _body;
+	shared_ptr<Node> _oc_node;
+	shared_ptr<Node> _dup_node;
+
+	float accelleration = 1.5f;
+	float max_speed = 0.8f;
+	float _grid_size = 1;
+	int _urchin_index = 0;
 
 public:
 
@@ -24,15 +29,6 @@ public:
 
 	void reset() override;
 
-	bool canMove(shared_ptr<GameState> state, Direction direction);
-
-	void fall(shared_ptr<GameState> state);
-
 	static shared_ptr<UrchinViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int urchin_index);
 
-	void setPhysicsPosition(float x, float y);
-
-	void updateNodePosition();
-
-	void initPhysics(shared_ptr<ObstacleWorld> world);
 };

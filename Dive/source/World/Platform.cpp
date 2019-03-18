@@ -94,9 +94,9 @@ void Platform::rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen) {
 }
 
 void Platform::parallaxTranslate(float reference_dx) {
-	Vec2 new_pos = getPosition() + Vec2(reference_dx * _relative_speed, 0);
-	setPosition(new_pos);
-	//setLinearVelocity(Vec2(reference_dx * _relative_speed, 0));
+	//Vec2 new_pos = getPosition() + Vec2(reference_dx * _relative_speed, 0);
+	//setPosition(new_pos);
+	setLinearVelocity(Vec2(reference_dx * _relative_speed, 0));
 }
 
 Rect Platform::getPlatformRect() {
@@ -106,7 +106,7 @@ Rect Platform::getPlatformRect() {
 }
 
 Vec2 Platform::getMinCorner() {
-	Vec2 min = Vec2(99999, 99999);
+	Vec2 min = Vec2(999, 999);
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		if (min.x > adj_tiles[i].x)
 			min.x = adj_tiles[i].x;
@@ -117,7 +117,7 @@ Vec2 Platform::getMinCorner() {
 }
 
 Vec2 Platform::getMaxCorner() {
-	Vec2 max = Vec2(-99999, -99999);
+	Vec2 max = Vec2(-999, -999);
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		if (max.x < adj_tiles[i].x)
 			max.x = adj_tiles[i].x;

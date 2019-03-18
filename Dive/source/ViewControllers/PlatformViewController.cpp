@@ -48,7 +48,7 @@ shared_ptr<PlatformViewController> PlatformViewController::alloc(shared_ptr<Game
 			shared_ptr<PolygonNode> cp_node = PolygonNode::allocWithTexture(subtexture);
 			cp_node->setScale(grid_size / subtexture->getWidth());
 			cp_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
-			cp_node->setPosition(position);
+			cp_node->setPosition(Vec2(position));
 			p->_nodes.push_back(cp_node);
 			p->_cp_node->addChild(cp_node, 1);
 		}

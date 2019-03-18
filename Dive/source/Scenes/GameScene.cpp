@@ -27,7 +27,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 5
+#define SCENE_WIDTH 12
 
 #pragma mark -
 #pragma mark Constructors
@@ -169,6 +169,13 @@ void GameScene::buildScene() {
 	_gamestate->_player = Player::alloc(Vec2(4, 31), Vec2(1,1), _gamestate->_map->getMapRect());
 	_gamestate->_player->initPhysics(_world);
 
+	shared_ptr<Urchin> urchin1 = Urchin::alloc(Vec2(4, 28), _gamestate->_map->getMapRect());
+	urchin1->initPhysics(_world);
+	shared_ptr<Urchin> urchin2 = Urchin::alloc(Vec2(8, 19), _gamestate->_map->getMapRect());
+	urchin2->initPhysics(_world);
+	_gamestate->_urchins.push_back(urchin1);
+	_gamestate->_urchins.push_back(urchin2);
+
 	_background = PolygonNode::allocWithTexture(image);
 	_background->setName("world");
 	_background->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
@@ -181,8 +188,6 @@ void GameScene::buildScene() {
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
 
 	_urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
-	_urchin_vc->setPosition(2, 7);
-	_urchin_vc->initPhysics(_world);
 	_map_vc->getNode()->addChild(_urchin_vc->getNode(), 1);
 
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);

@@ -6,7 +6,7 @@ using namespace cugl;
 using namespace std;
 
 #define PLATFORM_DENSITY 1
-#define PLATFORM_FRICTION 1
+#define PLATFORM_FRICTION 0.01
 #define PLATFORM_RESTITUTION 0.01
 
 class Platform : public SimpleObstacle

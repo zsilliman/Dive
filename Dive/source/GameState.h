@@ -3,6 +3,7 @@
 #include <cugl/cugl.h>
 #include "World/PlatformMap.h"
 #include "Entities/Player.h"
+#include "Entities/Urchin.h"
 using namespace cugl;
 using namespace std;
 
@@ -14,6 +15,8 @@ public:
 	shared_ptr<PlatformMap> _map;
     /** A reference to the player */
     shared_ptr<Player> _player;
+	/** A reference to each of the Urchins */
+	vector<shared_ptr<Urchin>> _urchins = {};
 	/**
 
 	A reference to the goal location 

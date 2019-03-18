@@ -7,13 +7,14 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
     Keyboard* keyboard = Input::get<Keyboard>();
     if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
         CULog("left");
-        state->_map->parallaxTranslatePlatforms(-0.1);
+        state->_map->parallaxTranslatePlatforms(-3);
     }
     else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
         CULog("right");
-        state->_map->parallaxTranslatePlatforms(0.1);
+        state->_map->parallaxTranslatePlatforms(3);
 	}
 	else {
+		//Stop the platforms when they need to be stopped
 		state->_map->parallaxTranslatePlatforms(0);
 	}
     //previous code--
