@@ -146,7 +146,8 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 	shared_ptr<JsonValue> obj_layer = layers->get(0);
 	vector<int> data = tile_layer->get("data")->asIntArray();
 	Vec2 map_dimen = Vec2(tile_width, tile_height);
-	map->map_rect = Rect(0, 0, map->_width, map->_height);
+	//map->map_rect = Rect(0, 0, tile_width, tile_height);
+	map->map_rect = Rect(0, 0, tile_width, tile_height);
 
 	int blk_counter = 0;
 	for (int y = 0; y < tile_height; y++) {
@@ -161,11 +162,12 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map
 				shared_ptr<Platform> platform_dup = platform->duplicate();
-				platform_dup->setPosition(platform->getPosition() + Vec2(2*map->_width, 0));
+				platform_dup->setPosition(platform->getPosition() + Vec2(map->_width, 0));
 				map->platform_dups.push_back(platform_dup);
 			}
 		}
 	}
+	map->rotatePlatforms();
 
 	return map;
 }

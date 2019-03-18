@@ -11,10 +11,10 @@ int getIndex(Vec2 pos, Vec2 map_dimen) {
 
 /** Returns the location after moving either up,down,left or right */
 Vec2 getAdjacent(Vec2 d, Vec2 pos, Vec2 map_dimen) {
-	pos.x = Util::mod(pos.x + d.x, map_dimen.x);;
+	pos.x = Util::mod(pos.x + d.x, map_dimen.x);
 	pos.y += d.y;
 
-	//Check for y is in bounds. If not, return -1 for out of bounds
+	//Check for y is in bounds
 	if (pos.y < 0 || pos.y >= map_dimen.y) {
 		pos.y -= d.y;
 		return pos;
@@ -24,8 +24,8 @@ Vec2 getAdjacent(Vec2 d, Vec2 pos, Vec2 map_dimen) {
 
 /** Returns the value at the corresponding block or -1 if the value is out of bounds */
 int getAdjacentValue(vector<int>* grid, Vec2 d, Vec2 pos, Vec2 map_dimen) {
-	getAdjacent(d, pos, map_dimen);
-	int block = (*grid)[getIndex(pos, map_dimen)];
+	Vec2 adj = getAdjacent(d, pos, map_dimen);
+	int block = (*grid)[getIndex(adj, map_dimen)];
 
 	return block;
 }
@@ -94,7 +94,9 @@ void Platform::rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen) {
 }
 
 void Platform::parallaxTranslate(float reference_dx) {
-	setLinearVelocity(Vec2(reference_dx * _relative_speed, 0));
+	Vec2 new_pos = getPosition() + Vec2(reference_dx * _relative_speed, 0);
+	setPosition(new_pos);
+	//setLinearVelocity(Vec2(reference_dx * _relative_speed, 0));
 }
 
 Rect Platform::getPlatformRect() {
