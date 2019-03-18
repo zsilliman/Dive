@@ -54,10 +54,10 @@ void Entity::rotateEntity(Rect map_rect) {
 	float width = map_rect.size.width;
 	Rect oc_rect = getBoxRect(_box);     //Original
 	Rect cp_rect = getBoxRect(_box_dup); //duplicate
-	CULog("Rect Positions");
-	CULog(Vec2(map_rect.getMinX(), map_rect.getMinY()).toString().c_str());
-	CULog(Vec2(oc_rect.getMinX(), oc_rect.getMinY()).toString().c_str());
-	CULog(Vec2(cp_rect.getMinX(), cp_rect.getMinY()).toString().c_str());
+//    CULog("Rect Positions");
+//    CULog(Vec2(map_rect.getMinX(), map_rect.getMinY()).toString().c_str());
+//    CULog(Vec2(oc_rect.getMinX(), oc_rect.getMinY()).toString().c_str());
+//    CULog(Vec2(cp_rect.getMinX(), cp_rect.getMinY()).toString().c_str());
 	// oc_rect intersects left ==> cp_rect needs to be on right portion of the map
 	if (overlapsLeftEdge(oc_rect, map_rect)) {
 		_box_dup->setPosition(_box->getPosition() + Vec2(width, 0));

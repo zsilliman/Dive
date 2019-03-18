@@ -132,7 +132,7 @@ void GameScene::setComplete(bool value) {
     bool change = _complete != value;
     _complete = value;
     if (value && change) {
-        CULog("WINNN");
+//        CULog("WINNN");
         _winnode->setVisible(true);
         _countdown = EXIT_COUNT;
     } else if (!value) {
