@@ -27,7 +27,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 12
+#define SCENE_WIDTH 5
 
 #pragma mark -
 #pragma mark Constructors
@@ -100,7 +100,12 @@ void GameScene::update(float timestep) {
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
     _player_vc->update(_gamestate);
-	_urchin_vc->update(_gamestate);
+	for (int i = 0; i < _urchin_vcs.size(); i++) {
+		_urchin_vcs[i]->update(_gamestate);
+	}
+	for (int i = 0; i < _fish_vcs.size(); i++) {
+		_fish_vcs[i]->update(_gamestate);
+	}
 
 	if (!_complete) {
 		//_goal_vc->update(_gamestate);
@@ -151,8 +156,6 @@ void GameScene::buildScene() {
 	safe.origin *= scale;
 	safe.size *= scale;
 
-	_gamestate = GameState::allocEmpty();
-
 	Rect physics_bounds = Rect(-100, -100, 200, 200);
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
@@ -161,20 +164,12 @@ void GameScene::buildScene() {
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
+	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
 	shared_ptr<Texture> image = _assets->get<Texture>("background");
 
-	_gamestate->_map = PlatformMap::parseFromJSON("levels/sample_level.json", _assets);
-	_gamestate->_map->initPhysics(_world);
 
-	_gamestate->_player = Player::alloc(Vec2(4, 31), Vec2(1,1), _gamestate->_map->getMapRect());
-	_gamestate->_player->initPhysics(_world);
-
-	shared_ptr<Urchin> urchin1 = Urchin::alloc(Vec2(4, 28), _gamestate->_map->getMapRect());
-	urchin1->initPhysics(_world);
-	shared_ptr<Urchin> urchin2 = Urchin::alloc(Vec2(8, 19), _gamestate->_map->getMapRect());
-	urchin2->initPhysics(_world);
-	_gamestate->_urchins.push_back(urchin1);
-	_gamestate->_urchins.push_back(urchin2);
+	_gamestate = GameState::allocWithLevel("levels/sample_level.json", _assets);
+	_gamestate->initPhysics(_world);
 
 	_background = PolygonNode::allocWithTexture(image);
 	_background->setName("world");
@@ -187,9 +182,21 @@ void GameScene::buildScene() {
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
 
-	_urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
-	_map_vc->getNode()->addChild(_urchin_vc->getNode(), 1);
+	//Create Urchin viewcontrollers
+	_urchin_vcs = {};
+	for (int i = 0; i < _gamestate->_urchins.size();i++) {
+		shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, i);
+		_map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
+		_urchin_vcs.push_back(urchin_vc);
+	}
 
+	//Create Fish viewcontrollers
+	_fish_vcs = {};
+	for (int i = 0; i < _gamestate->_fish.size(); i++) {
+		shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, fish_texture, size, i);
+		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
+		_fish_vcs.push_back(_fish_vc);
+	}
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
 

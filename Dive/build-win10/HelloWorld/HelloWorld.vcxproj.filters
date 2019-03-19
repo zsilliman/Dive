@@ -51,9 +51,6 @@
     <ClInclude Include="..\..\source\DiveApp.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\source\Entities\Enemy.h">
-      <Filter>Header Files\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\source\Entities\Entity.h">
       <Filter>Header Files\Entities</Filter>
     </ClInclude>
@@ -111,6 +108,12 @@
     <ClInclude Include="..\..\source\ViewControllers\PlatformViewController.h">
       <Filter>Header Files\ViewControllers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Entities\Fish.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\FishViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -125,9 +128,6 @@
     <ClCompile Include="..\..\source\DiveApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\source\Entities\Enemy.cpp">
-      <Filter>Source Files\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\source\Entities\Entity.cpp">
       <Filter>Source Files\Entities</Filter>
     </ClCompile>
@@ -141,9 +141,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp">
-      <Filter>Source Files\Scenes</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\World\TiledTexture.cpp">
@@ -178,6 +175,15 @@
     </ClCompile>
     <ClCompile Include="..\..\source\World\Goal.cpp">
       <Filter>Source Files\World</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Entities\Fish.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\FishViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

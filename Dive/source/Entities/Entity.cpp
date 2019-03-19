@@ -12,7 +12,7 @@ Vec2 Entity::getPosition() {
 void Entity::setPosition(Vec2 position) {
 	_box->setPosition(position);
 	//put other off screen
-	_box_dup->setPosition(Vec2(-_dimensions.width * 2, position.y));
+	_box_dup->setPosition(Vec2(-_dimensions.width * 10, position.y));
 }
 
 bool Entity::canFloat() { return _can_float; }
@@ -56,11 +56,8 @@ void Entity::rotateEntity(Rect map_rect) {
 	Rect cp_rect = getBoxRect(_box_dup); //duplicate
 	_box->setActive(true);
 	_box_dup->setActive(true);
-//    CULog("Rect Positions");
-//    CULog(Vec2(map_rect.getMinX(), map_rect.getMinY()).toString().c_str());
-//    CULog(Vec2(oc_rect.getMinX(), oc_rect.getMinY()).toString().c_str());
-//    CULog(Vec2(cp_rect.getMinX(), cp_rect.getMinY()).toString().c_str());
-	// oc_rect intersects left ==> cp_rect needs to be on right portion of the map
+
+	//oc_rect intersects left ==> cp_rect needs to be on the right portion of the map
 	if (overlapsLeftEdge(oc_rect, map_rect)) {
 		_box_dup->setPosition(_box->getPosition() + Vec2(width, 0));
 		_box_dup->setAngle(_box->getAngle());
@@ -80,11 +77,13 @@ void Entity::rotateEntity(Rect map_rect) {
 		_box->setPosition(_box_dup->getPosition() - Vec2(width, 0));
 		_box->setAngle(_box_dup->getAngle());
 	}
+	//original is fully on screen ==> copy is off screen and thus inactive
 	else if (map_rect.contains(oc_rect)) {
 		_box_dup->setPosition(_box->getPosition() + Vec2(width, 0));
 		_box_dup->setAngle(_box->getAngle());
 		_box_dup->setActive(false);
 	}
+	//copy is fully on screen ==> original is off screen and thus inactive
 	else if (map_rect.contains(cp_rect)) {
 		_box->setPosition(_box_dup->getPosition() + Vec2(width, 0));
 		_box->setAngle(_box_dup->getAngle());
@@ -93,10 +92,10 @@ void Entity::rotateEntity(Rect map_rect) {
 }
 
 void Entity::initEntity(Vec2 pos, Vec2 size, Rect map_rect) {
-	_box = BoxObstacle::alloc(pos, size);
-	_box_dup = BoxObstacle::alloc(pos + Vec2(map_rect.size.width, 0), size);
-	_can_float = false;
-	_position = Vec2(pos);
-	_start_pos = Vec2(pos);
+	_position = Vec2(pos + size / 2);
+	_start_pos = Vec2(pos + size / 2);
 	_dimensions = Size(size.x, size.y);
+	_box = BoxObstacle::alloc(_start_pos, size);
+	_box_dup = BoxObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size);
+	_can_float = false;
 }

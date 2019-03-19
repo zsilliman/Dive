@@ -21,6 +21,7 @@
 #include "../ViewControllers/PlatformMapViewController.h"
 #include "../ViewControllers/PlayerViewController.h"
 #include "../ViewControllers/UrchinViewController.h"
+#include "../ViewControllers/FishViewController.h"
 
 
 //Step world AI once every 20 frames
@@ -49,7 +50,9 @@ protected:
 	/** controller that manages how the user controls world translations */
 	std::shared_ptr<PlatformMapViewController> _map_vc;
     std::shared_ptr<PlayerViewController> _player_vc;
-	std::shared_ptr<UrchinViewController> _urchin_vc;
+	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
+	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
+
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
     bool _complete;

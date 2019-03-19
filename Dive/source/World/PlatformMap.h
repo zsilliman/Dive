@@ -25,7 +25,7 @@ protected:
 
 public:
 
-	static shared_ptr<PlatformMap> parseFromJSON(string filename, shared_ptr<AssetManager> _assets);
+	static shared_ptr<PlatformMap> parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets);
 
 	static shared_ptr<PlatformMap> alloc();
 

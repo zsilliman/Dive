@@ -121,11 +121,8 @@ vector<float> getPropertyFloatList(shared_ptr<JsonValue> properties, string key)
 /*
 * Parse a map from a json file generated with map editor software named "Tiled"
 */
-shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<AssetManager> _assets) {
+shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets) {
 	shared_ptr<PlatformMap> map = make_shared<PlatformMap>();
-
-	std::shared_ptr<JsonReader> reader = JsonReader::allocWithAsset(file);
-	shared_ptr<JsonValue> json = reader->readJson();
 
 	//Map properties
 	int tile_height = json->get("height")->asInt();
@@ -149,7 +146,6 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 	//map->map_rect = Rect(0, 0, tile_width, tile_height);
 	map->map_rect = Rect(0, 0, tile_width, tile_height);
 
-	int blk_counter = 0;
 	for (int y = 0; y < tile_height; y++) {
 		for (int x = 0; x < tile_width; x++) {
 			int index = (tile_height - y - 1) * map->_width + x;

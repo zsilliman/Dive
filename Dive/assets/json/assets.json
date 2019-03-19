@@ -34,8 +34,8 @@
         "urchin": {
             "file":      "textures/urchin.png"
         },
-        "enemy":{
-            "file":      "textures/urchin.png"
+        "fish":{
+            "file":      "textures/Shark.png"
         },
         "diver":{
             "file":      "textures/diver.png"

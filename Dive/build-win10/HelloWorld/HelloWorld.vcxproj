@@ -187,7 +187,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\source\DiveApp.h" />
-    <ClInclude Include="..\..\source\Entities\Enemy.h" />
+    <ClInclude Include="..\..\source\Entities\Fish.h" />
     <ClInclude Include="..\..\source\Entities\Entity.h" />
     <ClInclude Include="..\..\source\Entities\Player.h" />
     <ClInclude Include="..\..\source\Entities\Urchin.h" />
@@ -195,6 +195,7 @@
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\Util.h" />
+    <ClInclude Include="..\..\source\ViewControllers\FishViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
@@ -213,7 +214,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\DiveApp.cpp" />
-    <ClCompile Include="..\..\source\Entities\Enemy.cpp" />
+    <ClCompile Include="..\..\source\Entities\Fish.cpp" />
     <ClCompile Include="..\..\source\Entities\Entity.cpp" />
     <ClCompile Include="..\..\source\Entities\Player.cpp" />
     <ClCompile Include="..\..\source\Entities\Urchin.cpp" />
@@ -221,6 +222,7 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\FishViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
