@@ -4,9 +4,9 @@ void PlatformViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<Game
 
 void PlatformViewController::update(shared_ptr<GameState> state) {
 	//Set positions/rotations of original platform according to physics
-	shared_ptr<Platform> platform = state->_map->getPlatforms()[_platform_index];
-	_oc_node->setPosition(platform->getPosition() * _grid_size - _node->getPosition());
-	_oc_node->setAngle(platform->getAngle());
+    shared_ptr<Platform> platform = state->_map->getPlatforms()[_platform_index];
+    _oc_node->setPosition(platform->getPosition() * _grid_size - _node->getPosition());
+    _oc_node->setAngle(platform->getAngle());
 
 	//Set positions/rotations of duplicate platform according to duplicate physics object
 	shared_ptr<Platform> platform_dup = state->_map->getPlatformDups()[_platform_index];

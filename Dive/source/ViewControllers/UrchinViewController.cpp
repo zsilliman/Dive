@@ -14,7 +14,9 @@ void UrchinViewController::update(shared_ptr<GameState> state) {
 
 void UrchinViewController::dispose() {}
 
-void UrchinViewController::reset() {}
+void UrchinViewController::reset() {
+
+}
 
 bool UrchinViewController::canMove(shared_ptr<GameState> state, Direction direction) {
 	/*int width = state->_map->getColumnCount();

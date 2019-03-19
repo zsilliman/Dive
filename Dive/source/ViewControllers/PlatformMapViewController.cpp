@@ -5,16 +5,22 @@ void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<G
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
     ///New changes--
     Keyboard* keyboard = Input::get<Keyboard>();
-    if (keyboard->keyPressed(KeyCode::ARROW_LEFT)) {
+    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
         CULog("left");
         state->_map->parallaxTranslatePlatforms(-1);
         for (int i = 0; i < _platforms.size(); i++) {
             _platforms[i]->update(state);
         }
     }
-    else if (keyboard->keyPressed(KeyCode::ARROW_RIGHT)) {
+    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
         CULog("right");
         state->_map->parallaxTranslatePlatforms(1);
+        for (int i = 0; i < _platforms.size(); i++) {
+            _platforms[i]->update(state);
+        }
+    }
+    else{
+        state->_map->parallaxTranslatePlatforms(0);
         for (int i = 0; i < _platforms.size(); i++) {
             _platforms[i]->update(state);
         }
@@ -61,7 +67,7 @@ shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_pt
 	map->_platforms = {};
 	map->_display = display;
 	map->_grid_size = display.width / init_state->_map->getWidth();
-	for (int i = 0; i < init_state->_map->getPlatforms().size(); i++) {
+	for (int i = 0; i < init_state->_map->getPlatformDups().size(); i++) {
 		shared_ptr<PlatformViewController> platform = PlatformViewController::alloc(init_state, tilesheet, map->_grid_size, i);
 		map->_node->addChild(platform->getNode(), 1);
 		map->_platforms.push_back(platform);

@@ -26,6 +26,7 @@ void GridRowViewController::dispose() {
 }
 
 void GridRowViewController::reset() {
+
     _node->removeAllChildren();
 }
 

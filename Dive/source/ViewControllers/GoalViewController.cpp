@@ -24,7 +24,7 @@ void GoalViewController::update(shared_ptr<GameState> state) {
 void GoalViewController::dispose() {}
 
 void GoalViewController::reset() {
-	
+
 }
 
 shared_ptr<GoalViewController> GoalViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {

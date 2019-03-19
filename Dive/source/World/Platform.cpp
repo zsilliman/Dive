@@ -161,6 +161,7 @@ void Platform::releaseFixtures() {
 }
 
 void Platform::reset() {
+
 	setPosition(_initial_pos);
 	setAngle(0);
 }
