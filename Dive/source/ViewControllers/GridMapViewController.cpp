@@ -48,6 +48,7 @@ void GridMapViewController::dispose() {
 }
 
 void GridMapViewController::reset() {
+
     _node->removeAllChildren();
 }
 

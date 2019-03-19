@@ -24,18 +24,18 @@ shared_ptr<GameState> GameState::allocWithLevel(string level_asset, shared_ptr<A
 		for (int x = 0; x < dimen.width; x++) {
 			int index = (dimen.height - y - 1) * dimen.width + x;
 			//If a block exists
-			if (data[index] == 2 && state->_player==nullptr) {
+			if (data[index] == PLAYER_TILE_ID && state->_player==nullptr) {
 				//Player
 				state->_player = Player::alloc(Vec2(x,y), state->_map->getMapRect());
-			} else if (data[index] == 3) {
+			} else if (data[index] == URCHIN_TILE_ID) {
 				//Urchin
 				shared_ptr<Urchin> urchin = Urchin::alloc(Vec2(x, y), state->_map->getMapRect());
 				state->_urchins.push_back(urchin);
-			} else if (data[index] == 4) {
+			} else if (data[index] == FISH_TILE_ID) {
 				//Fish
 				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect());
 				state->_fish.push_back(fish);
-			} else if (data[index] == 5) {
+			} else if (data[index] == JELLY_TILE_ID) {
 				//Jellyfish (tbd)
 				//...
 			}
@@ -50,13 +50,16 @@ void GameState::dispose() {
 		
 }
 
-void GameState::reset(){
+void GameState::reset() {
 	_map->reset();
-	/*_player->reset();
-	_goal_door->reset();
+	_player->reset();
+	//_goal_door->reset();
 	for (int i = 0; i < _urchins.size(); i++) {
 		_urchins[i]->reset();
-	}*/
+	}
+	for (int i = 0; i < _fish.size(); i++) {
+		_fish[i]->reset();
+	}
 }
 
 bool GameState::GoalCollision(){

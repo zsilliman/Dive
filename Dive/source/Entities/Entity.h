@@ -16,7 +16,7 @@ enum Direction {
 class Entity {
 
 protected:
-	bool _can_float = false;
+	bool _can_float = false, _alive = true;
 	Vec2 _position = Vec2();
 	Vec2 _start_pos = Vec2();
 	Size _dimensions = Size(0, 0);
@@ -40,6 +40,9 @@ public:
 	Vec2 getPosition();
 
 	void setPosition(Vec2 position);
+
+	bool isAlive() { return _alive; }
+	void setAlive(bool alive) { _alive = alive; }
 
 	void setLinearVelocity(Vec2 velocity) { 
 		_box->setLinearVelocity(velocity);

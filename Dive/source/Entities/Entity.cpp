@@ -20,7 +20,11 @@ bool Entity::canFloat() { return _can_float; }
 void Entity::setCanFloat(bool floats) { _can_float = floats; }
 
 void Entity::reset() {
-	_position.set(_start_pos);
+	_box->setPosition(_start_pos);
+	_box->setAngle(0);
+	_box_dup->setPosition(_start_pos);
+	_box_dup->setAngle(0);
+	_alive = true;
 }
 
 Rect Entity::getBoxRect(shared_ptr<Obstacle> box) {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cugl/cugl.h>
+#include "Util.h"
 #include "World/PlatformMap.h"
 #include "Entities/Player.h"
 #include "Entities/Urchin.h"

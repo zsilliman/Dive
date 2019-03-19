@@ -126,11 +126,12 @@ void GameScene::update(float timestep) {
 		//	setComplete(true);
 		//}
 	}
-    if (_countdown > 0) {
-        _countdown--;
-    } else if (_countdown == 0) {
-        reset();
-    }
+    //w below commented out, dups move oc don't
+//    if (_countdown > 0) {
+//        _countdown--;
+//    } else if (_countdown == 0) {
+//        reset();
+//    }
 }
 
 void GameScene::setComplete(bool value) {
