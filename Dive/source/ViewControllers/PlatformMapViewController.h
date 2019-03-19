@@ -2,6 +2,7 @@
 
 #include "ViewController.h"
 #include "PlatformViewController.h"
+#include "InputController.hpp"
 
 using namespace cugl;
 using namespace std;
@@ -11,6 +12,7 @@ class PlatformMapViewController : public ViewController {
 	vector<shared_ptr<PlatformViewController>> _platforms;
 	Size _display;
 	float _grid_size = 1;
+    
 
 public:
 

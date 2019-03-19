@@ -3,6 +3,12 @@
 #include <cugl/cugl.h>
 #include "Entity.h"
 
+#define URCHIN_FRICTION 0.3
+#define URCHIN_RESTITUTION 0.3
+#define URCHIN_ANG_DAMP 0.3
+#define URCHIN_LIN_DAMP 0.3
+#define URCHIN_DENSITY 1
+
 using namespace cugl;
 using namespace std;
 
@@ -10,6 +16,8 @@ class Urchin : public Entity {
 
 public:
 
-	static shared_ptr<Urchin> alloc(Vec2 start_pos);
+	void initUrchin(Vec2 start_pos, Rect map_rect);
+
+	static shared_ptr<Urchin> alloc(Vec2 start_pos, Rect map_rect);
 
 };

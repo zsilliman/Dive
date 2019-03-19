@@ -7,14 +7,11 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
     Keyboard* keyboard = Input::get<Keyboard>();
     if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
         CULog("left");
-        state->_map->parallaxTranslatePlatforms(-1);
-        for (int i = 0; i < _platforms.size(); i++) {
-            _platforms[i]->update(state);
-        }
+        state->_map->parallaxTranslatePlatforms(-2);
     }
     else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
         CULog("right");
-        state->_map->parallaxTranslatePlatforms(1);
+        state->_map->parallaxTranslatePlatforms(2);
         for (int i = 0; i < _platforms.size(); i++) {
             _platforms[i]->update(state);
         }
@@ -25,12 +22,10 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
             _platforms[i]->update(state);
         }
     }
-    //previous code--
-//    state->_map->parallaxTranslatePlatforms(1);
-//    for (int i = 0; i < _platforms.size(); i++) {
-//        _platforms[i]->update(state);
-//    }
 	state->_map->rotatePlatforms();
+	for (int i = 0; i < _platforms.size(); i++) {
+		_platforms[i]->update(state);
+	}
 
 	//Camera Controller
 	Vec2 player_pos = state->_player->getPosition() * _grid_size;
@@ -38,12 +33,10 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
 	float node_pos = -player_pos.y + _display.height / 2;
 	if (player_pos.y < _display.height/2) {
 		node_pos = 0;
-		CULog("a");
 	}
 	else if (player_pos.y > map_height - _display.height / 2) {
 		//Top portion
 		node_pos = -(map_height - _display.height);
-		CULog("b");
 	}
 	_node->setPositionY(node_pos);
 

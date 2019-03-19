@@ -51,26 +51,52 @@ bool PlatformMap::overlapsRightEdge(Rect platform_rect) {
 }
 
 void PlatformMap::rotatePlatforms() {
-    for (int i = 0; i < platforms.size(); i++) {
-        Rect oc_rect = platforms[i]->getPlatformRect();     //Original
-        Rect cp_rect = platform_dups[i]->getPlatformRect(); //duplicate
-        // oc_rect intersects left ==> cp_rect needs to be on right portion of the map
-        if (overlapsLeftEdge(oc_rect)) {
-            platform_dups[i]->setPosition(platforms[i]->getPosition() + Vec2(_width, 0));
-        }
-        //cp_rect intersects left ==> oc_rect needs to be on the right portion of the map
-        else if (overlapsLeftEdge(cp_rect)) {
-            platforms[i]->setPosition(platform_dups[i]->getPosition() + Vec2(_width, 0));
-        }
-        //original intersects right ==> copy needs to be on left portion of the map
-        else if (overlapsRightEdge(oc_rect)) {
-            platform_dups[i]->setPosition(platforms[i]->getPosition() - Vec2(_width, 0));
-        }
-        //copy intersects right ==> original needs to be on left portion of the map
-        else if (overlapsRightEdge(cp_rect)) {
-            platforms[i]->setPosition(platform_dups[i]->getPosition() - Vec2(_width, 0));
-        }
-    }
+//    for (int i = 0; i < platforms.size(); i++) {
+//        Rect oc_rect = platforms[i]->getPlatformRect();     //Original
+//        Rect cp_rect = platform_dups[i]->getPlatformRect(); //duplicate
+//        // oc_rect intersects left ==> cp_rect needs to be on right portion of the map
+//        if (overlapsLeftEdge(oc_rect)) {
+//            platform_dups[i]->setPosition(platforms[i]->getPosition() + Vec2(_width, 0));
+//        }
+//        //cp_rect intersects left ==> oc_rect needs to be on the right portion of the map
+//        else if (overlapsLeftEdge(cp_rect)) {
+//            platforms[i]->setPosition(platform_dups[i]->getPosition() + Vec2(_width, 0));
+//        }
+//        //original intersects right ==> copy needs to be on left portion of the map
+//        else if (overlapsRightEdge(oc_rect)) {
+//            platform_dups[i]->setPosition(platforms[i]->getPosition() - Vec2(_width, 0));
+//        }
+//        //copy intersects right ==> original needs to be on left portion of the map
+//        else if (overlapsRightEdge(cp_rect)) {
+//            platforms[i]->setPosition(platform_dups[i]->getPosition() - Vec2(_width, 0));
+//        }
+//    }
+	for (int i = 0; i < platforms.size(); i++) {
+		Rect oc_rect = platforms[i]->getPlatformRect();     //Original
+		Rect cp_rect = platform_dups[i]->getPlatformRect(); //duplicate
+		// oc_rect intersects left ==> cp_rect needs to be on right portion of the map
+		if (overlapsLeftEdge(oc_rect)) {
+			platform_dups[i]->setPosition(platforms[i]->getPosition() + Vec2(_width, 0));
+		}
+		//cp_rect intersects left ==> oc_rect needs to be on the right portion of the map
+		else if (overlapsLeftEdge(cp_rect)) {
+			platforms[i]->setPosition(platform_dups[i]->getPosition() + Vec2(_width, 0));
+		}
+		//original intersects right ==> copy needs to be on left portion of the map
+		else if (overlapsRightEdge(oc_rect)) {
+			platform_dups[i]->setPosition(platforms[i]->getPosition() - Vec2(_width, 0));
+		}
+		//copy intersects right ==> original needs to be on left portion of the map
+		else if (overlapsRightEdge(cp_rect)) {
+			platforms[i]->setPosition(platform_dups[i]->getPosition() - Vec2(_width, 0));
+		}
+		else if (map_rect.contains(oc_rect)) {
+			platform_dups[i]->setPosition(platforms[i]->getPosition() + Vec2(_width, 0));
+		}
+		else if (map_rect.contains(cp_rect)) {
+			platforms[i]->setPosition(platform_dups[i]->getPosition() + Vec2(_width, 0));
+		}
+	}
 }
 
 //Read custom properties from Tiled
@@ -141,7 +167,8 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 	shared_ptr<JsonValue> obj_layer = layers->get(0);
 	vector<int> data = tile_layer->get("data")->asIntArray();
 	Vec2 map_dimen = Vec2(tile_width, tile_height);
-	map->map_rect = Rect(0, 0, map->_width, map->_height);
+	//map->map_rect = Rect(0, 0, tile_width, tile_height);
+	map->map_rect = Rect(0, 0, tile_width, tile_height);
 
 	int blk_counter = 0;
 	for (int y = 0; y < tile_height; y++) {
@@ -155,10 +182,13 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(string file, shared_ptr<Asset
 				platform->setRelativeSpeed(speed_data[map->platform_dups.size()]);
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map
-				map->platform_dups.push_back(platform->duplicate());
+				shared_ptr<Platform> platform_dup = platform->duplicate();
+				platform_dup->setPosition(platform->getPosition() + Vec2(map->_width, 0));
+				map->platform_dups.push_back(platform_dup);
 			}
 		}
 	}
+	map->rotatePlatforms();
 
 	return map;
 }
