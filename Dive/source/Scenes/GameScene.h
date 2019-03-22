@@ -17,7 +17,7 @@
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
 #include <cugl/cugl.h>
-#include "GameState.h"
+#include "../GameState.h"
 #include "../ViewControllers/PlatformMapViewController.h"
 #include "../ViewControllers/PlayerViewController.h"
 #include "../ViewControllers/UrchinViewController.h"

@@ -1,5 +1,5 @@
 #include "GoalViewController.h"
-#include "Util.h"
+#include "../Util.h"
 
 void GoalViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 

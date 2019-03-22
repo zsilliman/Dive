@@ -96,7 +96,7 @@ void Platform::rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen) {
 void Platform::parallaxTranslate(float reference_dx) {
 	//Vec2 new_pos = getPosition() + Vec2(reference_dx * _relative_speed, 0);
 	//setPosition(new_pos);
-	setLinearVelocity(Vec2(reference_dx * _relative_speed, 0));
+	setLinearVelocity(Vec2(reference_dx * abs(_relative_speed), 0));
 }
 
 Rect Platform::getPlatformRect() {

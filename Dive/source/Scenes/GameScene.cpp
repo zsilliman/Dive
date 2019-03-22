@@ -149,9 +149,10 @@ void GameScene::setComplete(bool value) {
 
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
+    CULog("SIZE width, height %f %f", size.width, size.height);
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
-
+    CULog("SIZE pt 2 width, height %f %f", size.width, size.height);
 	// Find the safe area, adapting to the iPhone X
 	Rect safe = Application::get()->getSafeArea();
 	safe.origin *= scale;
@@ -166,15 +167,18 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
-	shared_ptr<Texture> image = _assets->get<Texture>("background");
+	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
 
 
 	_gamestate = GameState::allocWithLevel("levels/sample_level.json", _assets);
 	_gamestate->initPhysics(_world);
 
-	_background = PolygonNode::allocWithTexture(image);
+	_background = PolygonNode::allocWithTexture(background_image);
 	_background->setName("world");
-	_background->setAnchor(Vec2::ANCHOR_TOP_RIGHT);
+	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
+    float b_scale = SCENE_WIDTH/_background->getWidth();
+    _background->setScale(b_scale);
+    CULog("width, height, scale %f, %f, %f", _background->getWidth(), _background->getHeight(), b_scale);
 	addChild(_background, 0);
 
 	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);

@@ -1,5 +1,5 @@
 #include "Entity.h"
-#include "Util.h"
+#include "../Util.h"
 
 using namespace cugl;
 using namespace std;
