@@ -3,40 +3,33 @@
 void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
-    ///New changes--
+    //keyboard controlled movement--
     Keyboard* keyboard = Input::get<Keyboard>();
-//    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
-//        CULog("left");
-//        state->_map->parallaxTranslatePlatforms(-2);
-//    }
-//    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
-//        CULog("right");
-//        state->_map->parallaxTranslatePlatforms(2);
-//        for (int i = 0; i < _platforms.size(); i++) {
-//            _platforms[i]->update(state);
-//        }
-//    }
-//    else{
-//        state->_map->parallaxTranslatePlatforms(0);
-//        for (int i = 0; i < _platforms.size(); i++) {
-//            _platforms[i]->update(state);
-//        }
-//    }
-//	state->_map->rotatePlatforms();
-//	for (int i = 0; i < _platforms.size(); i++) {
-//		_platforms[i]->update(state);
-//	}
-
-    //continuous movement--
-    state->_map->parallaxTranslatePlatforms(2);
-    for (int i = 0; i < _platforms.size(); i++) {
-        _platforms[i]->update(state);
+    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
+        state->_map->parallaxTranslatePlatforms(-2);
+    }
+    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
+        state->_map->parallaxTranslatePlatforms(2);
+    }
+    else{
+        state->_map->parallaxTranslatePlatforms(0);
     }
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
         _platforms[i]->update(state);
     }
-    //end continuous movement-- 
+    //end keyboard controlled input--
+
+    //continuous movement--
+//    state->_map->parallaxTranslatePlatforms(2);
+//    for (int i = 0; i < _platforms.size(); i++) {
+//        _platforms[i]->update(state);
+//    }
+//    state->_map->rotatePlatforms();
+//    for (int i = 0; i < _platforms.size(); i++) {
+//        _platforms[i]->update(state);
+//    }
+    //end continuous movement--
 	//Camera Controller
 	Vec2 player_pos = state->_player->getPosition() * _grid_size;
 	float map_height = state->_map->getHeight() * _grid_size;

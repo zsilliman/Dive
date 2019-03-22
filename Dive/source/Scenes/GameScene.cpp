@@ -175,7 +175,7 @@ void GameScene::buildScene() {
 
 	_background = PolygonNode::allocWithTexture(background_image);
 	_background->setName("world");
-	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
+	_background->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
     float b_scale = SCENE_WIDTH/_background->getWidth();
     _background->setScale(b_scale);
     CULog("width, height, scale %f, %f, %f", _background->getWidth(), _background->getHeight(), b_scale);
