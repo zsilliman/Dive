@@ -100,6 +100,8 @@ void GameScene::update(float timestep) {
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
     _player_vc->update(_gamestate);
+    _goal_vc->update(_gamestate);
+
 	for (int i = 0; i < _urchin_vcs.size(); i++) {
 		_urchin_vcs[i]->update(_gamestate);
 	}
@@ -108,7 +110,6 @@ void GameScene::update(float timestep) {
 	}
 
 	if (!_complete) {
-		//_goal_vc->update(_gamestate);
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
 //            CULog("STEP");
@@ -119,9 +120,9 @@ void GameScene::update(float timestep) {
 			frame_counter = 0;
 		}
 
-		//if (_gamestate->GoalCollision()) {
-		//	setComplete(true);
-		//}
+        if (_gamestate->GoalCollision()) {
+            setComplete(true);
+        }
 		//if (_player_vc->hitEnemy(_gamestate)) {
 		//	setComplete(true);
 		//}
@@ -138,7 +139,7 @@ void GameScene::setComplete(bool value) {
     bool change = _complete != value;
     _complete = value;
     if (value && change) {
-//        CULog("WINNN");
+        CULog("WINNN");
         _winnode->setVisible(true);
         _countdown = EXIT_COUNT;
     } else if (!value) {
@@ -202,6 +203,10 @@ void GameScene::buildScene() {
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
 		_fish_vcs.push_back(_fish_vc);
 	}
+    
+    _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
+    _map_vc->getNode()->addChild(_goal_vc->getNode(),1);
+    
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
 
@@ -226,19 +231,7 @@ void GameScene::buildScene() {
 	shared_ptr<UrchinViewController> urchin_vc4 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 3);
 	_map_vc->getNode()->addChild(urchin_vc4->getNode());
 	_urchin_vcs.push_back(urchin_vc4);
-
-    _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
-	_map_vc->getNode()->addChild(_goal_vc->getNode());
-    
-    _winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-    _winnode->setAnchor(Vec2::ANCHOR_CENTER);
-    _winnode->setPosition(size.width/2.0f,size.height/2.0f);
-    _winnode->setForeground(WIN_COLOR);
-    setComplete(false);
-    addChild(_winnode,3);
-    
-    _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
-    addChild(_goal_vc->getNode(),0);*/
+     */
     
     shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
     shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
@@ -266,13 +259,13 @@ void GameScene::buildScene() {
     // We can only activate a button AFTER it is added to a scene
     button->activate(1);
 
- 
-/*  _winnode = Label::alloc("VICTORY!", _assets->get<Font>("charlemagne"));
-    _winnode->setForeground(Color4::YELLOW);
+    _winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
     _winnode->setAnchor(Vec2::ANCHOR_CENTER);
-    _winnode->setPosition(0,0);
+    _winnode->setPosition(2.5,4);
+    _winnode->setForeground(WIN_COLOR);
+    _winnode->setScale(4 / _winnode->getWidth());
     setComplete(false);
-    addChild(_winnode, 3);*/
+    addChild(_winnode,3);
     
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }

@@ -38,7 +38,10 @@ shared_ptr<GameState> GameState::allocWithLevel(string level_asset, shared_ptr<A
 			} else if (data[index] == JELLY_TILE_ID) {
 				//Jellyfish (tbd)
 				//...
-			}
+            }else if (data[index] == GOAL_TILE_ID){
+                //Goal
+                state->_goal = Goal::alloc(Vec2(x,y), state->_map->getMapRect());
+            }
 		}
 	}
 	
@@ -53,7 +56,7 @@ void GameState::dispose() {
 void GameState::reset() {
 	_map->reset();
 	_player->reset();
-	//_goal_door->reset();
+    _goal->reset();
 	for (int i = 0; i < _urchins.size(); i++) {
 		_urchins[i]->reset();
 	}
@@ -63,12 +66,14 @@ void GameState::reset() {
 }
 
 bool GameState::GoalCollision(){
-	return false;//_player->getPosition() == _goal_door->getPosition();
+	return abs(_player->getPosition().y - _goal->getPosition().y) < 2 && abs(_player->getPosition().x - _goal->getPosition().x) < 2;
 }
 
 void GameState::initPhysics(const shared_ptr<ObstacleWorld> world) {
 	_map->initPhysics(world);
 	_player->initPhysics(world);
+    _goal->initPhysics(world);
+    
 	for (int i = 0; i < _urchins.size(); i++) {
 		_urchins[i]->initPhysics(world);
 	}
