@@ -14,8 +14,10 @@ protected:
 	
 	vector<shared_ptr<Platform>> platforms = {};
 	vector<shared_ptr<Platform>> platform_dups = {};
+	vector<int> active_platforms = {};
 	shared_ptr<Goal> goal;
 	shared_ptr<Goal> goal_dup;
+	int active_goal = 0;
 
 	float _height, _width;
 	//Region to left of the map, rect defining the whole map, region to right of the map
@@ -24,7 +26,7 @@ protected:
 
     bool overlapsLeftEdge(Rect platform_rect);
 	bool overlapsRightEdge(Rect platform_rect);
-	void rotatePlatform(shared_ptr<Platform> oc, shared_ptr<Platform> cp);
+	int rotatePlatform(shared_ptr<Platform> oc, shared_ptr<Platform> cp, int active);
 
 public:
 
