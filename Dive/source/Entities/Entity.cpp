@@ -19,6 +19,15 @@ bool Entity::canFloat() { return _can_float; }
 
 void Entity::setCanFloat(bool floats) { _can_float = floats; }
 
+void Entity::setName(string name) {
+	_box->setName(name);
+	_box_dup->setName(name);
+}
+
+string Entity::getName() {
+	return _box->getName();
+}
+
 void Entity::reset() {
 	_box->setPosition(_start_pos);
 	_box->setAngle(0);
@@ -99,7 +108,7 @@ void Entity::initEntity(Vec2 pos, Vec2 size, Rect map_rect) {
 	_position = Vec2(pos + size / 2);
 	_start_pos = Vec2(pos + size / 2);
 	_dimensions = Size(size.x, size.y);
-	_box = BoxObstacle::alloc(_start_pos, size);
-	_box_dup = BoxObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size);
+	_box = WheelObstacle::alloc(_start_pos, size.x/2);
+	_box_dup = WheelObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size.x/2);
 	_can_float = false;
 }

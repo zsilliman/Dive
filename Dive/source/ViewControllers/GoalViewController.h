@@ -1,3 +1,4 @@
+/*
 #pragma once
 
 #include "../GameState.h"
@@ -30,3 +31,4 @@ public:
     
     static shared_ptr<GoalViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
 };
+*/

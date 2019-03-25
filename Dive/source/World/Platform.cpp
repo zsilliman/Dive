@@ -48,6 +48,10 @@ shared_ptr<Platform> Platform::duplicate() {
 	platform->adj_values = adj_values;
 	platform->_initial_pos.set(_initial_pos);
 	platform->_relative_speed = _relative_speed;
+	platform->fixtures = {};
+	platform->fixture_defs = {};
+	platform->shapes = {};
+	platform->setName(getName());
 	return platform;
 }
 
@@ -55,6 +59,7 @@ shared_ptr<Platform> Platform::allocWithGrid(vector<int>* grid, Vec2 start, Vec2
 	shared_ptr<Platform> platform = make_shared<Platform>();
 	platform->initGrid(grid, start, map_dimen);
 	platform->_initial_pos.set(platform->getMinCorner());
+	platform->setName("platform");
 	return platform;
 }
 
@@ -139,10 +144,14 @@ void Platform::createFixtures() {
 	shapes.resize(adj_tiles.size());
 	fixtures.resize(adj_tiles.size());
 	Vec2 min_corner = getMinCorner();
+	if (isSensor()) {
+		CULog("Sum shit");
+	}
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		fixture_defs[i].density = PLATFORM_DENSITY;
 		fixture_defs[i].friction = PLATFORM_FRICTION;
 		fixture_defs[i].restitution = PLATFORM_RESTITUTION;
+		fixture_defs[i].isSensor = isSensor();
 
 		shapes[i] = b2PolygonShape();
 		Vec2 center = adj_tiles[i] - min_corner + Vec2(0.5, 0.5);
@@ -153,6 +162,8 @@ void Platform::createFixtures() {
 		setGravityScale(0);
 	}
 	setPosition(min_corner);
+	setFixedRotation(true);
+	setRestitution(0);
 	_initial_pos.set(min_corner);
 }
 
@@ -167,60 +178,3 @@ void Platform::reset() {
 	setPosition(_initial_pos);
 	setAngle(0);
 }
-
-
-/*
-Polygon building algorithm. Ran into issues. Usefulness is tbd
-int Platform::countNeighbors(Vec2 map_dimen, Vec2 pos) {
-	vector<int>& grid_ref = *grid;
-	int count = 0;
-	//Compute blocks that surround given position
-	int top_right = getAdjacentValue(grid, Vec2(0,0), pos, map_dimen);
-	int bottom_right = getAdjacentValue(grid, Vec2(0, -1), pos, map_dimen);
-	int top_left = getAdjacentValue(grid, Vec2(-1, 0), pos, map_dimen);
-	int bottom_left = getAdjacentValue(grid, Vec2(-1, -1), pos, map_dimen);
-
-	//Count adjacent blocks
-	if (top_right >= 0) count++;
-	if (bottom_right >= 0) count++;
-	if (top_left >= 0) count++;
-	if (bottom_left >= 0) count++;
-
-	return count;
-}
-
-void Platform::buildPolygon(vector<int>* grid, Vec2 map_dimen) {
-	_poly = Poly2();
-	vector<Vec2> outline = {};
-	//Determine outline of platform
-	vector<Vec2> all_vertices = {};
-	//Step 1: Enumerate Vertices of all blocks
-	for (int i = 0; i < adj_tiles.size(); i++) {
-		//enumerate vertices of a single block
-		Vec2 bottom_left = adj_tiles[i];
-		Vec2 bottom_right = bottom_left + Vec2(1,0);
-		Vec2 top_left = bottom_left + Vec2(0,1);
-		Vec2 top_right = bottom_left + Vec2(1,1);
-		//add them to list of vertices
-		if (!contains(&all_vertices, bottom_left))
-			all_vertices.push_back(bottom_left);
-		if (!contains(&all_vertices, bottom_right))
-			all_vertices.push_back(bottom_right);
-		if (!contains(&all_vertices, top_left))
-			all_vertices.push_back(top_left);
-		if (!contains(&all_vertices, top_right))
-			all_vertices.push_back(top_right);
-	}
-	//Step 2: Filter out non-essential vertices
-	for (int i = 0; i < all_vertices.size(); i++) {
-		int neighbors = countNeighbors(map_dimen, all_vertices[i]);
-		if (neighbors == 1 || neighbors == 3) {
-			outline.push_back(all_vertices[i]);
-		}
-	}
-
-	//Step 3: reorder vertices (???)
-
-	_poly.set(outline);
-	_body = PolygonObstacle::alloc(_poly);
-}*/

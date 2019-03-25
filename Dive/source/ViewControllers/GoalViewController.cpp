@@ -1,3 +1,4 @@
+/*
 #include "GoalViewController.h"
 #include "../Util.h"
 
@@ -37,3 +38,4 @@ shared_ptr<GoalViewController> GoalViewController::alloc(shared_ptr<GameState> i
     
     return goal_vc;
 }
+*/

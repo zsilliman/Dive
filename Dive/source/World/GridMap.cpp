@@ -29,45 +29,6 @@ void GridMap::translate(int reference_offset) {
 	}
 }
 
-//Read custom properties from Tiled
-/*string getPropertyString(shared_ptr<JsonValue> properties, string key) {
-	for (int i = 0; i < properties->size(); i++) {
-		shared_ptr<JsonValue> prop = properties->get(i);
-		string jsonKey = prop->get("name")->asString();
-		if (jsonKey.compare(key) == 0) {
-			return prop->get("value")->asString();
-		}
-	}
-	CULog("Could not read string property");
-	return "";
-}*/
-
-//Read custom properties from Tiled
-/*int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
-	for (int i = 0; i < properties->size(); i++) {
-		shared_ptr<JsonValue> prop = properties->get(i);
-		string jsonKey = prop->get("name")->asString();
-		if (jsonKey.compare(key) == 0) {
-			return prop->get("value")->asInt();
-		}
-	}
-	CULog("Could not read integer property");
-	return -1;
-}*/
-
-/*vector<int> getPropertyIntList(shared_ptr<JsonValue> properties, string key) {
-	for (int i = 0; i < properties->size(); i++) {
-		shared_ptr<JsonValue> prop = properties->get(i);
-		string jsonKey = prop->get("name")->asString();
-		if (jsonKey.compare(key) == 0) {
-			string lst = prop->get("value")->asString();
-			return JsonValue::allocWithJson(lst)->asIntArray();
-		}
-	}
-	CULog("Could not read integer property");
-	return {};
-}*/
-
 int GridMap::getRowCount() {
 	return _height;
 }

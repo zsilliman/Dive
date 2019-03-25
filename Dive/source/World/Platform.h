@@ -5,9 +5,9 @@
 using namespace cugl;
 using namespace std;
 
-#define PLATFORM_DENSITY 1
+#define PLATFORM_DENSITY 9999
 #define PLATFORM_FRICTION 0.01
-#define PLATFORM_RESTITUTION 0.01
+#define PLATFORM_RESTITUTION 0
 
 class Platform : public SimpleObstacle
 {
@@ -45,9 +45,11 @@ public:
 
 	Vec2 getMaxCorner();
 
+	Vec2 getStartPosition() { return _initial_pos; }
+
 	void reset();
 
-	shared_ptr<Platform> duplicate();
+	virtual shared_ptr<Platform> duplicate();
 
 	static shared_ptr<Platform> allocWithGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen);
 

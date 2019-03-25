@@ -52,7 +52,6 @@ protected:
     std::shared_ptr<PlayerViewController> _player_vc;
 	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
 	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
-    std::shared_ptr<GoalViewController> _goal_vc;
     
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;

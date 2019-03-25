@@ -85,7 +85,6 @@ void GameScene::dispose() {
     }
 }
 
-
 #pragma mark -
 #pragma mark Gameplay Handling
 
@@ -97,10 +96,22 @@ void GameScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameScene::update(float timestep) {
+	Size  size = Application::get()->getDisplaySize();
+	CULog("SIZE width, height %f %f", size.width, size.height);
+	scale = SCENE_WIDTH / size.width;
+	size *= scale;
+
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
+
+	//Begin background parallax section
+	float parallax_speed = 0.5f;
+	float grid_size = size.width / _gamestate->_map->getWidth();
+	float pos = _map_vc->getPosition().y + _gamestate->_map->getHeight()*grid_size + (size.height/(2*parallax_speed));
+	_background->setPositionY(pos * parallax_speed);
+	//End background parallax section
+
     _player_vc->update(_gamestate);
-    _goal_vc->update(_gamestate);
 
 	for (int i = 0; i < _urchin_vcs.size(); i++) {
 		_urchin_vcs[i]->update(_gamestate);
@@ -119,10 +130,6 @@ void GameScene::update(float timestep) {
 			//}
 			frame_counter = 0;
 		}
-
-        if (_gamestate->GoalCollision()) {
-            setComplete(true);
-        }
 		//if (_player_vc->hitEnemy(_gamestate)) {
 		//	setComplete(true);
 		//}
@@ -176,13 +183,13 @@ void GameScene::buildScene() {
 
 	_background = PolygonNode::allocWithTexture(background_image);
 	_background->setName("world");
-	_background->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
     float b_scale = SCENE_WIDTH/_background->getWidth();
     _background->setScale(b_scale);
     CULog("width, height, scale %f, %f, %f", _background->getWidth(), _background->getHeight(), b_scale);
 	addChild(_background, 0);
 
-	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, size);
+	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
@@ -203,9 +210,6 @@ void GameScene::buildScene() {
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
 		_fish_vcs.push_back(_fish_vc);
 	}
-    
-    _goal_vc = GoalViewController::alloc(_gamestate, goal_texture, size);
-    _map_vc->getNode()->addChild(_goal_vc->getNode(),1);
     
 //    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
 
