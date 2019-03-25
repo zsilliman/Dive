@@ -14,6 +14,8 @@ protected:
 	
 	vector<shared_ptr<Platform>> platforms = {};
 	vector<shared_ptr<Platform>> platform_dups = {};
+	shared_ptr<Goal> goal;
+	shared_ptr<Goal> goal_dup;
 
 	float _height, _width;
 	//Region to left of the map, rect defining the whole map, region to right of the map
@@ -22,6 +24,7 @@ protected:
 
     bool overlapsLeftEdge(Rect platform_rect);
 	bool overlapsRightEdge(Rect platform_rect);
+	void rotatePlatform(shared_ptr<Platform> oc, shared_ptr<Platform> cp);
 
 public:
 
@@ -31,6 +34,9 @@ public:
 
 	const vector<shared_ptr<Platform>>& getPlatforms() { return platforms; };
 	const vector<shared_ptr<Platform>>& getPlatformDups() { return platform_dups; };
+	const shared_ptr<Goal> getGoal() { return goal; };
+	const shared_ptr<Goal> getGoalDup() { return goal_dup; }
+
 	const Rect getMapRect() { return map_rect; }
 	const float getWidth() { return _width; }
 	const float getHeight() { return _height; }
@@ -40,6 +46,8 @@ public:
 			world->addObstacle(platforms[i]);
 			world->addObstacle(platform_dups[i]);
 		}
+		world->addObstacle(goal);
+		world->addObstacle(goal_dup);
 	}
 
 	void rotatePlatforms();
@@ -51,3 +59,7 @@ public:
 	void parallaxTranslatePlatforms(float reference_dx);
 
 };
+
+
+
+

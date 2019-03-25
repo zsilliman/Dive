@@ -1,18 +1,18 @@
 #pragma once
 
 #include <cugl/cugl.h>
-#include "../Entities/Entity.h"
+#include "Platform.h"
 
 using namespace cugl;
 using namespace std;
 
 
-class Goal : public Entity  {
-    
-protected:
+class Goal : public Platform  {
 
 public:
-        
-    static shared_ptr<Goal> alloc(Vec2 start_pos, Rect map_rect);
+
+	shared_ptr<Goal> duplicateGoal();
+
+    static shared_ptr<Goal> allocGoal(Vec2 goal_pos);
         
 };

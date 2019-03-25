@@ -11,13 +11,15 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
     else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
         state->_map->parallaxTranslatePlatforms(2);
     }
-    else{
+    else {
         state->_map->parallaxTranslatePlatforms(0);
     }
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
         _platforms[i]->update(state);
     }
+	_goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
+	_goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
     //end keyboard controlled input--
 
     //continuous movement--
@@ -57,7 +59,7 @@ void PlatformMapViewController::reset() {
 	}
 }
 
-shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> tilesheet, Size display) {
+shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> tilesheet, shared_ptr<Texture> goal_texture, Size display) {
 	shared_ptr<PlatformMapViewController> map = make_shared<PlatformMapViewController>();
 	map->_node = Node::alloc();
 	map->_platforms = {};
@@ -70,5 +72,21 @@ shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_pt
 	}
 	Vec2 position = Vec2(0, -init_state->_map->getHeight() * map->_grid_size + display.height);
 	map->_node->setPosition(position);
+	
+	//Setup goal nodes
+	map->_goal = PolygonNode::allocWithTexture(goal_texture);
+	map->_goal->setScale(map->_grid_size / goal_texture->getWidth());
+	map->_goal->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	position = init_state->_map->getGoal()->getMinCorner() * map->_grid_size;
+	map->_goal->setPosition(position);
+	map->_node->addChild(map->_goal);
+
+	map->_goal_dup = PolygonNode::allocWithTexture(goal_texture);
+	map->_goal_dup->setScale(map->_grid_size / goal_texture->getWidth());
+	map->_goal_dup->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	position = init_state->_map->getGoalDup()->getMinCorner() * map->_grid_size;
+	map->_goal_dup->setPosition(position);
+	map->_node->addChild(map->_goal_dup);
+
 	return map;
 }

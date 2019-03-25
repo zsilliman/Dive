@@ -37,6 +37,10 @@ public:
 
 	void setCanFloat(bool floats);
 
+	void setName(string name);
+
+	string getName();
+
 	Vec2 getPosition();
 
 	void setPosition(Vec2 position);
