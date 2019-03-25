@@ -16,7 +16,12 @@ LOCAL_C_INCLUDES := $(CUGL_PATH)/include
 # Add your application source files here...
 LOCAL_SRC_FILES := \
 	$(subst $(LOCAL_PATH)/,, $(CUGL_PATH)/build-android/SDL_android_main.c) \
+	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/Entities/*.cpp)) \
+	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/Scenes/*.cpp)) \
+	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/ViewControllers/*.cpp)) \
+	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/World/*.cpp)) \
 	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/*.cpp))
+
 	
 	
 

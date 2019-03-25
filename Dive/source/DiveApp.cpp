@@ -38,7 +38,6 @@
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Collision/b2Collision.h>
 #include "Entities/Player.h"
-#include "World/Goal.h"
 
 // This keeps us from having to write cugl:: all the time
 using namespace cugl;

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.h"
+#include "../GameState.h"
 
 using namespace std;
 using namespace cugl;

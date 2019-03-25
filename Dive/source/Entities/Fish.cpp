@@ -21,6 +21,7 @@ void Fish::initFish(Vec2 start_pos, Rect map_rect) {
 	_box_dup = BoxObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(0.9,0.9));
 	_can_float = false;
 	_box->setFriction(FISH_FRICTION);
+    _box->setFixedRotation(true);
 	_box->setAngularDamping(FISH_ANG_DAMP);
 	_box->setRestitution(FISH_RESTITUTION);
 	_box->setDensity(FISH_DENSITY);

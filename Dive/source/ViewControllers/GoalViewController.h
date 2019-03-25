@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.h"
+#include "../GameState.h"
 #include "ViewController.h"
 #include "../Entities/Entity.h"
 
@@ -11,6 +11,12 @@ class GoalViewController : public ViewController {
     
 protected:
     Size _display;
+    shared_ptr<Node> _oc_node;
+    shared_ptr<Node> _dup_node;
+    
+    float accelleration = 1.5f;
+    float max_speed = 0.8f;
+    float _grid_size = 1;
     
 public:
     
@@ -21,10 +27,6 @@ public:
     void dispose() override;
     
     void reset() override;
-    
-    bool canMove(shared_ptr<GameState> state, Direction direction);
-    
-    void fall(shared_ptr<GameState> state);
     
     static shared_ptr<GoalViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
 };

@@ -10,7 +10,7 @@ void print_vector(std::vector<int> lst, int offset) {
 			vec.append(", ");
 	}
 	vec.append("}");
-	CULog(vec.c_str());
+	CULog("%s", vec.c_str());
 }
 
 void GridRow::reset() {

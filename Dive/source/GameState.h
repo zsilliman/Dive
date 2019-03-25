@@ -6,6 +6,8 @@
 #include "Entities/Player.h"
 #include "Entities/Urchin.h"
 #include "Entities/Fish.h"
+#include "World/Goal.h"
+
 using namespace cugl;
 using namespace std;
 
@@ -21,10 +23,12 @@ public:
 	vector<shared_ptr<Urchin>> _urchins = {};
 	/** A reference to each of the Fish */
 	vector<shared_ptr<Fish>> _fish = {};
+    
+    shared_ptr<Goal> _goal;
+
 
 	/**
 	A reference to the goal location 
-	shared_ptr<Goal> _goal_door;
 
 	A reference to a list of all urchins 
 	vector<shared_ptr<Urchin>> _urchins;

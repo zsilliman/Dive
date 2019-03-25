@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../World/TiledTexture.h"
-#include "GameState.h"
+#include "../GameState.h"
 #include "ViewController.h"
 
 using namespace cugl;

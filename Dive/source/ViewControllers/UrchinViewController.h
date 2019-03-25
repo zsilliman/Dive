@@ -1,6 +1,6 @@
 #pragma once
 
-#include "GameState.h"
+#include "../GameState.h"
 #include "ViewController.h"
 #include "../Entities/Entity.h"
 

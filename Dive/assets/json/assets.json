@@ -41,7 +41,7 @@
             "file":      "textures/diver.png"
         },
         "background":{
-            "file":      "textures/temp_background_light.jpg"
+            "file":      "textures/background_green.png"
         },
         "platform1":{
             "file":      "textures/platform1.png"
