@@ -65,6 +65,8 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
 	}
 
 	_assets = assets;
+    _input = make_shared<InputController>();
+    _input->init();
 
 	buildScene();
 
@@ -82,6 +84,7 @@ void GameScene::dispose() {
         //_goal_vc->dispose();
         //_winnode->dispose();
         _active = false;
+        _input->dispose();
     }
 }
 
@@ -96,8 +99,8 @@ void GameScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameScene::update(float timestep) {
+    _input->update(timestep);
 	Size  size = Application::get()->getDisplaySize();
-	CULog("SIZE width, height %f %f", size.width, size.height);
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
 
@@ -157,7 +160,6 @@ void GameScene::setComplete(bool value) {
 
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
-    CULog("SIZE width, height %f %f", size.width, size.height);
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
     CULog("SIZE pt 2 width, height %f %f", size.width, size.height);
@@ -189,7 +191,7 @@ void GameScene::buildScene() {
     CULog("width, height, scale %f, %f, %f", _background->getWidth(), _background->getHeight(), b_scale);
 	addChild(_background, 0);
 
-	_map_vc = PlatformMapViewController::alloc(_gamestate, tilesheet, goal_texture, size);
+	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
 	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);

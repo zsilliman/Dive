@@ -16,13 +16,13 @@
 //
 #ifndef __GAME_SCENE_H__
 #define __GAME_SCENE_H__
-#include <cugl/cugl.h>
 #include "../GameState.h"
 #include "../ViewControllers/PlatformMapViewController.h"
 #include "../ViewControllers/PlayerViewController.h"
 #include "../ViewControllers/UrchinViewController.h"
 #include "../ViewControllers/FishViewController.h"
 #include "../ViewControllers/GoalViewController.h"
+#include "../ViewControllers/InputController.h"
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
@@ -37,6 +37,9 @@ class GameScene : public cugl::Scene {
 protected:
     /** The asset manager for this game mode. */
     std::shared_ptr<cugl::AssetManager> _assets;
+    
+
+    
 
 	//MODELS
     // Gamestate contains all necessary models
@@ -52,6 +55,8 @@ protected:
     std::shared_ptr<PlayerViewController> _player_vc;
 	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
 	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
+    //input controller
+    std::shared_ptr<InputController> _input;
     
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
