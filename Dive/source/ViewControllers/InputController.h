@@ -1,5 +1,5 @@
 //
-//  InputController.hpp
+//  InputController.h
 //  Dive
 //
 //  This input controller is primarily designed for keyboard control.  On mobile
@@ -12,8 +12,8 @@
 //  Created by Pippen Wu on 2019/3/15.
 //
 
-#ifndef InputController_hpp
-#define InputController_hpp
+#ifndef InputController_h
+#define InputController_h
 
 #include <cugl/cugl.h>
 #include <unordered_set>

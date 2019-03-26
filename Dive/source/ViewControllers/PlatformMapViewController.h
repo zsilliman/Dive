@@ -2,7 +2,7 @@
 
 #include "ViewController.h"
 #include "PlatformViewController.h"
-#include "InputController.hpp"
+#include "InputController.h"
 
 using namespace cugl;
 using namespace std;

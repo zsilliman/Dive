@@ -22,7 +22,7 @@
 #include "../ViewControllers/UrchinViewController.h"
 #include "../ViewControllers/FishViewController.h"
 #include "../ViewControllers/GoalViewController.h"
-#include "../ViewControllers/InputController.hpp"
+#include "../ViewControllers/InputController.h"
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20

@@ -10,6 +10,30 @@
 		344BD8D6223DE108007792E6 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
 		766CD9D4223825F50020E734 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
 		766CD9D5223825F70020E734 /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E03223357A600A7432C /* GameState.cpp */; };
+		76F0B474224A785100EBF3E9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D022483449002E0E84 /* Player.cpp */; };
+		76F0B475224A785300EBF3E9 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D222483449002E0E84 /* Entity.cpp */; };
+		76F0B476224A785500EBF3E9 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D422483449002E0E84 /* Urchin.cpp */; };
+		76F0B477224A785B00EBF3E9 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D922483449002E0E84 /* InputController.cpp */; };
+		76F0B478224A785E00EBF3E9 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */; };
+		76F0B479224A786200EBF3E9 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */; };
+		76F0B47A224A786500EBF3E9 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */; };
+		76F0B47B224A786800EBF3E9 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */; };
+		76F0B47C224A786A00EBF3E9 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E122483449002E0E84 /* GridRowViewController.cpp */; };
+		76F0B47D224A786D00EBF3E9 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E422483449002E0E84 /* PlayerViewController.cpp */; };
+		76F0B47E224A786F00EBF3E9 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E922483449002E0E84 /* FishViewController.cpp */; };
+		76F0B47F224A787200EBF3E9 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EA22483449002E0E84 /* GoalViewController.cpp */; };
+		76F0B480224A787800EBF3E9 /* TiledTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F222483449002E0E84 /* TiledTexture.cpp */; };
+		76F0B481224A787A00EBF3E9 /* PlatformObstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F322483449002E0E84 /* PlatformObstacle.cpp */; };
+		76F0B482224A787E00EBF3E9 /* GridMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F622483449002E0E84 /* GridMap.cpp */; };
+		76F0B483224A788100EBF3E9 /* Platform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F922483449002E0E84 /* Platform.cpp */; };
+		76F0B484224A788200EBF3E9 /* GridRow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FA22483449002E0E84 /* GridRow.cpp */; };
+		76F0B485224A788600EBF3E9 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FD22483449002E0E84 /* Goal.cpp */; };
+		76F0B486224A788800EBF3E9 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FE22483449002E0E84 /* PlatformMap.cpp */; };
+		76F0B487224A788E00EBF3E9 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F022483449002E0E84 /* GameScene.cpp */; };
+		76F0B488224A789000EBF3E9 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EF22483449002E0E84 /* LoadingScene.cpp */; };
+		76F0B489224A78FE00EBF3E9 /* Fish.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D122483449002E0E84 /* Fish.cpp */; };
+		76F0B48A224A794600EBF3E9 /* json in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE332233641900A1FE5A /* json */; };
+		76F0B48B224A794900EBF3E9 /* levels in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE1F2233621E00A1FE5A /* levels */; };
 		EB0FF5092016E4A700517030 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EB0FF5082016E4A700517030 /* CoreFoundation.framework */; };
 		EB0FF6172016EFB200517030 /* iOS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A71D74D846002FBAE6 /* iOS.xcassets */; };
 		EB0FF6182016EFB200517030 /* Landscape.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EB7454A81D74D846002FBAE6 /* Landscape.storyboard */; };
@@ -222,7 +246,7 @@
 		EF0E16E322483449002E0E84 /* FishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishViewController.h; sourceTree = "<group>"; };
 		EF0E16E422483449002E0E84 /* PlayerViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerViewController.cpp; sourceTree = "<group>"; };
 		EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformMapViewController.cpp; sourceTree = "<group>"; };
-		EF0E16E622483449002E0E84 /* InputController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = InputController.hpp; sourceTree = "<group>"; };
+		EF0E16E622483449002E0E84 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
 		EF0E16E722483449002E0E84 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
 		EF0E16E822483449002E0E84 /* UrchinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrchinViewController.h; sourceTree = "<group>"; };
 		EF0E16E922483449002E0E84 /* FishViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishViewController.cpp; sourceTree = "<group>"; };
@@ -479,7 +503,7 @@
 			isa = PBXGroup;
 			children = (
 				EF0E16D922483449002E0E84 /* InputController.cpp */,
-				EF0E16E622483449002E0E84 /* InputController.hpp */,
+				EF0E16E622483449002E0E84 /* InputController.h */,
 				EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */,
 				EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */,
 				EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */,
@@ -598,7 +622,7 @@
 				TargetAttributes = {
 					EB0FF5FB2016EF4F00517030 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = G6P7H83FK6;
+						DevelopmentTeam = L5TND7G5EG;
 						ProvisioningStyle = Automatic;
 					};
 					EB74548B1D74D75C002FBAE6 = {
@@ -607,7 +631,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 2R2SQSPH3U;
+						DevelopmentTeam = L5TND7G5EG;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -668,7 +692,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				EB0FF61B2016EFC500517030 /* textures in Resources */,
+				76F0B48B224A794900EBF3E9 /* levels in Resources */,
 				EB0FF61C2016EFC500517030 /* fonts in Resources */,
+				76F0B48A224A794600EBF3E9 /* json in Resources */,
 				EB0FF6172016EFB200517030 /* iOS.xcassets in Resources */,
 				EB0FF6182016EFB200517030 /* Landscape.storyboard in Resources */,
 				EB0FF6192016EFB200517030 /* Portrait.storyboard in Resources */,
@@ -710,9 +736,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				76F0B481224A787A00EBF3E9 /* PlatformObstacle.cpp in Sources */,
+				76F0B47F224A787200EBF3E9 /* GoalViewController.cpp in Sources */,
+				76F0B47B224A786800EBF3E9 /* GridMapViewController.cpp in Sources */,
+				76F0B478224A785E00EBF3E9 /* PlatformMapViewController.cpp in Sources */,
+				76F0B487224A788E00EBF3E9 /* GameScene.cpp in Sources */,
+				76F0B47E224A786F00EBF3E9 /* FishViewController.cpp in Sources */,
+				76F0B480224A787800EBF3E9 /* TiledTexture.cpp in Sources */,
+				76F0B484224A788200EBF3E9 /* GridRow.cpp in Sources */,
+				76F0B486224A788800EBF3E9 /* PlatformMap.cpp in Sources */,
+				76F0B476224A785500EBF3E9 /* Urchin.cpp in Sources */,
+				76F0B474224A785100EBF3E9 /* Player.cpp in Sources */,
 				766CD9D5223825F70020E734 /* GameState.cpp in Sources */,
+				76F0B477224A785B00EBF3E9 /* InputController.cpp in Sources */,
 				EB0FF61D2016F06000517030 /* main.cpp in Sources */,
+				76F0B479224A786200EBF3E9 /* UrchinViewController.cpp in Sources */,
+				76F0B47A224A786500EBF3E9 /* PlatformViewController.cpp in Sources */,
+				76F0B475224A785300EBF3E9 /* Entity.cpp in Sources */,
+				76F0B483224A788100EBF3E9 /* Platform.cpp in Sources */,
+				76F0B482224A787E00EBF3E9 /* GridMap.cpp in Sources */,
 				766CD9D4223825F50020E734 /* DiveApp.cpp in Sources */,
+				76F0B485224A788600EBF3E9 /* Goal.cpp in Sources */,
+				76F0B488224A789000EBF3E9 /* LoadingScene.cpp in Sources */,
+				76F0B47D224A786D00EBF3E9 /* PlayerViewController.cpp in Sources */,
+				76F0B47C224A786A00EBF3E9 /* GridRowViewController.cpp in Sources */,
+				76F0B489224A78FE00EBF3E9 /* Fish.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -802,7 +850,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G6P7H83FK6;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
@@ -836,7 +884,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = G6P7H83FK6;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/iOS-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
@@ -1018,7 +1066,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1035,7 +1083,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

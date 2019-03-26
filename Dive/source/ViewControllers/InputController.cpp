@@ -12,7 +12,7 @@
 //  Created by Pippen Wu on 2019/3/15.
 //
 
-#include "InputController.hpp"
+#include "InputController.h"
 
 using namespace cugl;
 
@@ -145,6 +145,14 @@ void InputController::update(float dt) {
     _keyRight = keys->keyDown(KeyCode::ARROW_RIGHT);
 #endif
     
+    // If it does not support keyboard, we must reset "virtual" keyboard
+#ifdef CU_TOUCH_SCREEN
+    _keyExit = false;
+    _keyReset = false;
+    _keyLeft = false;
+    _keyRight = false;
+#endif
+    
     _leftPressed = _keyLeft;
     _rightPressed = _keyRight;
     _resetPressed = _keyReset;
@@ -158,14 +166,6 @@ void InputController::update(float dt) {
     if (_keyLeft) {
         _horizontal -= 1.0f;
     }
-    
-    // If it does not support keyboard, we must reset "virtual" keyboard
-#ifdef CU_TOUCH_SCREEN
-    _keyExit = false;
-    _keyReset = false;
-    _keyLeft = false;
-    _keyRight = false;
-#endif
 }
 
 /**
