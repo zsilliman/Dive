@@ -631,7 +631,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = L5TND7G5EG;
+						DevelopmentTeam = 2R2SQSPH3U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1066,7 +1066,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L5TND7G5EG;
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1083,7 +1083,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L5TND7G5EG;
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

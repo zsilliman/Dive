@@ -5,35 +5,39 @@ void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<G
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
     
     #if defined CU_TOUCH_SCREEN
-    Touchscreen* touch = Input::get<Touchscreen>();
-    if (touch->touchCount() == 1){
-        state->_map->parallaxTranslatePlatforms(2);
-    }else if (touch->touchCount() == 2){
-        state->_map->parallaxTranslatePlatforms(-2);
-    }
+//    Touchscreen* touch = Input::get<Touchscreen>();
+//    if (touch->touchCount() == 1){
+//        state->_map->parallaxTranslatePlatforms(2);
+//    }else if (touch->touchCount() == 2){
+//        state->_map->parallaxTranslatePlatforms(-2);
+//    }
     if (_input -> didPressLeft()){
         state->_map->parallaxTranslatePlatforms(-2);
     }
     else if (_input -> didPressRight()){
         state->_map->parallaxTranslatePlatforms(2);
+    }else{
+        state->_map->parallaxTranslatePlatforms(0);
     }
     #else
     //keyboard controlled movement--
-    Keyboard* keyboard = Input::get<Keyboard>();
-    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
-        state->_map->parallaxTranslatePlatforms(-2);
-    }
-    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
-        state->_map->parallaxTranslatePlatforms(2);
-    }
-    else {
-        state->_map->parallaxTranslatePlatforms(0);
-    }
-//    if (_input->didPressLeft()){
+//    Keyboard* keyboard = Input::get<Keyboard>();
+//    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
 //        state->_map->parallaxTranslatePlatforms(-2);
-//    }else if (_input->didPressRight()){
+//    }
+//    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
 //        state->_map->parallaxTranslatePlatforms(2);
 //    }
+//    else {
+//        state->_map->parallaxTranslatePlatforms(0);
+//    }
+    if (_input->goingLeft()){
+        state->_map->parallaxTranslatePlatforms(2);
+    }else if (_input->goingRight()){
+        state->_map->parallaxTranslatePlatforms(-2);
+    }else{
+        state->_map->parallaxTranslatePlatforms(0);
+    }
     #endif
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
