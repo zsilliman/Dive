@@ -3,6 +3,21 @@
 void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
+    
+    #if defined CU_TOUCH_SCREEN
+//    Touchscreen* touch = Input::get<Touchscreen>();
+//    if (touch->touchCount() == 1){
+//        state->_map->parallaxTranslatePlatforms(2);
+//    }else if (touch->touchCount() == 2){
+//        state->_map->parallaxTranslatePlatforms(-2);
+//    }
+//    if (_input -> didPressLeft()){
+//        state->_map->parallaxTranslatePlatforms(-2);
+//    }
+//    else if (_input -> didPressRight()){
+//        state->_map->parallaxTranslatePlatforms(2);
+//    }
+    #else
     //keyboard controlled movement--
     Keyboard* keyboard = Input::get<Keyboard>();
     if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
@@ -14,14 +29,19 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
     else {
         state->_map->parallaxTranslatePlatforms(0);
     }
+//    if (_input->didPressLeft()){
+//        state->_map->parallaxTranslatePlatforms(-2);
+//    }else if (_input->didPressRight()){
+//        state->_map->parallaxTranslatePlatforms(2);
+//    }
+    #endif
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
         _platforms[i]->update(state);
     }
-	_goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
-	_goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
-    //end keyboard controlled input--
-
+    _goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
+    _goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
+    
     //continuous movement--
 //    state->_map->parallaxTranslatePlatforms(2);
 //    for (int i = 0; i < _platforms.size(); i++) {
@@ -59,7 +79,7 @@ void PlatformMapViewController::reset() {
 	}
 }
 
-shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> tilesheet, shared_ptr<Texture> goal_texture, Size display) {
+shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> tilesheet, shared_ptr<Texture> goal_texture, Size display) {
 	shared_ptr<PlatformMapViewController> map = make_shared<PlatformMapViewController>();
 	map->_node = Node::alloc();
 	map->_platforms = {};

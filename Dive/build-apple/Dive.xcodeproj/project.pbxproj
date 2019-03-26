@@ -445,16 +445,16 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EF0E16CF22483449002E0E84 /* Entities */,
-				EF0E16EC22483449002E0E84 /* Scenes */,
-				EF0E16D822483449002E0E84 /* ViewControllers */,
-				EF0E16F122483449002E0E84 /* World */,
 				EB2BE9B41D74952A002FE78B /* main.cpp */,
 				EF660E04223357A600A7432C /* Util.h */,
 				EF396FAE2228CCF200FE0998 /* DiveApp.h */,
 				EF396FB02228CCF200FE0998 /* DiveApp.cpp */,
 				EF660E06223357A600A7432C /* GameState.h */,
 				EF660E03223357A600A7432C /* GameState.cpp */,
+				EF0E16CF22483449002E0E84 /* Entities */,
+				EF0E16EC22483449002E0E84 /* Scenes */,
+				EF0E16D822483449002E0E84 /* ViewControllers */,
+				EF0E16F122483449002E0E84 /* World */,
 			);
 			name = Source;
 			path = ../source;
@@ -479,10 +479,12 @@
 			isa = PBXGroup;
 			children = (
 				EF0E16D922483449002E0E84 /* InputController.cpp */,
+				EF0E16E622483449002E0E84 /* InputController.hpp */,
+				EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */,
+				EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */,
 				EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */,
 				EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */,
 				EF0E16DC22483449002E0E84 /* GridRowViewController.h */,
-				EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */,
 				EF0E16DE22483449002E0E84 /* GridMapViewController.h */,
 				EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */,
 				EF0E16E022483449002E0E84 /* PlatformViewController.h */,
@@ -490,8 +492,6 @@
 				EF0E16E222483449002E0E84 /* PlayerViewController.h */,
 				EF0E16E322483449002E0E84 /* FishViewController.h */,
 				EF0E16E422483449002E0E84 /* PlayerViewController.cpp */,
-				EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */,
-				EF0E16E622483449002E0E84 /* InputController.hpp */,
 				EF0E16E722483449002E0E84 /* GoalViewController.h */,
 				EF0E16E822483449002E0E84 /* UrchinViewController.h */,
 				EF0E16E922483449002E0E84 /* FishViewController.cpp */,
@@ -505,9 +505,9 @@
 			isa = PBXGroup;
 			children = (
 				EF0E16ED22483449002E0E84 /* GameScene.h */,
+				EF0E16F022483449002E0E84 /* GameScene.cpp */,
 				EF0E16EE22483449002E0E84 /* LoadingScene.h */,
 				EF0E16EF22483449002E0E84 /* LoadingScene.cpp */,
-				EF0E16F022483449002E0E84 /* GameScene.cpp */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";

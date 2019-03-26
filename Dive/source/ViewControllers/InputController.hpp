@@ -52,6 +52,10 @@ private:
 
 protected:
     // INPUT RESULTS
+    /** Whether the left action was chosen. */
+    bool _leftPressed;
+    /** Whether the righteset action was chosen. */
+    bool _rightPressed;
     /** Whether the reset action was chosen. */
     bool _resetPressed;
     /** Whether the exit action was chosen. */
@@ -211,6 +215,12 @@ public:
      * @return the amount of sideways movement.
      */
     float getHorizontal() const { return _horizontal; }
+    
+    // Returns true if the left key (left screen) is pressed
+    bool didPressLeft() {return _leftPressed;}
+    
+    // Returns true if the right key (right screen) is pressed
+    bool didPressRight() {return _rightPressed;}
 
     /**
      * Returns true if the reset button was pressed.

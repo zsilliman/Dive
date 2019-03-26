@@ -10,6 +10,7 @@ using namespace std;
 class PlatformMapViewController : public ViewController {
 
 	vector<shared_ptr<PlatformViewController>> _platforms;
+    shared_ptr<InputController> _input;
 	shared_ptr<PolygonNode> _goal, _goal_dup;
 	Size _display;
 	float _grid_size = 1;
@@ -24,6 +25,6 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<PlatformMapViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<TiledTexture> texture, shared_ptr<Texture> goal_texture, Size display);
+	static shared_ptr<PlatformMapViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> texture, shared_ptr<Texture> goal_texture, Size display);
 
 };

@@ -59,6 +59,8 @@ _keyReset(false),
 _keyExit(false),
 _keyLeft(false),
 _keyRight(false),
+_leftPressed(false),
+_rightPressed(false),
 _resetPressed(false),
 _exitPressed(false),
 _horizontal(0.0f){
@@ -94,15 +96,17 @@ void InputController::dispose() {
  */
 bool InputController::init() {
     bool success = true;
+    
     _bounds = Application::get()->getDisplayBounds();
     
     createZones();
     clearTouchInstance(_ltouch);
     clearTouchInstance(_rtouch);
-    
+
 #ifndef CU_TOUCH_SCREEN
     success = Input::activate<Keyboard>();
 #else
+    
     Touchscreen* touch = Input::get<Touchscreen>();
     touch->addBeginListener(LISTENER_KEY,[=](const cugl::TouchEvent& event, bool focus) {
         this->touchBeganCB(event,focus);
@@ -141,6 +145,8 @@ void InputController::update(float dt) {
     _keyRight = keys->keyDown(KeyCode::ARROW_RIGHT);
 #endif
     
+    _leftPressed = _keyLeft;
+    _rightPressed = _keyRight;
     _resetPressed = _keyReset;
     _exitPressed  = _keyExit;
     
@@ -157,6 +163,8 @@ void InputController::update(float dt) {
 #ifdef CU_TOUCH_SCREEN
     _keyExit = false;
     _keyReset = false;
+    _keyLeft = false;
+    _keyRight = false;
 #endif
 }
 
@@ -166,6 +174,8 @@ void InputController::update(float dt) {
 void InputController::clear() {
     _resetPressed = false;
     _exitPressed  = false;
+    _leftPressed = false;
+    _rightPressed = false;
 }
 
 /**
@@ -252,6 +262,7 @@ void InputController::touchBeganCB(const cugl::TouchEvent& event, bool focus) {
                 _ltouch.position = event.position;
                 _ltouch.touchids.insert(event.touch);
                 _keyLeft = true;
+                CULog("left is pressed");
             }
             break;
         case Zone::RIGHT:
@@ -261,6 +272,7 @@ void InputController::touchBeganCB(const cugl::TouchEvent& event, bool focus) {
                 _rtouch.position = event.position;
                 _rtouch.touchids.insert(event.touch);
                 _keyRight = true;
+                CULog("right is pressed");
             }
             break;
         default:
