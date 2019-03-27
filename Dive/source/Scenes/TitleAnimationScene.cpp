@@ -11,7 +11,7 @@
 using namespace cugl;
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 5
+#define SCENE_WIDTH 640
 
 #pragma mark -
 #pragma mark Constructors
@@ -38,8 +38,13 @@ bool TitleAnimationScene::init(const std::shared_ptr<cugl::AssetManager>& assets
     }
     
     _assets = assets;
+	shared_ptr<Texture> texture = _assets->get<Texture>("title");
     _titlenode  = std::dynamic_pointer_cast<AnimationNode>(_assets->get<Node>("dive"));
-    _titlenode->setContentSize(dimen);
+	_titlenode->setPosition(dimen/2);
+	_titlenode->setAnchor(Vec2::ANCHOR_CENTER);
+	_titlenode->setScale(1);
+	addChild(_titlenode);
+    //_titlenode->setContentSize(dimen);
     
     CULog("X: %f, Y: %f", _titlenode->getPositionX(), _titlenode->getPositionY());
     
