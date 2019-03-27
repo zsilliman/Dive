@@ -9,6 +9,7 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	player->_box->setFriction(0);
 	player->_box_dup->setFriction(0);
 	player->setName("player");
+    player->_box->setAngle(180);
 	return player;
 }
 

@@ -48,6 +48,9 @@
         },
         "title": {
             "file":      "animations/dive.jpg"
+        },
+        "diving": {
+            "file":      "textures/diving.png"
         }
 	},
 	"levels": {
