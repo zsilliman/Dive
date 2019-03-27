@@ -11,16 +11,19 @@ class UrchinViewController : public ViewController {
 
 protected:
 	Size _display;
-	shared_ptr<Node> _oc_node;
-	shared_ptr<Node> _dup_node;
+	shared_ptr<AnimationNode> _oc_node;
+	shared_ptr<AnimationNode> _dup_node;
 
 	float accelleration = 1.5f;
 	float max_speed = 0.8f;
 	float _grid_size = 1;
 	int _urchin_index = 0;
+    
+     bool _mainCycle;
 
 public:
-
+    void animateUrchin();
+    
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;
 
 	void update(shared_ptr<GameState> state) override;
