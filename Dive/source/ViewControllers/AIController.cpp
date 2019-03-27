@@ -7,3 +7,12 @@
 //
 
 #include "AIController.hpp"
+
+//shared_ptr<Entity> getEntity(){
+//    return entity;
+//}
+//
+//void setEntity(shared_ptr<Entity> e){
+//    entity = e;
+//}
+//

@@ -17,6 +17,9 @@
 #include <cugl/cugl.h>
 #include <iostream>
 #include <sstream>
+#include <Box2D/Dynamics/b2World.h>
+#include <Box2D/Dynamics/Contacts/b2Contact.h>
+#include <Box2D/Collision/b2Collision.h>
 
 #include "GameScene.h"
 
@@ -33,6 +36,7 @@ using namespace std;
 #pragma mark Constructors
 
 #define WIN_MESSAGE     "VICTORY!"
+#define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
 #define EXIT_COUNT      100
@@ -158,6 +162,19 @@ void GameScene::setComplete(bool value) {
     }
 }
 
+void GameScene::setLost(bool value) {
+//    bool change = _lost != value;
+//    _lost = value;
+    if (value ){//}&& change) {
+        CULog("You lost :(");
+        _losenode->setVisible(true);
+        _countdown = EXIT_COUNT;
+    }
+    else{
+        _losenode->setVisible(false);
+    }
+}
+
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -182,6 +199,13 @@ void GameScene::buildScene() {
 
 	_gamestate = GameState::allocWithLevel("levels/sample_level.json", _assets);
 	_gamestate->initPhysics(_world);
+    _world->activateCollisionCallbacks(true);
+    _world->onBeginContact = [this](b2Contact* contact) {
+        beginContact(contact);
+    };
+//    _world->beforeSolve = [this](b2Contact* contact, const b2Manifold* oldManifold) {
+//        beforeSolve(contact,oldManifold);
+//    };
 
 	_background = PolygonNode::allocWithTexture(background_image);
 	_background->setName("world");
@@ -213,36 +237,9 @@ void GameScene::buildScene() {
 		_fish_vcs.push_back(_fish_vc);
 	}
     
-//    _player_vc->setPhysicsPosition((size.width / 2)-.2, (size.height / 2)+.5);
-
-
-	/*_map_vc = GridMapViewController::alloc(_gamestate, tilesheet, size);
-	addChild(_map_vc->getNode(),0);
-
-	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
-	_map_vc->getNode()->addChild(_player_vc->getNode());
-    
-	//Making a bunch of urchins
-	std::shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
-	_urchin_vcs = {};
-	shared_ptr<UrchinViewController> urchin_vc1 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 0);
-	_map_vc->getNode()->addChild(urchin_vc1->getNode());
-	_urchin_vcs.push_back(urchin_vc1);
-	shared_ptr<UrchinViewController> urchin_vc2 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 1);
-	_map_vc->getNode()->addChild(urchin_vc2->getNode());
-	_urchin_vcs.push_back(urchin_vc2);
-	shared_ptr<UrchinViewController> urchin_vc3 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 2);
-	_map_vc->getNode()->addChild(urchin_vc3->getNode());
-	_urchin_vcs.push_back(urchin_vc3);
-	shared_ptr<UrchinViewController> urchin_vc4 = UrchinViewController::alloc(_gamestate, urchin_texture, size, 3);
-	_map_vc->getNode()->addChild(urchin_vc4->getNode());
-	_urchin_vcs.push_back(urchin_vc4);
-     */
     
     shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
     shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
-    
-    Size bsize = up->getSize();
     shared_ptr<Button> button = Button::alloc(PolygonNode::allocWithTexture(up),
                                               PolygonNode::allocWithTexture(down));
     
@@ -273,16 +270,95 @@ void GameScene::buildScene() {
     setComplete(false);
     addChild(_winnode,3);
     
+    _losenode = Label::alloc(LOSE_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
+    _losenode->setAnchor(Vec2::ANCHOR_CENTER);
+    _losenode->setPosition(2.5,4);
+    _losenode->setForeground(WIN_COLOR);
+    _losenode->setScale(4 / _losenode->getWidth());
+    setLost(false);
+    addChild(_losenode,3);
+    
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }
 
 void GameScene::reset() {
 	_gamestate->reset();
-	//_map_vc->updateRows(_gamestate);
-	//_map_vc->reset();
-    //_player_vc->reset();
-    //_goal_vc->reset();
-    //removeAllChildren();
-    //setComplete(false);
-    //buildScene();
 }
+
+/**
+ * Processes the start of a collision
+ *
+ * This method is called when we first get a collision between two objects.  We use
+ * this method to test if it is the "right" kind of collision.  In particular, we
+ * use it to test if we make it to the win door.
+ *
+ * @param  contact  The two bodies that collided
+ */
+void GameScene::beginContact(b2Contact* contact) {
+    b2Fixture* fix1 = contact->GetFixtureA();
+    b2Fixture* fix2 = contact->GetFixtureB();
+    
+    b2Body* body1 = fix1->GetBody();
+    b2Body* body2 = fix2->GetBody();
+    
+    void* fd1 = fix1->GetUserData();
+    void* fd2 = fix2->GetUserData();
+    
+    Obstacle* bd1 = (Obstacle*)body1->GetUserData();
+    Obstacle* bd2 = (Obstacle*)body2->GetUserData();
+    
+    if(bd1->getName() == "player"){
+        if(bd2->getName() == "urchin"){
+            CULog("loosing 1");
+            setLost(true);
+        }
+        else if(bd2->getName() == "fish"){
+            CULog("loosing 2");
+            setLost(true);
+        }
+        else if(bd2->getName() == "platform"){
+            //change ai
+        }
+        else if(bd2->getName() == "goal"){
+            setComplete(true);
+        }
+    }
+    else if(bd1->getName() == "urchin"){
+        if(bd2->getName() == "player"){
+            CULog("loosing 3");
+            setLost(true);
+        }
+        else if(bd2->getName() == "fish"){
+            //kill fish
+        }
+    }
+    else if(bd1->getName() == "fish"){
+        if(bd2->getName() == "player"){
+            CULog("loosing 4");
+            setLost(true);
+        }
+        else if(bd2->getName() == "urchin"){
+            //kill fish
+        }
+        else if(bd2->getName() == "fish"){
+            //???
+        }
+    }
+    else if(bd1->getName() == "platform"){
+        if(bd2->getName() == "player"){
+            //change ai direction
+        }
+        else if(bd2->getName() == "platform"){
+            //locking
+        }
+    }
+    else if(bd1->getName() == "goal"){
+        if(bd2->getName() == "player"){
+            setComplete(true);
+        }
+    }
+}
+
+//void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
+//
+//}

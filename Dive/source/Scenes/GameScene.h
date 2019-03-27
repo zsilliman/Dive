@@ -23,6 +23,9 @@
 #include "../ViewControllers/FishViewController.h"
 #include "../ViewControllers/GoalViewController.h"
 #include "../ViewControllers/InputController.h"
+#include <cugl/cugl.h>
+#include <Box2D/Dynamics/b2WorldCallbacks.h>
+#include <vector>
 
 //Step world AI once every 20 frames
 #define UPDATE_STEP 20
@@ -60,7 +63,9 @@ protected:
     
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
+    std::shared_ptr<cugl::Label> _losenode;
     bool _complete;
+    bool _lost;
     int _countdown;
 
 	int frame_counter = 0;
@@ -109,6 +114,8 @@ public:
     
     void setComplete(bool value);
 
+    void setLost(bool value);
+
     
 #pragma mark -
 #pragma mark Gameplay Handling
@@ -125,6 +132,30 @@ public:
      * Resets the status of the game so that we can play again.
      */
     void reset();
+    
+#pragma mark Collision Handling
+    /**
+     * Processes the start of a collision
+     *
+     * This method is called when we first get a collision between two objects.
+     * We use this method to test if it is the "right" kind of collision.  In
+     * particular, we use it to test if we make it to the win door.
+     *
+     * @param  contact  The two bodies that collided
+     */
+    void beginContact(b2Contact* contact);
+    
+    /**
+     * Handles any modifications necessary before collision resolution
+     *
+     * This method is called just before Box2D resolves a collision.  We use
+     * this method to implement sound on contact, using the algorithms outlined
+     * in Ian Parberry's "Introduction to Game Physics with Box2D".
+     *
+     * @param  contact  The two bodies that collided
+     * @param  contact  The collision manifold before contact
+     */
+    //void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold);
     
 };
 

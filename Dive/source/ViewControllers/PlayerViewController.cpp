@@ -5,9 +5,14 @@ void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameSt
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
 	state->_player->rotateEntity(state->_map->getMapRect());
-	
+	state->_player->setLinearVelocity(Vec2(1.8, -1.8));
     //new version:
-	state->_player->setLinearVelocity(Vec2(2, -2));
+//    if(getCollision(state) == 0){
+//        state->_player->setLinearVelocity(Vec2(0, -1.8));
+//    }
+//    else{
+//        state->_player->setLinearVelocity(Vec2(1.8, 0));
+//    }
     
 	_oc_node->setPosition(state->_player->_box->getPosition() * _grid_size);
 	_oc_node->setAngle(state->_player->_box->getAngle());
@@ -66,3 +71,8 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 
 	return player_vc;
 }
+
+//int getCollision(shared_ptr<GameState> state){
+//    b2Body* p_body = state->_player->_box->getBody();
+//    if(p_body->)
+//}

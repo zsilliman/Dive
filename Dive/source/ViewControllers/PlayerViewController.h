@@ -29,5 +29,7 @@ public:
 	void reset() override;
 
 	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
+    
+    int getCollision(shared_ptr<GameState> state);
 
 };

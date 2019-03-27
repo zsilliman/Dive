@@ -1,6 +1,6 @@
 #include <cugl/cugl.h>
 #include "PlatformMap.h"
-#include "Util.h"
+#include "../Util.h"
 
 using namespace cugl;
 using namespace std;
