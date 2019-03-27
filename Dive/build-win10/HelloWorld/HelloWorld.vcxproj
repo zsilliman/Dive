@@ -195,6 +195,7 @@
     <ClInclude Include="..\..\source\Loaders\GamestateLoader.h" />
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
+    <ClInclude Include="..\..\source\Scenes\TitleAnimationScene.hpp" />
     <ClInclude Include="..\..\source\Util.h" />
     <ClInclude Include="..\..\source\ViewControllers\FishViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
@@ -225,6 +226,7 @@
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\Scenes\TitleAnimationScene.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\FishViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
