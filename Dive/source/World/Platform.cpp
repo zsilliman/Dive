@@ -174,7 +174,7 @@ void Platform::releaseFixtures() {
 }
 
 void Platform::reset() {
-
 	setPosition(_initial_pos);
+	setLinearVelocity(Vec2(0,0));
 	setAngle(0);
 }

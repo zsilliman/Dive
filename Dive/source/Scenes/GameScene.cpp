@@ -142,11 +142,11 @@ void GameScene::update(float timestep) {
 		//}
 	}
     //w below commented out, dups move oc don't
-//    if (_countdown > 0) {
-//        _countdown--;
-//    } else if (_countdown == 0) {
-//        reset();
-//    }
+    if (_countdown > 0) {
+        _countdown--;
+    } else if (_countdown == 0) {
+        reset();
+    }
 }
 
 void GameScene::setComplete(bool value) {
@@ -286,6 +286,10 @@ void GameScene::buildScene() {
 
 void GameScene::reset() {
 	_gamestate->reset();
+	_countdown = -1;
+	_winnode->setVisible(false);
+	_losenode->setVisible(false);
+	CULog("Reset");
 }
 
 /**
