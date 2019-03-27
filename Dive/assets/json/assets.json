@@ -48,7 +48,9 @@
         }
 	},
 	"levels": {
-		"sample_level": "levels/sample_level.json"
+		"sample_level": {
+			"file":     "levels/sample_level.json"
+		}
 	},
 	"fonts": {
 		"charlemagne": {

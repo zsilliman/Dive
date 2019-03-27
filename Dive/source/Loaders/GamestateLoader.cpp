@@ -106,7 +106,7 @@ bool GamestateLoader::read(const std::shared_ptr<JsonValue>& json, LoaderCallbac
 		return false;
 	}
 	_queue.emplace(key);
-	std::string source = json->asString(UNKNOWN_SOURCE);
+	std::string source = json->get("file")->asString(UNKNOWN_SOURCE);
 
 	bool success = false;
 	if (_loader == nullptr || !async) {
