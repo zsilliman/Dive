@@ -195,6 +195,8 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
+    shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
+
 
 
 	_gamestate = _assets->get<GameState>("sample_level");
@@ -218,7 +220,7 @@ void GameScene::buildScene() {
 	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
-	_player_vc = PlayerViewController::alloc(_gamestate, diver_texture, size);
+	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
 
 	//Create Urchin viewcontrollers
