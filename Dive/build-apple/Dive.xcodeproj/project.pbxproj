@@ -145,6 +145,8 @@
 		EF0E17292248344A002E0E84 /* Goal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FD22483449002E0E84 /* Goal.cpp */; };
 		EF0E172A2248344A002E0E84 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FE22483449002E0E84 /* PlatformMap.cpp */; };
 		EF0E172B2248344A002E0E84 /* PlatformMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16FE22483449002E0E84 /* PlatformMap.cpp */; };
+		EF1AEFB2224BC0A10037161C /* TitleAnimationScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1AEFB0224BC0A10037161C /* TitleAnimationScene.cpp */; };
+		EF1AEFB3224BC0A10037161C /* TitleAnimationScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF1AEFB0224BC0A10037161C /* TitleAnimationScene.cpp */; };
 		EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
 		EF660E2B223357A700A7432C /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E03223357A600A7432C /* GameState.cpp */; };
 		EF660E2C223357A700A7432C /* GameState.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF660E03223357A600A7432C /* GameState.cpp */; };
@@ -270,6 +272,8 @@
 		EF0E16FD22483449002E0E84 /* Goal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Goal.cpp; sourceTree = "<group>"; };
 		EF0E16FE22483449002E0E84 /* PlatformMap.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformMap.cpp; sourceTree = "<group>"; };
 		EF0E16FF22483449002E0E84 /* Platform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Platform.h; sourceTree = "<group>"; };
+		EF1AEFB0224BC0A10037161C /* TitleAnimationScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TitleAnimationScene.cpp; sourceTree = "<group>"; };
+		EF1AEFB1224BC0A10037161C /* TitleAnimationScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TitleAnimationScene.hpp; sourceTree = "<group>"; };
 		EF396FAE2228CCF200FE0998 /* DiveApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiveApp.h; sourceTree = "<group>"; };
 		EF396FB02228CCF200FE0998 /* DiveApp.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DiveApp.cpp; sourceTree = "<group>"; };
 		EF660E03223357A600A7432C /* GameState.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GameState.cpp; sourceTree = "<group>"; };
@@ -532,6 +536,8 @@
 				EF0E16F022483449002E0E84 /* GameScene.cpp */,
 				EF0E16EE22483449002E0E84 /* LoadingScene.h */,
 				EF0E16EF22483449002E0E84 /* LoadingScene.cpp */,
+				EF1AEFB0224BC0A10037161C /* TitleAnimationScene.cpp */,
+				EF1AEFB1224BC0A10037161C /* TitleAnimationScene.hpp */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -768,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1AEFB3224BC0A10037161C /* TitleAnimationScene.cpp in Sources */,
 				EF0E171F22483449002E0E84 /* TiledTexture.cpp in Sources */,
 				EF0E170F22483449002E0E84 /* GridMapViewController.cpp in Sources */,
 				EF0E170922483449002E0E84 /* InputController.cpp in Sources */,
@@ -800,6 +807,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF1AEFB2224BC0A10037161C /* TitleAnimationScene.cpp in Sources */,
 				EF0E171E22483449002E0E84 /* TiledTexture.cpp in Sources */,
 				EF0E170E22483449002E0E84 /* GridMapViewController.cpp in Sources */,
 				EF0E170822483449002E0E84 /* InputController.cpp in Sources */,

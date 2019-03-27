@@ -45,6 +45,9 @@
         },
         "platform1":{
             "file":      "textures/platform1.png"
+        },
+        "title": {
+            "file":      "animations/dive.jpg"
         }
 	},
 	"fonts": {
@@ -52,5 +55,23 @@
 			"file":     "fonts/Charlemagne.ttf",
 			"size":     64
 		}
-	}
+    },
+    "scenes": {
+        "dive" : {
+            "type":    "Animation",
+            "format"    : {
+                "type" : "Anchored"
+            },
+            "comment": "title animation",
+            "data": {
+                "texture"    : "title",
+                "span"       : 118,
+                "cols"       : 10,
+                "frame"      : 0,
+                "scale"      : 10.0,
+                "position"   : [200,300],
+                "anchor"     : [0.5,0.5]
+            }
+        }
+    }
 }

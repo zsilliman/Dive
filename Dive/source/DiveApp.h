@@ -32,6 +32,7 @@
 #include <cugl/cugl.h>
 #include "Scenes/GameScene.h"
 #include "Scenes/LoadingScene.h"
+#include "Scenes/TitleAnimationScene.hpp"
 #include <vector>
 
 /**
@@ -52,8 +53,11 @@ protected:
 	GameScene _gameplay;
 	/** The controller for the loading screen */
 	LoadingScene _loading;
+    /** Title Animation Scene */
+    TitleAnimationScene _title;
     
     bool _loaded;
+    bool _animationplayed;
     
     float scale;
     

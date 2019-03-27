@@ -1,0 +1,19 @@
+{
+    "textures": {
+        "title": {
+            "file":      "animation/title.png"
+        }
+    },
+    "scenes" : {
+        "dive" : {
+            "type":    "Animation",
+            "comment": "title animation",
+            "data": {
+                "texture"    : "title",
+                "span"       : 118,
+                "cols"       : 10,
+                "frame"      : 0,
+            }
+        }
+    }
+}
