@@ -33,38 +33,14 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
 
 	Rect visible_rect = Rect(Vec2(0, -_node->getPosition().y / _grid_size), _display / _grid_size);
 
-    #if defined CU_TOUCH_SCREEN
-    Touchscreen* touch = Input::get<Touchscreen>();
-    if (touch->touchCount() == 1){
-		parallaxTranslateVisible(state->_map, visible_rect, 2);
-    }else if (touch->touchCount() == 2){
-		parallaxTranslateVisible(state->_map, visible_rect, -2);
+    if (_input->goingLeft()){
+        state->_map->parallaxTranslatePlatforms(2);
+    }else if (_input->goingRight()){
+        state->_map->parallaxTranslatePlatforms(-2);
+    }else{
+        state->_map->parallaxTranslatePlatforms(0);
     }
-    if (_input -> didPressLeft()){
-		parallaxTranslateVisible(state->_map, visible_rect, -2);
-    }
-    else if (_input -> didPressRight()){
-		parallaxTranslateVisible(state->_map, visible_rect, 2);
-    }
-    #else
-	//Input controlling
-    //keyboard controlled movement
-    Keyboard* keyboard = Input::get<Keyboard>();
-    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
-		parallaxTranslateVisible(state->_map, visible_rect, -2);
-    }
-    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
-		parallaxTranslateVisible(state->_map, visible_rect, 2);
-    }
-    else {
-		parallaxTranslateVisible(state->_map, visible_rect, 0);
-    }
-//    if (_input->didPressLeft()){
-//        state->_map->parallaxTranslatePlatforms(-2);
-//    }else if (_input->didPressRight()){
-//        state->_map->parallaxTranslatePlatforms(2);
-//    }
-    #endif
+
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
         _platforms[i]->update(state);

@@ -141,22 +141,25 @@ void InputController::update(float dt) {
     // Map "keyboard" events to the current frame boundary
     _keyReset  = keys->keyPressed(RESET_KEY);
     _keyExit   = keys->keyPressed(EXIT_KEY);
-    _keyLeft = keys->keyDown(KeyCode::ARROW_LEFT);
-    _keyRight = keys->keyDown(KeyCode::ARROW_RIGHT);
-#endif
-    
-    // If it does not support keyboard, we must reset "virtual" keyboard
-#ifdef CU_TOUCH_SCREEN
-    _keyExit = false;
-    _keyReset = false;
-    _keyLeft = false;
-    _keyRight = false;
+    _keyLeft   = keys->keyDown(KeyCode::ARROW_LEFT);
+    _keyRight  = keys->keyDown(KeyCode::ARROW_RIGHT);
 #endif
     
     _leftPressed = _keyLeft;
+    CULog("LEFT IS SET TO %d", _leftPressed);
     _rightPressed = _keyRight;
     _resetPressed = _keyReset;
     _exitPressed  = _keyExit;
+
+    
+    // If it does not support keyboard, we must reset "virtual" keyboard
+#ifdef CU_TOUCH_SCREEN
+//    _keyExit = false;
+//    _keyReset = false;
+//    _keyLeft = false;
+//    _keyRight = false;
+    
+#endif
     
     // Directional controls
     _horizontal = 0.0f;
@@ -297,9 +300,11 @@ void InputController::touchEndedCB(const cugl::TouchEvent& event, bool focus) {
     if (_ltouch.touchids.find(event.touch) != _ltouch.touchids.end()) {
         _ltouch.touchids.clear();
         _keyLeft = false;
+        CULog("left is UNpressed");
     } else if (_rtouch.touchids.find(event.touch) != _rtouch.touchids.end()) {
         _rtouch.touchids.clear();
         _keyRight = false;
+        CULog("right is UNpressed");
     }
     _dbtaptime = event.timestamp;
 }

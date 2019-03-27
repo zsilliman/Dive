@@ -221,6 +221,9 @@ public:
     
     // Returns true if the right key (right screen) is pressed
     bool didPressRight() {return _rightPressed;}
+    
+    bool goingLeft() {return _horizontal>0;}
+    bool goingRight() {return _horizontal<0;}
 
     /**
      * Returns true if the reset button was pressed.
