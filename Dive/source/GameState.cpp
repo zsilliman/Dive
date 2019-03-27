@@ -8,13 +8,13 @@ shared_ptr<GameState> GameState::allocEmpty() {
 	return state;
 }
 
-shared_ptr<GameState> GameState::allocWithLevel(string level_asset, shared_ptr<AssetManager> assets) {
+shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	shared_ptr<GameState> state = make_shared<GameState>();
 	state->_player == nullptr;
-	// todo...
-	std::shared_ptr<JsonReader> reader = JsonReader::allocWithAsset(level_asset);
-	shared_ptr<JsonValue> json = reader->readJson();
-	state->_map = PlatformMap::parseFromJSON(json, assets);
+	state->_map = nullptr;
+	state->_fish = {};
+	state->_urchins = {};
+	state->_map = PlatformMap::parseFromJSON(json);
 
 	shared_ptr<JsonValue> obj_layer = json->get("layers")->get(1);
 	Size dimen = Size(state->_map->getWidth(), state->_map->getHeight());

@@ -14,6 +14,8 @@ class PlatformMapViewController : public ViewController {
 	shared_ptr<PolygonNode> _goal, _goal_dup;
 	Size _display;
 	float _grid_size = 1;
+
+	void parallaxTranslateVisible(shared_ptr<PlatformMap> map, Rect visible_rect, float reference_dx);
     
 public:
 

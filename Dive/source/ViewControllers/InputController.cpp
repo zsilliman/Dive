@@ -146,7 +146,7 @@ void InputController::update(float dt) {
 #endif
     
     _leftPressed = _keyLeft;
-    CULog("LEFT IS SET TO %d", _leftPressed);
+//    CULog("LEFT IS SET TO %d", _leftPressed);
     _rightPressed = _keyRight;
     _resetPressed = _keyReset;
     _exitPressed  = _keyExit;

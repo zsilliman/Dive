@@ -37,14 +37,13 @@ public:
 	static shared_ptr<GameState> allocEmpty();
 
 	/** Allocate gamestate from a file */
-	static shared_ptr<GameState> allocWithLevel(string level_asset, shared_ptr<AssetManager> assets);
+	static shared_ptr<GameState> allocFromJson(shared_ptr<JsonValue> json);
 
 	void initPhysics(shared_ptr<ObstacleWorld> world);
 
 	void dispose();
     
     void reset();
-    
-    bool GoalCollision();
 
 };
+

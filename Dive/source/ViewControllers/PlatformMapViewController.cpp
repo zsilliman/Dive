@@ -1,66 +1,28 @@
 #include "PlatformMapViewController.h"
 
+void PlatformMapViewController::parallaxTranslateVisible(shared_ptr<PlatformMap> map, Rect visible_rect, float reference_dx) {
+	for (int i = 0; i < map->getPlatforms().size(); i++) {
+		Rect platform_rect = map->getPlatforms()[i]->getPlatformRect();
+		Rect platform_dup_rect = map->getPlatformDups()[i]->getPlatformRect();
+		if (visible_rect.doesIntersect(platform_rect) || visible_rect.doesIntersect(platform_dup_rect)) {
+			map->parallaxTranslatePlatform(i, reference_dx);
+		}
+	}
+	Rect goal_rect = map->getGoal()->getPlatformRect();
+	Rect goal_dup_rect = map->getGoalDup()->getPlatformRect();
+	if (visible_rect.doesIntersect(goal_rect) || visible_rect.doesIntersect(goal_dup_rect)) {
+		map->parallaxTranslateGoal(reference_dx);
+	}
+}
+
 void PlatformMapViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlatformMapViewController::update(shared_ptr<GameState> state) {
-    
-    #if defined CU_TOUCH_SCREEN
-//    Touchscreen* touch = Input::get<Touchscreen>();
-//    if (touch->touchCount() == 1){
-//        state->_map->parallaxTranslatePlatforms(2);
-//    }else if (touch->touchCount() == 2){
-//        state->_map->parallaxTranslatePlatforms(-2);
-//    }
-    if (_input -> didPressLeft()){
-        state->_map->parallaxTranslatePlatforms(-2);
-    }
-    else if (_input -> didPressRight()){
-        state->_map->parallaxTranslatePlatforms(2);
-    }else{
-        state->_map->parallaxTranslatePlatforms(0);
-    }
-    #else
-    //keyboard controlled movement--
-//    Keyboard* keyboard = Input::get<Keyboard>();
-//    if (keyboard->keyDown(KeyCode::ARROW_LEFT)) {
-//        state->_map->parallaxTranslatePlatforms(-2);
-//    }
-//    else if (keyboard->keyDown(KeyCode::ARROW_RIGHT)) {
-//        state->_map->parallaxTranslatePlatforms(2);
-//    }
-//    else {
-//        state->_map->parallaxTranslatePlatforms(0);
-//    }
-    if (_input->goingLeft()){
-        state->_map->parallaxTranslatePlatforms(2);
-    }else if (_input->goingRight()){
-        state->_map->parallaxTranslatePlatforms(-2);
-    }else{
-        state->_map->parallaxTranslatePlatforms(0);
-    }
-    #endif
-    state->_map->rotatePlatforms();
-    for (int i = 0; i < _platforms.size(); i++) {
-        _platforms[i]->update(state);
-    }
-    _goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
-    _goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
-    
-    //continuous movement--
-//    state->_map->parallaxTranslatePlatforms(2);
-//    for (int i = 0; i < _platforms.size(); i++) {
-//        _platforms[i]->update(state);
-//    }
-//    state->_map->rotatePlatforms();
-//    for (int i = 0; i < _platforms.size(); i++) {
-//        _platforms[i]->update(state);
-//    }
-    //end continuous movement--
 	//Camera Controller
 	Vec2 player_pos = state->_player->getPosition() * _grid_size;
 	float map_height = state->_map->getHeight() * _grid_size;
 	float node_pos = -player_pos.y + _display.height / 2;
-	if (player_pos.y < _display.height/2) {
+	if (player_pos.y < _display.height / 2) {
 		node_pos = 0;
 	}
 	else if (player_pos.y > map_height - _display.height / 2) {
@@ -69,6 +31,22 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
 	}
 	_node->setPositionY(node_pos);
 
+	Rect visible_rect = Rect(Vec2(0, -_node->getPosition().y / _grid_size), _display / _grid_size);
+
+    if (_input->goingLeft()){
+        state->_map->parallaxTranslatePlatforms(2);
+    }else if (_input->goingRight()){
+        state->_map->parallaxTranslatePlatforms(-2);
+    }else{
+        state->_map->parallaxTranslatePlatforms(0);
+    }
+
+    state->_map->rotatePlatforms();
+    for (int i = 0; i < _platforms.size(); i++) {
+        _platforms[i]->update(state);
+    }
+    _goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
+    _goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
 }
 
 void PlatformMapViewController::dispose() {
