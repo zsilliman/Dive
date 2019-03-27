@@ -39,7 +39,7 @@ using namespace std;
 #define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
-#define EXIT_COUNT      100
+#define EXIT_COUNT      10
 #define MESSAGE_FONT    "charlemagne"
 
 /**
@@ -143,6 +143,7 @@ void GameScene::update(float timestep) {
 	}
     //w below commented out, dups move oc don't
     if (_countdown > 0) {
+        CULog("decreasing count");
         _countdown--;
     } else if (_countdown == 0) {
         reset();
@@ -160,6 +161,8 @@ void GameScene::setComplete(bool value) {
         _winnode->setVisible(false);
         _countdown = -1;
     }
+    CULog("countdown in complete %d", _countdown);
+
 }
 
 void GameScene::setLost(bool value) {
@@ -171,15 +174,16 @@ void GameScene::setLost(bool value) {
         _countdown = EXIT_COUNT;
     }
     else{
+        _countdown=-1;
         _losenode->setVisible(false);
     }
+    CULog("countdown in lost %d", _countdown);
 }
 
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
-    CULog("SIZE pt 2 width, height %f %f", size.width, size.height);
 	// Find the safe area, adapting to the iPhone X
 	Rect safe = Application::get()->getSafeArea();
 	safe.origin *= scale;
@@ -214,7 +218,6 @@ void GameScene::buildScene() {
 	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
     float b_scale = SCENE_WIDTH/_background->getWidth();
     _background->setScale(b_scale);
-    CULog("width, height, scale %f, %f, %f", _background->getWidth(), _background->getHeight(), b_scale);
 	addChild(_background, 0);
 
 	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, goal_texture, size);
@@ -318,14 +321,10 @@ void GameScene::beginContact(b2Contact* contact) {
     
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
-            CULog("loosing 1");
             setLost(true);
-            setComplete(false);
         }
         else if(bd2->getName() == "fish"){
-            CULog("loosing 2");
             setLost(true);
-            setComplete(false);
         }
         else if(bd2->getName() == "platform"){
             //change ai
@@ -336,9 +335,7 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if(bd1->getName() == "urchin"){
         if(bd2->getName() == "player"){
-            CULog("loosing 3");
             setLost(true);
-            setComplete(false);
         }
         
         else if(bd2->getName() == "fish"){
@@ -347,9 +344,7 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if(bd1->getName() == "fish"){
         if(bd2->getName() == "player"){
-            CULog("loosing 4");
             setLost(true);
-            setComplete(false);
         }
         else if(bd2->getName() == "urchin"){
             //kill fish
@@ -369,11 +364,10 @@ void GameScene::beginContact(b2Contact* contact) {
     else if(bd1->getName() == "goal"){
         if(bd2->getName() == "player"){
             setComplete(true);
-            setLost(false);
         }
     }
 }
 
-//void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
+//void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
 //
 //}
