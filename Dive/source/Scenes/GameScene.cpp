@@ -318,10 +318,12 @@ void GameScene::beginContact(b2Contact* contact) {
         if(bd2->getName() == "urchin"){
             CULog("loosing 1");
             setLost(true);
+            setComplete(false);
         }
         else if(bd2->getName() == "fish"){
             CULog("loosing 2");
             setLost(true);
+            setComplete(false);
         }
         else if(bd2->getName() == "platform"){
             //change ai
@@ -334,7 +336,9 @@ void GameScene::beginContact(b2Contact* contact) {
         if(bd2->getName() == "player"){
             CULog("loosing 3");
             setLost(true);
+            setComplete(false);
         }
+        
         else if(bd2->getName() == "fish"){
             //kill fish
         }
@@ -343,6 +347,7 @@ void GameScene::beginContact(b2Contact* contact) {
         if(bd2->getName() == "player"){
             CULog("loosing 4");
             setLost(true);
+            setComplete(false);
         }
         else if(bd2->getName() == "urchin"){
             //kill fish
@@ -362,6 +367,7 @@ void GameScene::beginContact(b2Contact* contact) {
     else if(bd1->getName() == "goal"){
         if(bd2->getName() == "player"){
             setComplete(true);
+            setLost(false);
         }
     }
 }
