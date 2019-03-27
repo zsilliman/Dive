@@ -18,6 +18,17 @@ void PlatformMap::addPlatform(shared_ptr<Platform> platform) {
     //platform_dups.push_back(platform);
 }
 
+
+void PlatformMap::parallaxTranslatePlatform(int index, float reference_dx) {
+	platforms[index]->parallaxTranslate(reference_dx);
+	platform_dups[index]->parallaxTranslate(reference_dx);
+}
+
+void PlatformMap::parallaxTranslateGoal(float reference_dx) {
+	goal->parallaxTranslate(reference_dx);
+	goal_dup->parallaxTranslate(reference_dx);
+}
+
 void PlatformMap::parallaxTranslatePlatforms(float reference_dx) {
 	for (int i = 0; i < platforms.size(); i++) {
 		platforms[i]->parallaxTranslate(reference_dx);
@@ -60,28 +71,27 @@ int PlatformMap::rotatePlatform(shared_ptr<Platform> oc, shared_ptr<Platform> cp
 	Rect cp_rect = cp->getPlatformRect(); //duplicate
 	bool active_out = active;
 	// oc_rect intersects left ==> cp_rect needs to be on right portion of the map
-	if (overlapsLeftEdge(oc_rect) && active == 0) {
+	if (overlapsLeftEdge(oc_rect)) {
 		cp->setPosition(oc->getPosition() + Vec2(_width, 0));
 	}
 	//cp_rect intersects left ==> oc_rect needs to be on the right portion of the map
-	else if (overlapsLeftEdge(cp_rect) && active == 1) {
+	else if (overlapsLeftEdge(cp_rect)) {
 		oc->setPosition(cp->getPosition() + Vec2(_width, 0));
 	}
 	//original intersects right ==> copy needs to be on left portion of the map
-	else if (overlapsRightEdge(oc_rect) && active == 0) {
+	else if (overlapsRightEdge(oc_rect)) {
 		cp->setPosition(oc->getPosition() - Vec2(_width, 0));
 	}
 	//copy intersects right ==> original needs to be on left portion of the map
-	else if (overlapsRightEdge(cp_rect) && active == 1) {
+	else if (overlapsRightEdge(cp_rect)) {
 		oc->setPosition(cp->getPosition() - Vec2(_width, 0));
 	}
-	else if (map_rect.contains(oc_rect)) {
+	if (map_rect.contains(oc_rect)) {
 		cp->setPosition(oc->getPosition() + Vec2(_width, 0));
 		active_out = 0;
 	}
 	else if (map_rect.contains(cp_rect)) {
 		oc->setPosition(cp->getPosition() + Vec2(_width, 0));
-		active_out = 1;
 	}
 	return active_out;
 }
@@ -92,6 +102,9 @@ void PlatformMap::rotatePlatforms() {
 		shared_ptr<Platform> cp = platform_dups[i];
 		int active = active_platforms[i];
 		active_platforms[i] = rotatePlatform(oc, cp, active);
+		if (i == platforms.size() - 1) {
+			CULog(std::to_string(active).c_str());
+		}
 	}
 	active_goal = rotatePlatform(goal, goal_dup, active_goal);
 }
@@ -139,7 +152,7 @@ vector<float> getPropertyFloatList(shared_ptr<JsonValue> properties, string key)
 /*
 * Parse a map from a json file generated with map editor software named "Tiled"
 */
-shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets) {
+shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	shared_ptr<PlatformMap> map = make_shared<PlatformMap>();
 
 	//Map properties

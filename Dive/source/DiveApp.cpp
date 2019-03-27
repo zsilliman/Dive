@@ -38,6 +38,7 @@
 #include <Box2D/Dynamics/Contacts/b2Contact.h>
 #include <Box2D/Collision/b2Collision.h>
 #include "Entities/Player.h"
+#include "Loaders/GamestateLoader.h"
 
 // This keeps us from having to write cugl:: all the time
 using namespace cugl;
@@ -64,6 +65,8 @@ void DiveApp::onStartup() {
     _assets->attach<Texture>(TextureLoader::alloc()->getHook());
     _assets->attach<Font>(FontLoader::alloc()->getHook());
 	_assets->attach<Node>(SceneLoader::alloc()->getHook());
+	_assets->attach<GameState>(GamestateLoader::alloc()->getHook());
+	_assets->attach<JsonValue>(JsonLoader::alloc()->getHook());
 
     // Activate mouse or touch screen input as appropriate
     // We have to do this BEFORE the scene, because the scene has a button

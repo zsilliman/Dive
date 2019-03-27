@@ -180,7 +180,7 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
 
 
-	_gamestate = GameState::allocWithLevel("levels/sample_level.json", _assets);
+	_gamestate = _assets->get<GameState>("sample_level");
 	_gamestate->initPhysics(_world);
 
 	_background = PolygonNode::allocWithTexture(background_image);
@@ -272,7 +272,7 @@ void GameScene::buildScene() {
     _winnode->setScale(4 / _winnode->getWidth());
     setComplete(false);
     addChild(_winnode,3);
-    
+
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }
 

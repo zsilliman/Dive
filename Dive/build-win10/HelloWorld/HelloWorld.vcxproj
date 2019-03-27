@@ -192,6 +192,7 @@
     <ClInclude Include="..\..\source\Entities\Player.h" />
     <ClInclude Include="..\..\source\Entities\Urchin.h" />
     <ClInclude Include="..\..\source\GameState.h" />
+    <ClInclude Include="..\..\source\Loaders\GamestateLoader.h" />
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
     <ClInclude Include="..\..\source\Util.h" />
@@ -199,6 +200,7 @@
     <ClInclude Include="..\..\source\ViewControllers\GoalViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\GridRowViewController.h" />
+    <ClInclude Include="..\..\source\ViewControllers\InputController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlatformMapViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlatformViewController.h" />
     <ClInclude Include="..\..\source\ViewControllers\PlayerViewController.h" />
@@ -219,6 +221,7 @@
     <ClCompile Include="..\..\source\Entities\Player.cpp" />
     <ClCompile Include="..\..\source\Entities\Urchin.cpp" />
     <ClCompile Include="..\..\source\GameState.cpp" />
+    <ClCompile Include="..\..\source\Loaders\GamestateLoader.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
@@ -226,6 +229,7 @@
     <ClCompile Include="..\..\source\ViewControllers\GoalViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\GridRowViewController.cpp" />
+    <ClCompile Include="..\..\source\ViewControllers\InputController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlatformMapViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlatformViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\PlayerViewController.cpp" />

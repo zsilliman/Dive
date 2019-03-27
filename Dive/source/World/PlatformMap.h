@@ -30,7 +30,7 @@ protected:
 
 public:
 
-	static shared_ptr<PlatformMap> parseFromJSON(shared_ptr<JsonValue> json, shared_ptr<AssetManager> _assets);
+	static shared_ptr<PlatformMap> parseFromJSON(shared_ptr<JsonValue> json);
 
 	static shared_ptr<PlatformMap> alloc();
 
@@ -59,6 +59,10 @@ public:
 	void reset();
 
 	void parallaxTranslatePlatforms(float reference_dx);
+
+	void parallaxTranslatePlatform(int index, float reference_dx);
+
+	void parallaxTranslateGoal(float reference_dx);
 
 };
 

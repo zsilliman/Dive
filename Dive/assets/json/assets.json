@@ -47,6 +47,9 @@
             "file":      "textures/platform1.png"
         }
 	},
+	"levels": {
+		"sample_level": "levels/sample_level.json"
+	},
 	"fonts": {
 		"charlemagne": {
 			"file":     "fonts/Charlemagne.ttf",
