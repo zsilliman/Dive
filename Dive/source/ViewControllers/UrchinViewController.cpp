@@ -14,6 +14,8 @@ void UrchinViewController::update(shared_ptr<GameState> state) {
     //Set positions/rotations of duplicate according to duplicate physics object
     _dup_node->setPosition(state->_urchins[_urchin_index]->_box_dup->getPosition() * _grid_size);
     _dup_node->setAngle(state->_urchins[_urchin_index]->_box_dup->getAngle());
+    
+    animateUrchin();
 }
 
 
@@ -28,10 +30,10 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
     urchin_vc->_urchin_index = urchin_index;
     urchin_vc->_grid_size = display.width / init_state->_map->getWidth();
     urchin_vc->_node = Node::allocWithPosition(Vec2(0, 0));
-    urchin_vc->_oc_node = PolygonNode::allocWithTexture(texture);
+    urchin_vc->_oc_node = AnimationNode::alloc(texture,1,1,1);
     urchin_vc->_oc_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
     urchin_vc->_oc_node->setScale(urchin_vc->_grid_size / texture->getWidth(), urchin_vc->_grid_size / texture->getHeight());
-    urchin_vc->_dup_node = PolygonNode::allocWithTexture(texture);
+    urchin_vc->_dup_node = AnimationNode::alloc(texture,1,1,1);
     urchin_vc->_dup_node->setScale(urchin_vc->_grid_size / texture->getWidth(), urchin_vc->_grid_size / texture->getHeight());
     urchin_vc->_dup_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
     urchin_vc->_display = display;
@@ -39,5 +41,39 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
     urchin_vc->_node->addChild(urchin_vc->_oc_node);
     urchin_vc->_node->addChild(urchin_vc->_dup_node);
     
+    urchin_vc->_mainCycle = true;
+    
     return urchin_vc;
 }
+
+
+void UrchinViewController::animateUrchin(){
+    bool* cycle = &_mainCycle;
+    
+    if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
+        *cycle = true;
+    } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
+        *cycle = false;
+    }
+    
+    //    if (*cycle) {
+    //        _oc_node->setFrame(_oc_node->getFrame()+1);
+    //    } else {
+    //        _oc_node->setFrame(_oc_node->getFrame()-1);
+    //    }
+    //
+    
+    if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
+        *cycle = true;
+    } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
+        *cycle = false;
+    }
+    
+    //    if (*cycle) {
+    //        _dup_node->setFrame(_dup_node->getFrame()+1);
+    //    } else {
+    //        _dup_node->setFrame(_dup_node->getFrame()-1);
+    //    }
+}
+
+

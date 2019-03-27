@@ -510,7 +510,6 @@
 				EF0E16E622483449002E0E84 /* InputController.h */,
 				EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */,
 				EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */,
-				EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */,
 				EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */,
 				EF0E16DC22483449002E0E84 /* GridRowViewController.h */,
 				EF0E16DE22483449002E0E84 /* GridMapViewController.h */,
@@ -518,10 +517,11 @@
 				EF0E16E022483449002E0E84 /* PlatformViewController.h */,
 				EF0E16E122483449002E0E84 /* GridRowViewController.cpp */,
 				EF0E16E222483449002E0E84 /* PlayerViewController.h */,
-				EF0E16E322483449002E0E84 /* FishViewController.h */,
 				EF0E16E422483449002E0E84 /* PlayerViewController.cpp */,
 				EF0E16E722483449002E0E84 /* GoalViewController.h */,
 				EF0E16E822483449002E0E84 /* UrchinViewController.h */,
+				EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */,
+				EF0E16E322483449002E0E84 /* FishViewController.h */,
 				EF0E16E922483449002E0E84 /* FishViewController.cpp */,
 				EF0E16EA22483449002E0E84 /* GoalViewController.cpp */,
 				EF0E16EB22483449002E0E84 /* ViewController.h */,
@@ -637,7 +637,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 2R2SQSPH3U;
+						DevelopmentTeam = L5TND7G5EG;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1074,7 +1074,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1091,7 +1091,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = L5TND7G5EG;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

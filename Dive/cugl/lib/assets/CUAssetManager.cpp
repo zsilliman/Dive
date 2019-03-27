@@ -46,6 +46,7 @@
 //  Version: 1/7/18
 //
 #include <cugl/cugl.h>
+#include "../../source/GameState.h"
 
 using namespace cugl;
 
@@ -298,7 +299,9 @@ bool AssetManager::loadDirectory(const std::shared_ptr<JsonValue>& json) {
             success = readCategory(typeid(JsonValue).hash_code(),child) && success;
         } else if (child->key() == "scenes") {
             success = readCategory(typeid(Node).hash_code(),child) && success;
-        } else {
+		} else if (child->key() == "levels") {
+			success = readCategory(typeid(GameState).hash_code(),child) && success;
+		} else {
             CULogError("Unknown asset category '%s'",child->key().c_str());
             success = false;
         }
@@ -385,7 +388,9 @@ void AssetManager::loadDirectoryAsync(const std::shared_ptr<JsonValue>& json, Lo
             readCategory(typeid(Font).hash_code(),child,callback);
         } else if (child->key() == "jsons") {
             readCategory(typeid(JsonValue).hash_code(),child,callback);
-        } else if (child->key() != "scenes") {
+        } else if (child->key() == "levels") {
+			readCategory(typeid(GameState).hash_code(),child,callback);
+		} else if (child->key() != "scenes") {
             CULogError("Unknown asset category '%s'",child->key().c_str());
         }
     }
@@ -470,7 +475,9 @@ bool AssetManager::unloadDirectory(const std::shared_ptr<JsonValue>& json) {
             success = purgeCategory(typeid(JsonValue).hash_code(),child) && success;
         } else if (child->key() == "scenes") {
             success = purgeCategory(typeid(Node).hash_code(),child) && success;
-        } else {
+		} else if (child->key() == "levels") {
+			success = purgeCategory(typeid(GameState).hash_code(),child) && success;
+		} else {
             CULogError("Unknown asset category '%s'",child->key().c_str());
             success = false;
         }

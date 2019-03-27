@@ -71,36 +71,44 @@ void Entity::rotateEntity(Rect map_rect) {
 	_box_dup->setActive(true);
 
 	//oc_rect intersects left ==> cp_rect needs to be on the right portion of the map
-	if (overlapsLeftEdge(oc_rect, map_rect)) {
+	if (overlapsLeftEdge(oc_rect, map_rect) && _active_box == 0) {
 		_box_dup->setPosition(_box->getPosition() + Vec2(width, 0));
 		_box_dup->setAngle(_box->getAngle());
+		_box_dup->setLinearVelocity(_box->getLinearVelocity());
 	}
 	//cp_rect intersects left ==> oc_rect needs to be on the right portion of the map
-	else if (overlapsLeftEdge(cp_rect, map_rect)) {
+	else if (overlapsLeftEdge(cp_rect, map_rect) && _active_box == 1) {
 		_box->setPosition(_box_dup->getPosition() + Vec2(width, 0));
 		_box->setAngle(_box_dup->getAngle());
+		_box->setLinearVelocity(_box_dup->getLinearVelocity());
 	}
 	//original intersects right ==> copy needs to be on left portion of the map
-	else if (overlapsRightEdge(oc_rect, map_rect)) {
+	else if (overlapsRightEdge(oc_rect, map_rect) && _active_box == 0) {
 		_box_dup->setPosition(_box->getPosition() - Vec2(width, 0));
 		_box_dup->setAngle(_box->getAngle());
+		_box_dup->setLinearVelocity(_box->getLinearVelocity());
 	}
 	//copy intersects right ==> original needs to be on left portion of the map
-	else if (overlapsRightEdge(cp_rect, map_rect)) {
+	else if (overlapsRightEdge(cp_rect, map_rect) && _active_box == 1) {
 		_box->setPosition(_box_dup->getPosition() - Vec2(width, 0));
 		_box->setAngle(_box_dup->getAngle());
+		_box->setLinearVelocity(_box_dup->getLinearVelocity());
 	}
 	//original is fully on screen ==> copy is off screen and thus inactive
 	else if (map_rect.contains(oc_rect)) {
 		_box_dup->setPosition(_box->getPosition() + Vec2(width, 0));
 		_box_dup->setAngle(_box->getAngle());
-		_box_dup->setActive(false);
+		_box_dup->setLinearVelocity(_box->getLinearVelocity());
+		//_box_dup->setActive(false);
+		_active_box = 0;
 	}
 	//copy is fully on screen ==> original is off screen and thus inactive
 	else if (map_rect.contains(cp_rect)) {
 		_box->setPosition(_box_dup->getPosition() + Vec2(width, 0));
 		_box->setAngle(_box_dup->getAngle());
-		_box->setActive(false);
+		_box->setLinearVelocity(_box_dup->getLinearVelocity());
+		//_box->setActive(false);
+		_active_box = 1;
 	}
 }
 

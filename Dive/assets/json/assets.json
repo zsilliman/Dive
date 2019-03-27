@@ -50,6 +50,11 @@
             "file":      "animations/dive.jpg"
         }
 	},
+	"levels": {
+		"sample_level": {
+			"file":     "levels/sample_level.json"
+		}
+	},
 	"fonts": {
 		"charlemagne": {
 			"file":     "fonts/Charlemagne.ttf",

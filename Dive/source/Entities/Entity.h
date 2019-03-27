@@ -16,7 +16,7 @@ enum Direction {
 class Entity {
 
 protected:
-	bool _can_float = false, _alive = true;
+	bool _can_float = false, _alive = true, _active_box = 0;
 	Vec2 _position = Vec2();
 	Vec2 _start_pos = Vec2();
 	Size _dimensions = Size(0, 0);
