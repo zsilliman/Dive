@@ -172,6 +172,8 @@ void GameScene::setLost(bool value) {
         CULog("You lost :(");
         _losenode->setVisible(true);
         _countdown = EXIT_COUNT;
+        shared_ptr<Texture> dying_texture = _assets->get<Texture>("dying");
+        _player_vc->lose(dying_texture);
     }
     else{
         _countdown=-1;

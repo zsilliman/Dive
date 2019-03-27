@@ -10,13 +10,13 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	player->_box_dup->setFriction(0);
 	player->setName("player");
     player->_box->setAngle(180);
+    player->_box_dup->setAngle(180);
 	return player;
 }
 
 Direction Player::getCurrentDirection() {
 	return _current_direction;
 }
-
 
 Direction Player::swapCurrentDirection() {
 	if (_current_direction == Direction::RIGHT) {
@@ -26,4 +26,13 @@ Direction Player::swapCurrentDirection() {
 		_current_direction = Direction::RIGHT;
 	}
 	return _current_direction;
+}
+
+
+void Player::reset() {
+    _box->setPosition(_start_pos);
+    _box->setAngle(180);
+    _box_dup->setPosition(_start_pos);
+    _box_dup->setAngle(180);
+    _alive = true;
 }

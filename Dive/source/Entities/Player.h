@@ -23,5 +23,6 @@ public:
 	Direction swapCurrentDirection();
 
 	static shared_ptr<Player> alloc(Vec2 start_pos, Rect map_rect);
-
+    
+    void reset();
 };
