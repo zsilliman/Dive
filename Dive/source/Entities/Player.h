@@ -15,6 +15,8 @@ class Player : public Entity {
 protected:
 
 	Direction _current_direction = Direction::RIGHT;
+    
+    float startingAngle;
 
 public:
 	

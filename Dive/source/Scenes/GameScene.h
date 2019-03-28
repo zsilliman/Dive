@@ -73,6 +73,8 @@ protected:
 	//Setting up the scene
 	void buildScene();
     
+    bool _playerFloor;
+    
 public:
 #pragma mark -
 #pragma mark Constructors
@@ -144,6 +146,9 @@ public:
      * @param  contact  The two bodies that collided
      */
     void beginContact(b2Contact* contact);
+    
+    
+    void endContact(b2Contact* contact);
     
     /**
      * Handles any modifications necessary before collision resolution
