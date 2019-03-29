@@ -35,4 +35,5 @@ public:
 
 	static shared_ptr<FishViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int fish_index);
 
+    void setDead(bool val);
 };

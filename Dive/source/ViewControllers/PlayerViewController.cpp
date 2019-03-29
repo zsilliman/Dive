@@ -5,7 +5,7 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
-    state->_player->setLinearVelocity(Vec2(1.9, -1.9));
+    //state->_player->setLinearVelocity(Vec2(1.9, -1.9));
 	state->_player->rotateEntity(state->_map->getMapRect());
 	_oc_node->setPosition(state->_player->_box->getPosition() * _grid_size);
 	_oc_node->setAngle(state->_player->_box->getAngle());
@@ -51,7 +51,6 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	return player_vc;
 }
 
-
 void PlayerViewController::animatePlayer(){
     bool* cycle = &_mainCycle;
     if (_cooldown == 0){
@@ -88,10 +87,10 @@ void PlayerViewController::animatePlayer(){
 void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string direction){
     CULog("setting direction to %s", direction.c_str());
     if(direction == "down"){
-        state->_player->setLinearVelocity(Vec2(0, -1.8));
+        state->_player->setLinearVelocity(Vec2(0, -.8));
     }
     else if(direction == "up"){
-        state->_player->setLinearVelocity(Vec2(0, 1.8));
+        state->_player->setLinearVelocity(Vec2(0, .8));
     }
     else if(direction == "left"){
         state->_player->setLinearVelocity(Vec2(-1.8,0));

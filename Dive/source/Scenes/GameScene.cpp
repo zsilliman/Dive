@@ -135,7 +135,9 @@ void GameScene::update(float timestep) {
         _gamestate->_player->_box->setAngle(180);
         _gamestate->_player->_box_dup->setAngle(180);
     }
-
+//    if(_to_remove != nullptr){
+//        (FishViewController)_to_remove->setDead();
+//    }
 	if (!_complete) {
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
@@ -193,6 +195,9 @@ void GameScene::buildScene() {
 	safe.size *= scale;
 
 	Rect physics_bounds = Rect(-100, -100, 200, 200);
+    
+    _block_counter = 0;
+    CULog("set block counter");
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
@@ -203,6 +208,7 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
+    shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
 
 	_gamestate = _assets->get<GameState>("sample_level");
 	_gamestate->initPhysics(_world);
@@ -324,14 +330,17 @@ void GameScene::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
+    //ViewController to_remove = nullptr;
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
             setLost(true);
         }
-        else if(bd2->getName() == "fish"){
+        //if it contains "fish"
+        else if (bd2->getName().find("fish") != string::npos) {
             setLost(true);
         }
         else if(bd2->getName() == "platform"){
+            _block_counter++;
             CULog("player/platform 1");
             _player_vc->setAIDirection(_gamestate, "right");
             _prev_dir = "right";
@@ -345,17 +354,28 @@ void GameScene::beginContact(b2Contact* contact) {
         if(bd2->getName() == "player"){
             setLost(true);
         }
-        
-        else if(bd2->getName() == "fish"){
+        else if (bd2->getName().find("fish") != string::npos) {
             //kill fish
+            char num = bd2->getName().back();
+            int n = int(num);
+            //_fish_vcs[n]->setDead(true);
+            //_to_remove = _fish_vcs[n];
         }
+//        else if(bd2->getName() == "fish"){
+//            //kill fish
+//
+//        }
     }
-    else if(bd1->getName() == "fish"){
+    else if (bd1->getName().find("fish") != string::npos) {
         if(bd2->getName() == "player"){
             setLost(true);
         }
         else if(bd2->getName() == "urchin"){
-            //kill fish
+            char num = bd1->getName().back();
+            int n = int(num);
+            //_fish_vcs[n]->setDead(true);
+            //_to_remove = _fish_vcs[n];
+
         }
         else if(bd2->getName() == "fish"){
             //???
@@ -363,6 +383,7 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
+            _block_counter++;
             //change ai direction
             CULog("player/platform 2");
             _player_vc->setAIDirection(_gamestate, "right");
@@ -419,26 +440,32 @@ void GameScene::endContact(b2Contact* contact) {
     b2Body* body1 = fix1->GetBody();
     b2Body* body2 = fix2->GetBody();
     
-    void* fd1 = fix1->GetUserData();
-    void* fd2 = fix2->GetUserData();
+//    void* fd1 = fix1->GetUserData();
+//    void* fd2 = fix2->GetUserData();
     
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
     if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
+            _block_counter--;
             //change ai direction
             CULog("player/platform 1.1");
-            _player_vc->setAIDirection(_gamestate, "down");
-            _prev_dir = "down";
+            if(_block_counter==0){
+                _player_vc->setAIDirection(_gamestate, "down");
+                _prev_dir = "down";
+            }
         }
     }
     else if(bd1->getName() == "player"){
         if(bd2->getName() == "platform"){
+            _block_counter--;
             //change ai direction
             CULog("player/platform 2.1");
-            _player_vc->setAIDirection(_gamestate, "down");
-            _prev_dir = "down";
+            if(_block_counter==0){
+                _player_vc->setAIDirection(_gamestate, "down");
+                _prev_dir = "down";
+            }
         }
     }
 }

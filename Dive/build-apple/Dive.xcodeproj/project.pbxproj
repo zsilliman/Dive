@@ -516,14 +516,14 @@
 		EF0E16CF22483449002E0E84 /* Entities */ = {
 			isa = PBXGroup;
 			children = (
-				EF0E16D022483449002E0E84 /* Player.cpp */,
-				EF0E16D122483449002E0E84 /* Fish.cpp */,
 				EF0E16D222483449002E0E84 /* Entity.cpp */,
+				EF0E16D622483449002E0E84 /* Entity.h */,
+				EF0E16D122483449002E0E84 /* Fish.cpp */,
+				EF0E16D722483449002E0E84 /* Fish.h */,
+				EF0E16D022483449002E0E84 /* Player.cpp */,
 				EF0E16D322483449002E0E84 /* Player.h */,
 				EF0E16D422483449002E0E84 /* Urchin.cpp */,
 				EF0E16D522483449002E0E84 /* Urchin.h */,
-				EF0E16D622483449002E0E84 /* Entity.h */,
-				EF0E16D722483449002E0E84 /* Fish.h */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -664,7 +664,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = L5TND7G5EG;
+						DevelopmentTeam = A8CZTHRJN9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1111,7 +1111,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L5TND7G5EG;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1128,7 +1128,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = L5TND7G5EG;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;

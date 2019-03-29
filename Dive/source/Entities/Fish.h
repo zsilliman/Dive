@@ -25,6 +25,6 @@ public:
 
 	void initFish(Vec2 start_pos, Rect map_rect);
 
-	static shared_ptr<Fish> alloc(Vec2 start_pos, Rect map_rect);
+	static shared_ptr<Fish> alloc(Vec2 start_pos, Rect map_rect, int index);
 
 };

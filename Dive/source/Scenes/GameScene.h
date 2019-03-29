@@ -68,6 +68,8 @@ protected:
     bool _lost;
     int _countdown;
     string _prev_dir;
+    int _block_counter;
+    std::shared_ptr<ViewController> _to_remove;
 
 	int frame_counter = 0;
 

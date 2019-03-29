@@ -19,7 +19,8 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	shared_ptr<JsonValue> obj_layer = json->get("layers")->get(1);
 	Size dimen = Size(state->_map->getWidth(), state->_map->getHeight());
 	vector<int> data = obj_layer->get("data")->asIntArray();
-
+    
+    int fish_counter = 0;
 	for (int y = 0; y < dimen.height; y++) {
 		for (int x = 0; x < dimen.width; x++) {
 			int index = (dimen.height - y - 1) * dimen.width + x;
@@ -33,8 +34,9 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 				state->_urchins.push_back(urchin);
 			} else if (data[index] == FISH_TILE_ID) {
 				//Fish
-				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect());
+				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect(), fish_counter);
 				state->_fish.push_back(fish);
+                fish_counter++;
 			} else if (data[index] == JELLY_TILE_ID) {
 				//Jellyfish (tbd)
 				//...

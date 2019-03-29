@@ -72,3 +72,17 @@ void FishViewController::animateFish(){
 //        _dup_node->setFrame(_dup_node->getFrame()-1);
 //    }
 }
+
+void FishViewController::setDead(bool val){
+//gives mem error
+//    _oc_node->setPosition(Vec2(-50,-50));
+//    _dup_node->setPosition(Vec2(-50,-50));
+    if(getNode() == nullptr){
+        CULog("null");
+    }
+    else{
+        getNode()->setPosition(Vec2(-50,-50));
+    }
+    CULog("killing fish");
+
+}
