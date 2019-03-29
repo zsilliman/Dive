@@ -39,7 +39,7 @@ using namespace std;
 #define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
-#define EXIT_COUNT      30
+#define EXIT_COUNT      100
 #define MESSAGE_FONT    "charlemagne"
 
 /**
@@ -153,6 +153,7 @@ void GameScene::update(float timestep) {
     }
 }
 
+/*
 void GameScene::setComplete(bool value) {
     bool change = _complete != value;
     _complete = value;
@@ -165,13 +166,31 @@ void GameScene::setComplete(bool value) {
         _countdown = -1;
     }
     CULog("countdown in complete %d", _countdown);
+}*/
 
+void GameScene::setState(State state) {
+	bool changed = state != current_state;
+	if (state == WIN && current_state != LOSE && changed) {
+		_winnode->setVisible(true);
+		_countdown = EXIT_COUNT;
+	} else if (state == LOSE && current_state != WIN && changed) {
+		_losenode->setVisible(true);
+		_countdown = EXIT_COUNT;
+		shared_ptr<Texture> dying_texture = _assets->get<Texture>("dying");
+		_player_vc->lose(dying_texture);
+	} else if (state == PLAY) {
+		_losenode->setVisible(false);
+		_winnode->setVisible(false);
+		_countdown = -1;
+	}
+	current_state = state;
 }
 
+/*
 void GameScene::setLost(bool value) {
-//    bool change = _lost != value;
-//    _lost = value;
-    if (value ){//}&& change) {
+    //bool change = _lost != value;
+    //_lost = value;
+    if (value) {
         CULog("You lost :(");
         _losenode->setVisible(true);
         _countdown = EXIT_COUNT;
@@ -183,7 +202,7 @@ void GameScene::setLost(bool value) {
         _losenode->setVisible(false);
     }
     CULog("countdown in lost %d", _countdown);
-}
+}*/
 
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
@@ -283,7 +302,6 @@ void GameScene::buildScene() {
     _winnode->setPosition(2.5,4);
     _winnode->setForeground(WIN_COLOR);
     _winnode->setScale(4 / _winnode->getWidth());
-    setComplete(false);
     addChild(_winnode,3);
 
     
@@ -292,19 +310,16 @@ void GameScene::buildScene() {
     _losenode->setPosition(2.5,4);
     _losenode->setForeground(WIN_COLOR);
     _losenode->setScale(4 / _losenode->getWidth());
-    setLost(false);
     addChild(_losenode,3);
     
-
+	setState(PLAY);
 
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }
 
 void GameScene::reset() {
 	_gamestate->reset();
-	_countdown = -1;
-	_winnode->setVisible(false);
-	_losenode->setVisible(false);
+	setState(PLAY);
 	CULog("Reset");
 }
 
@@ -333,12 +348,17 @@ void GameScene::beginContact(b2Contact* contact) {
     //ViewController to_remove = nullptr;
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
-            setLost(true);
+            //setLost(true);
+			setState(LOSE);
         }
         //if it contains "fish"
         else if (bd2->getName().find("fish") != string::npos) {
-            setLost(true);
+            setState(LOSE);
         }
+//        else if(bd2->getName() == "fish"){
+//            //setLost(true);
+//            //setState(LOSE);
+//        }
         else if(bd2->getName() == "platform"){
             _block_counter++;
             CULog("player/platform 1");
@@ -347,12 +367,14 @@ void GameScene::beginContact(b2Contact* contact) {
             //change ai
         }
         else if(bd2->getName() == "goal"){
-            setComplete(true);
+            //setComplete(true);
+			setState(WIN);
         }
     }
-    else if(bd1->getName() == "urchin"){
-        if(bd2->getName() == "player"){
-            setLost(true);
+    else if(bd1->getName() == "urchin") {
+        if(bd2->getName() == "player") {
+            //setLost(true);
+			setState(LOSE);
         }
         else if (bd2->getName().find("fish") != string::npos) {
             //kill fish
@@ -368,7 +390,8 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if (bd1->getName().find("fish") != string::npos) {
         if(bd2->getName() == "player"){
-            setLost(true);
+            //setLost(true);
+			setState(LOSE);
         }
         else if(bd2->getName() == "urchin"){
             char num = bd1->getName().back();
@@ -386,7 +409,7 @@ void GameScene::beginContact(b2Contact* contact) {
             _block_counter++;
             //change ai direction
             CULog("player/platform 2");
-            _player_vc->setAIDirection(_gamestate, "right");
+			_player_vc->setAIDirection(_gamestate, "right");
             _prev_dir = "right";
 //            _playerFloor = true;
         }
@@ -397,7 +420,8 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if(bd1->getName() == "goal"){
         if(bd2->getName() == "player"){
-            setComplete(true);
+            //setComplete(true);
+			setState(WIN);
         }
     }
 }

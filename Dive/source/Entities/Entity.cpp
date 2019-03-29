@@ -28,12 +28,26 @@ string Entity::getName() {
 	return _box->getName();
 }
 
+bool Entity::isAlive() { return _alive; }
+
+void Entity::kill() {
+	_box->setActive(false);
+	_box_dup->setActive(false);
+	_alive = false;
+}
+
+void Entity::revive() {
+	_box->setActive(true);
+	_box_dup->setActive(true);
+	_alive = true;
+}
+
 void Entity::reset() {
 	_box->setPosition(_start_pos);
 	_box->setAngle(0);
 	_box_dup->setPosition(_start_pos);
 	_box_dup->setAngle(0);
-	_alive = true;
+	revive();
 }
 
 Rect Entity::getBoxRect(shared_ptr<Obstacle> box) {

@@ -7,7 +7,6 @@ void UrchinViewController::update(shared_ptr<GameState> state) {
     state->_urchins[_urchin_index]->rotateEntity(state->_map->getMapRect());
     
     //new version:
-    
     _oc_node->setPosition(state->_urchins[_urchin_index]->_box->getPosition() * _grid_size);
     _oc_node->setAngle(state->_urchins[_urchin_index]->_box->getAngle());
     
