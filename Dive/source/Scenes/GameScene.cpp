@@ -132,8 +132,8 @@ void GameScene::update(float timestep) {
         _gamestate->_player->_box->setAngle(180.5f);
         _gamestate->_player->_box_dup->setAngle(180.5f);
     }else{
-        _gamestate->_player->_box->setAngle(180);
-        _gamestate->_player->_box_dup->setAngle(180);
+        _gamestate->_player->_box->setAngle(179);
+        _gamestate->_player->_box_dup->setAngle(179);
     }
 //    if(_to_remove != nullptr){
 //        (FishViewController)_to_remove->setDead();
@@ -364,6 +364,7 @@ void GameScene::beginContact(b2Contact* contact) {
             CULog("player/platform 1");
             _player_vc->setAIDirection(_gamestate, "right");
             _prev_dir = "right";
+            _playerFloor = true;
             //change ai
         }
         else if(bd2->getName() == "goal"){
@@ -411,7 +412,7 @@ void GameScene::beginContact(b2Contact* contact) {
             CULog("player/platform 2");
 			_player_vc->setAIDirection(_gamestate, "right");
             _prev_dir = "right";
-//            _playerFloor = true;
+            _playerFloor = true;
         }
         else if(bd2->getName() == "platform"){
             //locking
@@ -478,6 +479,7 @@ void GameScene::endContact(b2Contact* contact) {
             if(_block_counter==0){
                 _player_vc->setAIDirection(_gamestate, "down");
                 _prev_dir = "down";
+                _playerFloor = false;
             }
         }
     }
@@ -489,6 +491,7 @@ void GameScene::endContact(b2Contact* contact) {
             if(_block_counter==0){
                 _player_vc->setAIDirection(_gamestate, "down");
                 _prev_dir = "down";
+                _playerFloor = false;
             }
         }
     }

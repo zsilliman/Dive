@@ -13,6 +13,8 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
     player->startingAngle = 180.5f;
     player->_box->setAngle(player->startingAngle);
     player->_box_dup->setAngle(player->startingAngle);
+    player->_box->setGravityScale(.25);
+    player->_box_dup->setGravityScale(.25);
 	return player;
 }
 
