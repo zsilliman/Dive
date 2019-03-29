@@ -131,17 +131,17 @@ void DiveApp::onShutdown() {
  */
 void DiveApp::update(float timestep) {
     //
-    //if (!_loaded && _loading.isActive()) {
-    //    _loading.update(0.01f);
-    //}
-    //else if (!_loaded) {
-    //    _loading.dispose(); // Disables the input listeners in this mode
-    //    _gameplay.init(_assets);
-    //    _loaded = true;
-    //}
-    //else {
-    //    _gameplay.update(timestep);
-    //}
+//    if (!_loaded && _loading.isActive()) {
+//        _loading.update(0.01f);
+//    }
+//    else if (!_loaded) {
+//        _loading.dispose(); // Disables the input listeners in this mode
+//        _gameplay.init(_assets);
+//        _loaded = true;
+//    }
+//    else {
+//        _gameplay.update(timestep);
+//    }
 
     if (!_loaded && _loading.isActive()) {
         _loading.update(0.01f);

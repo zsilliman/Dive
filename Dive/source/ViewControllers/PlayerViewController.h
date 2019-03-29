@@ -23,6 +23,8 @@ protected:
     bool _mainCycle;
 
 public:
+    void lose(shared_ptr<Texture> texture);
+    
     void animatePlayer();
     
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;

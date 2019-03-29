@@ -15,6 +15,8 @@ class Player : public Entity {
 protected:
 
 	Direction _current_direction = Direction::RIGHT;
+    
+    float startingAngle;
 
 public:
 	
@@ -23,5 +25,6 @@ public:
 	Direction swapCurrentDirection();
 
 	static shared_ptr<Player> alloc(Vec2 start_pos, Rect map_rect);
-
+    
+    void reset();
 };

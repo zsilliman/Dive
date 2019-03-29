@@ -39,7 +39,7 @@ using namespace std;
 #define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
-#define EXIT_COUNT      50
+#define EXIT_COUNT      30
 #define MESSAGE_FONT    "charlemagne"
 
 /**
@@ -127,6 +127,14 @@ void GameScene::update(float timestep) {
 	for (int i = 0; i < _fish_vcs.size(); i++) {
 		_fish_vcs[i]->update(_gamestate);
 	}
+    
+    if (_playerFloor) {
+        _gamestate->_player->_box->setAngle(180.5f);
+        _gamestate->_player->_box_dup->setAngle(180.5f);
+    }else{
+        _gamestate->_player->_box->setAngle(180);
+        _gamestate->_player->_box_dup->setAngle(180);
+    }
 
 	if (!_complete) {
 		frame_counter++;
@@ -165,6 +173,8 @@ void GameScene::setLost(bool value) {
         CULog("You lost :(");
         _losenode->setVisible(true);
         _countdown = EXIT_COUNT;
+        shared_ptr<Texture> dying_texture = _assets->get<Texture>("dying");
+        _player_vc->lose(dying_texture);
     }
     else{
         _countdown=-1;
@@ -194,8 +204,6 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
 
-
-
 	_gamestate = _assets->get<GameState>("sample_level");
 	_gamestate->initPhysics(_world);
     _world->activateCollisionCallbacks(true);
@@ -221,6 +229,7 @@ void GameScene::buildScene() {
     
 	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
+    _playerFloor = true;
 
 	//Create Urchin viewcontrollers
 	_urchin_vcs = {};
@@ -358,6 +367,7 @@ void GameScene::beginContact(b2Contact* contact) {
             CULog("player/platform 2");
             _player_vc->setAIDirection(_gamestate, "right");
             _prev_dir = "right";
+//            _playerFloor = true;
         }
         else if(bd2->getName() == "platform"){
             //locking
@@ -370,6 +380,26 @@ void GameScene::beginContact(b2Contact* contact) {
         }
     }
 }
+
+
+//void GameScene::endContact(b2Contact* contact) {
+//    b2Fixture* fix1 = contact->GetFixtureA();
+//    b2Fixture* fix2 = contact->GetFixtureB();
+//
+//    b2Body* body1 = fix1->GetBody();
+//    b2Body* body2 = fix2->GetBody();
+//
+//    Obstacle* bd1 = (Obstacle*)body1->GetUserData();
+//    Obstacle* bd2 = (Obstacle*)body2->GetUserData();
+//
+//    if(bd1->getName() == "platform"){
+//        if(bd2->getName() == "player"){
+//            //not working with free fall
+//            _playerFloor = false;
+//        }
+//    }
+//}
+
 
 //void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
 //

@@ -51,6 +51,9 @@
         },
         "diving": {
             "file":      "textures/diving.png"
+        },
+        "dying": {
+            "file":      "textures/dying.png"
         }
 	},
 	"levels": {

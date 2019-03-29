@@ -24,6 +24,10 @@ void PlayerViewController::reset() {
 
 }
 
+void PlayerViewController::lose(shared_ptr<Texture> texture){
+
+}
+
 shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
 	player_vc->_grid_size = display.width / init_state->_map->getWidth();
