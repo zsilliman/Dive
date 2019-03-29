@@ -159,6 +159,7 @@ void Platform::createFixtures() {
 		fixture_defs[i].shape = &shapes[i];
 		fixtures[i] = _body->CreateFixture(&fixture_defs[i]);
 		setBodyType(b2BodyType::b2_kinematicBody);
+        //setBodyType(b2BodyType::b2_dynamicBody);
 		setGravityScale(0);
 	}
 	setPosition(min_corner);

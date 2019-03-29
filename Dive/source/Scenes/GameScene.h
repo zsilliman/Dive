@@ -71,6 +71,7 @@ protected:
 	bool _complete = false;
 
     int _countdown;
+    string _prev_dir;
 
 	int frame_counter = 0;
 
@@ -147,8 +148,6 @@ public:
     void beginContact(b2Contact* contact);
     
     
-    void endContact(b2Contact* contact);
-    
     /**
      * Handles any modifications necessary before collision resolution
      *
@@ -161,6 +160,16 @@ public:
      */
     //void beforeSolve(b2Contact* contact, const b2Manifold* oldManifold);
     
+    /**
+     * Processes the end of a collision
+     *
+     * This method is called when we first get a collision between two objects.
+     * We use this method to test if it is the "right" kind of collision.  In
+     * particular, we use it to test if we make it to the win door.
+     *
+     * @param  contact  The two bodies that collided
+     */
+    void endContact(b2Contact* contact);
 };
 
 #endif /* __GAME_SCENE_H__ */
