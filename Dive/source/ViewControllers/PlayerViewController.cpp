@@ -1,19 +1,12 @@
 #include "PlayerViewController.h"
 #include "../Util.h"
 
+
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
+    state->_player->setLinearVelocity(Vec2(1.9, -1.9));
 	state->_player->rotateEntity(state->_map->getMapRect());
-	state->_player->setLinearVelocity(Vec2(1.8, -1.8));
-    //new version:
-//    if(getCollision(state) == 0){
-//        state->_player->setLinearVelocity(Vec2(0, -1.8));
-//    }
-//    else{
-//        state->_player->setLinearVelocity(Vec2(1.8, 0));
-//    }
-    
 	_oc_node->setPosition(state->_player->_box->getPosition() * _grid_size);
 	_oc_node->setAngle(state->_player->_box->getAngle());
 
@@ -22,31 +15,6 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	_dup_node->setAngle(state->_player->_box_dup->getAngle());
     
     animatePlayer();
-
-	//old version:
-	/*Vec2 start_pos = state->_player->getPosition();
-	//CULog("start_pos x, y: %d %d", start_pos.x, start_pos.y);
-	if (isBlocked(state)) {
-		CULog("should move but won't");
-		state->_player->move(Direction::RIGHT, state->_map->getColumnCount());
-	}
-
-	else if (canMove(state, Direction::DOWN)) {
-		fall(state);
-	}
-	else {
-		int row = start_pos.y;
-		//CULog("current row %d row count %d", row, state->_map->getRowCount());
-		if (canMove(state, state->_player->getCurrentDirection()))
-		{
-			state->_player->move(state->_player->getCurrentDirection(), state->_map->getColumnCount());
-		}
-	}
-	Vec2 tile_pos = state->_player->getPosition();
-	float grid_size = _display.width / state->_map->getColumnCount();
-	Vec2 map_pos = state->_map->tileToMapCoords(tile_pos.y, tile_pos.x, grid_size);
-	_node->setPosition(map_pos);
-	_node->setVisible(true);*/
 }
 
 
@@ -110,5 +78,21 @@ void PlayerViewController::animatePlayer(){
         }
     }else{
         _cooldown --;
+    }
+}
+
+void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string direction){
+    CULog("setting direction to %s", direction.c_str());
+    if(direction == "down"){
+        state->_player->setLinearVelocity(Vec2(0, -1.8));
+    }
+    else if(direction == "up"){
+        state->_player->setLinearVelocity(Vec2(0, 1.8));
+    }
+    else if(direction == "left"){
+        state->_player->setLinearVelocity(Vec2(-1.8,0));
+    }
+    else if(direction == "right"){
+        state->_player->setLinearVelocity(Vec2(1.8, 0));
     }
 }

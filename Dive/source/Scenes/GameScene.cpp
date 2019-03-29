@@ -39,7 +39,7 @@ using namespace std;
 #define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
-#define EXIT_COUNT      10
+#define EXIT_COUNT      50
 #define MESSAGE_FONT    "charlemagne"
 
 /**
@@ -103,6 +103,7 @@ void GameScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameScene::update(float timestep) {
+    _prev_dir = "none";
     _input->update(timestep);
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -130,16 +131,8 @@ void GameScene::update(float timestep) {
 	if (!_complete) {
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
-//            CULog("STEP");
-			//_player_vc->update(_gamestate);
-			//for (int i = 0; i < _urchin_vcs.size(); i++) {
-			//	_urchin_vcs[i]->update(_gamestate);
-			//}
 			frame_counter = 0;
 		}
-		//if (_player_vc->hitEnemy(_gamestate)) {
-		//	setComplete(true);
-		//}
 	}
     //w below commented out, dups move oc don't
     if (_countdown > 0) {
@@ -209,6 +202,9 @@ void GameScene::buildScene() {
     _world->onBeginContact = [this](b2Contact* contact) {
         beginContact(contact);
     };
+    _world->onEndContact = [this](b2Contact* contact) {
+        endContact(contact);
+    };
 //    _world->beforeSolve = [this](b2Contact* contact, const b2Manifold* oldManifold) {
 //        beforeSolve(contact,oldManifold);
 //    };
@@ -228,11 +224,11 @@ void GameScene::buildScene() {
 
 	//Create Urchin viewcontrollers
 	_urchin_vcs = {};
-	for (int i = 0; i < _gamestate->_urchins.size();i++) {
-		shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, i);
-		_map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
-		_urchin_vcs.push_back(urchin_vc);
-	}
+    for (int i = 0; i < _gamestate->_urchins.size();i++) {
+        shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, i);
+        _map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
+        _urchin_vcs.push_back(urchin_vc);
+    }
 
 	//Create Fish viewcontrollers
 	_fish_vcs = {};
@@ -327,6 +323,9 @@ void GameScene::beginContact(b2Contact* contact) {
             setLost(true);
         }
         else if(bd2->getName() == "platform"){
+            CULog("player/platform 1");
+            _player_vc->setAIDirection(_gamestate, "right");
+            _prev_dir = "right";
             //change ai
         }
         else if(bd2->getName() == "goal"){
@@ -356,9 +355,13 @@ void GameScene::beginContact(b2Contact* contact) {
     else if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
             //change ai direction
+            CULog("player/platform 2");
+            _player_vc->setAIDirection(_gamestate, "right");
+            _prev_dir = "right";
         }
         else if(bd2->getName() == "platform"){
             //locking
+            CULog("platform collision!");
         }
     }
     else if(bd1->getName() == "goal"){
@@ -371,3 +374,42 @@ void GameScene::beginContact(b2Contact* contact) {
 //void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
 //
 //}
+
+/**
+ * Processes the end of a collision
+ *
+ *
+ *
+ * @param  contact  The two bodies that collided
+ */
+void GameScene::endContact(b2Contact* contact) {
+    b2Fixture* fix1 = contact->GetFixtureA();
+    b2Fixture* fix2 = contact->GetFixtureB();
+    
+    b2Body* body1 = fix1->GetBody();
+    b2Body* body2 = fix2->GetBody();
+    
+    void* fd1 = fix1->GetUserData();
+    void* fd2 = fix2->GetUserData();
+    
+    Obstacle* bd1 = (Obstacle*)body1->GetUserData();
+    Obstacle* bd2 = (Obstacle*)body2->GetUserData();
+    
+    if(bd1->getName() == "platform"){
+        if(bd2->getName() == "player"){
+            //change ai direction
+            CULog("player/platform 1.1");
+            _player_vc->setAIDirection(_gamestate, "down");
+            _prev_dir = "down";
+        }
+    }
+    else if(bd1->getName() == "player"){
+        if(bd2->getName() == "platform"){
+            //change ai direction
+            CULog("player/platform 2.1");
+            _player_vc->setAIDirection(_gamestate, "down");
+            _prev_dir = "down";
+        }
+    }
+}
+    
