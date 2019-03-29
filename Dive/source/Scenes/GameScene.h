@@ -64,8 +64,12 @@ protected:
 	std::shared_ptr<ObstacleWorld> _world;
     std::shared_ptr<cugl::Label> _winnode;
     std::shared_ptr<cugl::Label> _losenode;
-    bool _complete;
-    bool _lost;
+
+	enum State { WIN, LOSE, PLAY };
+	State prev_state = PLAY;
+	State current_state = PLAY;
+	bool _complete = false;
+
     int _countdown;
 
 	int frame_counter = 0;
@@ -111,13 +115,8 @@ public:
      * @return true if the controller is initialized properly, false otherwise.
      */
     bool init(const std::shared_ptr<cugl::AssetManager>& assets);
-    
-    bool isComplete( ) const { return _complete; }
-    
-    void setComplete(bool value);
 
-    void setLost(bool value);
-
+	void setState(State state);
     
 #pragma mark -
 #pragma mark Gameplay Handling

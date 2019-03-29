@@ -39,14 +39,15 @@ public:
 
 	void setName(string name);
 
+	bool isAlive();
+	virtual void kill();
+	virtual void revive();
+
 	string getName();
 
 	Vec2 getPosition();
 
 	void setPosition(Vec2 position);
-
-	bool isAlive() { return _alive; }
-	void setAlive(bool alive) { _alive = alive; }
 
 	void setLinearVelocity(Vec2 velocity) { 
 		_box->setLinearVelocity(velocity);
