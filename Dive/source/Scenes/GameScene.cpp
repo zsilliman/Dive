@@ -82,11 +82,6 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
  */
 void GameScene::dispose() {
     if (_active) {
-        //removeAllChildren();
-		//_map_vc->dispose();
-		//_player_vc->dispose();
-        //_goal_vc->dispose();
-        //_winnode->dispose();
         _active = false;
         _input->dispose();
     }
@@ -103,7 +98,6 @@ void GameScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void GameScene::update(float timestep) {
-    _prev_dir = "none";
     _input->update(timestep);
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -127,17 +121,29 @@ void GameScene::update(float timestep) {
 	for (int i = 0; i < _fish_vcs.size(); i++) {
 		_fish_vcs[i]->update(_gamestate);
 	}
-    
+    _animation_counter--;
+    //on a platform
     if (_playerFloor) {
+        if(_prev_diver_angle == 179){
+            _animation_counter = 7;
+        }
         _gamestate->_player->_box->setAngle(180.5f);
         _gamestate->_player->_box_dup->setAngle(180.5f);
-    }else{
+    }else if (_animation_counter <= 0){
+        if(_prev_diver_angle == 180.5f){
+            _animation_counter = 7;
+        }
         _gamestate->_player->_box->setAngle(179);
         _gamestate->_player->_box_dup->setAngle(179);
     }
-//    if(_to_remove != nullptr){
-//        (FishViewController)_to_remove->setDead();
-//    }
+    //else if (bd2->getName().find("fish") != string::npos) {
+    if(_fish_remove != -1){
+        CULog("setting dead %d", _fish_remove);
+//        _to_remove->setDead(true);
+//        _to_remove = _dummy_fish;
+        _fish_vcs[_fish_remove]->setDead(_fish_remove_bd);
+        _fish_remove = -1;
+    }
 	if (!_complete) {
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
@@ -146,27 +152,11 @@ void GameScene::update(float timestep) {
 	}
     //w below commented out, dups move oc don't
     if (_countdown > 0) {
-        CULog("decreasing count");
         _countdown--;
     } else if (_countdown == 0) {
         reset();
     }
 }
-
-/*
-void GameScene::setComplete(bool value) {
-    bool change = _complete != value;
-    _complete = value;
-    if (value && change) {
-        CULog("WINNN");
-        _winnode->setVisible(true);
-        _countdown = EXIT_COUNT;
-    } else if (!value) {
-        _winnode->setVisible(false);
-        _countdown = -1;
-    }
-    CULog("countdown in complete %d", _countdown);
-}*/
 
 void GameScene::setState(State state) {
 	bool changed = state != current_state;
@@ -186,24 +176,6 @@ void GameScene::setState(State state) {
 	current_state = state;
 }
 
-/*
-void GameScene::setLost(bool value) {
-    //bool change = _lost != value;
-    //_lost = value;
-    if (value) {
-        CULog("You lost :(");
-        _losenode->setVisible(true);
-        _countdown = EXIT_COUNT;
-        shared_ptr<Texture> dying_texture = _assets->get<Texture>("dying");
-        _player_vc->lose(dying_texture);
-    }
-    else{
-        _countdown=-1;
-        _losenode->setVisible(false);
-    }
-    CULog("countdown in lost %d", _countdown);
-}*/
-
 void GameScene::buildScene() {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -216,6 +188,12 @@ void GameScene::buildScene() {
 	Rect physics_bounds = Rect(-100, -100, 200, 200);
     
     _block_counter = 0;
+    _animation_counter = 10;
+    _diver_angle = 180.5f;
+    _prev_diver_angle = 179;
+    _fish_remove = -1;
+    
+    
     CULog("set block counter");
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
@@ -228,6 +206,8 @@ void GameScene::buildScene() {
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
     shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
+    
+    
 
 	_gamestate = _assets->get<GameState>("sample_level");
 	_gamestate->initPhysics(_world);
@@ -345,7 +325,6 @@ void GameScene::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
-    //ViewController to_remove = nullptr;
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
             //setLost(true);
@@ -355,15 +334,10 @@ void GameScene::beginContact(b2Contact* contact) {
         else if (bd2->getName().find("fish") != string::npos) {
             setState(LOSE);
         }
-//        else if(bd2->getName() == "fish"){
-//            //setLost(true);
-//            //setState(LOSE);
-//        }
         else if(bd2->getName() == "platform"){
             _block_counter++;
             CULog("player/platform 1");
             _player_vc->setAIDirection(_gamestate, "right");
-            _prev_dir = "right";
             _playerFloor = true;
             //change ai
         }
@@ -374,20 +348,15 @@ void GameScene::beginContact(b2Contact* contact) {
     }
     else if(bd1->getName() == "urchin") {
         if(bd2->getName() == "player") {
-            //setLost(true);
 			setState(LOSE);
         }
         else if (bd2->getName().find("fish") != string::npos) {
             //kill fish
             char num = bd2->getName().back();
-            int n = int(num);
-            //_fish_vcs[n]->setDead(true);
-            //_to_remove = _fish_vcs[n];
+            //converts to int
+            _fish_remove = num-'0';
+            _fish_remove_bd = bd2;
         }
-//        else if(bd2->getName() == "fish"){
-//            //kill fish
-//
-//        }
     }
     else if (bd1->getName().find("fish") != string::npos) {
         if(bd2->getName() == "player"){
@@ -396,10 +365,9 @@ void GameScene::beginContact(b2Contact* contact) {
         }
         else if(bd2->getName() == "urchin"){
             char num = bd1->getName().back();
-            int n = int(num);
-            //_fish_vcs[n]->setDead(true);
-            //_to_remove = _fish_vcs[n];
-
+            //converts to int
+            _fish_remove = num-'0';
+            _fish_remove_bd = bd1;
         }
         else if(bd2->getName() == "fish"){
             //???
@@ -411,7 +379,6 @@ void GameScene::beginContact(b2Contact* contact) {
             //change ai direction
             CULog("player/platform 2");
 			_player_vc->setAIDirection(_gamestate, "right");
-            _prev_dir = "right";
             _playerFloor = true;
         }
         else if(bd2->getName() == "platform"){
@@ -426,25 +393,6 @@ void GameScene::beginContact(b2Contact* contact) {
         }
     }
 }
-
-
-//void GameScene::endContact(b2Contact* contact) {
-//    b2Fixture* fix1 = contact->GetFixtureA();
-//    b2Fixture* fix2 = contact->GetFixtureB();
-//
-//    b2Body* body1 = fix1->GetBody();
-//    b2Body* body2 = fix2->GetBody();
-//
-//    Obstacle* bd1 = (Obstacle*)body1->GetUserData();
-//    Obstacle* bd2 = (Obstacle*)body2->GetUserData();
-//
-//    if(bd1->getName() == "platform"){
-//        if(bd2->getName() == "player"){
-//            //not working with free fall
-//            _playerFloor = false;
-//        }
-//    }
-//}
 
 
 //void GameScene::beforeSolve(b2Contact* contact, const b2Manifold* oldManifold){
@@ -478,7 +426,6 @@ void GameScene::endContact(b2Contact* contact) {
             CULog("player/platform 1.1");
             if(_block_counter==0){
                 _player_vc->setAIDirection(_gamestate, "down");
-                _prev_dir = "down";
                 _playerFloor = false;
             }
         }
@@ -490,7 +437,6 @@ void GameScene::endContact(b2Contact* contact) {
             CULog("player/platform 2.1");
             if(_block_counter==0){
                 _player_vc->setAIDirection(_gamestate, "down");
-                _prev_dir = "down";
                 _playerFloor = false;
             }
         }

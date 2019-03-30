@@ -73,16 +73,12 @@ void FishViewController::animateFish(){
 //    }
 }
 
-void FishViewController::setDead(bool val){
+void FishViewController::setDead(Obstacle* body){
 //gives mem error
-//    _oc_node->setPosition(Vec2(-50,-50));
-//    _dup_node->setPosition(Vec2(-50,-50));
-    if(getNode() == nullptr){
-        CULog("null");
-    }
-    else{
-        getNode()->setPosition(Vec2(-50,-50));
-    }
+    //from viewcontroller
+    //getNode()->g;
+    //setPosition(-50, -50);
+    //setVisible(false);
+    body->setPosition(Vec2(0,0));
     CULog("killing fish");
-
 }

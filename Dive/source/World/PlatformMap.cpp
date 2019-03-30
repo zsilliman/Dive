@@ -182,8 +182,6 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	for (int y = 0; y < tile_height; y++) {
 		for (int x = 0; x < tile_width; x++) {
 			int index = (tile_height - y - 1) * map->_width + x;
-            CULog("hererere %d %d %d", x, y, data[index]);
-
 			//If a block exists
 			if (data[index] > 0) {
                 //for(int i=index+1; i<)

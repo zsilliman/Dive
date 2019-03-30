@@ -45,8 +45,12 @@ void Entity::revive() {
 void Entity::reset() {
 	_box->setPosition(_start_pos);
 	_box->setAngle(0);
+    _box->setLinearVelocity(Vec2(0,0));
 	_box_dup->setPosition(_start_pos);
 	_box_dup->setAngle(0);
+    _box_dup->setLinearVelocity(Vec2(0,0));
+    
+
 	revive();
 }
 

@@ -144,9 +144,6 @@ void Platform::createFixtures() {
 	shapes.resize(adj_tiles.size());
 	fixtures.resize(adj_tiles.size());
 	Vec2 min_corner = getMinCorner();
-	if (isSensor()) {
-		CULog("Sum shit");
-	}
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		fixture_defs[i].density = PLATFORM_DENSITY;
 		fixture_defs[i].friction = PLATFORM_FRICTION;

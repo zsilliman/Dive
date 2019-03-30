@@ -71,9 +71,15 @@ protected:
 	bool _complete = false;
 
     int _countdown;
-    string _prev_dir;
     int _block_counter;
-    std::shared_ptr<ViewController> _to_remove;
+    int _animation_counter;
+    int _diver_angle;
+    int _prev_diver_angle;
+    int _fish_remove;
+    Obstacle* _fish_remove_bd;
+
+    //std::shared_ptr<FishViewController> _to_remove;
+    //std::shared_ptr<FishViewController> _dummy_fish;
 
 	int frame_counter = 0;
 
