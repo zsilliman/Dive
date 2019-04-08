@@ -102,9 +102,6 @@ void PlatformMap::rotatePlatforms() {
 		shared_ptr<Platform> cp = platform_dups[i];
 		int active = active_platforms[i];
 		active_platforms[i] = rotatePlatform(oc, cp, active);
-		if (i == platforms.size() - 1) {
-			CULog(std::to_string(active).c_str());
-		}
 	}
 	active_goal = rotatePlatform(goal, goal_dup, active_goal);
 }
@@ -182,6 +179,7 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	for (int y = 0; y < tile_height; y++) {
 		for (int x = 0; x < tile_width; x++) {
 			int index = (tile_height - y - 1) * map->_width + x;
+
 			//If a block exists
 			if (data[index] > 0) {
                 //for(int i=index+1; i<)

@@ -39,6 +39,6 @@ public:
     
     int getCollision(shared_ptr<GameState> state);
     
-    void setAIDirection(shared_ptr<GameState> state, string direction);
+	void setAIDirection(shared_ptr<GameState> state, string direction);
 
 };
