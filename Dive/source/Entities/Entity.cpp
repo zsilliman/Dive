@@ -50,7 +50,6 @@ void Entity::reset() {
 	_box_dup->setAngle(0);
     _box_dup->setLinearVelocity(Vec2(0,0));
     
-
 	revive();
 }
 

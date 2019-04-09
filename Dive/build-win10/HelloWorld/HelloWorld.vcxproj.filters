@@ -129,6 +129,12 @@
     <ClInclude Include="..\..\source\Scenes\TitleAnimationScene.hpp">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Entities\Angler.h">
+      <Filter>Header Files\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\source\ViewControllers\AnglerViewController.h">
+      <Filter>Header Files\ViewControllers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -208,6 +214,12 @@
     </ClCompile>
     <ClCompile Include="..\..\source\Scenes\TitleAnimationScene.cpp">
       <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Entities\Angler.cpp">
+      <Filter>Source Files\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\ViewControllers\AnglerViewController.cpp">
+      <Filter>Source Files\ViewControllers</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

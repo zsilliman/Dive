@@ -14,6 +14,7 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	state->_map = nullptr;
 	state->_fish = {};
 	state->_urchins = {};
+	state->_anglers = {};
 	state->_map = PlatformMap::parseFromJSON(json);
 
 	shared_ptr<JsonValue> obj_layer = json->get("layers")->get(1);
@@ -21,6 +22,7 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	vector<int> data = obj_layer->get("data")->asIntArray();
     
     int fish_counter = 0;
+	int angler_counter = 0;
 	for (int y = 0; y < dimen.height; y++) {
 		for (int x = 0; x < dimen.width; x++) {
 			int index = (dimen.height - y - 1) * dimen.width + x;
@@ -37,10 +39,12 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect(), fish_counter);
 				state->_fish.push_back(fish);
                 fish_counter++;
-			} else if (data[index] == JELLY_TILE_ID) {
-				//Jellyfish (tbd)
-				//...
-            }else if (data[index] == GOAL_TILE_ID) {
+			} else if (data[index] == ANGLER_TILE_ID) {
+				//Angler fish
+				shared_ptr<Angler> angler = Angler::alloc(Vec2(x, y), state->_map->getMapRect(), angler_counter);
+				state->_anglers.push_back(angler);
+				angler_counter++;
+            } else if (data[index] == GOAL_TILE_ID) {
                 //Goal (this is generated within the PlatformMap class since they move like platforms not entities)
             }
 		}
@@ -63,6 +67,9 @@ void GameState::reset() {
 	for (int i = 0; i < _fish.size(); i++) {
 		_fish[i]->reset();
 	}
+	for (int i = 0; i < _anglers.size(); i++) {
+		_anglers[i]->reset();
+	}
 }
 
 void GameState::initPhysics(const shared_ptr<ObstacleWorld> world) {
@@ -74,5 +81,8 @@ void GameState::initPhysics(const shared_ptr<ObstacleWorld> world) {
 	}
 	for (int i = 0; i < _fish.size(); i++) {
 		_fish[i]->initPhysics(world);
+	}
+	for (int i = 0; i < _anglers.size(); i++) {
+		_anglers[i]->initPhysics(world);
 	}
 }

@@ -6,6 +6,7 @@
 #include "Entities/Player.h"
 #include "Entities/Urchin.h"
 #include "Entities/Fish.h"
+#include "Entities/Angler.h"
 
 using namespace cugl;
 using namespace std;
@@ -22,16 +23,8 @@ public:
 	vector<shared_ptr<Urchin>> _urchins = {};
 	/** A reference to each of the Fish */
 	vector<shared_ptr<Fish>> _fish = {};
-
-
-	/**
-	A reference to the goal location 
-
-	A reference to a list of all urchins 
-	vector<shared_ptr<Urchin>> _urchins;
-
-	A reference to a list of all enemies
-	vector<shared_ptr<Enemy>> _enemies;*/
+	/** A reference to each of the Angler fish */
+	vector<shared_ptr<Angler>> _anglers = {};
 
 	/** Allocate gamestate, then manually set values */
 	static shared_ptr<GameState> allocEmpty();

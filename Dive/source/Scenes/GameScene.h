@@ -21,6 +21,7 @@
 #include "../ViewControllers/PlayerViewController.h"
 #include "../ViewControllers/UrchinViewController.h"
 #include "../ViewControllers/FishViewController.h"
+#include "../ViewControllers/AnglerViewController.h"
 #include "../ViewControllers/GoalViewController.h"
 #include "../ViewControllers/InputController.h"
 #include <cugl/cugl.h>
@@ -58,6 +59,8 @@ protected:
     std::shared_ptr<PlayerViewController> _player_vc;
 	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
 	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
+	std::vector<std::shared_ptr<AnglerViewController>> _angler_vcs;
+
     //input controller
     std::shared_ptr<InputController> _input;
     
@@ -77,6 +80,8 @@ protected:
     int _prev_diver_angle;
     int _fish_remove;
     Obstacle* _fish_remove_bd;
+	int _angler_remove;
+	Obstacle* _angler_remove_bd;
 
     //std::shared_ptr<FishViewController> _to_remove;
     //std::shared_ptr<FishViewController> _dummy_fish;

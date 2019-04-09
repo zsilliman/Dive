@@ -121,6 +121,9 @@ void GameScene::update(float timestep) {
 	for (int i = 0; i < _fish_vcs.size(); i++) {
 		_fish_vcs[i]->update(_gamestate);
 	}
+	for (int i = 0; i < _angler_vcs.size(); i++) {
+		_angler_vcs[i]->update(_gamestate);
+	}
     _animation_counter--;
     //on a platform
     if (_playerFloor) {
@@ -144,6 +147,11 @@ void GameScene::update(float timestep) {
         _fish_vcs[_fish_remove]->setDead(_fish_remove_bd);
         _fish_remove = -1;
     }
+	//remove angler fish
+	if (_angler_remove != -1) {
+		_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
+		_angler_remove = -1;
+	}
 	if (!_complete) {
 		frame_counter++;
 		if (frame_counter >= UPDATE_STEP) {
@@ -192,6 +200,7 @@ void GameScene::buildScene() {
     _diver_angle = 180.5f;
     _prev_diver_angle = 179;
     _fish_remove = -1;
+	_angler_remove = -1;
     
     
     CULog("set block counter");
@@ -250,6 +259,14 @@ void GameScene::buildScene() {
 		shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, fish_texture, size, i);
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
 		_fish_vcs.push_back(_fish_vc);
+	}
+
+	//Create Fish viewcontrollers
+	_angler_vcs = {};
+	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, fish_texture, size, i);
+		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
+		_angler_vcs.push_back(_angler_vc);
 	}
     
     
@@ -334,6 +351,9 @@ void GameScene::beginContact(b2Contact* contact) {
         else if (bd2->getName().find("fish") != string::npos) {
             setState(LOSE);
         }
+		else if (bd2->getName().find("angler") != string::npos) {
+			setState(LOSE);
+		}
         else if(bd2->getName() == "platform"){
             _block_counter++;
             CULog("player/platform 1");
@@ -357,22 +377,49 @@ void GameScene::beginContact(b2Contact* contact) {
             _fish_remove = num-'0';
             _fish_remove_bd = bd2;
         }
+		else if (bd2->getName().find("angler") != string::npos) {
+			//kill angler
+			char num = bd2->getName().back();
+			//converts to int
+			_angler_remove = num - '0';
+		}
     }
     else if (bd1->getName().find("fish") != string::npos) {
         if(bd2->getName() == "player"){
             //setLost(true);
 			setState(LOSE);
         }
-        else if(bd2->getName() == "urchin"){
+        else if(bd2->getName() == "urchin") {
             char num = bd1->getName().back();
             //converts to int
             _fish_remove = num-'0';
             _fish_remove_bd = bd1;
         }
-        else if(bd2->getName() == "fish"){
+        else if(bd2->getName().find("fish") != string::npos) {
             //???
         }
+		else if (bd2->getName().find("angler") != string::npos) {
+			//???
+		}
     }
+	else if (bd1->getName().find("angler") != string::npos) {
+		if (bd2->getName() == "player") {
+			//setLost(true);
+			setState(LOSE);
+		}
+		else if (bd2->getName() == "urchin") {
+			//kill angler
+			char num = bd1->getName().back();
+			//converts to int
+			_angler_remove = num - '0';
+		}
+		else if (bd2->getName().find("fish")) {
+			//???
+		}
+		else if (bd2->getName().find("angler") != string::npos) {
+			//???
+		}
+	}
     else if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
             _block_counter++;
