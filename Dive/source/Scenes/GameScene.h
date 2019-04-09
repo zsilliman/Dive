@@ -79,9 +79,7 @@ protected:
     int _diver_angle;
     int _prev_diver_angle;
     int _fish_remove;
-    Obstacle* _fish_remove_bd;
 	int _angler_remove;
-	Obstacle* _angler_remove_bd;
 
     //std::shared_ptr<FishViewController> _to_remove;
     //std::shared_ptr<FishViewController> _dummy_fish;

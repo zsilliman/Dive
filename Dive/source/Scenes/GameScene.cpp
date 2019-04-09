@@ -144,7 +144,7 @@ void GameScene::update(float timestep) {
         CULog("setting dead %d", _fish_remove);
 //        _to_remove->setDead(true);
 //        _to_remove = _dummy_fish;
-        _fish_vcs[_fish_remove]->setDead(_fish_remove_bd);
+        _fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
         _fish_remove = -1;
     }
 	//remove angler fish
@@ -375,7 +375,6 @@ void GameScene::beginContact(b2Contact* contact) {
             char num = bd2->getName().back();
             //converts to int
             _fish_remove = num-'0';
-            _fish_remove_bd = bd2;
         }
 		else if (bd2->getName().find("angler") != string::npos) {
 			//kill angler
@@ -393,7 +392,6 @@ void GameScene::beginContact(b2Contact* contact) {
             char num = bd1->getName().back();
             //converts to int
             _fish_remove = num-'0';
-            _fish_remove_bd = bd1;
         }
         else if(bd2->getName().find("fish") != string::npos) {
             //???

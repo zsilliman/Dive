@@ -4,6 +4,7 @@
 void FishViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void FishViewController::update(shared_ptr<GameState> state) {
+	_node->setVisible(state->_fish[_fish_index]->isAlive());
 	state->_fish[_fish_index]->setLinearVelocity(Vec2(1, 0));
 	state->_fish[_fish_index]->rotateEntity(state->_map->getMapRect());
 	//new version:
@@ -73,12 +74,12 @@ void FishViewController::animateFish(){
 //    }
 }
 
-void FishViewController::setDead(Obstacle* body){
-//gives mem error
-    //from viewcontroller
-    //getNode()->g;
-    //setPosition(-50, -50);
-    //setVisible(false);
-    body->setPosition(Vec2(0,0));
-    CULog("killing fish");
+void FishViewController::kill(shared_ptr<Fish> fish) {
+	CULog("killing fish");
+	fish->kill();
+}
+
+void FishViewController::revive(shared_ptr<Fish> fish) {
+	CULog("reviving fish");
+	fish->revive();
 }
