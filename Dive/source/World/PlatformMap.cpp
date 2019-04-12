@@ -132,6 +132,19 @@ int getPropertyInt(shared_ptr<JsonValue> properties, string key) {
 	return -1;
 }
 
+//Read custom properties from Tiled
+int getPropertyFloat(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			return prop->get("value")->asFloat();
+		}
+	}
+	CULog("Could not read integer property");
+	return -1;
+}
+
 vector<float> getPropertyFloatList(shared_ptr<JsonValue> properties, string key) {
 	for (int i = 0; i < properties->size(); i++) {
 		shared_ptr<JsonValue> prop = properties->get(i);
@@ -162,6 +175,8 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	shared_ptr<JsonValue> properties = json->get("properties");
 	vector<float> speed_data = getPropertyFloatList(properties, "speeds");
 	map->asset_name = getPropertyString(properties, "asset");
+
+	float goal_speed = getPropertyFloat(properties, "goalspeed");
 
 	//Layer properties
 	shared_ptr<JsonValue> layers = json->get("layers");
@@ -198,7 +213,7 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 			if (obj_data[index] == GOAL_TILE_ID) {
 				Vec2 start = Vec2(x, y);
 				map->goal = Goal::allocGoal(start);
-				map->goal->setRelativeSpeed(speed_data[map->platform_dups.size()]);
+				map->goal->setRelativeSpeed(goal_speed);
 
 				map->goal_dup = map->goal->duplicateGoal();
 				map->goal_dup->setPosition(map->goal->getPosition() + Vec2(map->_width, 0));

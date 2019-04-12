@@ -87,15 +87,15 @@ void PlayerViewController::animatePlayer(){
 void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string direction){
     CULog("setting direction to %s", direction.c_str());
     if(direction == "down"){
-        state->_player->setLinearVelocity(Vec2(0, -.8));
+        state->_player->setLinearVelocity(Vec2(0, -PLAYER_VERTICAL_SPEED));
     }
     else if(direction == "up"){
-        state->_player->setLinearVelocity(Vec2(0, .8));
+        state->_player->setLinearVelocity(Vec2(0, PLAYER_VERTICAL_SPEED));
     }
     else if(direction == "left"){
-        state->_player->setLinearVelocity(Vec2(-1.8,0));
+        state->_player->setLinearVelocity(Vec2(-PLAYER_HORIZONTAL_SPEED,0));
     }
     else if(direction == "right"){
-        state->_player->setLinearVelocity(Vec2(1.8, 0));
+        state->_player->setLinearVelocity(Vec2(PLAYER_HORIZONTAL_SPEED, 0));
     }
 }

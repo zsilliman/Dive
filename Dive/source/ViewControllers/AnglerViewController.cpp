@@ -5,6 +5,10 @@ void AnglerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameSt
 
 void AnglerViewController::update(shared_ptr<GameState> state) {
 	_node->setVisible(state->_anglers[_angler_index]->isAlive());
+
+	if (!state->_anglers[_angler_index]->isAlive())
+		return;
+
 	state->_anglers[_angler_index]->setLinearVelocity(Vec2(0, 0));
 	state->_anglers[_angler_index]->rotateEntity(state->_map->getMapRect());
 

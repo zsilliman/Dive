@@ -5,6 +5,9 @@ void FishViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameStat
 
 void FishViewController::update(shared_ptr<GameState> state) {
 	_node->setVisible(state->_fish[_fish_index]->isAlive());
+	if (!state->_fish[_fish_index]->isAlive())
+		return;
+
 	state->_fish[_fish_index]->setLinearVelocity(Vec2(1, 0));
 	state->_fish[_fish_index]->rotateEntity(state->_map->getMapRect());
 	//new version:
