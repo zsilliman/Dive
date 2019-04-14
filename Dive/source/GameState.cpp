@@ -10,7 +10,7 @@ shared_ptr<GameState> GameState::allocEmpty() {
 
 shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	shared_ptr<GameState> state = make_shared<GameState>();
-	state->_player == nullptr;
+	state->_player = nullptr;
 	state->_map = nullptr;
 	state->_fish = {};
 	state->_urchins = {};
