@@ -45,6 +45,7 @@ shared_ptr<Platform> Platform::duplicate() {
 	shared_ptr<Platform> platform = make_shared<Platform>();
 	//copy values
 	platform->adj_tiles = adj_tiles;
+	platform->col_tiles = col_tiles;
 	platform->adj_values = adj_values;
 	platform->_initial_pos.set(_initial_pos);
 	platform->_relative_speed = _relative_speed;
@@ -55,45 +56,48 @@ shared_ptr<Platform> Platform::duplicate() {
 	return platform;
 }
 
-shared_ptr<Platform> Platform::allocWithGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen) {
+shared_ptr<Platform> Platform::allocWithGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen) {
 	shared_ptr<Platform> platform = make_shared<Platform>();
-	platform->initGrid(grid, start, map_dimen);
+	platform->initGrid(collision_data, render_data, start, map_dimen);
 	platform->_initial_pos.set(platform->getMinCorner());
 	platform->setName("platform");
 	return platform;
 }
 
-void Platform::initGrid(vector<int>* grid, Vec2 start, Vec2 map_dimen) {
-	rec_init(grid, start, map_dimen);
+void Platform::initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen) {
+	rec_init(collision_data, render_data, start, map_dimen);
 	//set all adjacent values to 0 to prevent overlap of platforms
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		int index = getIndex(adj_tiles[i], map_dimen);
-		(*grid)[index] = 0;
+		(*render_data)[index] = 0;
 	}
 }
 
 /** DFS search of all neighboring tiles */
-void Platform::rec_init(vector<int>* grid, Vec2 current, Vec2 map_dimen) {
-	vector<int>& grid_ref = *grid;
+void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, Vec2 current, Vec2 map_dimen) {
+	vector<int>& render_ref = *render_data;
 	Vec2 dir_buf[4] = { Vec2(1,0), Vec2(-1,0), Vec2(0,1), Vec2(0,-1) };
 
 	//Add current to list of visited
 	adj_tiles.push_back(current);
 	int index = getIndex(current, map_dimen);
-	int blk = grid_ref[index];
+	if ((*collision_data)[index] > 0) {
+		col_tiles.push_back(current);
+	}
+	int blk = render_ref[index];
 	adj_values.push_back(blk);
 
 	//Iterate over directions
 	for (int i = 0; i < 4; i++) {
-		Vec2 adj = current + dir_buf[i]; //getAdjacent(dir_buf[i], current, map_dimen);
+		Vec2 adj = current + dir_buf[i];
 		//Checks whether adj is out of bounds in y direction. x direction is not necessary to check
 		if (adj.y < 0 || adj.y >= map_dimen.y)
 			adj.set(current);
 
-		int blk = grid_ref[getIndex(adj, map_dimen)];
+		int blk = render_ref[getIndex(adj, map_dimen)];
 		//If the block exists and was not put in adj_tiles yet
 		if (blk > 0 && !contains(&adj_tiles, adj, map_dimen)) {
-			rec_init(grid, adj, map_dimen);
+			rec_init(collision_data, render_data, adj, map_dimen);
 		}
 	}
 }
@@ -112,22 +116,22 @@ Rect Platform::getPlatformRect() {
 
 Vec2 Platform::getMinCorner() {
 	Vec2 min = Vec2(999, 999);
-	for (int i = 0; i < adj_tiles.size(); i++) {
-		if (min.x > adj_tiles[i].x)
-			min.x = adj_tiles[i].x;
-		if (min.y > adj_tiles[i].y)
-			min.y = adj_tiles[i].y;
+	for (int i = 0; i < col_tiles.size(); i++) {
+		if (min.x > col_tiles[i].x)
+			min.x = col_tiles[i].x;
+		if (min.y > col_tiles[i].y)
+			min.y = col_tiles[i].y;
 	}
 	return min;
 }
 
 Vec2 Platform::getMaxCorner() {
 	Vec2 max = Vec2(-999, -999);
-	for (int i = 0; i < adj_tiles.size(); i++) {
-		if (max.x < adj_tiles[i].x)
-			max.x = adj_tiles[i].x;
-		if (max.y < adj_tiles[i].y)
-			max.y = adj_tiles[i].y;
+	for (int i = 0; i < col_tiles.size(); i++) {
+		if (max.x < col_tiles[i].x)
+			max.x = col_tiles[i].x;
+		if (max.y < col_tiles[i].y)
+			max.y = col_tiles[i].y;
 	}
 	//Add 1 to each because each index corresponds to lower left corner
 	return max + Vec2(1, 1);
@@ -140,23 +144,22 @@ Size Platform::getPlatformSize() {
 }
 
 void Platform::createFixtures() {
-	fixture_defs.resize(adj_tiles.size());
-	shapes.resize(adj_tiles.size());
-	fixtures.resize(adj_tiles.size());
+	fixture_defs.resize(col_tiles.size());
+	shapes.resize(col_tiles.size());
+	fixtures.resize(col_tiles.size());
 	Vec2 min_corner = getMinCorner();
-	for (int i = 0; i < adj_tiles.size(); i++) {
+	for (int i = 0; i < col_tiles.size(); i++) {
 		fixture_defs[i].density = PLATFORM_DENSITY;
 		fixture_defs[i].friction = PLATFORM_FRICTION;
 		fixture_defs[i].restitution = PLATFORM_RESTITUTION;
 		fixture_defs[i].isSensor = isSensor();
 
 		shapes[i] = b2PolygonShape();
-		Vec2 center = adj_tiles[i] - min_corner + Vec2(0.5, 0.5);
+		Vec2 center = col_tiles[i] - min_corner + Vec2(0.5, 0.5);
 		shapes[i].SetAsBox(0.5, 0.5, b2Vec2(center.x, center.y), 0);
 		fixture_defs[i].shape = &shapes[i];
 		fixtures[i] = _body->CreateFixture(&fixture_defs[i]);
 		setBodyType(b2BodyType::b2_kinematicBody);
-        //setBodyType(b2BodyType::b2_dynamicBody);
 		setGravityScale(0);
 	}
 	setPosition(min_corner);

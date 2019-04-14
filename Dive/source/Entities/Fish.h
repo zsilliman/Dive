@@ -10,10 +10,10 @@
 #include <cugl/cugl.h>
 #include "Entity.h"
 
-#define FISH_FRICTION 0.3
-#define FISH_RESTITUTION 0.3
-#define FISH_ANG_DAMP 0.3
-#define FISH_LIN_DAMP 0.3
+#define FISH_FRICTION 0
+#define FISH_RESTITUTION 0
+#define FISH_ANG_DAMP 0
+#define FISH_LIN_DAMP 0
 #define FISH_DENSITY 1
 
 using namespace cugl;

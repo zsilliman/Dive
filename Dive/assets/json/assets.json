@@ -21,8 +21,8 @@
 			"wrapS":    "clamp",
 			"wrapT":    "clamp"
 		},
-		"blank": {
-			"file":     "textures/blank.png",
+		"tileset": {
+			"file":     "textures/Tileset_light.png",
 			"minfilter":"nearest",
 			"magfilter":"linear",
 			"wrapS":    "clamp",
@@ -37,11 +37,14 @@
         "fish":{
             "file":      "textures/Shark.png"
         },
+        "angler":{
+            "file":      "textures/Angler_Fish.png"
+        },
         "diver":{
             "file":      "textures/diver.png"
         },
         "background":{
-            "file":      "textures/background_green.png"
+            "file":      "textures/background_blue.png"
         },
         "platform1":{
             "file":      "textures/platform1.png"

@@ -12,6 +12,7 @@ protected:
 	bool _set = false;
 	int _tile_width, _tile_height; //Number of pixels per tile
 	int _columns, _rows, _tile_count;	   //Number of tiles
+	int index_offset = 0;
 	shared_ptr<Texture> _texture;
 	vector<shared_ptr<Texture>> _tiles = {};
 
@@ -24,6 +25,8 @@ public:
 	static shared_ptr<TiledTexture> alloc(shared_ptr<Texture> texture, int width, int height);
 
 	void setTexture(shared_ptr<Texture> texture, int width, int height);
+
+	void setTileIndexOffset(int offset);
 
 	/**
 	 * Number of pixels along x-axis of tile

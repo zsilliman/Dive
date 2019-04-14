@@ -17,7 +17,7 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 	state->_anglers = {};
 	state->_map = PlatformMap::parseFromJSON(json);
 
-	shared_ptr<JsonValue> obj_layer = json->get("layers")->get(1);
+	shared_ptr<JsonValue> obj_layer = json->get("layers")->get(2);
 	Size dimen = Size(state->_map->getWidth(), state->_map->getHeight());
 	vector<int> data = obj_layer->get("data")->asIntArray();
     

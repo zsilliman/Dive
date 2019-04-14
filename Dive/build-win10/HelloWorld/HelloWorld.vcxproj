@@ -195,7 +195,9 @@
     <ClInclude Include="..\..\source\GameState.h" />
     <ClInclude Include="..\..\source\Loaders\GamestateLoader.h" />
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
+    <ClInclude Include="..\..\source\Scenes\LevelSelectScene.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
+    <ClInclude Include="..\..\source\Scenes\MenuScene.h" />
     <ClInclude Include="..\..\source\Scenes\TitleAnimationScene.hpp" />
     <ClInclude Include="..\..\source\Util.h" />
     <ClInclude Include="..\..\source\ViewControllers\AnglerViewController.h" />
@@ -228,7 +230,9 @@
     <ClCompile Include="..\..\source\Loaders\GamestateLoader.cpp" />
     <ClCompile Include="..\..\source\main.cpp" />
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
+    <ClCompile Include="..\..\source\Scenes\LevelSelectScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\Scenes\MenuScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\TitleAnimationScene.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\AnglerViewController.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\FishViewController.cpp" />

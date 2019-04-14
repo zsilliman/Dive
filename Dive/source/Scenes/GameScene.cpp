@@ -206,17 +206,17 @@ void GameScene::buildScene() {
     CULog("set block counter");
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
-	shared_ptr<Texture> texture = _assets->get<Texture>("blank");
+	shared_ptr<Texture> texture = _assets->get<Texture>("tileset");
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
-	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 16, 16);
+	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 382, 382);
+	tilesheet->setTileIndexOffset(9);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
+	shared_ptr<Texture> angler_texture = _assets->get<Texture>("angler");
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
     shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
-    
-    
 
 	_gamestate = _assets->get<GameState>("sample_level");
 	_gamestate->initPhysics(_world);
@@ -264,7 +264,7 @@ void GameScene::buildScene() {
 	//Create Fish viewcontrollers
 	_angler_vcs = {};
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, fish_texture, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, angler_texture, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}

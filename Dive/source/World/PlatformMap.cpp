@@ -181,12 +181,18 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	//Layer properties
 	shared_ptr<JsonValue> layers = json->get("layers");
 
-	//Grabs first layer
-	shared_ptr<JsonValue> tile_layer = layers->get(0);
-	vector<int> data = tile_layer->get("data")->asIntArray();
+	//Grabs collision layer
+	shared_ptr<JsonValue> collision_layer = layers->get(0);
+	vector<int> collision_data = collision_layer->get("data")->asIntArray();
 
-	shared_ptr<JsonValue> obj_layer = layers->get(1);
+	//Grabs rendered layer
+	shared_ptr<JsonValue> rendered_layer = layers->get(1);
+	vector<int> render_data = rendered_layer->get("data")->asIntArray();
+
+	//Grabs object layer
+	shared_ptr<JsonValue> obj_layer = layers->get(2);
 	vector<int> obj_data = obj_layer->get("data")->asIntArray();
+
 	Vec2 map_dimen = Vec2(tile_width, tile_height);
 	//map->map_rect = Rect(0, 0, tile_width, tile_height);
 	map->map_rect = Rect(0, 0, tile_width, tile_height);
@@ -196,11 +202,11 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 			int index = (tile_height - y - 1) * map->_width + x;
 
 			//If a block exists
-			if (data[index] > 0) {
+			if (render_data[index] > 0) {
                 //for(int i=index+1; i<)
 				//Create platform from this and adjacent blocks
 				Vec2 start = Vec2(x, y);
-				shared_ptr<Platform> platform = Platform::allocWithGrid(&data, start, map_dimen);
+				shared_ptr<Platform> platform = Platform::allocWithGrid(&collision_data, &render_data, start, map_dimen);
 				platform->setRelativeSpeed(speed_data[map->platform_dups.size()]);
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map

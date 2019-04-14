@@ -34,19 +34,19 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
 	Rect visible_rect = Rect(Vec2(0, -_node->getPosition().y / _grid_size), _display / _grid_size);
 
     if (_input->goingLeft()){
-        state->_map->parallaxTranslatePlatforms(2);
+		parallaxTranslateVisible(state->_map, visible_rect, 2);
     }else if (_input->goingRight()){
-        state->_map->parallaxTranslatePlatforms(-2);
+		parallaxTranslateVisible(state->_map, visible_rect, -2);
     }else{
-        state->_map->parallaxTranslatePlatforms(0);
+		parallaxTranslateVisible(state->_map, visible_rect, 0);
     }
 
     state->_map->rotatePlatforms();
     for (int i = 0; i < _platforms.size(); i++) {
         _platforms[i]->update(state);
     }
-    _goal->setPosition(state->_map->getGoal()->getPosition() * _grid_size);
-    _goal_dup->setPosition(state->_map->getGoalDup()->getPosition() * _grid_size);
+    _goal->setPosition(state->_map->getGoal()->getMinCorner() * _grid_size);
+    _goal_dup->setPosition(state->_map->getGoalDup()->getMinCorner() * _grid_size);
 }
 
 void PlatformMapViewController::dispose() {
@@ -82,6 +82,7 @@ shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_pt
 	map->_goal->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	position = init_state->_map->getGoal()->getMinCorner() * map->_grid_size;
 	map->_goal->setPosition(position);
+	map->_goal->setVisible(true);
 	map->_node->addChild(map->_goal);
 
 	map->_goal_dup = PolygonNode::allocWithTexture(goal_texture);
@@ -89,6 +90,7 @@ shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_pt
 	map->_goal_dup->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	position = init_state->_map->getGoalDup()->getMinCorner() * map->_grid_size;
 	map->_goal_dup->setPosition(position);
+	map->_goal_dup->setVisible(true);
 	map->_node->addChild(map->_goal_dup);
 
 	return map;

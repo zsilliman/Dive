@@ -1,0 +1,14 @@
+{ "columns":10,
+ "image":"..\/textures\/Tileset_light.png",
+ "imageheight":3840,
+ "imagewidth":3840,
+ "margin":0,
+ "name":"Tileset",
+ "spacing":0,
+ "tilecount":100,
+ "tiledversion":"1.2.2",
+ "tileheight":384,
+ "tilewidth":384,
+ "type":"tileset",
+ "version":1.2
+}

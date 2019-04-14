@@ -60,10 +60,28 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	//new version:
 	_oc_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
 	_oc_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
+	
+	Vec2 lin_vel = state->_anglers[_angler_index]->_box->getLinearVelocity();
 
 	//Set positions/rotations of duplicate according to duplicate physics object
 	_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
-	_dup_node->setAngle(state->_anglers[_angler_index]->_box_dup->getAngle());
+
+	float angle = -PI;
+	if (lin_vel.length() > 0.01)
+		angle = lin_vel.getAngle();
+	angle += PI;
+	CULog("angle");
+	CULog(std::to_string(angle).c_str());
+	if (angle < PI/2 && angle > -PI/2) {
+		_oc_node->flipVertical(false);
+		_dup_node->flipVertical(false);
+	}
+	else {
+		_oc_node->flipVertical(true);
+		_dup_node->flipVertical(true);
+	}
+	_oc_node->setAngle(angle);
+	_dup_node->setAngle(angle);
 
 	animateAngler();
 }

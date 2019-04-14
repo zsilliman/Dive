@@ -13,7 +13,7 @@ TiledTexture::~TiledTexture()
 }
 
 shared_ptr<Texture> TiledTexture::getTile(int i) {
-	return _tiles[i];
+	return _tiles[i-index_offset];
 }
 
 void TiledTexture::setTexture(shared_ptr<Texture> texture, int tile_width, int tile_height) {
@@ -35,6 +35,10 @@ void TiledTexture::setTexture(shared_ptr<Texture> texture, int tile_width, int t
 		}
 	}
 	_set = true;
+}
+
+void TiledTexture::setTileIndexOffset(int offset) {
+	index_offset = offset;
 }
 
 shared_ptr<TiledTexture> TiledTexture::alloc(shared_ptr<Texture> texture, int tile_width, int tile_height) {

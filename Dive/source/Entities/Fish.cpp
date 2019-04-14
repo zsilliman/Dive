@@ -14,11 +14,11 @@ using namespace std;
 
 //Note start pos center
 void Fish::initFish(Vec2 start_pos, Rect map_rect) {
-	_dimensions = Size(1, 1);
-	_position = Vec2(start_pos + _dimensions / 2);
+	_dimensions = Size(2, 1);
+	_position = Vec2(start_pos + _dimensions / 2) + Vec2(0,0.05);
 	_start_pos = Vec2(start_pos + _dimensions / 2);
-	_box = BoxObstacle::alloc(_start_pos, Size(0.9,0.9));
-	_box_dup = BoxObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(0.9,0.9));
+	_box = CapsuleObstacle::alloc(_start_pos, Size(2,0.9));
+	_box_dup = CapsuleObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(2,0.9));
 	_can_float = false;
 	_box->setFriction(FISH_FRICTION);
     _box->setFixedRotation(true);
@@ -28,6 +28,7 @@ void Fish::initFish(Vec2 start_pos, Rect map_rect) {
 	_box->setLinearDamping(FISH_LIN_DAMP);
 	_box->setBodyType(b2BodyType::b2_dynamicBody);
 	_box->setGravityScale(0);
+	_box_dup->setFixedRotation(true);
 
 	_box_dup->setFriction(FISH_FRICTION);
 	_box_dup->setAngularDamping(FISH_ANG_DAMP);
@@ -36,6 +37,7 @@ void Fish::initFish(Vec2 start_pos, Rect map_rect) {
 	_box_dup->setLinearDamping(FISH_LIN_DAMP);
 	_box_dup->setBodyType(b2BodyType::b2_dynamicBody);
 	_box_dup->setGravityScale(0);
+	_box_dup->setFixedRotation(true);
 }
 
 shared_ptr<Fish> Fish::alloc(Vec2 start_pos, Rect map_rect, int index) {
