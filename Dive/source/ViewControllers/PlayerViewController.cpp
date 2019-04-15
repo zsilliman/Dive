@@ -93,9 +93,9 @@ void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string di
         state->_player->setLinearVelocity(Vec2(0, PLAYER_VERTICAL_SPEED));
     }
     else if(direction == "left"){
-        state->_player->setLinearVelocity(Vec2(-PLAYER_HORIZONTAL_SPEED,0));
+        state->_player->setLinearVelocity(Vec2(-PLAYER_HORIZONTAL_SPEED, state->_player->_box->getLinearVelocity().y));
     }
     else if(direction == "right"){
-        state->_player->setLinearVelocity(Vec2(PLAYER_HORIZONTAL_SPEED, 0));
+        state->_player->setLinearVelocity(Vec2(PLAYER_HORIZONTAL_SPEED, state->_player->_box->getLinearVelocity().y));
     }
 }

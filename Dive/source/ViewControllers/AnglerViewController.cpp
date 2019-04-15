@@ -66,6 +66,7 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	//Set positions/rotations of duplicate according to duplicate physics object
 	_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
 
+	//Handle rotation of angler
 	float angle = -PI;
 	if (lin_vel.length() > 0.01)
 		angle = lin_vel.getAngle();
