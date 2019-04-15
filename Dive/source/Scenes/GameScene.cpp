@@ -207,7 +207,7 @@ void GameScene::buildScene() {
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
     
 	shared_ptr<Texture> texture = _assets->get<Texture>("tileset");
-    shared_ptr<Texture> goal_texture = _assets->get<Texture>("goal");
+    shared_ptr<Texture> goal_texture = _assets->get<Texture>("statue");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 382, 382);
 	tilesheet->setTileIndexOffset(9);
 	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");

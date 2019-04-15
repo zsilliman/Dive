@@ -57,6 +57,9 @@
         },
         "dying": {
             "file":      "textures/dying.png"
+        },
+        "statue": {
+            "file":     "textures/statue.png"
         }
 	},
 	"levels": {
