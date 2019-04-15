@@ -141,14 +141,16 @@ void GameScene::update(float timestep) {
     }
     //else if (bd2->getName().find("fish") != string::npos) {
     if(_fish_remove != -1){
-        CULog("setting dead %d", _fish_remove);
+        CULog("setting dead fish %d", _fish_remove);
 //        _to_remove->setDead(true);
 //        _to_remove = _dummy_fish;
         _fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
         _fish_remove = -1;
+        CULog("fish dead num  %d", _fish_remove);
     }
 	//remove angler fish
 	if (_angler_remove != -1) {
+        CULog("setting dead angler %d", _angler_remove);
 		_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
 		_angler_remove = -1;
 	}
@@ -158,7 +160,6 @@ void GameScene::update(float timestep) {
 			frame_counter = 0;
 		}
 	}
-    //w below commented out, dups move oc don't
     if (_countdown > 0) {
         _countdown--;
     } else if (_countdown == 0) {
@@ -371,15 +372,11 @@ void GameScene::beginContact(b2Contact* contact) {
 			setState(LOSE);
         }
         else if (bd2->getName().find("fish") != string::npos) {
-            //kill fish
             char num = bd2->getName().back();
-            //converts to int
             _fish_remove = num-'0';
         }
 		else if (bd2->getName().find("angler") != string::npos) {
-			//kill angler
 			char num = bd2->getName().back();
-			//converts to int
 			_angler_remove = num - '0';
 		}
     }
@@ -390,32 +387,36 @@ void GameScene::beginContact(b2Contact* contact) {
         }
         else if(bd2->getName() == "urchin") {
             char num = bd1->getName().back();
-            //converts to int
             _fish_remove = num-'0';
         }
         else if(bd2->getName().find("fish") != string::npos) {
-            //???
+            //fish on fish--- ignore?
         }
 		else if (bd2->getName().find("angler") != string::npos) {
-			//???
+            CULog("fish angler 1");
+            char num = bd1->getName().back();
+            _fish_remove = num-'0';
+            char num2 = bd2->getName().back();
+            _angler_remove = num2-'0';
 		}
     }
 	else if (bd1->getName().find("angler") != string::npos) {
 		if (bd2->getName() == "player") {
-			//setLost(true);
 			setState(LOSE);
 		}
 		else if (bd2->getName() == "urchin") {
-			//kill angler
 			char num = bd1->getName().back();
-			//converts to int
 			_angler_remove = num - '0';
 		}
-		else if (bd2->getName().find("fish")) {
-			//???
+		else if (bd2->getName().find("fish") != string::npos) {
+            CULog("fish angler 2");
+            char num = bd2->getName().back();
+            _fish_remove = num-'0';
+            char num2 = bd1->getName().back();
+            _angler_remove = num2-'0';
 		}
 		else if (bd2->getName().find("angler") != string::npos) {
-			//???
+			//angler on angler--- ignore?
 		}
 	}
     else if(bd1->getName() == "platform"){
