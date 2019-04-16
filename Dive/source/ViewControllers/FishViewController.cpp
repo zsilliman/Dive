@@ -8,7 +8,14 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	if (!state->_fish[_fish_index]->isAlive())
 		return;
 
-	state->_fish[_fish_index]->setLinearVelocity(Vec2(-1, 0));
+	Vec2 vel = Vec2(1, 0);
+	if (state->_fish[_fish_index]->isLeft()) {
+		vel = vel * -1;
+	}
+	_oc_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
+	_dup_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
+
+	state->_fish[_fish_index]->setLinearVelocity(vel);
 	state->_fish[_fish_index]->rotateEntity(state->_map->getMapRect());
 	//new version:
 	_oc_node->setPosition(state->_fish[_fish_index]->_box->getPosition() * _grid_size);

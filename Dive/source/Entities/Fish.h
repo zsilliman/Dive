@@ -20,8 +20,14 @@ using namespace cugl;
 using namespace std;
 
 class Fish : public Entity {
+protected:
+	bool is_left = true;
 
 public:
+
+	void setLeft(bool is_left);
+
+	bool isLeft();
 
 	void initFish(Vec2 start_pos, Rect map_rect);
 

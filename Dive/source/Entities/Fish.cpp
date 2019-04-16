@@ -40,11 +40,16 @@ void Fish::initFish(Vec2 start_pos, Rect map_rect) {
 	_box_dup->setFixedRotation(true);
 }
 
+void Fish::setLeft(bool is_left) { this->is_left = is_left; }
+
+bool Fish::isLeft() { return is_left; }
+
 shared_ptr<Fish> Fish::alloc(Vec2 start_pos, Rect map_rect, int index) {
 	shared_ptr<Fish> fish = make_shared<Fish>();
 	fish->initFish(start_pos, map_rect);
     string name = "fish";
     fish->setName(name.append(std::to_string(index)));
+	fish->setLeft(true);
 	return fish;
 }
 

@@ -219,7 +219,7 @@ void GameScene::buildScene() {
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
     shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
 
-	_gamestate = _assets->get<GameState>("sample_level");
+	_gamestate = _assets->get<GameState>("very_hard_level");
 	_gamestate->initPhysics(_world);
     _world->activateCollisionCallbacks(true);
     _world->onBeginContact = [this](b2Contact* contact) {
@@ -317,6 +317,7 @@ void GameScene::buildScene() {
 
 void GameScene::reset() {
 	_gamestate->reset();
+	_player_vc->setAIDirection(_gamestate, "down");
 	setState(PLAY);
 	CULog("Reset");
 }

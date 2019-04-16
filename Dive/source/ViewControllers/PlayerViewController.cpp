@@ -47,6 +47,7 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	player_vc->_node->addChild(player_vc->_dup_node);
     
     player_vc->_mainCycle = true;
+	player_vc->setAIDirection(init_state, "down");
 
 	return player_vc;
 }
