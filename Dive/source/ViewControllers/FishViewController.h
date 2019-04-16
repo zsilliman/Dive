@@ -38,4 +38,9 @@ public:
 	void kill(shared_ptr<Fish> fish);
 
 	void revive(shared_ptr<Fish> fish);
+    
+    void setDirection(shared_ptr<Fish> fish);
+    
+    void setInitialVelocity(shared_ptr<GameState> state, Vec2 vel);
+
 };

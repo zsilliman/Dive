@@ -53,6 +53,13 @@ void Entity::reset() {
 	revive();
 }
 
+void Entity::changeDirection() {
+    int x = _box->getLinearVelocity().x;
+    int y = _box->getLinearVelocity().y;
+    _box->setLinearVelocity(Vec2(-x, y));
+    _box_dup->setLinearVelocity(Vec2(-x, y));
+}
+
 Rect Entity::getBoxRect(shared_ptr<Obstacle> box) {
 	Size size = Size(_dimensions);
 	Vec2 pos = box->getPosition() - (size / 2);

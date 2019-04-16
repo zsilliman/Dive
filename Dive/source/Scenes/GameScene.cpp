@@ -142,8 +142,6 @@ void GameScene::update(float timestep) {
     //else if (bd2->getName().find("fish") != string::npos) {
     if(_fish_remove != -1){
         CULog("setting dead fish %d", _fish_remove);
-//        _to_remove->setDead(true);
-//        _to_remove = _dummy_fish;
         _fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
         _fish_remove = -1;
         CULog("fish dead num  %d", _fish_remove);
@@ -165,6 +163,7 @@ void GameScene::update(float timestep) {
     } else if (_countdown == 0) {
         reset();
     }
+    _fish_countdown--;
 }
 
 void GameScene::setState(State state) {
@@ -202,6 +201,7 @@ void GameScene::buildScene() {
     _prev_diver_angle = 179;
     _fish_remove = -1;
 	_angler_remove = -1;
+    _fish_countdown = 10;
     
     
     CULog("set block counter");
@@ -261,6 +261,10 @@ void GameScene::buildScene() {
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
 		_fish_vcs.push_back(_fish_vc);
 	}
+    
+//    for (int i = 0; i < _fish_vcs.size(); i++) {
+//        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
+//    }
 
 	//Create Fish viewcontrollers
 	_angler_vcs = {};
@@ -320,6 +324,9 @@ void GameScene::reset() {
 	_player_vc->setAIDirection(_gamestate, "down");
 	setState(PLAY);
 	CULog("Reset");
+    for (int i = 0; i < _fish_vcs.size(); i++) {
+        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
+    }
 }
 
 /**
@@ -338,18 +345,16 @@ void GameScene::beginContact(b2Contact* contact) {
     b2Body* body1 = fix1->GetBody();
     b2Body* body2 = fix2->GetBody();
     
-    void* fd1 = fix1->GetUserData();
-    void* fd2 = fix2->GetUserData();
+//    void* fd1 = fix1->GetUserData();
+//    void* fd2 = fix2->GetUserData();
     
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
-            //setLost(true);
 			setState(LOSE);
         }
-        //if it contains "fish"
         else if (bd2->getName().find("fish") != string::npos) {
             setState(LOSE);
         }
@@ -358,13 +363,10 @@ void GameScene::beginContact(b2Contact* contact) {
 		}
         else if(bd2->getName() == "platform"){
             _block_counter++;
-            CULog("player/platform 1");
             _player_vc->setAIDirection(_gamestate, "right");
             _playerFloor = true;
-            //change ai
         }
         else if(bd2->getName() == "goal"){
-            //setComplete(true);
 			setState(WIN);
         }
     }
@@ -373,33 +375,25 @@ void GameScene::beginContact(b2Contact* contact) {
 			setState(LOSE);
         }
         else if (bd2->getName().find("fish") != string::npos) {
-            char num = bd2->getName().back();
-            _fish_remove = num-'0';
+            fishUrchinCollisions(bd2, bd1);
         }
 		else if (bd2->getName().find("angler") != string::npos) {
-			char num = bd2->getName().back();
-			_angler_remove = num - '0';
-		}
+            anglerUrchinCollisions(bd2, bd1);
+        }
     }
     else if (bd1->getName().find("fish") != string::npos) {
         if(bd2->getName() == "player"){
-            //setLost(true);
 			setState(LOSE);
         }
         else if(bd2->getName() == "urchin") {
-            char num = bd1->getName().back();
-            _fish_remove = num-'0';
-        }
-        else if(bd2->getName().find("fish") != string::npos) {
-            //fish on fish--- ignore?
+            fishUrchinCollisions(bd1, bd2);
         }
 		else if (bd2->getName().find("angler") != string::npos) {
-            CULog("fish angler 1");
-            char num = bd1->getName().back();
-            _fish_remove = num-'0';
-            char num2 = bd2->getName().back();
-            _angler_remove = num2-'0';
+            fishAnglerCollisions(bd1, bd2);
 		}
+        else if (bd2->getName() == "platform"){
+            fishPlatformCollisions(bd1, bd2);
+        }
     }
 	else if (bd1->getName().find("angler") != string::npos) {
 		if (bd2->getName() == "player") {
@@ -410,35 +404,56 @@ void GameScene::beginContact(b2Contact* contact) {
 			_angler_remove = num - '0';
 		}
 		else if (bd2->getName().find("fish") != string::npos) {
-            CULog("fish angler 2");
-            char num = bd2->getName().back();
-            _fish_remove = num-'0';
-            char num2 = bd1->getName().back();
-            _angler_remove = num2-'0';
-		}
-		else if (bd2->getName().find("angler") != string::npos) {
-			//angler on angler--- ignore?
+            fishAnglerCollisions(bd2, bd1);
 		}
 	}
     else if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
+            //diverPlatformCollisions(bd2, bd1);
+            
             _block_counter++;
-            //change ai direction
-            CULog("player/platform 2");
-			_player_vc->setAIDirection(_gamestate, "right");
+            _player_vc->setAIDirection(_gamestate, "right");
             _playerFloor = true;
         }
-        else if(bd2->getName() == "platform"){
-            //locking
-            CULog("platform collision!");
+        else if (bd2->getName().find("fish") != string::npos) {
+            fishPlatformCollisions(bd2, bd1);
         }
     }
     else if(bd1->getName() == "goal"){
         if(bd2->getName() == "player"){
-            //setComplete(true);
 			setState(WIN);
         }
     }
+}
+
+void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
+    char num = fish->getName().back();
+    int fishint = num-'0';
+    if(_fish_countdown<=0){
+        _fish_countdown=10;
+        _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
+    }
+}
+
+void GameScene::fishAnglerCollisions(Obstacle* fish, Obstacle* angler){
+    char num = fish->getName().back();
+    _fish_remove = num-'0';
+    char num2 = angler->getName().back();
+    _angler_remove = num2-'0';
+}
+
+void GameScene::fishUrchinCollisions(Obstacle* fish, Obstacle* urchin){
+    char num = fish->getName().back();
+    _fish_remove = num-'0';
+}
+
+void GameScene::anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin){
+    char num = angler->getName().back();
+    _angler_remove = num-'0';
+}
+
+void diverPlatformCollisions(Obstacle* diver, Obstacle* platform){
+    
 }
 
 

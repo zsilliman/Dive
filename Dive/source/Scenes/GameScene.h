@@ -80,6 +80,7 @@ protected:
     int _prev_diver_angle;
     int _fish_remove;
 	int _angler_remove;
+    int _fish_countdown;
 
     //std::shared_ptr<FishViewController> _to_remove;
     //std::shared_ptr<FishViewController> _dummy_fish;
@@ -158,7 +159,16 @@ public:
      */
     void beginContact(b2Contact* contact);
     
+    void fishPlatformCollisions(Obstacle* fish, Obstacle* platform);
     
+    void diverPlatformCollisions(Obstacle* diver, Obstacle* platform);
+    
+    void fishAnglerCollisions(Obstacle* fish, Obstacle* angler);
+    
+    void fishUrchinCollisions(Obstacle* fish, Obstacle* urchin);
+    
+    void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
+
     /**
      * Handles any modifications necessary before collision resolution
      *
