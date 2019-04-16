@@ -8,7 +8,6 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	if (!state->_fish[_fish_index]->isAlive())
 		return;
 
-	state->_fish[_fish_index]->setLinearVelocity(Vec2(-1, 0));
 	state->_fish[_fish_index]->rotateEntity(state->_map->getMapRect());
 	//new version:
 	_oc_node->setPosition(state->_fish[_fish_index]->_box->getPosition() * _grid_size);
@@ -21,10 +20,14 @@ void FishViewController::update(shared_ptr<GameState> state) {
     animateFish();
 }
 
+void FishViewController::setInitialVelocity(shared_ptr<GameState> state, Vec2 vel){
+    state->_fish[_fish_index]->setLinearVelocity(vel);
+}
+
 void FishViewController::dispose() {}
 
 void FishViewController::reset() {
-
+    CULog("fish vc reset");
 }
 
 shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int fish_index) {
@@ -57,24 +60,11 @@ void FishViewController::animateFish(){
         *cycle = false;
     }
     
-//    if (*cycle) {
-//        _oc_node->setFrame(_oc_node->getFrame()+1);
-//    } else {
-//        _oc_node->setFrame(_oc_node->getFrame()-1);
-//    }
-//
-    
     if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
         *cycle = true;
     } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
         *cycle = false;
     }
-    
-//    if (*cycle) {
-//        _dup_node->setFrame(_dup_node->getFrame()+1);
-//    } else {
-//        _dup_node->setFrame(_dup_node->getFrame()-1);
-//    }
 }
 
 void FishViewController::kill(shared_ptr<Fish> fish) {
@@ -85,4 +75,9 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
 void FishViewController::revive(shared_ptr<Fish> fish) {
 	CULog("reviving fish");
 	fish->revive();
+}
+
+void FishViewController::setDirection(shared_ptr<Fish> fish) {
+    CULog("changing fish direction");
+    fish->changeDirection();
 }

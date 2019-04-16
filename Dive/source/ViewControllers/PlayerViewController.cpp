@@ -85,7 +85,6 @@ void PlayerViewController::animatePlayer(){
 }
 
 void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string direction) {
-    CULog("setting direction to %s", direction.c_str());
     if(direction == "down"){
         state->_player->setLinearVelocity(Vec2(0, -PLAYER_VERTICAL_SPEED));
     }

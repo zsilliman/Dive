@@ -42,6 +42,7 @@ public:
 	bool isAlive();
 	virtual void kill();
 	virtual void revive();
+    virtual void changeDirection();
 
 	string getName();
 
