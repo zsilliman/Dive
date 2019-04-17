@@ -71,8 +71,6 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	if (lin_vel.length() > 0.01)
 		angle = lin_vel.getAngle();
 	angle += PI;
-	CULog("angle");
-	CULog(std::to_string(angle).c_str());
 	if (angle < PI/2 && angle > -PI/2) {
 		_oc_node->flipVertical(false);
 		_dup_node->flipVertical(false);

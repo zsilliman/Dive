@@ -79,6 +79,9 @@ void GameState::reset() {
 	}
 }
 
+void GameState::setLevel(string level){
+}
+
 void GameState::initPhysics(const shared_ptr<ObstacleWorld> world) {
 	_map->initPhysics(world);
 	_player->initPhysics(world);

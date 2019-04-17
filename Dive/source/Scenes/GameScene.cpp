@@ -72,7 +72,7 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
     _input = make_shared<InputController>();
     _input->init();
 
-	buildScene();
+	buildScene("easy_level");
 
     return true;
 }
@@ -184,7 +184,32 @@ void GameScene::setState(State state) {
 	current_state = state;
 }
 
-void GameScene::buildScene() {
+string GameScene::cycleLevel(){
+    string level;
+    if(_current_level == "easy_level"){
+        CULog("setting medium");
+        level = "medium_level";
+    }
+    else if(_current_level == "medium_level"){
+        CULog("setting hard");
+        level = "hard_level";
+    }
+    else if(_current_level == "hard_level"){
+        CULog("setting v hard");
+        level = "very_hard_level";
+    }
+    else if(_current_level == "very_hard_level"){
+        CULog("setting easy");
+        level = "easy_level";
+    }
+    else{
+        CULog("bad level");
+        level = "easy_level";
+    }
+    return level;
+}
+
+void GameScene::buildScene(string level) {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
@@ -202,7 +227,7 @@ void GameScene::buildScene() {
     _fish_remove = -1;
 	_angler_remove = -1;
     _fish_countdown = 10;
-    
+    _current_level = level;
     
     CULog("set block counter");
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
@@ -219,7 +244,7 @@ void GameScene::buildScene() {
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
     shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
 
-	_gamestate = _assets->get<GameState>("very_hard_level");
+	_gamestate = _assets->get<GameState>(level);
 	_gamestate->initPhysics(_world);
     _world->activateCollisionCallbacks(true);
     _world->onBeginContact = [this](b2Contact* contact) {
@@ -261,10 +286,6 @@ void GameScene::buildScene() {
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
 		_fish_vcs.push_back(_fish_vc);
 	}
-    
-//    for (int i = 0; i < _fish_vcs.size(); i++) {
-//        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
-//    }
 
 	//Create Fish viewcontrollers
 	_angler_vcs = {};
@@ -320,13 +341,21 @@ void GameScene::buildScene() {
 }
 
 void GameScene::reset() {
-	_gamestate->reset();
-	_player_vc->setAIDirection(_gamestate, "down");
-	setState(PLAY);
-	CULog("Reset");
-    for (int i = 0; i < _fish_vcs.size(); i++) {
-        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
+    if(current_state == WIN){
+        CULog("cycling level");
+        _current_level = cycleLevel();
     }
+    else{
+        CULog("not in win state %d", current_state);
+    }
+    _gamestate->reset();
+    _player_vc->setAIDirection(_gamestate, "down");
+    //setState(PLAY);
+    CULog("Reset");
+//    for (int i = 0; i < _fish_vcs.size(); i++) {
+//        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
+//    }
+    buildScene(_current_level);
 }
 
 /**
@@ -339,6 +368,7 @@ void GameScene::reset() {
  * @param  contact  The two bodies that collided
  */
 void GameScene::beginContact(b2Contact* contact) {
+    CULog("BEGINNING CONTACT");
     b2Fixture* fix1 = contact->GetFixtureA();
     b2Fixture* fix2 = contact->GetFixtureB();
     
@@ -363,6 +393,7 @@ void GameScene::beginContact(b2Contact* contact) {
 		}
         else if(bd2->getName() == "platform"){
             _block_counter++;
+            CULog("inc block counter 2  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, "right");
             _playerFloor = true;
         }
@@ -412,6 +443,7 @@ void GameScene::beginContact(b2Contact* contact) {
             //diverPlatformCollisions(bd2, bd1);
             
             _block_counter++;
+            CULog("inc block counter 1  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, "right");
             _playerFloor = true;
         }
@@ -484,9 +516,14 @@ void GameScene::endContact(b2Contact* contact) {
     if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
             _block_counter--;
+            CULog("dec block counter 1  %d", _block_counter);
+            if(_block_counter<0){
+                _block_counter = 0;
+                CULog("setting block counter to 0.1");
+            }
             //change ai direction
-            CULog("player/platform 1.1");
             if(_block_counter==0){
+                CULog("block counter 0.1");
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }
@@ -495,9 +532,15 @@ void GameScene::endContact(b2Contact* contact) {
     else if(bd1->getName() == "player"){
         if(bd2->getName() == "platform"){
             _block_counter--;
+            CULog("dec block counter 2  %d", _block_counter);
+            if(_block_counter<0){
+                _block_counter = 0;
+                CULog("setting block counter to 0.1");
+            }
             //change ai direction
-            CULog("player/platform 2.1");
             if(_block_counter==0){
+                CULog("block counter 0.2");
+
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }

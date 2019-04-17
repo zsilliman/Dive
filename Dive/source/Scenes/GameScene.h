@@ -81,6 +81,8 @@ protected:
     int _fish_remove;
 	int _angler_remove;
     int _fish_countdown;
+    string _current_level;
+    string _next_level;
 
     //std::shared_ptr<FishViewController> _to_remove;
     //std::shared_ptr<FishViewController> _dummy_fish;
@@ -88,7 +90,7 @@ protected:
 	int frame_counter = 0;
 
 	//Setting up the scene
-	void buildScene();
+	void buildScene(string level);
     
     bool _playerFloor;
     
@@ -168,6 +170,8 @@ public:
     void fishUrchinCollisions(Obstacle* fish, Obstacle* urchin);
     
     void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
+    
+    string cycleLevel();
 
     /**
      * Handles any modifications necessary before collision resolution
