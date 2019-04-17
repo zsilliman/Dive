@@ -67,6 +67,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     level3->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 3 selected");
+            this->_counter++;
         }
     });
     level4 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level4"));
