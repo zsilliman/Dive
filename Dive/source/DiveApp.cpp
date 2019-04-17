@@ -150,6 +150,10 @@ void DiveApp::update(float timestep) {
         _loading.dispose(); // Disables the input listeners in this mode
         _title.init(_assets);
         _loaded = true;
+        //
+        _title.dispose();
+        _gameplay.init(_assets);
+        _animationplayed = true;
     }
     else if (!_animationplayed && _title.isActive()){
         _title.update(timestep);
