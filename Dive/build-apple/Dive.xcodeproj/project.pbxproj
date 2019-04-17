@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		344B56E0224C19B300D51676 /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56DB224C19B300D51676 /* AIController.cpp */; };
-		344B56E1224C19B300D51676 /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56DB224C19B300D51676 /* AIController.cpp */; };
-		344B56E2224C19B300D51676 /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56DB224C19B300D51676 /* AIController.cpp */; };
 		344B56EA224C1AE700D51676 /* GamestateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56E8224C1AE700D51676 /* GamestateLoader.cpp */; };
 		344B56EB224C1AE700D51676 /* GamestateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56E8224C1AE700D51676 /* GamestateLoader.cpp */; };
 		344B56EC224C1AE700D51676 /* GamestateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56E8224C1AE700D51676 /* GamestateLoader.cpp */; };
@@ -25,15 +22,6 @@
 		76F0B474224A785100EBF3E9 /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D022483449002E0E84 /* Player.cpp */; };
 		76F0B475224A785300EBF3E9 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D222483449002E0E84 /* Entity.cpp */; };
 		76F0B476224A785500EBF3E9 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D422483449002E0E84 /* Urchin.cpp */; };
-		76F0B477224A785B00EBF3E9 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D922483449002E0E84 /* InputController.cpp */; };
-		76F0B478224A785E00EBF3E9 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */; };
-		76F0B479224A786200EBF3E9 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */; };
-		76F0B47A224A786500EBF3E9 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */; };
-		76F0B47B224A786800EBF3E9 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */; };
-		76F0B47C224A786A00EBF3E9 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E122483449002E0E84 /* GridRowViewController.cpp */; };
-		76F0B47D224A786D00EBF3E9 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E422483449002E0E84 /* PlayerViewController.cpp */; };
-		76F0B47E224A786F00EBF3E9 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E922483449002E0E84 /* FishViewController.cpp */; };
-		76F0B47F224A787200EBF3E9 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EA22483449002E0E84 /* GoalViewController.cpp */; };
 		76F0B480224A787800EBF3E9 /* TiledTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F222483449002E0E84 /* TiledTexture.cpp */; };
 		76F0B481224A787A00EBF3E9 /* PlatformObstacle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F322483449002E0E84 /* PlatformObstacle.cpp */; };
 		76F0B482224A787E00EBF3E9 /* GridMap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F622483449002E0E84 /* GridMap.cpp */; };
@@ -118,24 +106,6 @@
 		EF0E170522483449002E0E84 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D222483449002E0E84 /* Entity.cpp */; };
 		EF0E170622483449002E0E84 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D422483449002E0E84 /* Urchin.cpp */; };
 		EF0E170722483449002E0E84 /* Urchin.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D422483449002E0E84 /* Urchin.cpp */; };
-		EF0E170822483449002E0E84 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D922483449002E0E84 /* InputController.cpp */; };
-		EF0E170922483449002E0E84 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16D922483449002E0E84 /* InputController.cpp */; };
-		EF0E170A22483449002E0E84 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */; };
-		EF0E170B22483449002E0E84 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */; };
-		EF0E170C22483449002E0E84 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */; };
-		EF0E170D22483449002E0E84 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */; };
-		EF0E170E22483449002E0E84 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */; };
-		EF0E170F22483449002E0E84 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */; };
-		EF0E171022483449002E0E84 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E122483449002E0E84 /* GridRowViewController.cpp */; };
-		EF0E171122483449002E0E84 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E122483449002E0E84 /* GridRowViewController.cpp */; };
-		EF0E171222483449002E0E84 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E422483449002E0E84 /* PlayerViewController.cpp */; };
-		EF0E171322483449002E0E84 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E422483449002E0E84 /* PlayerViewController.cpp */; };
-		EF0E171422483449002E0E84 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */; };
-		EF0E171522483449002E0E84 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */; };
-		EF0E171622483449002E0E84 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E922483449002E0E84 /* FishViewController.cpp */; };
-		EF0E171722483449002E0E84 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16E922483449002E0E84 /* FishViewController.cpp */; };
-		EF0E171822483449002E0E84 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EA22483449002E0E84 /* GoalViewController.cpp */; };
-		EF0E171922483449002E0E84 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EA22483449002E0E84 /* GoalViewController.cpp */; };
 		EF0E171A22483449002E0E84 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EF22483449002E0E84 /* LoadingScene.cpp */; };
 		EF0E171B22483449002E0E84 /* LoadingScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16EF22483449002E0E84 /* LoadingScene.cpp */; };
 		EF0E171C22483449002E0E84 /* GameScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF0E16F022483449002E0E84 /* GameScene.cpp */; };
@@ -165,10 +135,30 @@
 		EF84BE352233641900A1FE5A /* json in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE332233641900A1FE5A /* json */; };
 		EFC949F82262DC450096B686 /* Angler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFC949F62262DC440096B686 /* Angler.cpp */; };
 		EFC949F92262DC450096B686 /* Angler.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFC949F62262DC440096B686 /* Angler.cpp */; };
-		EFC949FC2262DC580096B686 /* AnglerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFC949FB2262DC580096B686 /* AnglerViewController.cpp */; };
-		EFC949FD2262DC580096B686 /* AnglerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFC949FB2262DC580096B686 /* AnglerViewController.cpp */; };
 		EFE1A5C322668DA700BCC857 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A5C122668DA700BCC857 /* MainMenuScene.cpp */; };
 		EFE1A5C422668DA700BCC857 /* MainMenuScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A5C122668DA700BCC857 /* MainMenuScene.cpp */; };
+		EFE1A63C2267701500BCC857 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6222267701500BCC857 /* InputController.cpp */; };
+		EFE1A63D2267701500BCC857 /* InputController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6222267701500BCC857 /* InputController.cpp */; };
+		EFE1A63E2267701500BCC857 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6232267701500BCC857 /* UrchinViewController.cpp */; };
+		EFE1A63F2267701500BCC857 /* UrchinViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6232267701500BCC857 /* UrchinViewController.cpp */; };
+		EFE1A6402267701500BCC857 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6242267701500BCC857 /* PlatformViewController.cpp */; };
+		EFE1A6412267701500BCC857 /* PlatformViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6242267701500BCC857 /* PlatformViewController.cpp */; };
+		EFE1A6422267701500BCC857 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6292267701500BCC857 /* GridMapViewController.cpp */; };
+		EFE1A6432267701500BCC857 /* GridMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6292267701500BCC857 /* GridMapViewController.cpp */; };
+		EFE1A6442267701500BCC857 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62B2267701500BCC857 /* GridRowViewController.cpp */; };
+		EFE1A6452267701500BCC857 /* GridRowViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62B2267701500BCC857 /* GridRowViewController.cpp */; };
+		EFE1A6462267701500BCC857 /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62D2267701500BCC857 /* AIController.cpp */; };
+		EFE1A6472267701500BCC857 /* AIController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62D2267701500BCC857 /* AIController.cpp */; };
+		EFE1A6482267701500BCC857 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62F2267701500BCC857 /* PlayerViewController.cpp */; };
+		EFE1A6492267701500BCC857 /* PlayerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A62F2267701500BCC857 /* PlayerViewController.cpp */; };
+		EFE1A64A2267701500BCC857 /* AnglerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6302267701500BCC857 /* AnglerViewController.cpp */; };
+		EFE1A64B2267701500BCC857 /* AnglerViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6302267701500BCC857 /* AnglerViewController.cpp */; };
+		EFE1A64C2267701500BCC857 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6332267701500BCC857 /* PlatformMapViewController.cpp */; };
+		EFE1A64D2267701500BCC857 /* PlatformMapViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6332267701500BCC857 /* PlatformMapViewController.cpp */; };
+		EFE1A64E2267701500BCC857 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6362267701500BCC857 /* FishViewController.cpp */; };
+		EFE1A64F2267701500BCC857 /* FishViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6362267701500BCC857 /* FishViewController.cpp */; };
+		EFE1A6502267701500BCC857 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6372267701500BCC857 /* GoalViewController.cpp */; };
+		EFE1A6512267701500BCC857 /* GoalViewController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFE1A6372267701500BCC857 /* GoalViewController.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,8 +186,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		344B56DB224C19B300D51676 /* AIController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIController.cpp; sourceTree = "<group>"; };
-		344B56DF224C19B300D51676 /* AIController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIController.hpp; sourceTree = "<group>"; };
 		344B56E8224C1AE700D51676 /* GamestateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamestateLoader.cpp; sourceTree = "<group>"; };
 		344B56E9224C1AE700D51676 /* GamestateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamestateLoader.h; sourceTree = "<group>"; };
 		7635CAD6224C265900E1A8DE /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
@@ -255,25 +243,6 @@
 		EF0E16D522483449002E0E84 /* Urchin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Urchin.h; sourceTree = "<group>"; };
 		EF0E16D622483449002E0E84 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
 		EF0E16D722483449002E0E84 /* Fish.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Fish.h; sourceTree = "<group>"; };
-		EF0E16D922483449002E0E84 /* InputController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputController.cpp; sourceTree = "<group>"; };
-		EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UrchinViewController.cpp; sourceTree = "<group>"; };
-		EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformViewController.cpp; sourceTree = "<group>"; };
-		EF0E16DC22483449002E0E84 /* GridRowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRowViewController.h; sourceTree = "<group>"; };
-		EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformMapViewController.h; sourceTree = "<group>"; };
-		EF0E16DE22483449002E0E84 /* GridMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridMapViewController.h; sourceTree = "<group>"; };
-		EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridMapViewController.cpp; sourceTree = "<group>"; };
-		EF0E16E022483449002E0E84 /* PlatformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformViewController.h; sourceTree = "<group>"; };
-		EF0E16E122483449002E0E84 /* GridRowViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridRowViewController.cpp; sourceTree = "<group>"; };
-		EF0E16E222483449002E0E84 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
-		EF0E16E322483449002E0E84 /* FishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishViewController.h; sourceTree = "<group>"; };
-		EF0E16E422483449002E0E84 /* PlayerViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerViewController.cpp; sourceTree = "<group>"; };
-		EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformMapViewController.cpp; sourceTree = "<group>"; };
-		EF0E16E622483449002E0E84 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
-		EF0E16E722483449002E0E84 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
-		EF0E16E822483449002E0E84 /* UrchinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrchinViewController.h; sourceTree = "<group>"; };
-		EF0E16E922483449002E0E84 /* FishViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishViewController.cpp; sourceTree = "<group>"; };
-		EF0E16EA22483449002E0E84 /* GoalViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoalViewController.cpp; sourceTree = "<group>"; };
-		EF0E16EB22483449002E0E84 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		EF0E16ED22483449002E0E84 /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		EF0E16EE22483449002E0E84 /* LoadingScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoadingScene.h; sourceTree = "<group>"; };
 		EF0E16EF22483449002E0E84 /* LoadingScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LoadingScene.cpp; sourceTree = "<group>"; };
@@ -303,10 +272,31 @@
 		EF84BE332233641900A1FE5A /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
 		EFC949F62262DC440096B686 /* Angler.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Angler.cpp; sourceTree = "<group>"; };
 		EFC949F72262DC450096B686 /* Angler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Angler.h; sourceTree = "<group>"; };
-		EFC949FA2262DC580096B686 /* AnglerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnglerViewController.h; sourceTree = "<group>"; };
-		EFC949FB2262DC580096B686 /* AnglerViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnglerViewController.cpp; sourceTree = "<group>"; };
 		EFE1A5C122668DA700BCC857 /* MainMenuScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MainMenuScene.cpp; sourceTree = "<group>"; };
 		EFE1A5C222668DA700BCC857 /* MainMenuScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MainMenuScene.hpp; sourceTree = "<group>"; };
+		EFE1A6222267701500BCC857 /* InputController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InputController.cpp; sourceTree = "<group>"; };
+		EFE1A6232267701500BCC857 /* UrchinViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UrchinViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6242267701500BCC857 /* PlatformViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6252267701500BCC857 /* InputController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputController.h; sourceTree = "<group>"; };
+		EFE1A6262267701500BCC857 /* GridRowViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridRowViewController.h; sourceTree = "<group>"; };
+		EFE1A6272267701500BCC857 /* PlatformMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformMapViewController.h; sourceTree = "<group>"; };
+		EFE1A6282267701500BCC857 /* GridMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GridMapViewController.h; sourceTree = "<group>"; };
+		EFE1A6292267701500BCC857 /* GridMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridMapViewController.cpp; sourceTree = "<group>"; };
+		EFE1A62A2267701500BCC857 /* PlatformViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlatformViewController.h; sourceTree = "<group>"; };
+		EFE1A62B2267701500BCC857 /* GridRowViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GridRowViewController.cpp; sourceTree = "<group>"; };
+		EFE1A62C2267701500BCC857 /* PlayerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerViewController.h; sourceTree = "<group>"; };
+		EFE1A62D2267701500BCC857 /* AIController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AIController.cpp; sourceTree = "<group>"; };
+		EFE1A62E2267701500BCC857 /* FishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FishViewController.h; sourceTree = "<group>"; };
+		EFE1A62F2267701500BCC857 /* PlayerViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlayerViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6302267701500BCC857 /* AnglerViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = AnglerViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6312267701500BCC857 /* AIController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIController.hpp; sourceTree = "<group>"; };
+		EFE1A6322267701500BCC857 /* AnglerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnglerViewController.h; sourceTree = "<group>"; };
+		EFE1A6332267701500BCC857 /* PlatformMapViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = PlatformMapViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6342267701500BCC857 /* GoalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GoalViewController.h; sourceTree = "<group>"; };
+		EFE1A6352267701500BCC857 /* UrchinViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UrchinViewController.h; sourceTree = "<group>"; };
+		EFE1A6362267701500BCC857 /* FishViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FishViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6372267701500BCC857 /* GoalViewController.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GoalViewController.cpp; sourceTree = "<group>"; };
+		EFE1A6382267701500BCC857 /* ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -518,7 +508,7 @@
 				EF660E03223357A600A7432C /* GameState.cpp */,
 				EF0E16CF22483449002E0E84 /* Entities */,
 				EF0E16EC22483449002E0E84 /* Scenes */,
-				EF0E16D822483449002E0E84 /* ViewControllers */,
+				EFE1A6212267701500BCC857 /* ViewControllers */,
 				EF0E16F122483449002E0E84 /* World */,
 			);
 			name = Source;
@@ -540,36 +530,6 @@
 				EF0E16D522483449002E0E84 /* Urchin.h */,
 			);
 			path = Entities;
-			sourceTree = "<group>";
-		};
-		EF0E16D822483449002E0E84 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				344B56DB224C19B300D51676 /* AIController.cpp */,
-				344B56DF224C19B300D51676 /* AIController.hpp */,
-				EFC949FB2262DC580096B686 /* AnglerViewController.cpp */,
-				EFC949FA2262DC580096B686 /* AnglerViewController.h */,
-				EF0E16D922483449002E0E84 /* InputController.cpp */,
-				EF0E16E622483449002E0E84 /* InputController.h */,
-				EF0E16DD22483449002E0E84 /* PlatformMapViewController.h */,
-				EF0E16E522483449002E0E84 /* PlatformMapViewController.cpp */,
-				EF0E16DB22483449002E0E84 /* PlatformViewController.cpp */,
-				EF0E16DC22483449002E0E84 /* GridRowViewController.h */,
-				EF0E16DE22483449002E0E84 /* GridMapViewController.h */,
-				EF0E16DF22483449002E0E84 /* GridMapViewController.cpp */,
-				EF0E16E022483449002E0E84 /* PlatformViewController.h */,
-				EF0E16E122483449002E0E84 /* GridRowViewController.cpp */,
-				EF0E16E222483449002E0E84 /* PlayerViewController.h */,
-				EF0E16E422483449002E0E84 /* PlayerViewController.cpp */,
-				EF0E16E722483449002E0E84 /* GoalViewController.h */,
-				EF0E16E822483449002E0E84 /* UrchinViewController.h */,
-				EF0E16DA22483449002E0E84 /* UrchinViewController.cpp */,
-				EF0E16E322483449002E0E84 /* FishViewController.h */,
-				EF0E16E922483449002E0E84 /* FishViewController.cpp */,
-				EF0E16EA22483449002E0E84 /* GoalViewController.cpp */,
-				EF0E16EB22483449002E0E84 /* ViewController.h */,
-			);
-			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		EF0E16EC22483449002E0E84 /* Scenes */ = {
@@ -606,6 +566,36 @@
 				EF0E16FF22483449002E0E84 /* Platform.h */,
 			);
 			path = World;
+			sourceTree = "<group>";
+		};
+		EFE1A6212267701500BCC857 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				EFE1A6222267701500BCC857 /* InputController.cpp */,
+				EFE1A6232267701500BCC857 /* UrchinViewController.cpp */,
+				EFE1A6242267701500BCC857 /* PlatformViewController.cpp */,
+				EFE1A6252267701500BCC857 /* InputController.h */,
+				EFE1A6262267701500BCC857 /* GridRowViewController.h */,
+				EFE1A6272267701500BCC857 /* PlatformMapViewController.h */,
+				EFE1A6282267701500BCC857 /* GridMapViewController.h */,
+				EFE1A6292267701500BCC857 /* GridMapViewController.cpp */,
+				EFE1A62A2267701500BCC857 /* PlatformViewController.h */,
+				EFE1A62B2267701500BCC857 /* GridRowViewController.cpp */,
+				EFE1A62C2267701500BCC857 /* PlayerViewController.h */,
+				EFE1A62D2267701500BCC857 /* AIController.cpp */,
+				EFE1A62E2267701500BCC857 /* FishViewController.h */,
+				EFE1A62F2267701500BCC857 /* PlayerViewController.cpp */,
+				EFE1A6302267701500BCC857 /* AnglerViewController.cpp */,
+				EFE1A6312267701500BCC857 /* AIController.hpp */,
+				EFE1A6322267701500BCC857 /* AnglerViewController.h */,
+				EFE1A6332267701500BCC857 /* PlatformMapViewController.cpp */,
+				EFE1A6342267701500BCC857 /* GoalViewController.h */,
+				EFE1A6352267701500BCC857 /* UrchinViewController.h */,
+				EFE1A6362267701500BCC857 /* FishViewController.cpp */,
+				EFE1A6372267701500BCC857 /* GoalViewController.cpp */,
+				EFE1A6382267701500BCC857 /* ViewController.h */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -792,31 +782,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				76F0B481224A787A00EBF3E9 /* PlatformObstacle.cpp in Sources */,
-				76F0B47F224A787200EBF3E9 /* GoalViewController.cpp in Sources */,
-				76F0B47B224A786800EBF3E9 /* GridMapViewController.cpp in Sources */,
-				76F0B478224A785E00EBF3E9 /* PlatformMapViewController.cpp in Sources */,
 				76F0B487224A788E00EBF3E9 /* GameScene.cpp in Sources */,
-				76F0B47E224A786F00EBF3E9 /* FishViewController.cpp in Sources */,
 				76F0B480224A787800EBF3E9 /* TiledTexture.cpp in Sources */,
 				76F0B484224A788200EBF3E9 /* GridRow.cpp in Sources */,
 				76F0B486224A788800EBF3E9 /* PlatformMap.cpp in Sources */,
-				344B56E2224C19B300D51676 /* AIController.cpp in Sources */,
 				76F0B476224A785500EBF3E9 /* Urchin.cpp in Sources */,
 				76F0B474224A785100EBF3E9 /* Player.cpp in Sources */,
 				766CD9D5223825F70020E734 /* GameState.cpp in Sources */,
 				344B56EC224C1AE700D51676 /* GamestateLoader.cpp in Sources */,
-				76F0B477224A785B00EBF3E9 /* InputController.cpp in Sources */,
 				EB0FF61D2016F06000517030 /* main.cpp in Sources */,
-				76F0B479224A786200EBF3E9 /* UrchinViewController.cpp in Sources */,
-				76F0B47A224A786500EBF3E9 /* PlatformViewController.cpp in Sources */,
 				76F0B475224A785300EBF3E9 /* Entity.cpp in Sources */,
 				76F0B483224A788100EBF3E9 /* Platform.cpp in Sources */,
 				76F0B482224A787E00EBF3E9 /* GridMap.cpp in Sources */,
 				766CD9D4223825F50020E734 /* DiveApp.cpp in Sources */,
 				76F0B485224A788600EBF3E9 /* Goal.cpp in Sources */,
 				76F0B488224A789000EBF3E9 /* LoadingScene.cpp in Sources */,
-				76F0B47D224A786D00EBF3E9 /* PlayerViewController.cpp in Sources */,
-				76F0B47C224A786A00EBF3E9 /* GridRowViewController.cpp in Sources */,
 				76F0B489224A78FE00EBF3E9 /* Fish.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -826,36 +806,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1AEFB3224BC0A10037161C /* TitleAnimationScene.cpp in Sources */,
+				EFE1A6412267701500BCC857 /* PlatformViewController.cpp in Sources */,
 				EF0E171F22483449002E0E84 /* TiledTexture.cpp in Sources */,
-				EF0E170F22483449002E0E84 /* GridMapViewController.cpp in Sources */,
-				EF0E170922483449002E0E84 /* InputController.cpp in Sources */,
 				EF0E170122483449002E0E84 /* Player.cpp in Sources */,
-				EF0E171722483449002E0E84 /* FishViewController.cpp in Sources */,
 				EF660E2C223357A700A7432C /* GameState.cpp in Sources */,
 				EF0E170722483449002E0E84 /* Urchin.cpp in Sources */,
 				EB7454AE1D74D891002FBAE6 /* main.cpp in Sources */,
 				344BD8D6223DE108007792E6 /* DiveApp.cpp in Sources */,
+				EFE1A6432267701500BCC857 /* GridMapViewController.cpp in Sources */,
 				EF0E172B2248344A002E0E84 /* PlatformMap.cpp in Sources */,
-				EFC949FD2262DC580096B686 /* AnglerViewController.cpp in Sources */,
-				EF0E170B22483449002E0E84 /* UrchinViewController.cpp in Sources */,
+				EFE1A64B2267701500BCC857 /* AnglerViewController.cpp in Sources */,
 				EF0E172522483449002E0E84 /* Platform.cpp in Sources */,
-				EF0E171922483449002E0E84 /* GoalViewController.cpp in Sources */,
 				EF0E17292248344A002E0E84 /* Goal.cpp in Sources */,
 				EF0E172122483449002E0E84 /* PlatformObstacle.cpp in Sources */,
-				EF0E170D22483449002E0E84 /* PlatformViewController.cpp in Sources */,
 				EF0E170522483449002E0E84 /* Entity.cpp in Sources */,
+				EFE1A6472267701500BCC857 /* AIController.cpp in Sources */,
 				344B56EB224C1AE700D51676 /* GamestateLoader.cpp in Sources */,
+				EFE1A64D2267701500BCC857 /* PlatformMapViewController.cpp in Sources */,
 				EFC949F92262DC450096B686 /* Angler.cpp in Sources */,
 				EF0E170322483449002E0E84 /* Fish.cpp in Sources */,
+				EFE1A64F2267701500BCC857 /* FishViewController.cpp in Sources */,
+				EFE1A6492267701500BCC857 /* PlayerViewController.cpp in Sources */,
 				EF0E171B22483449002E0E84 /* LoadingScene.cpp in Sources */,
 				EF0E172722483449002E0E84 /* GridRow.cpp in Sources */,
-				344B56E1224C19B300D51676 /* AIController.cpp in Sources */,
-				EF0E171322483449002E0E84 /* PlayerViewController.cpp in Sources */,
-				EF0E171522483449002E0E84 /* PlatformMapViewController.cpp in Sources */,
+				EFE1A63D2267701500BCC857 /* InputController.cpp in Sources */,
+				EFE1A6512267701500BCC857 /* GoalViewController.cpp in Sources */,
 				EF0E171D22483449002E0E84 /* GameScene.cpp in Sources */,
-				EF0E171122483449002E0E84 /* GridRowViewController.cpp in Sources */,
+				EFE1A63F2267701500BCC857 /* UrchinViewController.cpp in Sources */,
 				EF0E172322483449002E0E84 /* GridMap.cpp in Sources */,
 				EFE1A5C422668DA700BCC857 /* MainMenuScene.cpp in Sources */,
+				EFE1A6452267701500BCC857 /* GridRowViewController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -864,36 +844,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF1AEFB2224BC0A10037161C /* TitleAnimationScene.cpp in Sources */,
+				EFE1A6402267701500BCC857 /* PlatformViewController.cpp in Sources */,
 				EF0E171E22483449002E0E84 /* TiledTexture.cpp in Sources */,
-				EF0E170E22483449002E0E84 /* GridMapViewController.cpp in Sources */,
-				EF0E170822483449002E0E84 /* InputController.cpp in Sources */,
 				EF0E170022483449002E0E84 /* Player.cpp in Sources */,
-				EF0E171622483449002E0E84 /* FishViewController.cpp in Sources */,
 				EF660E2B223357A700A7432C /* GameState.cpp in Sources */,
 				EF0E170622483449002E0E84 /* Urchin.cpp in Sources */,
 				EB2BE9B61D74952A002FE78B /* main.cpp in Sources */,
 				EF396FB32228CCF200FE0998 /* DiveApp.cpp in Sources */,
+				EFE1A6422267701500BCC857 /* GridMapViewController.cpp in Sources */,
 				EF0E172A2248344A002E0E84 /* PlatformMap.cpp in Sources */,
-				EFC949FC2262DC580096B686 /* AnglerViewController.cpp in Sources */,
-				EF0E170A22483449002E0E84 /* UrchinViewController.cpp in Sources */,
+				EFE1A64A2267701500BCC857 /* AnglerViewController.cpp in Sources */,
 				EF0E172422483449002E0E84 /* Platform.cpp in Sources */,
-				EF0E171822483449002E0E84 /* GoalViewController.cpp in Sources */,
 				EF0E17282248344A002E0E84 /* Goal.cpp in Sources */,
 				EF0E172022483449002E0E84 /* PlatformObstacle.cpp in Sources */,
-				EF0E170C22483449002E0E84 /* PlatformViewController.cpp in Sources */,
 				EF0E170422483449002E0E84 /* Entity.cpp in Sources */,
+				EFE1A6462267701500BCC857 /* AIController.cpp in Sources */,
 				344B56EA224C1AE700D51676 /* GamestateLoader.cpp in Sources */,
+				EFE1A64C2267701500BCC857 /* PlatformMapViewController.cpp in Sources */,
 				EFC949F82262DC450096B686 /* Angler.cpp in Sources */,
 				EF0E170222483449002E0E84 /* Fish.cpp in Sources */,
+				EFE1A64E2267701500BCC857 /* FishViewController.cpp in Sources */,
+				EFE1A6482267701500BCC857 /* PlayerViewController.cpp in Sources */,
 				EF0E171A22483449002E0E84 /* LoadingScene.cpp in Sources */,
 				EF0E172622483449002E0E84 /* GridRow.cpp in Sources */,
-				344B56E0224C19B300D51676 /* AIController.cpp in Sources */,
-				EF0E171222483449002E0E84 /* PlayerViewController.cpp in Sources */,
-				EF0E171422483449002E0E84 /* PlatformMapViewController.cpp in Sources */,
+				EFE1A63C2267701500BCC857 /* InputController.cpp in Sources */,
+				EFE1A6502267701500BCC857 /* GoalViewController.cpp in Sources */,
 				EF0E171C22483449002E0E84 /* GameScene.cpp in Sources */,
-				EF0E171022483449002E0E84 /* GridRowViewController.cpp in Sources */,
+				EFE1A63E2267701500BCC857 /* UrchinViewController.cpp in Sources */,
 				EF0E172222483449002E0E84 /* GridMap.cpp in Sources */,
 				EFE1A5C322668DA700BCC857 /* MainMenuScene.cpp in Sources */,
+				EFE1A6442267701500BCC857 /* GridRowViewController.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
