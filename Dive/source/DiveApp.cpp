@@ -87,7 +87,8 @@ void DiveApp::onStartup() {
 	// This reads the given JSON file and uses it to load all other assets
 	_assets->loadDirectory("json/assets.json");
     
-    _animationplayed = false;
+    _animated = false;
+    _menued = false;
 
     Application::onStartup();
 }
@@ -130,7 +131,7 @@ void DiveApp::onShutdown() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void DiveApp::update(float timestep) {
-    //
+
 //    if (!_loaded && _loading.isActive()) {
 //        _loading.update(0.01f);
 //    }
@@ -151,16 +152,23 @@ void DiveApp::update(float timestep) {
         _title.init(_assets);
         _loaded = true;
     }
-    else if (!_animationplayed && _title.isActive()){
+    else if (!_animated && _title.isActive()){
         _title.update(timestep);
     }
-    else if (!_animationplayed){
+    else if (!_animated){
         _title.dispose();
-        _gameplay.init(_assets);
-        _animationplayed = true;
-
+        _menu.init(_assets);
+        _animated = true;
     }
-    else {
+    else if (!_menued && _menu.isActive()){
+        _menu.update(timestep);
+    }
+    else if (!_menued){
+        _menu.dispose();
+        _gameplay.init(_assets);
+        _menued = true;
+    }
+    else{
         _gameplay.update(timestep);
     }
 }
@@ -179,8 +187,11 @@ void DiveApp::draw() {
 	if (!_loaded) {
 		_loading.render(_batch);
 	}
-    else if (!_animationplayed){
+    else if (!_animated){
         _title.render(_batch);
+    }
+    else if (!_menued){
+        _menu.render(_batch);
     }
 	else {
 		_gameplay.render(_batch);

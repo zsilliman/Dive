@@ -22,10 +22,13 @@ protected:
     /** Reference to the animation node */
     std::shared_ptr<cugl::AnimationNode> _titlenode;
     
+    int NUMBER_FRAMES = 117;
+    int MAX_COOLDOWN = 1; //3;
+    int LINGER = 5; //40;
     /** "Cooldown" in between frames */
-    int _cooldown = 10;
+    int _cooldown = 3;
     /** How to linger on the last frame */
-    int _linger = 200;
+    int _linger = LINGER;
     /** If the animation is done */
     bool _finished = false;
     

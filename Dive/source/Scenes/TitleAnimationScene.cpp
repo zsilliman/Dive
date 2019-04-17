@@ -39,7 +39,7 @@ bool TitleAnimationScene::init(const std::shared_ptr<cugl::AssetManager>& assets
     
     _assets = assets;
 	shared_ptr<Texture> texture = _assets->get<Texture>("title");
-    _titlenode  = std::dynamic_pointer_cast<AnimationNode>(_assets->get<Node>("dive"));
+    _titlenode  = std::dynamic_pointer_cast<AnimationNode>(_assets->get<Node>("animation"));
 	_titlenode->setPosition(dimen/2);
 	_titlenode->setAnchor(Vec2::ANCHOR_CENTER);
 	_titlenode->setScale(1);
@@ -80,8 +80,8 @@ void TitleAnimationScene::update(float progress) {
 //    }
     
     if (!_finished){
-        if (_titlenode->getFrame()>=117){
-            _cooldown = 3;
+        if (_titlenode->getFrame()>=NUMBER_FRAMES){
+            _cooldown = MAX_COOLDOWN;
             _linger--;
             if (_linger < 0){
                 _finished = true;
@@ -89,7 +89,7 @@ void TitleAnimationScene::update(float progress) {
         }
         if (_cooldown <= 0){
             _titlenode->setFrame(_titlenode->getFrame()+1);
-            _cooldown = 1;
+            _cooldown = MAX_COOLDOWN;
         }else{
             _cooldown--;
         }

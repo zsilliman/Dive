@@ -33,6 +33,7 @@
 #include "Scenes/GameScene.h"
 #include "Scenes/LoadingScene.h"
 #include "Scenes/TitleAnimationScene.hpp"
+#include "Scenes/MainMenuScene.hpp"
 #include <vector>
 
 /**
@@ -55,9 +56,12 @@ protected:
 	LoadingScene _loading;
     /** Title Animation Scene */
     TitleAnimationScene _title;
+    /** Controller for the main menu */
+    MainMenuScene _menu;
     
     bool _loaded;
-    bool _animationplayed;
+    bool _animated;
+    bool _menued;
     
     float scale;
     
