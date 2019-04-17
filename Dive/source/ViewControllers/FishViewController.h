@@ -18,12 +18,12 @@ protected:
 	float max_speed = 0.8f;
 	float _grid_size = 1;
 	int _fish_index = 0;
-    
-    bool _mainCycle;
+
+	bool _mainCycle;
 
 public:
-    
-    void animateFish();
+
+	void animateFish();
 
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;
 
@@ -38,9 +38,9 @@ public:
 	void kill(shared_ptr<Fish> fish);
 
 	void revive(shared_ptr<Fish> fish);
-    
-    void setDirection(shared_ptr<Fish> fish);
-    
-    void setInitialVelocity(shared_ptr<GameState> state, Vec2 vel);
+
+	void setDirection(shared_ptr<Fish> fish);
+
+	void setInitialVelocity(shared_ptr<GameState> state, Vec2 vel);
 
 };
