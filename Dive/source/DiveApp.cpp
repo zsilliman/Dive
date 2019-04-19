@@ -151,11 +151,12 @@ void DiveApp::update(float timestep) {
         _title.init(_assets);
         _loaded = true;
         //
-        _title.dispose();
-        _gameplay.init(_assets);
-        _animationplayed = true;
+        //_title.dispose();
+        //_gameplay.init(_assets);
+        _animationplayed = false;
     }
     else if (!_animationplayed && _title.isActive()){
+		CULog("TITLE ANIMATION PLAYING");
         _title.update(timestep);
     }
     else if (!_animationplayed){

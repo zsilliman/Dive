@@ -1,0 +1,54 @@
+{
+    "textures": {
+        "background": {
+            "file":      "textures/background_blue.png"
+        },
+    },
+    "fonts": {
+        "charlemagne": {
+            "file":     "fonts/Charlemagne.ttf",
+            "size":     64
+        }
+    },
+    "scenes" : {
+        "root_node" : {
+            "type":    "Node",
+            "comment": "parent node",
+            "data": {
+                "anchor" : [0,0]
+            },
+            "children": {
+                "dive" : {
+                    "type": "Node",
+                    "comment": "container for dive letters",
+                    "children": {
+                        "D": {
+                            "type"       :"Label",
+                            "font"       : "charlemagne",
+                            "text"       : "D",
+                            "anchor"     : [0.5,0.5],
+                        },
+                        "I": {
+                            "type"       :"Label",
+                            "font"       : "charlemagne",
+                            "text"       : "I",
+                            "anchor"     : [0.5,0.5],
+                        },
+                        "V": {
+                            "type"       :"Label",
+                            "font"       : "charlemagne",
+                            "text"       : "V",
+                            "anchor"     : [0.5,0.5],
+                        },
+                        "E": {
+                            "type"       :"Label",
+                            "font"       : "charlemagne",
+                            "text"       : "E",
+                            "anchor"     : [0.5,0.5],
+                        },
+                    }
+                }
+            }
+        }
+    }
+}

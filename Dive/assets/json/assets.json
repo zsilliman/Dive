@@ -46,6 +46,9 @@
         "background":{
             "file":      "textures/background_blue.png"
         },
+        "background_clear":{
+            "file":      "textures/background_blue_seethrough.png"
+        },
         "platform1":{
             "file":      "textures/platform1.png"
         },

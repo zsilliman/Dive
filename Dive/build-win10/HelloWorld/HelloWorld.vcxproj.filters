@@ -135,6 +135,9 @@
     <ClInclude Include="..\..\source\ViewControllers\AnglerViewController.h">
       <Filter>Header Files\ViewControllers</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Scenes\TitleProgrammedScene.h">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -220,6 +223,9 @@
     </ClCompile>
     <ClCompile Include="..\..\source\ViewControllers\AnglerViewController.cpp">
       <Filter>Source Files\ViewControllers</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scenes\TitleProgrammedScene.cpp">
+      <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
