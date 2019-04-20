@@ -32,56 +32,61 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
 	player_vc->_grid_size = display.width / init_state->_map->getWidth();
 	player_vc->_node = Node::allocWithPosition(Vec2(0, 0));
-    player_vc->_oc_node = AnimationNode::alloc(texture, 1, 20);
+    player_vc->_oc_node = AnimationNode::alloc(texture, 1, 10);
 	player_vc->_oc_node->setPosition(init_state->_player->getPosition());
-	player_vc->_oc_node->setScale(player_vc->_grid_size / texture->getWidth()*30, player_vc->_grid_size / texture->getHeight()*2*1.3);
-	player_vc->_dup_node = AnimationNode::alloc(texture, 1, 20);
-	player_vc->_dup_node->setScale(player_vc->_grid_size / texture->getWidth()*30, player_vc->_grid_size / texture->getHeight()*2*1.3);
+	player_vc->_oc_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*2.2);
+	player_vc->_dup_node = AnimationNode::alloc(texture, 1, 10);
+	player_vc->_dup_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*2.2);
 	player_vc->_dup_node->setPosition(init_state->_player->getPosition());
     player_vc->_display = display;
-
-    player_vc->_oc_node->flipVertical(true);
-    player_vc->_dup_node->flipVertical(true);
     
 	player_vc->_node->addChild(player_vc->_oc_node);
 	player_vc->_node->addChild(player_vc->_dup_node);
     
     player_vc->_mainCycle = true;
 	player_vc->setAIDirection(init_state, "down");
-
+    
 	return player_vc;
 }
 
+void PlayerViewController::setFloor(bool f){
+    _floor = f;
+}
+
 void PlayerViewController::animatePlayer(){
-    bool* cycle = &_mainCycle;
-    if (_cooldown == 0){
-        _cooldown = 3;
-        if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
-            *cycle = true;
-        } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
-            *cycle = false;
-        }
-        
-        if (*cycle) {
-            _oc_node->setFrame(_oc_node->getFrame()+1);
-        } else {
-            _oc_node->setFrame(_oc_node->getFrame()-1);
-        }
-        
-        
-        if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
-            *cycle = true;
-        } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
-            *cycle = false;
-        }
-        
-        if (*cycle) {
-            _dup_node->setFrame(_dup_node->getFrame()+1);
-        } else {
-            _dup_node->setFrame(_dup_node->getFrame()-1);
-        }
+    if (_floor == false){
+        _oc_node->setFrame(5);
+        _dup_node->setFrame(5);
     }else{
-        _cooldown --;
+        bool* cycle = &_mainCycle;
+        if (_cooldown == 0){
+            _cooldown = 5;
+            if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
+                *cycle = true;
+            } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
+                *cycle = false;
+            }
+            
+            if (*cycle) {
+                _oc_node->setFrame(_oc_node->getFrame()+1);
+            } else {
+                _oc_node->setFrame(_oc_node->getFrame()-1);
+            }
+            
+            if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
+                *cycle = true;
+            } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
+                *cycle = false;
+            }
+            
+            if (*cycle) {
+                _dup_node->setFrame(_dup_node->getFrame()+1);
+            } else {
+                _dup_node->setFrame(_dup_node->getFrame()-1);
+            }
+        }else{
+            _cooldown --;
+        }
     }
 }
 

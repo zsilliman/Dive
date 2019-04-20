@@ -10,9 +10,6 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	player->_box->setFriction(0);
 	player->_box_dup->setFriction(0);
 	player->setName("player");
-    player->startingAngle = 180.5f;
-    player->_box->setAngle(player->startingAngle);
-    player->_box_dup->setAngle(player->startingAngle);
     player->_box->setGravityScale(0);
     player->_box_dup->setGravityScale(0);
 	player->_box->setRestitution(0);
@@ -37,8 +34,6 @@ Direction Player::swapCurrentDirection() {
 
 void Player::reset() {
     _box->setPosition(_start_pos);
-    _box->setAngle(startingAngle);
     _box_dup->setPosition(_start_pos);
-    _box_dup->setAngle(startingAngle);
     _alive = true;
 }

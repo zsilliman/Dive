@@ -19,8 +19,6 @@ protected:
 
 	Direction _current_direction = Direction::RIGHT;
     
-    float startingAngle;
-
 public:
 	
 	Direction getCurrentDirection();

@@ -112,7 +112,13 @@ void GameScene::update(float timestep) {
 	float pos = _map_vc->getPosition().y + _gamestate->_map->getHeight()*grid_size + (size.height/(2*parallax_speed));
 	_background->setPositionY(pos * parallax_speed);
 	//End background parallax section
-
+    _animation_counter--;
+    //on a platform
+    if (_playerFloor) {
+        _player_vc->setFloor(true);
+    }else{
+        _player_vc->setFloor(false);
+    }
     _player_vc->update(_gamestate);
 
 	for (int i = 0; i < _urchin_vcs.size(); i++) {
@@ -124,21 +130,7 @@ void GameScene::update(float timestep) {
 	for (int i = 0; i < _angler_vcs.size(); i++) {
 		_angler_vcs[i]->update(_gamestate);
 	}
-    _animation_counter--;
-    //on a platform
-    if (_playerFloor) {
-        if(_prev_diver_angle == 179){
-            _animation_counter = 7;
-        }
-        _gamestate->_player->_box->setAngle(180.5f);
-        _gamestate->_player->_box_dup->setAngle(180.5f);
-    }else if (_animation_counter <= 0){
-        if(_prev_diver_angle == 180.5f){
-            _animation_counter = 7;
-        }
-        _gamestate->_player->_box->setAngle(179);
-        _gamestate->_player->_box_dup->setAngle(179);
-    }
+   
     //else if (bd2->getName().find("fish") != string::npos) {
     if(_fish_remove != -1){
         CULog("setting dead fish %d", _fish_remove);
@@ -241,7 +233,7 @@ void GameScene::buildScene(string level) {
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
 	shared_ptr<Texture> angler_texture = _assets->get<Texture>("angler");
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
-    shared_ptr<Texture> diving_texture = _assets->get<Texture>("diving");
+    shared_ptr<Texture> diving_texture = _assets->get<Texture>("walking");
     shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
 
 	_gamestate = _assets->get<GameState>(level);
@@ -269,7 +261,7 @@ void GameScene::buildScene(string level) {
     
 	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
-    _playerFloor = true;
+    _playerFloor = false;
 
 	//Create Urchin viewcontrollers
 	_urchin_vcs = {};

@@ -21,8 +21,13 @@ protected:
     int _cooldown = 3;
     
     bool _mainCycle;
+    
+    bool _floor;
 
 public:
+    
+    void setFloor(bool f);
+    
     void lose(shared_ptr<Texture> texture);
     
     void animatePlayer();
