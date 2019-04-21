@@ -307,10 +307,10 @@ void GameScene::buildScene(string level) {
     button->setPosition(4.75,.2);
     button->setScale(0.5f / up->getWidth());
     
-    addChild(button,3);
+    //addChild(button,3);
     
     // We can only activate a button AFTER it is added to a scene
-    button->activate(1);
+    //button->activate(1);
 
     _winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
     _winnode->setAnchor(Vec2::ANCHOR_CENTER);

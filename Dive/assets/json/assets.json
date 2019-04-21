@@ -62,7 +62,7 @@
             "file":      "textures/dying.png"
         },
         "statue": {
-            "file":     "textures/statue.png"
+            "file":     "textures/Statue.png"
         },
         "walking": {
             "file":     "textures/walking.png"
