@@ -13,7 +13,17 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	//Set positions/rotations of duplicate according to duplicate physics object
 	_dup_node->setPosition(state->_player->_box_dup->getPosition() * _grid_size);
 	_dup_node->setAngle(state->_player->_box_dup->getAngle());
-    
+
+	if (_direction == "right") {
+		_oc_node->flipHorizontal(false);
+		_dup_node->flipHorizontal(false);
+	}
+	else {
+		_oc_node->flipHorizontal(true);
+		_dup_node->flipHorizontal(true);
+	}
+
+	state->_player->updateSensors();
     animatePlayer();
 }
 
@@ -21,7 +31,7 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 void PlayerViewController::dispose() {}
 
 void PlayerViewController::reset() {
-
+	_direction = "right";
 }
 
 void PlayerViewController::lose(shared_ptr<Texture> texture){
@@ -32,7 +42,7 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
 	player_vc->_grid_size = display.width / init_state->_map->getWidth();
 	player_vc->_node = Node::allocWithPosition(Vec2(0, 0));
-    player_vc->_oc_node = AnimationNode::alloc(texture, 1, 10);
+	player_vc->_oc_node = AnimationNode::alloc(texture, 1, 10);
 	player_vc->_oc_node->setPosition(init_state->_player->getPosition());
 	player_vc->_oc_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*2.2);
 	player_vc->_dup_node = AnimationNode::alloc(texture, 1, 10);
@@ -45,6 +55,7 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
     
     player_vc->_mainCycle = true;
 	player_vc->setAIDirection(init_state, "down");
+	player_vc->_direction = "right";
     
 	return player_vc;
 }
@@ -99,8 +110,12 @@ void PlayerViewController::setAIDirection(shared_ptr<GameState> state, string di
     }
     else if(direction == "left"){
         state->_player->setLinearVelocity(Vec2(-PLAYER_HORIZONTAL_SPEED, state->_player->_box->getLinearVelocity().y));
+		_direction = direction;
     }
     else if(direction == "right"){
         state->_player->setLinearVelocity(Vec2(PLAYER_HORIZONTAL_SPEED, state->_player->_box->getLinearVelocity().y));
+		_direction = direction;
     }
 }
+
+string PlayerViewController::getAIDirection() { return _direction; }

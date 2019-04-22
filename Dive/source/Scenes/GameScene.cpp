@@ -103,6 +103,7 @@ void GameScene::update(float timestep) {
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
 
+	_player_side_count = 0;
 	_world->update(timestep);
 	_map_vc->update(_gamestate);
 
@@ -159,6 +160,8 @@ void GameScene::update(float timestep) {
 }
 
 void GameScene::setState(State state) {
+	if (state == WIN && current_state == LOSE || state == LOSE && current_state == WIN)
+		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
 		_winnode->setVisible(true);
@@ -373,6 +376,12 @@ void GameScene::beginContact(b2Contact* contact) {
     Obstacle* bd1 = (Obstacle*)body1->GetUserData();
     Obstacle* bd2 = (Obstacle*)body2->GetUserData();
     
+	if (bd1->getName() == "player left side" && bd2->getName() == "platform") {
+		playerSidePlatformCollisions(bd1, bd2, true);
+	}
+	if (bd1->getName() == "player right side" && bd2->getName() == "platform") {
+		playerSidePlatformCollisions(bd1, bd2, false);
+	}
     if(bd1->getName() == "player"){
         if(bd2->getName() == "urchin"){
 			setState(LOSE);
@@ -386,7 +395,7 @@ void GameScene::beginContact(b2Contact* contact) {
         else if(bd2->getName() == "platform"){
             _block_counter++;
             CULog("inc block counter 2  %d", _block_counter);
-            _player_vc->setAIDirection(_gamestate, "right");
+            _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
         else if(bd2->getName() == "goal"){
@@ -436,18 +445,36 @@ void GameScene::beginContact(b2Contact* contact) {
             
             _block_counter++;
             CULog("inc block counter 1  %d", _block_counter);
-            _player_vc->setAIDirection(_gamestate, "right");
+            _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
         else if (bd2->getName().find("fish") != string::npos) {
             fishPlatformCollisions(bd2, bd1);
-        }
+		}
+		else if (bd2->getName() == "player left side") {
+			playerSidePlatformCollisions(bd2, bd1, true);
+		}
+		else if (bd2->getName() == "player right side") {
+			playerSidePlatformCollisions(bd2, bd1, false);
+		}
     }
     else if(bd1->getName() == "goal"){
         if(bd2->getName() == "player"){
 			setState(WIN);
         }
     }
+}
+
+void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* platform, bool left) {
+	if (_player_side_count != 0 || !_player_vc->getFloor()) return;
+		_player_side_count++;
+	if (left) {
+		_player_vc->setAIDirection(_gamestate, "right");
+		CULog("GO RIGHT");
+	} else {
+		_player_vc->setAIDirection(_gamestate, "left");
+		CULog("GO LEFT");
+	}
 }
 
 void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){

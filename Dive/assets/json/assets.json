@@ -89,7 +89,11 @@
 		"charlemagne": {
 			"file":     "fonts/Charlemagne.ttf",
 			"size":     64
-		}
+		},
+        "OldKlarheit": {
+            "file":     "fonts/OldKlarheit-Regular.ttf",
+            "size":     128
+        }
     },
     "scenes": {
         "dive" : {

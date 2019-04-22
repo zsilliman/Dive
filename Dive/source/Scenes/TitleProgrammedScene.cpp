@@ -42,7 +42,7 @@ bool TitleProgrammedScene::init(const std::shared_ptr<cugl::AssetManager>& asset
 	_assets = assets;
 	shared_ptr<Texture> texture = _assets->get<Texture>("background");
 	shared_ptr<Texture> texture_clear = _assets->get<Texture>("background_clear");
-	shared_ptr<Font> font = _assets->get<Font>("charlemagne");
+	shared_ptr<Font> font = _assets->get<Font>("OldKlarheit");
 	_root = Node::allocWithPosition(Vec2(0,0));
 
 	float scale = _dimen.width/texture->getWidth();
@@ -52,9 +52,10 @@ bool TitleProgrammedScene::init(const std::shared_ptr<cugl::AssetManager>& asset
 	_background1->setZOrder(0);
 	_root->addChild(_background1);
 
-	_background2 = PolygonNode::allocWithTexture(texture_clear);
+	_background2 = PolygonNode::allocWithTexture(texture);
 	_background2->setAnchor(Vec2::ANCHOR_TOP_LEFT);
 	_background2->setScale(scale);
+	_background2->setColor(Color4(Vec3(1,1,1)));
 	_background2->setZOrder(1);
 	_root->addChild(_background2);
 	
@@ -66,36 +67,39 @@ bool TitleProgrammedScene::init(const std::shared_ptr<cugl::AssetManager>& asset
 	_root->addChild(_background3);
 
 	_dive = Node::allocWithPosition(Vec2());
-	shared_ptr<FloatLayout> f_layout = FloatLayout::alloc();
-	f_layout->setHorizontal(true);
-	_dive->setLayout(f_layout);
+	_dive->setZOrder(5);
 
+	Color4 color = Color4(Vec3(1,1,1));
 	float padding = 10;
 	_D_node = Label::alloc("D", font);
+	_D_node->setForeground(color);
 	_D_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	_D_node->setPositionX(0);
 	_dive->addChild(_D_node);
 
 	_I_node = Label::alloc("I", font);
+	_I_node->setForeground(color);
 	_I_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	_I_node->setPositionX(_D_node->getPositionX() + _D_node->getWidth() + padding);
 	_dive->addChild(_I_node);
 	
 	_V_node = Label::alloc("V", font);
+	_V_node->setForeground(color);
 	_V_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	_V_node->setPositionX(_I_node->getPositionX() + _I_node->getWidth() + padding);
 	_dive->addChild(_V_node);
 	
 	_E_node = Label::alloc("E", font);
+	_E_node->setForeground(color);
 	_E_node->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
 	_E_node->setPositionX(_V_node->getPositionX() + _V_node->getWidth() + padding);
 	_dive->addChild(_E_node);
-	_dive->setZOrder(5);
 
 	_dive_width = _D_node->getWidth() + _I_node->getWidth() + _V_node->getWidth() + _E_node->getWidth() + padding * 3;
 	_dive_height = _D_node->getHeight();
 
 	_root->addChild(_dive);
+	_root->sortZOrder();
 	addChild(_root);
 
 	_t = 0;

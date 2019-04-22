@@ -50,15 +50,9 @@ public:
 
 	void setPosition(Vec2 position);
 
-	void setLinearVelocity(Vec2 velocity) { 
-		_box->setLinearVelocity(velocity);
-		_box_dup->setLinearVelocity(velocity);
-	}
+	virtual void setLinearVelocity(Vec2 velocity);
 
-	void initPhysics(shared_ptr<ObstacleWorld> world) {
-		world->addObstacle(_box);
-		world->addObstacle(_box_dup);
-	}
+	virtual void initPhysics(shared_ptr<ObstacleWorld> world);
 
 	void initEntity(Vec2 pos, Vec2 size, Rect map_rect);
 

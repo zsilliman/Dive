@@ -20,10 +20,22 @@ protected:
 	Direction _current_direction = Direction::RIGHT;
     
 public:
+
+	shared_ptr<BoxObstacle> _sensor_left;
+	shared_ptr<BoxObstacle> _sensor_left_dup;
+
+	shared_ptr<BoxObstacle> _sensor_right;
+	shared_ptr<BoxObstacle> _sensor_right_dup;
 	
 	Direction getCurrentDirection();
 
 	Direction swapCurrentDirection();
+
+	void initPhysics(shared_ptr<ObstacleWorld> world) override;
+
+	void setLinearVelocity(Vec2 velocity) override;
+
+	void updateSensors();
 
 	static shared_ptr<Player> alloc(Vec2 start_pos, Rect map_rect);
     

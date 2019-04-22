@@ -13,6 +13,7 @@ protected:
 	Size _display;
 	shared_ptr<AnimationNode> _oc_node;
 	shared_ptr<AnimationNode> _dup_node;
+	string _direction = "right";
 
     float accelleration = 1.5f;
     float max_speed = 0.8f;
@@ -27,6 +28,8 @@ protected:
 public:
     
     void setFloor(bool f);
+
+	bool getFloor() { return _floor; }
     
     void lose(shared_ptr<Texture> texture);
     
@@ -45,5 +48,7 @@ public:
     int getCollision(shared_ptr<GameState> state);
     
 	void setAIDirection(shared_ptr<GameState> state, string direction);
+	
+	string getAIDirection();
 
 };

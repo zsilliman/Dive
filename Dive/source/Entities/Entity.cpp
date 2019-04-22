@@ -15,6 +15,16 @@ void Entity::setPosition(Vec2 position) {
 	_box_dup->setPosition(Vec2(-_dimensions.width * 10, position.y));
 }
 
+void Entity::initPhysics(shared_ptr<ObstacleWorld> world) {
+	world->addObstacle(_box);
+	world->addObstacle(_box_dup);
+}
+
+void Entity::setLinearVelocity(Vec2 velocity) {
+	_box->setLinearVelocity(velocity);
+	_box_dup->setLinearVelocity(velocity);
+}
+
 bool Entity::canFloat() { return _can_float; }
 
 void Entity::setCanFloat(bool floats) { _can_float = floats; }

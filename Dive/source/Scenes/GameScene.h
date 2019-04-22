@@ -81,6 +81,7 @@ protected:
     int _fish_remove;
 	int _angler_remove;
     int _fish_countdown;
+	int _player_side_count;
     string _current_level;
     string _next_level;
 
@@ -161,6 +162,8 @@ public:
      */
     void beginContact(b2Contact* contact);
     
+	void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* platform, bool left);
+
     void fishPlatformCollisions(Obstacle* fish, Obstacle* platform);
     
     void diverPlatformCollisions(Obstacle* diver, Obstacle* platform);
