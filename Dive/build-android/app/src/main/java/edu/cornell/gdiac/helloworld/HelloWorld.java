@@ -1,4 +1,4 @@
-package edu.cornell.gdiac.helloworld;
+package edu.cornell.gdiac.dive;
 
 import org.libsdl.app.*;
 import android.support.v7.app.AppCompatActivity;

@@ -162,7 +162,7 @@ public:
      */
     void beginContact(b2Contact* contact);
     
-	void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* platform, bool left);
+	void playerSidePlatformCollisions(Obstacle* player_side, Obstacle* platform, bool left);
 
     void fishPlatformCollisions(Obstacle* fish, Obstacle* platform);
     
