@@ -169,8 +169,6 @@ void GameScene::setState(State state) {
 	} else if (state == LOSE && current_state != WIN && changed) {
 		_losenode->setVisible(true);
 		_countdown = EXIT_COUNT;
-		shared_ptr<Texture> dying_texture = _assets->get<Texture>("dying");
-		_player_vc->lose(dying_texture);
 	} else if (state == PLAY) {
 		_losenode->setVisible(false);
 		_winnode->setVisible(false);
@@ -243,13 +241,11 @@ void GameScene::buildScene(string level) {
     shared_ptr<Texture> goal_texture = _assets->get<Texture>("statue");
 	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 382, 382);
 	tilesheet->setTileIndexOffset(9);
-	shared_ptr<Texture> diver_texture = _assets->get<Texture>("diver");
 	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
 	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
 	shared_ptr<Texture> angler_texture = _assets->get<Texture>("angler");
 	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
     shared_ptr<Texture> diving_texture = _assets->get<Texture>("walking");
-    shared_ptr<Texture> dying_diver_texture = _assets->get<Texture>("dying_diver");
 
 	_gamestate = _assets->get<GameState>(level);
 	_gamestate->initPhysics(_world);

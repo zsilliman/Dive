@@ -28,9 +28,6 @@
 			"wrapS":    "clamp",
 			"wrapT":    "clamp"
 		},
-        "goal": {
-            "file":      "textures/goaldoor.png"
-        },
         "urchin": {
             "file":      "textures/urchin.png"
         },
@@ -40,26 +37,14 @@
         "angler":{
             "file":      "textures/Angler_Fish.png"
         },
-        "diver":{
-            "file":      "textures/diver.png"
-        },
         "background":{
             "file":      "textures/background_blue.png"
         },
         "background_clear":{
             "file":      "textures/background_blue_seethrough.png"
         },
-        "platform1":{
-            "file":      "textures/platform1.png"
-        },
         "title": {
             "file":      "animations/dive.jpg"
-        },
-        "diving": {
-            "file":      "textures/diving.png"
-        },
-        "dying": {
-            "file":      "textures/dying.png"
         },
         "statue": {
             "file":     "textures/Statue.png"
