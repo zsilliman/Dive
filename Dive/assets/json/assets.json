@@ -83,6 +83,15 @@
         },
         "very_hard_level": {
             "file":     "levels/very_hard_level.json"
+        },
+        "tutorial1":{
+            "file":     "levels/tutorial1.json"
+        },
+        "tutorial2":{
+            "file":     "levels/tutorial2.json"
+        },
+        "tutorial3":{
+            "file":     "levels/tutorial3.json"
         }
 	},
 	"fonts": {
