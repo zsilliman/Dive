@@ -72,7 +72,7 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
     _input = make_shared<InputController>();
     _input->init();
 
-	buildScene("easy_level");
+	buildScene("tutorial1");
 
     return true;
 }
@@ -181,7 +181,19 @@ void GameScene::setState(State state) {
 
 string GameScene::cycleLevel(){
     string level;
-    if(_current_level == "easy_level"){
+    if(_current_level == "tutorial1"){
+        CULog("setting tutorial2");
+        level = "tutorial2";
+    }
+    else if(_current_level == "tutorial2"){
+        CULog("setting easy");
+        level = "easy_level";
+    }
+    else if(_current_level == "easy_level"){
+        CULog("setting tutorial 3");
+        level = "tutorial3";
+    }
+    else if(_current_level == "tutorial3"){
         CULog("setting medium");
         level = "medium_level";
     }
