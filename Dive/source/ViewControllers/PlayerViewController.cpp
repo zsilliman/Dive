@@ -19,8 +19,8 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 		_dup_node->flipHorizontal(false);
 	}
 	else {
-		_oc_node->flipHorizontal(true);
-		_dup_node->flipHorizontal(true);
+        _oc_node->flipHorizontal(true);
+        _dup_node->flipHorizontal(true);
 	}
 
 	state->_player->updateSensors();
@@ -66,12 +66,21 @@ void PlayerViewController::setFloor(bool f){
 
 void PlayerViewController::animatePlayer(){
     if (_floor == false){
-        _oc_node->setFrame(5);
-        _dup_node->setFrame(5);
+        if (_oc_node->isFlipHorizontal()){
+            _oc_node->setFrame(4);
+        }else{
+            _oc_node->setFrame(5);
+        }
+        if (_dup_node->isFlipHorizontal()){
+            _dup_node->setFrame(4);
+        }else {
+            _dup_node->setFrame(5);
+        }
     }else{
         bool* cycle = &_mainCycle;
         if (_cooldown == 0){
             _cooldown = 5;
+            if (_oc_node)
             if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
                 *cycle = true;
             } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
