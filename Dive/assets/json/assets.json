@@ -57,26 +57,26 @@
 		"sample_level": {
 			"file":     "levels/sample_level.json"
 		},
-        "easy_level": {
-            "file":     "levels/easy_level.json"
+        "level_1": {
+            "file":     "levels/level_1.json"
         },
-        "medium_level": {
-            "file":     "levels/medium_level.json"
+        "level_2": {
+            "file":     "levels/level_2.json"
         },
-        "hard_level": {
-            "file":     "levels/hard_level.json"
+        "level_3": {
+            "file":     "levels/level_3.json"
         },
-        "very_hard_level": {
-            "file":     "levels/very_hard_level.json"
+        "level_4": {
+            "file":     "levels/level_4.json"
         },
-        "tutorial1":{
-            "file":     "levels/tutorial1.json"
+        "level_5": {
+            "file":     "levels/level_5.json"
         },
-        "tutorial2":{
-            "file":     "levels/tutorial2.json"
+        "level_6": {
+            "file":     "levels/level_6.json"
         },
-        "tutorial3":{
-            "file":     "levels/tutorial3.json"
+        "level_7": {
+            "file":     "levels/level_7.json"
         }
 	},
 	"fonts": {

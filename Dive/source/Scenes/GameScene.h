@@ -84,6 +84,7 @@ protected:
 	int _player_side_count;
     string _current_level;
     string _next_level;
+    int final_level = 7;
 
     //std::shared_ptr<FishViewController> _to_remove;
     //std::shared_ptr<FishViewController> _dummy_fish;

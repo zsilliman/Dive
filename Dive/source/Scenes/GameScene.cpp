@@ -72,7 +72,7 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
     _input = make_shared<InputController>();
     _input->init();
 
-	buildScene("tutorial1");
+	buildScene("level_1");
 
     return true;
 }
@@ -178,40 +178,15 @@ void GameScene::setState(State state) {
 }
 
 string GameScene::cycleLevel(){
-    string level;
-    if(_current_level == "tutorial1"){
-        CULog("setting tutorial2");
-        level = "tutorial2";
-    }
-    else if(_current_level == "tutorial2"){
-        CULog("setting easy");
-        level = "easy_level";
-    }
-    else if(_current_level == "easy_level"){
-        CULog("setting tutorial 3");
-        level = "tutorial3";
-    }
-    else if(_current_level == "tutorial3"){
-        CULog("setting medium");
-        level = "medium_level";
-    }
-    else if(_current_level == "medium_level"){
-        CULog("setting hard");
-        level = "hard_level";
-    }
-    else if(_current_level == "hard_level"){
-        CULog("setting v hard");
-        level = "very_hard_level";
-    }
-    else if(_current_level == "very_hard_level"){
-        CULog("setting easy");
-        level = "easy_level";
+    string level = _current_level.erase(0,6);
+    int level_int = stoi(level)+1;
+    if(level_int<=final_level){
+        _next_level = "level_"+std::to_string(level_int);
     }
     else{
-        CULog("bad level");
-        level = "easy_level";
+        _next_level = "level_1";
     }
-    return level;
+    return _next_level;
 }
 
 void GameScene::buildScene(string level) {
