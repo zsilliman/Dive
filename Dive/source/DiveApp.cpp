@@ -85,7 +85,7 @@ void DiveApp::onStartup() {
 	_loading.init(_assets);
 
 	// This reads the given JSON file and uses it to load all other assets
-	_assets->loadDirectory("json/assets.json");
+	_assets->loadDirectoryAsync("json/assets.json", nullptr);
     
     _animationplayed = false;
 
