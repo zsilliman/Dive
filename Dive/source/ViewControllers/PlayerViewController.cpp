@@ -44,9 +44,9 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	player_vc->_node = Node::allocWithPosition(Vec2(0, 0));
 	player_vc->_oc_node = AnimationNode::alloc(texture, 1, 10);
 	player_vc->_oc_node->setPosition(init_state->_player->getPosition());
-	player_vc->_oc_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*2.2);
+	player_vc->_oc_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*1.6);
 	player_vc->_dup_node = AnimationNode::alloc(texture, 1, 10);
-	player_vc->_dup_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*2.2);
+	player_vc->_dup_node->setScale(player_vc->_grid_size / texture->getWidth()*15, player_vc->_grid_size / texture->getHeight()*1.6);
 	player_vc->_dup_node->setPosition(init_state->_player->getPosition());
     player_vc->_display = display;
     
@@ -79,7 +79,7 @@ void PlayerViewController::animatePlayer(){
     }else{
         bool* cycle = &_mainCycle;
         if (_cooldown == 0){
-            _cooldown = 5;
+            _cooldown = 4;
             if (_oc_node)
             if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
                 *cycle = true;
