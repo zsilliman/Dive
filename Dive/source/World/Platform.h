@@ -18,7 +18,7 @@ protected:
 	//Useful for ignoring collisions between
 	int _platform_id = 0;
 
-	void rec_init(vector<int>* collision_data, vector<int>* render_data, Vec2 current, Vec2 map_dimen);
+	void rec_init(vector<int>* collision_data, vector<int>* render_data, Vec2 current, Vec2 map_dimen, bool wrapping);
 
 	//Physics fields
 	vector<b2FixtureDef> fixture_defs = {};
@@ -32,7 +32,7 @@ public:
 
 	void parallaxTranslate(float reference_dx);
 
-	void initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen);
+	void initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen, bool wrapping);
 
 	void setRelativeSpeed(float relative_speed) { _relative_speed = relative_speed; }
 
@@ -52,7 +52,7 @@ public:
 
 	virtual shared_ptr<Platform> duplicate();
 
-	static shared_ptr<Platform> allocWithGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen);
+	static shared_ptr<Platform> allocWithGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen, bool wrapping);
 
 	//Override Physics Functions
 	void createFixtures() override;

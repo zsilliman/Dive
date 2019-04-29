@@ -47,6 +47,8 @@ protected:
     /** Whether or not the player has pressed play to continue */
     bool  _completed;
 
+	void callback(const std::string& key, bool success);
+
     
 public:
 #pragma mark -

@@ -56,16 +56,16 @@ shared_ptr<Platform> Platform::duplicate() {
 	return platform;
 }
 
-shared_ptr<Platform> Platform::allocWithGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen) {
+shared_ptr<Platform> Platform::allocWithGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen, bool wrapping) {
 	shared_ptr<Platform> platform = make_shared<Platform>();
-	platform->initGrid(collision_data, render_data, start, map_dimen);
+	platform->initGrid(collision_data, render_data, start, map_dimen, wrapping);
 	platform->_initial_pos.set(platform->getMinCorner());
 	platform->setName("platform");
 	return platform;
 }
 
-void Platform::initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen) {
-	rec_init(collision_data, render_data, start, map_dimen);
+void Platform::initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen, bool wrapping) {
+	rec_init(collision_data, render_data, start, map_dimen, wrapping);
 	//set all adjacent values to 0 to prevent overlap of platforms
 	for (int i = 0; i < adj_tiles.size(); i++) {
 		int index = getIndex(adj_tiles[i], map_dimen);
@@ -74,7 +74,7 @@ void Platform::initGrid(vector<int>* collision_data, vector<int>* render_data, V
 }
 
 /** DFS search of all neighboring tiles */
-void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, Vec2 current, Vec2 map_dimen) {
+void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, Vec2 current, Vec2 map_dimen, bool wrapping) {
 	vector<int>& render_ref = *render_data;
 	Vec2 dir_buf[4] = { Vec2(1,0), Vec2(-1,0), Vec2(0,1), Vec2(0,-1) };
 
@@ -90,14 +90,17 @@ void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, V
 	//Iterate over directions
 	for (int i = 0; i < 4; i++) {
 		Vec2 adj = current + dir_buf[i];
-		//Checks whether adj is out of bounds in y direction. x direction is not necessary to check
+		//Checks whether adj is out of bounds in y direction
 		if (adj.y < 0 || adj.y >= map_dimen.y)
+			adj.set(current);
+		//Checks whether adj is out of bounds in x direction if wrapping is disabled
+		if (wrapping = false && (adj.x < 0 || adj.x >= map_dimen.x))
 			adj.set(current);
 
 		int blk = render_ref[getIndex(adj, map_dimen)];
 		//If the block exists and was not put in adj_tiles yet
 		if (blk > 0 && !contains(&adj_tiles, adj, map_dimen)) {
-			rec_init(collision_data, render_data, adj, map_dimen);
+			rec_init(collision_data, render_data, adj, map_dimen, wrapping);
 		}
 	}
 }

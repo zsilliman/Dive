@@ -1,33 +1,33 @@
 {
-	"textures": {
-		"icon": {
-			"file":     "textures/dive_icon.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"close-normal": {
-			"file":     "textures/CloseNormal.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"close-selected": {
-			"file":     "textures/CloseSelected.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"tileset": {
-			"file":     "textures/Tileset_light.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
+    "textures": {
+        "icon": {
+            "file":     "textures/dive_icon.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
+        "close-normal": {
+            "file":     "textures/CloseNormal.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
+        "close-selected": {
+            "file":     "textures/CloseSelected.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
+        "tileset": {
+            "file":     "textures/Tileset_light.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
         "urchin": {
             "file":      "textures/urchin.png"
         },
@@ -52,11 +52,11 @@
         "walking": {
             "file":     "textures/walking.png"
         }
-	},
-	"levels": {
-		"sample_level": {
-			"file":     "levels/sample_level.json"
-		},
+    },
+    "levels": {
+        "sample_level": {
+            "file":     "levels/sample_level.json"
+        },
         "level_1": {
             "file":     "levels/level_1.json"
         },
@@ -78,12 +78,12 @@
         "level_7": {
             "file":     "levels/level_7.json"
         }
-	},
-	"fonts": {
-		"charlemagne": {
-			"file":     "fonts/Charlemagne.ttf",
-			"size":     64
-		},
+    },
+    "fonts": {
+        "charlemagne": {
+            "file":     "fonts/Charlemagne.ttf",
+            "size":     64
+        },
         "OldKlarheit": {
             "file":     "fonts/OldKlarheit-Regular.ttf",
             "size":     128
