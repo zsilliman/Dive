@@ -90,8 +90,10 @@ void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, V
 	//Iterate over directions
 	for (int i = 0; i < 4; i++) {
 		Vec2 adj = current + dir_buf[i];
-		//Checks whether adj is out of bounds in y direction
+		//Checks whether adj is out of bounds in y direction.
 		if (adj.y < 0 || adj.y >= map_dimen.y)
+			adj.set(current);
+		if (wrapping == false && adj.x < 0 && adj.x >= map_dimen.x)
 			adj.set(current);
 		//Checks whether adj is out of bounds in x direction if wrapping is disabled
 		if (wrapping = false && (adj.x < 0 || adj.x >= map_dimen.x))
@@ -99,7 +101,7 @@ void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, V
 
 		int blk = render_ref[getIndex(adj, map_dimen)];
 		//If the block exists and was not put in adj_tiles yet
-		if (blk > 0 && !contains(&adj_tiles, adj, map_dimen)) {
+		if (blk > 0 && !contains(&adj_tiles, adj, map_dimen) && adj.x < map_dimen.x) {
 			rec_init(collision_data, render_data, adj, map_dimen, wrapping);
 		}
 	}
