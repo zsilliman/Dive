@@ -156,7 +156,6 @@ void DiveApp::update(float timestep) {
         _animationplayed = false;
     }
     else if (!_animationplayed && _title.isActive()){
-		CULog("TITLE ANIMATION PLAYING");
         _title.update(timestep);
     }
     else if (!_animationplayed){

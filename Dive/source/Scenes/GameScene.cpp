@@ -135,14 +135,11 @@ void GameScene::update(float timestep) {
    
     //else if (bd2->getName().find("fish") != string::npos) {
     if(_fish_remove != -1){
-        CULog("setting dead fish %d", _fish_remove);
         _fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
         _fish_remove = -1;
-        CULog("fish dead num  %d", _fish_remove);
     }
 	//remove angler fish
 	if (_angler_remove != -1) {
-        CULog("setting dead angler %d", _angler_remove);
 		_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
 		_angler_remove = -1;
 	}
@@ -161,7 +158,7 @@ void GameScene::update(float timestep) {
 }
 
 void GameScene::setState(State state) {
-	if (state == WIN && current_state == LOSE || state == LOSE && current_state == WIN)
+	if ((state == WIN && current_state == LOSE) || (state == LOSE && current_state == WIN))
 		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
@@ -307,19 +304,12 @@ void GameScene::buildScene(string level) {
 
 void GameScene::reset() {
     if(current_state == WIN){
-        CULog("cycling level");
         _current_level = cycleLevel();
-    }
-    else{
-        CULog("not in win state %d", current_state);
     }
     _gamestate->reset();
     _player_vc->setAIDirection(_gamestate, "down");
 
     CULog("Reset");
-//    for (int i = 0; i < _fish_vcs.size(); i++) {
-//        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
-//    }
     buildScene(_current_level);
 }
 
@@ -333,7 +323,6 @@ void GameScene::reset() {
  * @param  contact  The two bodies that collided
  */
 void GameScene::beginContact(b2Contact* contact) {
-    CULog("BEGINNING CONTACT");
     b2Fixture* fix1 = contact->GetFixtureA();
     b2Fixture* fix2 = contact->GetFixtureB();
     
@@ -364,7 +353,6 @@ void GameScene::beginContact(b2Contact* contact) {
 		}
         else if(bd2->getName() == "platform"){
             _block_counter++;
-            CULog("inc block counter 2  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
@@ -414,7 +402,6 @@ void GameScene::beginContact(b2Contact* contact) {
             //diverPlatformCollisions(bd2, bd1);
             
             _block_counter++;
-            CULog("inc block counter 1  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
@@ -440,10 +427,8 @@ void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* pl
 		_player_side_count++;
 	if (left) {
 		_player_vc->setAIDirection(_gamestate, "right");
-		CULog("GO RIGHT");
 	} else {
 		_player_vc->setAIDirection(_gamestate, "left");
-		CULog("GO LEFT");
 	}
 }
 
@@ -505,14 +490,11 @@ void GameScene::endContact(b2Contact* contact) {
     if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
             _block_counter--;
-            CULog("dec block counter 1  %d", _block_counter);
             if(_block_counter<0){
                 _block_counter = 0;
-                CULog("setting block counter to 0.1");
             }
             //change ai direction
             if(_block_counter==0){
-                CULog("block counter 0.1");
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }
@@ -521,15 +503,11 @@ void GameScene::endContact(b2Contact* contact) {
     else if(bd1->getName() == "player"){
         if(bd2->getName() == "platform"){
             _block_counter--;
-            CULog("dec block counter 2  %d", _block_counter);
             if(_block_counter<0){
                 _block_counter = 0;
-                CULog("setting block counter to 0.1");
             }
             //change ai direction
             if(_block_counter==0){
-                CULog("block counter 0.2");
-
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }
