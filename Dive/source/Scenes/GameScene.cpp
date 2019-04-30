@@ -72,6 +72,7 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
     _input = make_shared<InputController>();
     _input->init();
 
+	buildOnce();
 	buildScene("level_1");
 
     return true;
@@ -189,6 +190,40 @@ string GameScene::cycleLevel(){
     return _next_level;
 }
 
+void GameScene::buildOnce() {
+	texture = _assets->get<Texture>("tileset");
+	goal_texture = _assets->get<Texture>("statue");
+	tilesheet = TiledTexture::alloc(texture, 382, 382);
+	tilesheet->setTileIndexOffset(9);
+	urchin_texture = _assets->get<Texture>("urchin");
+	fish_texture = _assets->get<Texture>("fish");
+	angler_texture = _assets->get<Texture>("angler");
+	background_image = _assets->get<Texture>("background");
+	diving_texture = _assets->get<Texture>("walking");
+
+	_background = nullptr;
+	_background = PolygonNode::allocWithTexture(background_image);
+	_background->setName("world");
+	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
+	float b_scale = SCENE_WIDTH / _background->getWidth();
+	_background->setScale(b_scale);
+
+	_winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
+	_winnode->setAnchor(Vec2::ANCHOR_CENTER);
+	_winnode->setPosition(2.5, 4);
+	_winnode->setForeground(WIN_COLOR);
+	_winnode->setScale(4 / _winnode->getWidth());
+	addChild(_winnode, 3);
+
+
+	_losenode = Label::alloc(LOSE_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
+	_losenode->setAnchor(Vec2::ANCHOR_CENTER);
+	_losenode->setPosition(2.5, 4);
+	_losenode->setForeground(WIN_COLOR);
+	_losenode->setScale(4 / _losenode->getWidth());
+	addChild(_losenode, 3);
+}
+
 void GameScene::buildScene(string level) {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -208,21 +243,15 @@ void GameScene::buildScene(string level) {
 	_angler_remove = -1;
     _fish_countdown = 10;
     _current_level = level;
-    
-    CULog("set block counter");
-	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
-    
-	shared_ptr<Texture> texture = _assets->get<Texture>("tileset");
-    shared_ptr<Texture> goal_texture = _assets->get<Texture>("statue");
-	shared_ptr<TiledTexture> tilesheet = TiledTexture::alloc(texture, 382, 382);
-	tilesheet->setTileIndexOffset(9);
-	shared_ptr<Texture> urchin_texture = _assets->get<Texture>("urchin");
-	shared_ptr<Texture> fish_texture = _assets->get<Texture>("fish");
-	shared_ptr<Texture> angler_texture = _assets->get<Texture>("angler");
-	shared_ptr<Texture> background_image = _assets->get<Texture>("background");
-    shared_ptr<Texture> diving_texture = _assets->get<Texture>("walking");
+
+	this->removeAllChildren();
 
 	_gamestate = _assets->get<GameState>(level);
+
+	if (_world != nullptr)
+		_world.reset();
+
+	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
 	_gamestate->initPhysics(_world);
     _world->activateCollisionCallbacks(true);
     _world->onBeginContact = [this](b2Contact* contact) {
@@ -231,26 +260,21 @@ void GameScene::buildScene(string level) {
     _world->onEndContact = [this](b2Contact* contact) {
         endContact(contact);
     };
-//    _world->beforeSolve = [this](b2Contact* contact, const b2Manifold* oldManifold) {
-//        beforeSolve(contact,oldManifold);
-//    };
 
-	_background = PolygonNode::allocWithTexture(background_image);
-	_background->setName("world");
-	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
-    float b_scale = SCENE_WIDTH/_background->getWidth();
-    _background->setScale(b_scale);
-	addChild(_background, 0);
+	if (_map_vc != nullptr)
+		_map_vc.reset();
 
 	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
+	if (_player_vc != nullptr)
+		_player_vc.reset();
 	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
     _playerFloor = false;
 
+	_urchin_vcs.clear();
 	//Create Urchin viewcontrollers
-	_urchin_vcs = {};
     for (int i = 0; i < _gamestate->_urchins.size();i++) {
         shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, i);
         _map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
@@ -258,7 +282,7 @@ void GameScene::buildScene(string level) {
     }
 
 	//Create Fish viewcontrollers
-	_fish_vcs = {};
+	_fish_vcs.clear();
 	for (int i = 0; i < _gamestate->_fish.size(); i++) {
 		shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, fish_texture, size, i);
 		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
@@ -266,55 +290,18 @@ void GameScene::buildScene(string level) {
 	}
 
 	//Create Fish viewcontrollers
-	_angler_vcs = {};
+	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
 		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, angler_texture, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}
-    
-    
-    shared_ptr<Texture> up   = _assets->get<Texture>("close-normal");
-    shared_ptr<Texture> down = _assets->get<Texture>("close-selected");
-    shared_ptr<Button> button = Button::alloc(PolygonNode::allocWithTexture(up),
-                                              PolygonNode::allocWithTexture(down));
-    
-    // Create a callback function for the button
-    button->setName("close");
-    button->setListener([=] (const std::string& name, bool down) {
-        // Only quit when the button is released
-        if (!down) {
-            CULog("Goodbye!");
-            Application::get()->quit();
-        }
-    });
-    
-    button->setAnchor(Vec2::ANCHOR_CENTER);
-    button->setPosition(4.75,.2);
-    button->setScale(0.5f / up->getWidth());
-    
-    //addChild(button,3);
-    
-    // We can only activate a button AFTER it is added to a scene
-    //button->activate(1);
 
-    _winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-    _winnode->setAnchor(Vec2::ANCHOR_CENTER);
-    _winnode->setPosition(2.5,4);
-    _winnode->setForeground(WIN_COLOR);
-    _winnode->setScale(4 / _winnode->getWidth());
+	addChild(_background, 0);
     addChild(_winnode,3);
-
-    
-    _losenode = Label::alloc(LOSE_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-    _losenode->setAnchor(Vec2::ANCHOR_CENTER);
-    _losenode->setPosition(2.5,4);
-    _losenode->setForeground(WIN_COLOR);
-    _losenode->setScale(4 / _losenode->getWidth());
     addChild(_losenode,3);
-    
+	sortZOrder();
 	setState(PLAY);
-
     Application::get()->setClearColor(Color4f::CORNFLOWER);
 }
 
@@ -328,7 +315,7 @@ void GameScene::reset() {
     }
     _gamestate->reset();
     _player_vc->setAIDirection(_gamestate, "down");
-    //setState(PLAY);
+
     CULog("Reset");
 //    for (int i = 0; i < _fish_vcs.size(); i++) {
 //        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));

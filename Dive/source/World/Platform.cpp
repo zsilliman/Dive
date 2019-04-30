@@ -6,7 +6,7 @@ using namespace std;
 
 
 int getIndex(Vec2 pos, Vec2 map_dimen) {
-	return (int)((map_dimen.y - pos.y - 1) * map_dimen.x + Util::mod(pos.x, map_dimen.x));
+		return (int)((map_dimen.y - pos.y - 1) * map_dimen.x + Util::mod(pos.x, map_dimen.x));
 }
 
 /** Returns the location after moving either up,down,left or right */

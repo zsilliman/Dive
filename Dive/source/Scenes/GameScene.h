@@ -41,33 +41,38 @@ class GameScene : public cugl::Scene {
 protected:
     /** The asset manager for this game mode. */
     std::shared_ptr<cugl::AssetManager> _assets;
-    
+    //Stuff that gets loaded once for all levels
+	shared_ptr<Texture> texture;
+	shared_ptr<Texture> goal_texture;
+	shared_ptr<TiledTexture> tilesheet;
+	shared_ptr<Texture> urchin_texture;
+	shared_ptr<Texture> fish_texture;
+	shared_ptr<Texture> angler_texture;
+	shared_ptr<Texture> background_image;
+	shared_ptr<Texture> diving_texture;
 
-    
+	std::shared_ptr<cugl::Node> _background = nullptr;
+	std::shared_ptr<InputController> _input = nullptr;
+	std::shared_ptr<cugl::Label> _winnode = nullptr;
+	std::shared_ptr<cugl::Label> _losenode = nullptr;
 
-	//MODELS
-    // Gamestate contains all necessary models
-	std::shared_ptr<GameState> _gamestate;
-    
-	std::shared_ptr<cugl::Node> _background;
-
+	//Loaded again for each new level
+	//Gamestate contains all necessary models
+	std::shared_ptr<GameState> _gamestate = nullptr;
 	float scale;
 
     // COUPLED VIEW + CONTROLLERS
 	/** controller that manages how the user controls world translations */
-	std::shared_ptr<PlatformMapViewController> _map_vc;
-    std::shared_ptr<PlayerViewController> _player_vc;
-	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
-	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
-	std::vector<std::shared_ptr<AnglerViewController>> _angler_vcs;
+	std::shared_ptr<PlatformMapViewController> _map_vc = nullptr;
+    std::shared_ptr<PlayerViewController> _player_vc = nullptr;
+	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs = {};
+	std::vector<std::shared_ptr<FishViewController>> _fish_vcs = {};
+	std::vector<std::shared_ptr<AnglerViewController>> _angler_vcs = {};
 
     //input controller
-    std::shared_ptr<InputController> _input;
-    
-	std::shared_ptr<ObstacleWorld> _world;
-    std::shared_ptr<cugl::Label> _winnode;
-    std::shared_ptr<cugl::Label> _losenode;
+	std::shared_ptr<ObstacleWorld> _world = nullptr;
 
+	//Non-shared_ptr fields and definitions
 	enum State { WIN, LOSE, PLAY };
 	State prev_state = PLAY;
 	State current_state = PLAY;
@@ -86,15 +91,12 @@ protected:
     string _next_level;
     int final_level = 7;
 
-    //std::shared_ptr<FishViewController> _to_remove;
-    //std::shared_ptr<FishViewController> _dummy_fish;
-
 	int frame_counter = 0;
+	bool _playerFloor;
 
 	//Setting up the scene
+	void buildOnce();
 	void buildScene(string level);
-    
-    bool _playerFloor;
     
 public:
 #pragma mark -
@@ -174,7 +176,7 @@ public:
     void fishUrchinCollisions(Obstacle* fish, Obstacle* urchin);
     
     void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
-    
+
     string cycleLevel();
 
     /**
