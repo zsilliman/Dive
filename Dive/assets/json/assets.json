@@ -143,11 +143,10 @@
                     "data": {
                         "texture"    : "background",
                         "anchor"     : [0.5,0.5],
-                        "scale"      : [3,3]
+                        "scale"      : [1,1]
                     },
                     "layout" : {
-                        "x_anchor" : "center",
-                        "y_anchor" : "middle"
+                        "width": 100
                     },
                     "children":{
                         "title"  : {
@@ -183,22 +182,12 @@
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl1U"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": 2
                                     }
                                 },
                                 "down"       : {
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl1D"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": 2
                                     }
                                 }
                             },
@@ -223,22 +212,12 @@
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl2U"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": 1
                                     }
                                 },
                                 "down"       : {
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl2D"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": 1
                                     }
                                 }
                             },
@@ -263,20 +242,12 @@
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl3U"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle"
                                     }
                                 },
                                 "down"       : {
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl3D"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle"
                                     }
                                 }
                             },
@@ -301,22 +272,12 @@
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl4U"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": -1
                                     }
                                 },
                                 "down"       : {
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl4D"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": -1
                                     }
                                 }
                             },
@@ -341,22 +302,12 @@
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl5U"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": -2
                                     }
                                 },
                                 "down"       : {
                                     "type"   : "Image",
                                     "data"   : {
                                         "texture"  : "lvl5D"
-                                    },
-                                    "layout":{
-                                        "x_anchor": "center",
-                                        "y_anchor": "middle",
-                                        "y_offset": -2
                                     }
                                 }
                             },

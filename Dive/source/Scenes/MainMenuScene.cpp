@@ -92,6 +92,39 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         level5->activate(5);
     }
     
+    CULog("Button 1 position: (%f,%f)", level1->getPositionX(), level1->getPositionY());
+    CULog("Button 2 position: (%f,%f)", level2->getPositionX(), level2->getPositionY());
+    CULog("dimension width: %d", Application::get()->getDisplayWidth());
+    CULog("dimension height: %d", Application::get()->getDisplayHeight());
+    CULog("safe area: (%f,%f), (%f,%f)", Application::get()->getSafeArea().getMinX(), Application::get()->getSafeArea().getMinY(),
+         Application::get()->getSafeArea().getMaxX(), Application::get()->getSafeArea().getMaxY());
+    
+    float x_min = 0;
+    float y_min = 0;
+    int x_max = Application::get()->getDisplayWidth();
+    int y_max = Application::get()->getDisplayHeight();
+    float x_min_safe = Application::get()->getSafeArea().getMinX();
+    float y_min_safe = Application::get()->getSafeArea().getMinY();
+    float x_max_safe = Application::get()->getSafeArea().getMaxX();
+    float y_max_safe = Application::get()->getSafeArea().getMaxY();
+    float x_safe_offset = (x_min_safe-x_min);
+    float y_safe_offset = (y_min_safe-y_min);
+    float safe_width = (x_max-x_min)-2*x_safe_offset;
+    float safe_height = (y_max-y_min)-2*y_safe_offset;
+    
+    CULog("safe width and heigth: %f, %f", safe_width, safe_height);
+    CULog("Button 1 NEW position: (%f,%f)", x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9);
+    level1->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9 + 710);
+    level2->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*7 + 710);
+    level3->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*5 + 710);
+    level4->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*3 + 710);
+    level5->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*1 + 710);
+    
+    
+    
+    
+    
+
     // XNA nostalgia
     Application::get()->setClearColor(Color4f::CORNFLOWER);
     return true;
