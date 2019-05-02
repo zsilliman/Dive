@@ -20,6 +20,9 @@
 		344B56EB224C1AE700D51676 /* GamestateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56E8224C1AE700D51676 /* GamestateLoader.cpp */; };
 		344B56EC224C1AE700D51676 /* GamestateLoader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 344B56E8224C1AE700D51676 /* GamestateLoader.cpp */; };
 		344BD8D6223DE108007792E6 /* DiveApp.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EF396FB02228CCF200FE0998 /* DiveApp.cpp */; };
+		344F3EB8227A70FC00E63EE0 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 344F3EB4227A70FC00E63EE0 /* sounds */; };
+		344F3EB9227A70FC00E63EE0 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 344F3EB4227A70FC00E63EE0 /* sounds */; };
+		344F3EBA227A70FC00E63EE0 /* sounds in Resources */ = {isa = PBXBuildFile; fileRef = 344F3EB4227A70FC00E63EE0 /* sounds */; };
 		7635CAD7224C265900E1A8DE /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 7635CAD6224C265900E1A8DE /* animations */; };
 		7635CAD8224C265900E1A8DE /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 7635CAD6224C265900E1A8DE /* animations */; };
 		7635CAD9224C265900E1A8DE /* animations in Resources */ = {isa = PBXBuildFile; fileRef = 7635CAD6224C265900E1A8DE /* animations */; };
@@ -207,6 +210,7 @@
 		344B56DF224C19B300D51676 /* AIController.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = AIController.hpp; sourceTree = "<group>"; };
 		344B56E8224C1AE700D51676 /* GamestateLoader.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GamestateLoader.cpp; sourceTree = "<group>"; };
 		344B56E9224C1AE700D51676 /* GamestateLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GamestateLoader.h; sourceTree = "<group>"; };
+		344F3EB4227A70FC00E63EE0 /* sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = sounds; sourceTree = "<group>"; };
 		7635CAD6224C265900E1A8DE /* animations */ = {isa = PBXFileReference; lastKnownFileType = folder; path = animations; sourceTree = "<group>"; };
 		76A375D1226B712B00412AE0 /* TitleProgrammedScene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TitleProgrammedScene.cpp; sourceTree = "<group>"; };
 		76A375D5226B712C00412AE0 /* TitleProgrammedScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleProgrammedScene.h; sourceTree = "<group>"; };
@@ -398,6 +402,7 @@
 		EB2BE9B71D749870002FE78B /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				344F3EB4227A70FC00E63EE0 /* sounds */,
 				76C9CC68224C26AD006D0C63 /* textures */,
 				7635CAD6224C265900E1A8DE /* animations */,
 				EF84BE332233641900A1FE5A /* json */,
@@ -746,6 +751,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344F3EBA227A70FC00E63EE0 /* sounds in Resources */,
 				7635CAD9224C265900E1A8DE /* animations in Resources */,
 				76F0B48B224A794900EBF3E9 /* levels in Resources */,
 				76C9CC6B224C26AD006D0C63 /* textures in Resources */,
@@ -762,6 +768,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				344F3EB9227A70FC00E63EE0 /* sounds in Resources */,
 				7635CAD8224C265900E1A8DE /* animations in Resources */,
 				EF84BE212233621E00A1FE5A /* levels in Resources */,
 				76C9CC6A224C26AD006D0C63 /* textures in Resources */,
@@ -780,6 +787,7 @@
 			files = (
 				EF84BE342233641900A1FE5A /* json in Resources */,
 				EF84BE202233621E00A1FE5A /* levels in Resources */,
+				344F3EB8227A70FC00E63EE0 /* sounds in Resources */,
 				76C9CC69224C26AD006D0C63 /* textures in Resources */,
 				7635CAD7224C265900E1A8DE /* animations in Resources */,
 				EB2BE9B91D7498C9002FE78B /* fonts in Resources */,

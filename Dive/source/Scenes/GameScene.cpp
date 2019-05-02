@@ -39,7 +39,7 @@ using namespace std;
 #define LOSE_MESSAGE    "You lost"
 /** The color of the win message */
 #define WIN_COLOR       Color4::YELLOW
-#define EXIT_COUNT      100
+#define EXIT_COUNT      130
 #define MESSAGE_FONT    "charlemagne"
 
 /**
@@ -162,9 +162,12 @@ void GameScene::setState(State state) {
 		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
-		_winnode->setVisible(true);
+        AudioChannels::get()->playEffect("victory", victory_sound);
+        _winnode->setVisible(true);
 		_countdown = EXIT_COUNT;
 	} else if (state == LOSE && current_state != WIN && changed) {
+        //
+        AudioChannels::get()->playEffect("lose", lose_sound);
 		_losenode->setVisible(true);
 		_countdown = EXIT_COUNT;
 	} else if (state == PLAY) {
@@ -188,6 +191,8 @@ string GameScene::cycleLevel(){
 }
 
 void GameScene::buildOnce() {
+    counter = 0;
+    
 	texture = _assets->get<Texture>("tileset");
 	goal_texture = _assets->get<Texture>("statue");
 	tilesheet = TiledTexture::alloc(texture, 382, 382);
@@ -198,6 +203,12 @@ void GameScene::buildOnce() {
 	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
 
+    bubble_sound = _assets->get<Sound>("bubble01");
+    victory_sound = _assets->get<Sound>("victory");
+    lose_sound = _assets->get<Sound>("lose");
+
+
+    
 	_background = nullptr;
 	_background = PolygonNode::allocWithTexture(background_image);
 	_background->setName("world");

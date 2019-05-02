@@ -51,6 +51,13 @@ protected:
 	shared_ptr<Texture> background_image;
 	shared_ptr<Texture> diving_texture;
 
+    //sounds
+    std::shared_ptr<Sound> bubble_sound;
+    std::shared_ptr<Sound> victory_sound;
+    std::shared_ptr<Sound> lose_sound;
+
+
+    
 	std::shared_ptr<cugl::Node> _background = nullptr;
 	std::shared_ptr<InputController> _input = nullptr;
 	std::shared_ptr<cugl::Label> _winnode = nullptr;
@@ -90,6 +97,7 @@ protected:
     string _current_level;
     string _next_level;
     int final_level = 7;
+    int counter;
 
 	int frame_counter = 0;
 	bool _playerFloor;
