@@ -107,7 +107,7 @@ void GameScene::update(float timestep) {
 
 	if (current_state == PLAY) {
 		_player_side_count = 0;
-		_world->update(2*timestep);
+		_world->update(timestep);
 		_map_vc->update(_gamestate);
 
 		//Begin background parallax section
