@@ -107,7 +107,7 @@ void GameScene::update(float timestep) {
 
 	if (current_state == PLAY) {
 		_player_side_count = 0;
-		_world->update(timestep);
+		_world->update(2*timestep);
 		_map_vc->update(_gamestate);
 
 		//Begin background parallax section
@@ -282,6 +282,7 @@ void GameScene::buildScene(string level) {
     _world->onEndContact = [this](b2Contact* contact) {
         endContact(contact);
     };
+	
 
 	if (_map_vc != nullptr)
 		_map_vc.reset();

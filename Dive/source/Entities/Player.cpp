@@ -5,7 +5,7 @@ using namespace std;
 
 shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	shared_ptr<Player> player = make_shared<Player>();
-	Size size = Vec2(0.9, 0.9);
+	Size size = Vec2(0.8, 0.8);
 	player->initEntity(start_pos, size, map_rect);
 	player->_box->setFriction(0);
 	player->_box_dup->setFriction(0);
@@ -15,20 +15,20 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	player->_box->setRestitution(0);
 	player->_box_dup->setRestitution(0);
 	//Side sensor detection
-	player->_sensor_left = BoxObstacle::alloc(player->_position - size/2, Size(size.width * .475, size.height/2));
+	player->_sensor_left = BoxObstacle::alloc(player->_position - size/2, Size(size.width * .05, size.height/10));
 	player->_sensor_left->setSensor(true);
 	player->_sensor_left->setName("player left side");
 
-	player->_sensor_right = BoxObstacle::alloc(player->_position + size / 2, Size(size.width * .475, size.height / 2));
+	player->_sensor_right = BoxObstacle::alloc(player->_position + size / 2, Size(size.width * .05, size.height / 10));
 	player->_sensor_right->setSensor(true);
 	player->_sensor_right->setName("player right side");
 
 	//Side sensor detection duplicates
-	player->_sensor_left_dup = BoxObstacle::alloc(player->_position - size / 2, Size(size.width * .475, size.height / 2));
+	player->_sensor_left_dup = BoxObstacle::alloc(player->_position - size / 2, Size(size.width * .05, size.height / 10));
 	player->_sensor_left_dup->setSensor(true);
 	player->_sensor_left_dup->setName("player left side");
 
-	player->_sensor_right_dup = BoxObstacle::alloc(player->_position + size / 2, Size(size.width * .475, size.height / 2));
+	player->_sensor_right_dup = BoxObstacle::alloc(player->_position + size / 2, Size(size.width * .05, size.height / 10));
 	player->_sensor_right_dup->setSensor(true);
 	player->_sensor_right_dup->setName("player right side");
 
