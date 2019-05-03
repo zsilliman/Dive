@@ -20,7 +20,7 @@
          "name":"render_layer",
          "opacity":1,
          "type":"tilelayer",
-         "visible":false,
+         "visible":true,
          "width":10,
          "x":0,
          "y":0
@@ -57,7 +57,7 @@
          "value":"[0,0,1,0]"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.2.2",
+ "tiledversion":"1.2.3",
  "tileheight":382,
  "tilesets":[
         {

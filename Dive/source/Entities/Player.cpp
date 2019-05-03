@@ -4,7 +4,6 @@ using namespace cugl;
 using namespace std;
 
 shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
-    CULog("alloc in player");
 	shared_ptr<Player> player = make_shared<Player>();
 	Size size = Vec2(0.9, 0.9);
 	player->initEntity(start_pos, size, map_rect);

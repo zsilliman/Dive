@@ -77,6 +77,23 @@
             "size":     128
         }
     },
+    "sounds": {
+        "bubble01": {
+            "type":     "sample",
+            "file":     "sounds/bubble01.wav",
+            "volume":   0.2
+        },
+        "victory": {
+            "type":     "sample",
+            "file":     "sounds/victory.wav",
+            "volume":   0.2
+        },
+        "lose": {
+            "type":     "sample",
+            "file":     "sounds/lose2.wav",
+            "volume":   0.2
+        }
+    },
     "scenes": {
         "dive" : {
             "type":    "Animation",

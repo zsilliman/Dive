@@ -67,6 +67,9 @@ void DiveApp::onStartup() {
 	_assets->attach<Node>(SceneLoader::alloc()->getHook());
 	_assets->attach<GameState>(GamestateLoader::alloc()->getHook());
 	_assets->attach<JsonValue>(JsonLoader::alloc()->getHook());
+    _assets->attach<Sound>(SoundLoader::alloc()->getHook());
+    
+    AudioChannels::start(24);
 
     // Activate mouse or touch screen input as appropriate
     // We have to do this BEFORE the scene, because the scene has a button
@@ -102,6 +105,7 @@ void DiveApp::onStartup() {
  * causing the application to be deleted.
  */
 void DiveApp::onShutdown() {
+    AudioChannels::stop();
     // Delete all smart pointers
     _batch = nullptr;
     _assets = nullptr;
@@ -128,19 +132,6 @@ void DiveApp::onShutdown() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void DiveApp::update(float timestep) {
-    //
-//    if (!_loaded && _loading.isActive()) {
-//        _loading.update(0.01f);
-//    }
-//    else if (!_loaded) {
-//        _loading.dispose(); // Disables the input listeners in this mode
-//        _gameplay.init(_assets);
-//        _loaded = true;
-//    }
-//    else {
-//        _gameplay.update(timestep);
-//    }
-
     if (!_loaded && _title.isActive()) {
         _title.update(timestep);
     }
