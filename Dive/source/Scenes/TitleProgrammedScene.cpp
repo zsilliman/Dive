@@ -40,6 +40,7 @@ bool TitleProgrammedScene::init(const std::shared_ptr<cugl::AssetManager>& asset
 	}
 
 	_assets = assets;
+	_assets->loadDirectory("json/loading.json");
 	shared_ptr<Texture> texture = _assets->get<Texture>("background");
 	shared_ptr<Texture> texture_clear = _assets->get<Texture>("background_clear");
 	shared_ptr<Font> font = _assets->get<Font>("OldKlarheit");
@@ -111,18 +112,16 @@ bool TitleProgrammedScene::init(const std::shared_ptr<cugl::AssetManager>& asset
  * Disposes of all (non-static) resources allocated to this mode.
  */
 void TitleProgrammedScene::dispose() {
-	if (_active) {
-		_root = nullptr;
-		_background1 = nullptr;
-		_background2 = nullptr;
-		_background3 = nullptr;
-
-		_D_node = nullptr;
-		_I_node = nullptr;
-		_V_node = nullptr;
-		_E_node = nullptr;
-		_active = false;
-	}
+	_root = nullptr;
+	_background1 = nullptr;
+	_background2 = nullptr;
+	_background3 = nullptr;
+			
+	_D_node = nullptr;
+	_I_node = nullptr;
+	_V_node = nullptr;
+	_E_node = nullptr;
+	_active = false;
 }
 
 void TitleProgrammedScene::dive_func(float t) {
@@ -140,6 +139,37 @@ void TitleProgrammedScene::dive_func(float t) {
 	Vec2 pos = start + (end - start) * sqrtf(t);
 	pos.x += f_t * 50;
 	_dive->setPosition(pos);
+}
+
+void TitleProgrammedScene::idle_func(shared_ptr<Node> letter, float t) {
+	float amplitude = (PI / 12);
+	float angle0 = amplitude * sin(2 * PI * t);
+	letter->setAngle(angle0);
+
+	float magnitude = _dimen.width*.0002*_D_node->getScaleX();
+	float y0 = magnitude * sin(2 * PI*t) + letter->getPositionY();
+	letter->setPositionY(y0);
+}
+
+void TitleProgrammedScene::idle_blend_func(float t, float offset) {
+	if (t < offset) {
+		idle_func(_D_node, t);
+	}
+	else if (t < offset * 2) {
+		idle_func(_D_node, t);
+		idle_func(_I_node, t - offset);
+	}
+	else if (t < offset * 3) {
+		idle_func(_D_node, t);
+		idle_func(_I_node, t - offset);
+		idle_func(_V_node, t - (2 * offset));
+	}
+	else {
+		idle_func(_D_node, t);
+		idle_func(_I_node, t - offset);
+		idle_func(_V_node, t - (2 * offset));
+		idle_func(_E_node, t - (3 * offset));
+	}
 }
 
 void TitleProgrammedScene::parallax_func1(float t) {
@@ -173,9 +203,17 @@ void TitleProgrammedScene::parallax_func3(float t) {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void TitleProgrammedScene::update(float progress) {
+	if (_progress < 1) {
+		_progress = _assets->progress();
+		if (_progress >= 1) {
+			_progress = 1.0f;
+			_loaded = true;
+		}
+	}
+
 	float t_step = progress/4;
 	if (!_finished) {
-		if (!_stall) {
+		if (!_animated) {
 			_t += t_step;
 			if (_t > 1)
 				_t = 1;
@@ -184,17 +222,21 @@ void TitleProgrammedScene::update(float progress) {
 			parallax_func3(_t);
 			dive_func(_t);
 			if (_t >= 1) {
-				_stall = true;
+				_animated = true;
 				_t = 0;
 			}
 		}
-		else {
-			_t += t_step;
+		else if (_animated) {
+			_t += t_step/2;
+			idle_blend_func(_t, 0.1);
 			if (_t > 1) {
-				_t = 1;
-				_finished = true;
+				_idled = true;
 			}
 		}
+	}
+
+	if (_animated && _loaded && _idled) {
+		_finished = true;
 	}
 
 	this->_active = !_finished;

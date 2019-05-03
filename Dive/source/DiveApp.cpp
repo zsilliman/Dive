@@ -81,13 +81,11 @@ void DiveApp::onStartup() {
 	setClearColor(Color4(229, 229, 229, 255));
 
 	// Create a "loading" screen
+	_title.init(_assets);
 	_loaded = false;
-	_loading.init(_assets);
 
 	// This reads the given JSON file and uses it to load all other assets
 	_assets->loadDirectoryAsync("json/assets.json", nullptr);
-    
-    _animationplayed = false;
 
     Application::onStartup();
 }
@@ -143,27 +141,13 @@ void DiveApp::update(float timestep) {
 //        _gameplay.update(timestep);
 //    }
 
-    if (!_loaded && _loading.isActive()) {
-        _loading.update(0.01f);
-    }
-    else if (!_loaded) {
-        _loading.dispose(); // Disables the input listeners in this mode
-        _title.init(_assets);
-        _loaded = true;
-        //
-        //_title.dispose();
-        //_gameplay.init(_assets);
-        _animationplayed = false;
-    }
-    else if (!_animationplayed && _title.isActive()){
-		CULog("TITLE ANIMATION PLAYING");
+    if (!_loaded && _title.isActive()) {
         _title.update(timestep);
     }
-    else if (!_animationplayed){
-        _title.dispose();
-        _gameplay.init(_assets);
-        _animationplayed = true;
-
+    else if (!_loaded) {
+		_title.dispose();
+		_gameplay.init(_assets);
+		_loaded = true;
     }
     else {
         _gameplay.update(timestep);
@@ -182,11 +166,8 @@ void DiveApp::update(float timestep) {
 void DiveApp::draw() {
     // This takes care of begin/end
 	if (!_loaded) {
-		_loading.render(_batch);
+		_title.render(_batch);
 	}
-    else if (!_animationplayed){
-        _title.render(_batch);
-    }
 	else {
 		_gameplay.render(_batch);
 	}

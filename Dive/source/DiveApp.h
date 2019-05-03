@@ -51,14 +51,10 @@ protected:
 
 	/** The controller for the game screen */
 	GameScene _gameplay;
-	/** The controller for the loading screen */
-	LoadingScene _loading;
-    /** Title Animation Scene */
+    /** Title Animation Scene / Loading Scene */
     TitleProgrammedScene _title;
     
-    bool _loaded;
-    bool _animationplayed;
-    
+    bool _loaded = false;
     float scale;
     
 public:

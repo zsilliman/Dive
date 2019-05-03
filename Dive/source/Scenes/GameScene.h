@@ -24,6 +24,8 @@
 #include "../ViewControllers/AnglerViewController.h"
 #include "../ViewControllers/GoalViewController.h"
 #include "../ViewControllers/InputController.h"
+#include "InGameOverlay.h"
+#include "../Util.h"
 #include <cugl/cugl.h>
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <vector>
@@ -53,8 +55,7 @@ protected:
 
 	std::shared_ptr<cugl::Node> _background = nullptr;
 	std::shared_ptr<InputController> _input = nullptr;
-	std::shared_ptr<cugl::Label> _winnode = nullptr;
-	std::shared_ptr<cugl::Label> _losenode = nullptr;
+	std::shared_ptr<InGameOverlay> _overlay = nullptr;
 
 	//Loaded again for each new level
 	//Gamestate contains all necessary models
@@ -72,13 +73,11 @@ protected:
     //input controller
 	std::shared_ptr<ObstacleWorld> _world = nullptr;
 
-	//Non-shared_ptr fields and definitions
-	enum State { WIN, LOSE, PLAY };
+	//Non-shared_ptr fields
 	State prev_state = PLAY;
 	State current_state = PLAY;
 	bool _complete = false;
 
-    int _countdown;
     int _block_counter;
     int _animation_counter;
     int _diver_angle;

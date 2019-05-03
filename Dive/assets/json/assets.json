@@ -1,26 +1,5 @@
 {
     "textures": {
-        "icon": {
-            "file":     "textures/dive_icon.png",
-            "minfilter":"nearest",
-            "magfilter":"linear",
-            "wrapS":    "clamp",
-            "wrapT":    "clamp"
-        },
-        "close-normal": {
-            "file":     "textures/CloseNormal.png",
-            "minfilter":"nearest",
-            "magfilter":"linear",
-            "wrapS":    "clamp",
-            "wrapT":    "clamp"
-        },
-        "close-selected": {
-            "file":     "textures/CloseSelected.png",
-            "minfilter":"nearest",
-            "magfilter":"linear",
-            "wrapS":    "clamp",
-            "wrapT":    "clamp"
-        },
         "tileset": {
             "file":     "textures/Tileset_light.png",
             "minfilter":"nearest",
@@ -51,6 +30,15 @@
         },
         "walking": {
             "file":     "textures/walking.png"
+        },
+        "UI_window": {
+            "file":     "textures/ui/window.png"
+        },
+        "UI_pause_up": {
+            "file":     "textures/ui/pause-button.png"
+        },
+        "UI_pause_down": {
+            "file":     "textures/ui/pause-button_down.png"
         }
     },
     "levels": {

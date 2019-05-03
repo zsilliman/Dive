@@ -30,7 +30,7 @@ using namespace std;
 #pragma mark Level Layout
 
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 5
+#define SCENE_WIDTH 500
 
 #pragma mark -
 #pragma mark Constructors
@@ -100,64 +100,74 @@ void GameScene::dispose() {
  */
 void GameScene::update(float timestep) {
     _input->update(timestep);
+	_overlay->update(timestep);
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
 
-	_player_side_count = 0;
-	_world->update(timestep);
-	_map_vc->update(_gamestate);
+	if (current_state == PLAY) {
+		_player_side_count = 0;
+		_world->update(timestep);
+		_map_vc->update(_gamestate);
 
-	//Begin background parallax section
-	float parallax_speed = 0.5f;
-	float grid_size = size.width / _gamestate->_map->getWidth();
-	float pos = _map_vc->getPosition().y + _gamestate->_map->getHeight()*grid_size + (size.height/(2*parallax_speed));
-	_background->setPositionY(pos * parallax_speed);
-	//End background parallax section
-    _animation_counter--;
-    //on a platform
-    if (_playerFloor) {
-        _player_vc->setFloor(true);
-    }else{
-        _player_vc->setFloor(false);
-    }
-    _player_vc->update(_gamestate);
+		//Begin background parallax section
+		float parallax_speed = 0.5f;
+		float grid_size = size.width / _gamestate->_map->getWidth();
+		float pos = _map_vc->getPosition().y + _gamestate->_map->getHeight()*grid_size + (size.height/(2*parallax_speed));
+		_background->setPositionY(pos * parallax_speed);
+		//End background parallax section
 
-	for (int i = 0; i < _urchin_vcs.size(); i++) {
-		_urchin_vcs[i]->update(_gamestate);
-	}
-	for (int i = 0; i < _fish_vcs.size(); i++) {
-		_fish_vcs[i]->update(_gamestate);
-	}
-	for (int i = 0; i < _angler_vcs.size(); i++) {
-		_angler_vcs[i]->update(_gamestate);
-	}
-   
-    //else if (bd2->getName().find("fish") != string::npos) {
-    if(_fish_remove != -1){
-        CULog("setting dead fish %d", _fish_remove);
-        _fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
-        _fish_remove = -1;
-        CULog("fish dead num  %d", _fish_remove);
-    }
-	//remove angler fish
-	if (_angler_remove != -1) {
-        CULog("setting dead angler %d", _angler_remove);
-		_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
-		_angler_remove = -1;
-	}
-	if (!_complete) {
-		frame_counter++;
-		if (frame_counter >= UPDATE_STEP) {
-			frame_counter = 0;
+		_animation_counter--;
+
+		//on a platform
+		if (_playerFloor) {
+			_player_vc->setFloor(true);
 		}
+		else {
+			_player_vc->setFloor(false);
+		}
+		_player_vc->update(_gamestate);
+
+		for (int i = 0; i < _urchin_vcs.size(); i++) {
+			_urchin_vcs[i]->update(_gamestate);
+		}
+		for (int i = 0; i < _fish_vcs.size(); i++) {
+			_fish_vcs[i]->update(_gamestate);
+		}
+		for (int i = 0; i < _angler_vcs.size(); i++) {
+			_angler_vcs[i]->update(_gamestate);
+		}
+
+		//else if (bd2->getName().find("fish") != string::npos) {
+		if (_fish_remove != -1) {
+			CULog("setting dead fish %d", _fish_remove);
+			_fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
+			_fish_remove = -1;
+			CULog("fish dead num  %d", _fish_remove);
+		}
+		//remove angler fish
+		if (_angler_remove != -1) {
+			CULog("setting dead angler %d", _angler_remove);
+			_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
+			_angler_remove = -1;
+		}
+		if (!_complete) {
+			frame_counter++;
+			if (frame_counter >= UPDATE_STEP) {
+				frame_counter = 0;
+			}
+		}
+		_fish_countdown--;
 	}
-    if (_countdown > 0) {
-        _countdown--;
-    } else if (_countdown == 0) {
-        reset();
-    }
-    _fish_countdown--;
+	else if (current_state == LOSE) {
+		//YOU LOSE ANIMATION (OVERLAY ALREADY IMPLEMENTED)
+	}
+	else if (current_state == WIN) {
+		//YOU WIN ANIMATION (OVERLAY ALREADY IMPLEMENTED)
+	}
+	else { //PAUSED
+		//probably nothing
+	}
 }
 
 void GameScene::setState(State state) {
@@ -165,17 +175,19 @@ void GameScene::setState(State state) {
 		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
-		_winnode->setVisible(true);
-		_countdown = EXIT_COUNT;
+		_overlay->setState(WIN);
+		current_state = WIN;
 	} else if (state == LOSE && current_state != WIN && changed) {
-		_losenode->setVisible(true);
-		_countdown = EXIT_COUNT;
+		_overlay->setState(LOSE);
+		current_state = LOSE;
 	} else if (state == PLAY) {
-		_losenode->setVisible(false);
-		_winnode->setVisible(false);
-		_countdown = -1;
+		_overlay->setState(PLAY);
+		current_state = PLAY;
 	}
-	current_state = state;
+	else if (state == PAUSE) {
+		_overlay->setState(PAUSE);
+		current_state = PAUSE;
+	}
 }
 
 string GameScene::cycleLevel(){
@@ -191,6 +203,14 @@ string GameScene::cycleLevel(){
 }
 
 void GameScene::buildOnce() {
+	Size  size = Application::get()->getDisplaySize();
+	scale = SCENE_WIDTH / size.width;
+	size *= scale;
+	// Find the safe area, adapting to the iPhone X
+	Rect safe = Application::get()->getSafeArea();
+	safe.origin *= scale;
+	safe.size *= scale;
+
 	texture = _assets->get<Texture>("tileset");
 	goal_texture = _assets->get<Texture>("statue");
 	tilesheet = TiledTexture::alloc(texture, 382, 382);
@@ -208,20 +228,19 @@ void GameScene::buildOnce() {
 	float b_scale = SCENE_WIDTH / _background->getWidth();
 	_background->setScale(b_scale);
 
-	_winnode = Label::alloc(WIN_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-	_winnode->setAnchor(Vec2::ANCHOR_CENTER);
-	_winnode->setPosition(2.5, 4);
-	_winnode->setForeground(WIN_COLOR);
-	_winnode->setScale(4 / _winnode->getWidth());
-	addChild(_winnode, 3);
+	_overlay = InGameOverlay::alloc(_assets, safe);
+	Button::Listener main_menu_callback = [=](const std::string& name, bool down) { if (!down) { CULog("MAIN MENU PRESSED"); } };
+	_overlay->setMainMenuCallback(main_menu_callback);
+	Button::Listener resume_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PLAY); CULog("RESUME PRESSED"); } };
+	_overlay->setResumeCallback(resume_callback);
+	Button::Listener retry_callback = [=](const std::string& name, bool down) { if (!down) { this->reset();  this->setState(PLAY); CULog("RETRY PRESSED"); } };
+	_overlay->setRetryCallback(retry_callback);
+	Button::Listener continue_callback = [=](const std::string& name, bool down) { if (!down) { this->_current_level = this->cycleLevel(); this->buildScene(_current_level);  this->setState(PLAY); CULog("CONTINUE PRESSED"); } };
+	_overlay->setContinueCallback(continue_callback);
+	Button::Listener pause_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PAUSE); CULog("PAUSE GAME PRESSED"); } };
+	_overlay->setPauseCallback(pause_callback);
 
-
-	_losenode = Label::alloc(LOSE_MESSAGE, _assets->get<Font>(MESSAGE_FONT));
-	_losenode->setAnchor(Vec2::ANCHOR_CENTER);
-	_losenode->setPosition(2.5, 4);
-	_losenode->setForeground(WIN_COLOR);
-	_losenode->setScale(4 / _losenode->getWidth());
-	addChild(_losenode, 3);
+	_overlay->setState(PLAY);
 }
 
 void GameScene::buildScene(string level) {
@@ -298,8 +317,7 @@ void GameScene::buildScene(string level) {
 	}
 
 	addChild(_background, 0);
-    addChild(_winnode,3);
-    addChild(_losenode,3);
+	addChild(_overlay->_root_node, 4);
 	sortZOrder();
 	setState(PLAY);
     Application::get()->setClearColor(Color4f::CORNFLOWER);
@@ -317,9 +335,6 @@ void GameScene::reset() {
     _player_vc->setAIDirection(_gamestate, "down");
 
     CULog("Reset");
-//    for (int i = 0; i < _fish_vcs.size(); i++) {
-//        _fish_vcs[i]->setInitialVelocity(_gamestate, Vec2(-1,0));
-//    }
     buildScene(_current_level);
 }
 
@@ -333,7 +348,6 @@ void GameScene::reset() {
  * @param  contact  The two bodies that collided
  */
 void GameScene::beginContact(b2Contact* contact) {
-    CULog("BEGINNING CONTACT");
     b2Fixture* fix1 = contact->GetFixtureA();
     b2Fixture* fix2 = contact->GetFixtureB();
     
@@ -364,7 +378,6 @@ void GameScene::beginContact(b2Contact* contact) {
 		}
         else if(bd2->getName() == "platform"){
             _block_counter++;
-            CULog("inc block counter 2  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
@@ -414,7 +427,6 @@ void GameScene::beginContact(b2Contact* contact) {
             //diverPlatformCollisions(bd2, bd1);
             
             _block_counter++;
-            CULog("inc block counter 1  %d", _block_counter);
             _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
@@ -440,10 +452,8 @@ void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* pl
 		_player_side_count++;
 	if (left) {
 		_player_vc->setAIDirection(_gamestate, "right");
-		CULog("GO RIGHT");
 	} else {
 		_player_vc->setAIDirection(_gamestate, "left");
-		CULog("GO LEFT");
 	}
 }
 
@@ -505,14 +515,11 @@ void GameScene::endContact(b2Contact* contact) {
     if(bd1->getName() == "platform"){
         if(bd2->getName() == "player"){
             _block_counter--;
-            CULog("dec block counter 1  %d", _block_counter);
             if(_block_counter<0){
                 _block_counter = 0;
-                CULog("setting block counter to 0.1");
             }
             //change ai direction
             if(_block_counter==0){
-                CULog("block counter 0.1");
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }
@@ -521,15 +528,11 @@ void GameScene::endContact(b2Contact* contact) {
     else if(bd1->getName() == "player"){
         if(bd2->getName() == "platform"){
             _block_counter--;
-            CULog("dec block counter 2  %d", _block_counter);
             if(_block_counter<0){
                 _block_counter = 0;
-                CULog("setting block counter to 0.1");
             }
             //change ai direction
             if(_block_counter==0){
-                CULog("block counter 0.2");
-
                 _player_vc->setAIDirection(_gamestate, "down");
                 _playerFloor = false;
             }
