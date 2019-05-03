@@ -30,8 +30,6 @@
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <vector>
 
-//Step world AI once every 20 frames
-#define UPDATE_STEP 20
 /**
  * This class is the primary gameplay constroller for the demo.
  *

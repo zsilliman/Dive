@@ -151,12 +151,6 @@ void GameScene::update(float timestep) {
 			_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
 			_angler_remove = -1;
 		}
-		if (!_complete) {
-			frame_counter++;
-			if (frame_counter >= UPDATE_STEP) {
-				frame_counter = 0;
-			}
-		}
 		_fish_countdown--;
 	}
 	else if (current_state == LOSE) {
@@ -244,7 +238,7 @@ void GameScene::buildOnce() {
 	_overlay->setResumeCallback(resume_callback);
 	Button::Listener retry_callback = [=](const std::string& name, bool down) { if (!down) { this->reset();  this->setState(PLAY); CULog("RETRY PRESSED"); } };
 	_overlay->setRetryCallback(retry_callback);
-	Button::Listener continue_callback = [=](const std::string& name, bool down) { if (!down) { this->_current_level = this->cycleLevel(); this->buildScene(_current_level);  this->setState(PLAY); CULog("CONTINUE PRESSED"); } };
+	Button::Listener continue_callback = [=](const std::string& name, bool down) { if (!down) { this->reset(); CULog("CONTINUE PRESSED"); } };
 	_overlay->setContinueCallback(continue_callback);
 	Button::Listener pause_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PAUSE); CULog("PAUSE GAME PRESSED"); } };
 	_overlay->setPauseCallback(pause_callback);
