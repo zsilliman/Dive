@@ -37,46 +37,75 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     }
     
     _assets = assets;
-    auto layer = assets->get<Node>("mainmenu");
+    auto layer0 = assets->get<Node>("mainmenu");
+    auto layer = assets->get<Node>("levelselect");
+    layer0->setContentSize(dimen);
     layer->setContentSize(dimen);
-    layer->doLayout(); // This rearranges the children to fit the screen
+//    layer->doLayout(); // This rearranges the children to fit the screen
+    addChild(layer0);
     addChild(layer);
     
-    _button = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_action"));
-    _label  = std::dynamic_pointer_cast<Label>(assets->get<Node>("mainmenu_action_up_label"));
-    _button->setListener([=](const std::string& name, bool down) {
+//    _button = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_action"));
+//    _label  = std::dynamic_pointer_cast<Label>(assets->get<Node>("mainmenu_action_up_label"));
+//    _button->setListener([=](const std::string& name, bool down) {
+//        if (down) {
+//            this->_counter++;
+//            this->_label->setText("Click Count is "+cugl::to_string(this->_counter));
+//        }
+//    });
+    
+    layer0->setVisible(true);
+    layer->setVisible(false);
+    
+    surface = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_surface"));
+    surface->setListener([=](const std::string& name, bool down) {
         if (down) {
-            this->_counter++;
-            this->_label->setText("Click Count is "+cugl::to_string(this->_counter));
+            CULog("go to credits");
         }
     });
     
-    level1 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level1"));
+    depths = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_depths"));
+    depths->setListener([=](const std::string& name, bool down) {
+        if (down) {
+            CULog("go to level select");
+            layer->setVisible(true);
+            layer0->setVisible(false);
+            level1->activate(1);
+            level2->activate(2);
+            level3->activate(3);
+            level4->activate(4);
+            level5->activate(5);
+//            surface->deactivate();
+//            depths->deactivate();
+
+        }
+    });
+    
+    level1 = std::dynamic_pointer_cast<Button>(assets->get<Node>("levelselect_level1"));
     level1->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 1 selected");
         }
     });
-    level2 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level2"));
+    level2 = std::dynamic_pointer_cast<Button>(assets->get<Node>("levelselect_level2"));
     level2->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 2 selected");
         }
     });
-    level3 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level3"));
+    level3 = std::dynamic_pointer_cast<Button>(assets->get<Node>("levelselect_level3"));
     level3->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 3 selected");
-            this->_counter++;
         }
     });
-    level4 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level4"));
+    level4 = std::dynamic_pointer_cast<Button>(assets->get<Node>("levelselect_level4"));
     level4->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 4 selected");
         }
     });
-    level5 = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_bluebg_level5"));
+    level5 = std::dynamic_pointer_cast<Button>(assets->get<Node>("levelselect_level5"));
     level5->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("level 5 selected");
@@ -84,12 +113,14 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
     
     if (_active) {
-        _button->activate(0);
-        level1->activate(1);
-        level2->activate(2);
-        level3->activate(3);
-        level4->activate(4);
-        level5->activate(5);
+//        _button->activate(0);
+//        level1->activate(1);
+//        level2->activate(2);
+//        level3->activate(3);
+//        level4->activate(4);
+//        level5->activate(5);
+        surface->activate(6);
+        depths->activate(7);
     }
     
     CULog("Button 1 position: (%f,%f)", level1->getPositionX(), level1->getPositionY());
@@ -112,18 +143,22 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     float safe_width = (x_max-x_min)-2*x_safe_offset;
     float safe_height = (y_max-y_min)-2*y_safe_offset;
     
-    CULog("safe width and heigth: %f, %f", safe_width, safe_height);
-    CULog("Button 1 NEW position: (%f,%f)", x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9);
-    level1->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9 + 710);
-    level2->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*7 + 710);
-    level3->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*5 + 710);
-    level4->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*3 + 710);
-    level5->setPosition(x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*1 + 710);
+//    CULog("safe width and heigth: %f, %f", safe_width, safe_height);
+//    CULog("Button 1 NEW position: (%f,%f)", x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9);
+    
+    int Y_LIFT = 850;
+    int X_LIFT = 300;
+    surface->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT);
+    depths->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT - 300);
     
     
+    level1->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*9 +Y_LIFT);
+    level2->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*7 +Y_LIFT);
+    level3->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*5 +Y_LIFT);
+    level4->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*3 +Y_LIFT);
+    level5->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT);
     
-    
-    
+    layer->setVisible(false);
 
     // XNA nostalgia
     Application::get()->setClearColor(Color4f::CORNFLOWER);
@@ -134,9 +169,11 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
  * Disposes of all (non-static) resources allocated to this mode.
  */
 void MainMenuScene::dispose() {
-    _button = nullptr;
-    _label  = nullptr;
+//    _button = nullptr;
+//    _label  = nullptr;
     _assets = nullptr;
+    surface = nullptr;
+    depths = nullptr;
     level1 = nullptr;
     level2 = nullptr;
     level3 = nullptr;

@@ -24,9 +24,12 @@ protected:
 //    std::shared_ptr<cugl::Button> _button;
 //
     // MODEL
-    std::shared_ptr<cugl::Button> _button;
-    std::shared_ptr<cugl::Label> _label;
+//    std::shared_ptr<cugl::Button> _button;
+//    std::shared_ptr<cugl::Label> _label;
     int _counter;
+    
+    std::shared_ptr<cugl::Button> surface;
+    std::shared_ptr<cugl::Button> depths;
     
     std::shared_ptr<cugl::Button> level1;
     std::shared_ptr<cugl::Button> level2;
