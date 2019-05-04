@@ -18,7 +18,8 @@ protected:
 	float max_speed = 0.8f;
 	float _grid_size = 1;
 	int _angler_index = 0;
-
+    
+    int _cooldown = 3;
 	bool _mainCycle;
 
 public:
