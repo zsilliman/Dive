@@ -95,17 +95,17 @@
         "victory": {
             "type":     "sample",
             "file":     "sounds/victory.wav",
-            "volume":   0.2
+            "volume":   0.5
         },
         "lose": {
             "type":     "sample",
             "file":     "sounds/lose2.wav",
-            "volume":   0.2
+            "volume":   0.5
         },
         "background_sound": {
             "type":     "sample",
             "file":     "sounds/background_music.wav",
-            "volume":   0.1
+            "volume":   0.5
         }
     },
     "scenes": {

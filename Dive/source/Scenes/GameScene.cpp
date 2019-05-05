@@ -157,6 +157,7 @@ void GameScene::update(float timestep) {
             if(!AudioChannels::get()->isActiveEffect("background")){
                 CULog("resuming update");
                 AudioChannels::get()->playEffect("background", background_music);
+                AudioChannels::get()->setEffectLoop("background", true);
             }
         }
 	}
@@ -269,8 +270,8 @@ void GameScene::buildOnce() {
     
     //AudioChannels::get()->playMusic(background_music);
     AudioChannels::get()->playEffect("background", background_music);
+    AudioChannels::get()->setEffectLoop("background", true);
 
-    
 }
 
 void GameScene::buildScene(string level) {
