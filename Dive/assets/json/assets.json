@@ -224,6 +224,62 @@
                 "y_anchor" : "middle"
             }
         },
+        "credits" :{
+            "type"      : "Node",
+            "format" : {
+                "type" : "Anchored"
+            },
+            "data":{
+                "anchor": [0.5,0.5]
+            },
+            "children"  : {
+                "downarr" : {
+                    "type"   : "Button",
+                    "format" : {
+                        "type" : "Anchored"
+                    },
+                    "data"   : {
+                        "anchor"   : [0.5,0.5],
+                        "upnode"  : "up",
+                        "downnode" : "down"
+                    },
+                    "children" : {
+                        "up"       : {
+                            "type"   : "Image",
+                            "data"   : {
+                                "texture"  : "down"
+                            }
+                        },
+                        "down"       : {
+                            "type"   : "Image",
+                            "data"   : {
+                                "texture"  : "down"
+                            }
+                        }
+                    }
+                },
+                "teamcred"  : {
+                    "type"   : "Image",
+                    "format"    : {
+                        "type" : "Anchored"
+                    },
+                    "data"   : {
+                        "texture"  : "credits",
+                        "anchor"   : [0.5,0.5],
+                        "scale"    : 1
+                    },
+                    "layout" : {
+                        "x_anchor" : "center",
+                        "y_anchor" : "middle",
+                        "y_offset" : 0
+                    }
+                }
+            },
+            "layout" :{
+                "x_anchor" : "center",
+                "y_anchor" : "middle"
+            }
+        },
         "levelselect" : {
             "type"      : "Node",
             "format" : {

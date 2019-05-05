@@ -39,11 +39,14 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     _assets = assets;
     auto layer0 = assets->get<Node>("mainmenu");
     auto layer = assets->get<Node>("levelselect");
+    auto layer2 = assets->get<Node>("credits");
     layer0->setContentSize(dimen);
     layer->setContentSize(dimen);
+    layer2->setContentSize(dimen);
 //    layer->doLayout(); // This rearranges the children to fit the screen
     addChild(layer0);
     addChild(layer);
+    addChild(layer2);
     
 //    _button = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_action"));
 //    _label  = std::dynamic_pointer_cast<Label>(assets->get<Node>("mainmenu_action_up_label"));
@@ -56,11 +59,30 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     
     layer0->setVisible(true);
     layer->setVisible(false);
+    layer2->setVisible(false);
+    
+    downarr = std::dynamic_pointer_cast<Button>(assets->get<Node>("credits_downarr"));
+    downarr->setListener([=](const std::string& name, bool down) {
+        if (down) {
+            CULog("go from credits to main");
+            layer0->setVisible(true);
+            layer2->setVisible(false);
+            downarr->removeListener();
+            surface->activate(6);
+            depths->activate(7);
+        }
+    });
+    
     
     surface = std::dynamic_pointer_cast<Button>(assets->get<Node>("mainmenu_surface"));
     surface->setListener([=](const std::string& name, bool down) {
         if (down) {
             CULog("go to credits");
+            layer0->setVisible(false);
+            layer2->setVisible(true);
+            downarr->activate(8);
+            surface->removeListener();
+            depths->removeListener();
         }
     });
     
@@ -151,6 +173,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     surface->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT);
     depths->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT - 300);
     
+    downarr->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*1 +Y_LIFT - 300);
     
     level1->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*9 +Y_LIFT);
     level2->setPosition(x_min+x_safe_offset+safe_width/2 +X_LIFT, y_min+y_safe_offset+safe_height/12*7 +Y_LIFT);

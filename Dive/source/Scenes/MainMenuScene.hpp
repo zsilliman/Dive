@@ -28,6 +28,8 @@ protected:
 //    std::shared_ptr<cugl::Label> _label;
     int _counter;
     
+    std::shared_ptr<cugl::Button> downarr;
+    
     std::shared_ptr<cugl::Button> surface;
     std::shared_ptr<cugl::Button> depths;
     
