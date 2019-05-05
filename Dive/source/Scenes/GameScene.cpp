@@ -152,6 +152,13 @@ void GameScene::update(float timestep) {
 			_angler_remove = -1;
 		}
 		_fish_countdown--;
+        
+        if(!AudioChannels::get()->isActiveEffect("victory") && !AudioChannels::get()->isActiveEffect("lose")){
+            if(!AudioChannels::get()->isActiveEffect("background")){
+                CULog("resuming update");
+                AudioChannels::get()->playEffect("background", background_music);
+            }
+        }
 	}
 	else if (current_state == LOSE) {
 		//YOU LOSE ANIMATION (OVERLAY ALREADY IMPLEMENTED)
@@ -161,6 +168,7 @@ void GameScene::update(float timestep) {
 	}
 	else { //PAUSED
 		//probably nothing
+        AudioChannels::get()->stopAllEffects();
 	}
 }
 
@@ -169,15 +177,28 @@ void GameScene::setState(State state) {
 		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
+        if(AudioChannels::get()->isActiveEffect("background")){
+            AudioChannels::get()->stopEffect("background");
+        }
 		AudioChannels::get()->playEffect("victory", victory_sound);
 		_overlay->setState(WIN);
 		current_state = WIN;
 	}
 	else if (state == LOSE && current_state != WIN && changed) {
+        if(AudioChannels::get()->isActiveEffect("background")){
+            AudioChannels::get()->stopEffect("background");
+        }
 		AudioChannels::get()->playEffect("lose", lose_sound);
 		_overlay->setState(LOSE);
 		current_state = LOSE;
 	} else if (state == PLAY) {
+        if(AudioChannels::get()->isActiveEffect("victory")){
+            AudioChannels::get()->stopEffect("victory");
+        }
+        if(AudioChannels::get()->isActiveEffect("lose")){
+            AudioChannels::get()->stopEffect("lose");
+        }
+
 		_overlay->setState(PLAY);
 		current_state = PLAY;
 	}
@@ -220,6 +241,7 @@ void GameScene::buildOnce() {
 	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
 
+    background_music = _assets->get<Sound>("background_sound");
     bubble_sound = _assets->get<Sound>("bubble01");
     victory_sound = _assets->get<Sound>("victory");
     lose_sound = _assets->get<Sound>("lose");
@@ -244,6 +266,11 @@ void GameScene::buildOnce() {
 	_overlay->setPauseCallback(pause_callback);
 
 	_overlay->setState(PLAY);
+    
+    //AudioChannels::get()->playMusic(background_music);
+    AudioChannels::get()->playEffect("background", background_music);
+
+    
 }
 
 void GameScene::buildScene(string level) {

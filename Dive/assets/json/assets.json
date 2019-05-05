@@ -101,6 +101,11 @@
             "type":     "sample",
             "file":     "sounds/lose2.wav",
             "volume":   0.2
+        },
+        "background_sound": {
+            "type":     "sample",
+            "file":     "sounds/background_music.wav",
+            "volume":   0.1
         }
     },
     "scenes": {

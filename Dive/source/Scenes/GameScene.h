@@ -55,6 +55,7 @@ protected:
     std::shared_ptr<Sound> bubble_sound;
     std::shared_ptr<Sound> victory_sound;
     std::shared_ptr<Sound> lose_sound;
+    std::shared_ptr<Sound> background_music;
 
 
     
