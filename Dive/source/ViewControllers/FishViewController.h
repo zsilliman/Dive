@@ -18,7 +18,7 @@ protected:
 	float max_speed = 0.8f;
 	float _grid_size = 1;
 	int _fish_index = 0;
-    int _cooldown = 3;
+    int _cooldown = 0;
 
 	bool _mainCycle;
 
