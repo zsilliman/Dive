@@ -132,10 +132,10 @@ void InGameOverlay::init(const std::shared_ptr<cugl::AssetManager>& assets, Rect
 	_ingame_node->addChild(_pause_button);
 	_root_node->addChild(_ingame_node);
 
-	_pause_node->activate(0,1);
-	_win_node->activate(2,3);
-	_lose_node->activate(4,5);
-	_pause_button->activate(6);
+	_pause_node->activate(1,2);
+	_win_node->activate(3,4);
+	_lose_node->activate(5,6);
+	_pause_button->activate(7);
 }
 
 void InGameOverlay::setMainMenuCallback(Button::Listener menu_callback) {
