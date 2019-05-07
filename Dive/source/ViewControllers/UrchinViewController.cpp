@@ -31,9 +31,9 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
     urchin_vc->_node = Node::allocWithPosition(Vec2(0, 0));
     urchin_vc->_oc_node = AnimationNode::alloc(texture,1,16);
     urchin_vc->_oc_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
-    urchin_vc->_oc_node->setScale(urchin_vc->_grid_size / texture->getWidth()*22, urchin_vc->_grid_size / texture->getHeight()*1.5);
+    urchin_vc->_oc_node->setScale(urchin_vc->_grid_size / texture->getHeight()*1.5, urchin_vc->_grid_size / texture->getHeight()*1.5);
     urchin_vc->_dup_node = AnimationNode::alloc(texture,1,16);
-    urchin_vc->_dup_node->setScale(urchin_vc->_grid_size / texture->getWidth()*22, urchin_vc->_grid_size / texture->getHeight()*1.5);
+    urchin_vc->_dup_node->setScale(urchin_vc->_grid_size / texture->getHeight()*1.5, urchin_vc->_grid_size / texture->getHeight()*1.5);
     urchin_vc->_dup_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
     urchin_vc->_display = display;
     
