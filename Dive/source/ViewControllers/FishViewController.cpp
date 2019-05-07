@@ -8,7 +8,7 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	if (!state->_fish[_fish_index]->isAlive())
 		return;
 
-	Vec2 vel = Vec2(0, 0);
+	Vec2 vel = Vec2(1, 0);
 	if (state->_fish[_fish_index]->isLeft()) {
 		vel = vel * -1;
 	}
