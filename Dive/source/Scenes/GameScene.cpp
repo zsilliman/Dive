@@ -236,9 +236,9 @@ void GameScene::buildOnce() {
 	goal_texture = _assets->get<Texture>("statue");
 	tilesheet = TiledTexture::alloc(texture, 382, 382);
 	tilesheet->setTileIndexOffset(9);
-	urchin_texture = _assets->get<Texture>("urchin_move");
-	fish_texture = _assets->get<Texture>("shark");
-	angler_texture = _assets->get<Texture>("angler_move");
+	urchin_texture = _assets->get<Texture>("blue_urchin");
+	fish_texture = _assets->get<Texture>("blue_shark");
+	angler_texture = _assets->get<Texture>("blue_angler");
 	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
 
