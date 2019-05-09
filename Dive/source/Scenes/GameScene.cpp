@@ -236,9 +236,20 @@ void GameScene::buildOnce() {
 	goal_texture = _assets->get<Texture>("statue");
 	tilesheet = TiledTexture::alloc(texture, 382, 382);
 	tilesheet->setTileIndexOffset(9);
-	urchin_texture = _assets->get<Texture>("blue_urchin");
-	fish_texture = _assets->get<Texture>("blue_shark");
-	angler_texture = _assets->get<Texture>("blue_angler");
+    
+	blue_urchin = _assets->get<Texture>("blue_urchin");
+	blue_shark = _assets->get<Texture>("blue_shark");
+	blue_angler = _assets->get<Texture>("blue_angler");
+    purple_urchin = _assets->get<Texture>("purple_urchin");
+    purple_shark = _assets->get<Texture>("purple_shark");
+    purple_angler = _assets->get<Texture>("purple_angler");
+    red_urchin = _assets->get<Texture>("red_urchin");
+    red_shark = _assets->get<Texture>("red_shark");
+    red_angler = _assets->get<Texture>("red_angler");
+    yellow_urchin = _assets->get<Texture>("yellow_urchin");
+    yellow_shark = _assets->get<Texture>("yellow_shark");
+    yellow_angler = _assets->get<Texture>("yellow_angler");
+    
 	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
 
@@ -327,23 +338,23 @@ void GameScene::buildScene(string level) {
 	_urchin_vcs.clear();
 	//Create Urchin viewcontrollers
     for (int i = 0; i < _gamestate->_urchins.size();i++) {
-        shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, urchin_texture, size, i);
+        shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, blue_urchin, size, i);
         _map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
         _urchin_vcs.push_back(urchin_vc);
     }
 
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
-	for (int i = 0; i < _gamestate->_fish.size(); i++) {
-		shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, fish_texture, size, i);
-		_map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
-		_fish_vcs.push_back(_fish_vc);
-	}
+    for (int i = 0; i < _gamestate->_fish.size(); i++) {
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, blue_shark, size, i);
+        _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
+        _fish_vcs.push_back(_fish_vc);
+    }
 
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, angler_texture, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, blue_angler, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}
