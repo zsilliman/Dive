@@ -178,6 +178,8 @@
 		EF84BE212233621E00A1FE5A /* levels in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE1F2233621E00A1FE5A /* levels */; };
 		EF84BE342233641900A1FE5A /* json in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE332233641900A1FE5A /* json */; };
 		EF84BE352233641900A1FE5A /* json in Resources */ = {isa = PBXBuildFile; fileRef = EF84BE332233641900A1FE5A /* json */; };
+		EFF4ACC9227C84E700AE5F35 /* InGameOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFF4ACC7227C84E700AE5F35 /* InGameOverlay.cpp */; };
+		EFF4ACCA227C84E700AE5F35 /* InGameOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = EFF4ACC7227C84E700AE5F35 /* InGameOverlay.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -319,6 +321,8 @@
 		EF660E06223357A600A7432C /* GameState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameState.h; sourceTree = "<group>"; };
 		EF84BE1F2233621E00A1FE5A /* levels */ = {isa = PBXFileReference; lastKnownFileType = folder; path = levels; sourceTree = "<group>"; };
 		EF84BE332233641900A1FE5A /* json */ = {isa = PBXFileReference; lastKnownFileType = folder; path = json; sourceTree = "<group>"; };
+		EFF4ACC7227C84E700AE5F35 /* InGameOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = InGameOverlay.cpp; sourceTree = "<group>"; };
+		EFF4ACC8227C84E700AE5F35 /* InGameOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InGameOverlay.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +602,8 @@
 				EF0E16EF22483449002E0E84 /* LoadingScene.cpp */,
 				EF1AEFB0224BC0A10037161C /* TitleAnimationScene.cpp */,
 				EF1AEFB1224BC0A10037161C /* TitleAnimationScene.hpp */,
+				EFF4ACC7227C84E700AE5F35 /* InGameOverlay.cpp */,
+				EFF4ACC8227C84E700AE5F35 /* InGameOverlay.h */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -697,7 +703,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = A8CZTHRJN9;
+						DevelopmentTeam = 2R2SQSPH3U;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -868,7 +874,7 @@
 				EF0E170D22483449002E0E84 /* PlatformViewController.cpp in Sources */,
 				EF0E170522483449002E0E84 /* Entity.cpp in Sources */,
 				344B56EB224C1AE700D51676 /* GamestateLoader.cpp in Sources */,
-				7672EFE8227E293900D41CE8 /* InGameOverlay.cpp in Sources */,
+				EFF4ACCA227C84E700AE5F35 /* InGameOverlay.cpp in Sources */,
 				EF0E170322483449002E0E84 /* Fish.cpp in Sources */,
 				EF0E171B22483449002E0E84 /* LoadingScene.cpp in Sources */,
 				EF0E172722483449002E0E84 /* GridRow.cpp in Sources */,
@@ -907,7 +913,7 @@
 				EF0E170C22483449002E0E84 /* PlatformViewController.cpp in Sources */,
 				EF0E170422483449002E0E84 /* Entity.cpp in Sources */,
 				344B56EA224C1AE700D51676 /* GamestateLoader.cpp in Sources */,
-				7672EFE7227E293900D41CE8 /* InGameOverlay.cpp in Sources */,
+				EFF4ACC9227C84E700AE5F35 /* InGameOverlay.cpp in Sources */,
 				EF0E170222483449002E0E84 /* Fish.cpp in Sources */,
 				EF0E171A22483449002E0E84 /* LoadingScene.cpp in Sources */,
 				EF0E172622483449002E0E84 /* GridRow.cpp in Sources */,
@@ -1159,7 +1165,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = A8CZTHRJN9;
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1176,7 +1182,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = A8CZTHRJN9;
+				DEVELOPMENT_TEAM = 2R2SQSPH3U;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
