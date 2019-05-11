@@ -7,23 +7,41 @@
             "wrapS":    "clamp",
             "wrapT":    "clamp"
         },
-        "urchin": {
-            "file":      "textures/urchin.png"
+        "blue_urchin": {
+            "file":      "textures/enemies/BLight_Urchin.png"
         },
-        "urchin_move": {
-            "file":      "textures/BLight_Urchin.png"
+        "blue_shark":{
+            "file":      "textures/enemies/BLight_Shark.png"
         },
-        "fish":{
-            "file":      "textures/Shark.png"
+        "blue_angler":{
+            "file":      "textures/enemies/BLight_Angler.png"
         },
-        "shark":{
-            "file":      "textures/BLight_Shark.png"
+        "purple_urchin": {
+            "file":      "textures/enemies/BDark_Urchin.png"
         },
-        "angler":{
-            "file":      "textures/Angler_Fish.png"
+        "purple_shark":{
+            "file":      "textures/enemies/BDark_Shark.png"
         },
-        "angler_move":{
-            "file":      "textures/BLight_Angler.png"
+        "purple_angler":{
+            "file":      "textures/enemies/BDark_Angler.png"
+        },
+        "red_urchin": {
+            "file":      "textures/enemies/G_Urchin.png"
+        },
+        "red_shark":{
+            "file":      "textures/enemies/G_Shark.png"
+        },
+        "red_angler":{
+            "file":      "textures/enemies/G_Angler.png"
+        },
+        "yellow_urchin": {
+            "file":      "textures/enemies/P_Urchin.png"
+        },
+        "yellow_shark":{
+            "file":      "textures/enemies/P_Shark.png"
+        },
+        "yellow_angler":{
+            "file":      "textures/enemies/P_Angler.png"
         },
         "background":{
             "file":      "textures/background_blue.png"

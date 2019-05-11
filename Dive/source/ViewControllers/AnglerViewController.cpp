@@ -98,9 +98,9 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
 	angler_vc->_node = Node::allocWithPosition(Vec2(0, 0));
 	angler_vc->_oc_node = AnimationNode::alloc(texture, 1, 14);
 	angler_vc->_oc_node->setPosition(init_state->_anglers[angler_index]->getPosition());
-	angler_vc->_oc_node->setScale(angler_vc->_grid_size / texture->getWidth()*15, angler_vc->_grid_size / texture->getHeight());
+	angler_vc->_oc_node->setScale(angler_vc->_grid_size / texture->getHeight(), angler_vc->_grid_size / texture->getHeight());
 	angler_vc->_dup_node = AnimationNode::alloc(texture, 1, 14);
-	angler_vc->_dup_node->setScale(angler_vc->_grid_size / texture->getWidth()*15, angler_vc->_grid_size / texture->getHeight());
+	angler_vc->_dup_node->setScale(angler_vc->_grid_size / texture->getHeight(), angler_vc->_grid_size / texture->getHeight());
 	angler_vc->_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
 	angler_vc->_display = display;
 

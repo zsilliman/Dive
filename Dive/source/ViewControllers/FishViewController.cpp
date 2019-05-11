@@ -45,9 +45,9 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
 	fish_vc->_node = Node::allocWithPosition(Vec2(0, 0));
 	fish_vc->_oc_node = AnimationNode::alloc(texture,1,10);
 	fish_vc->_oc_node->setPosition(init_state->_fish[fish_index]->getPosition());
-	fish_vc->_oc_node->setScale(fish_vc->_grid_size / texture->getWidth()*30, fish_vc->_grid_size / texture->getHeight()*3);
+	fish_vc->_oc_node->setScale(fish_vc->_grid_size / texture->getHeight()*3, fish_vc->_grid_size / texture->getHeight()*3);
 	fish_vc->_dup_node = AnimationNode::alloc(texture,1,10);
-	fish_vc->_dup_node->setScale(fish_vc->_grid_size / texture->getWidth()*30, fish_vc->_grid_size / texture->getHeight()*3);
+	fish_vc->_dup_node->setScale(fish_vc->_grid_size / texture->getHeight()*3, fish_vc->_grid_size / texture->getHeight()*3);
 	fish_vc->_dup_node->setPosition(init_state->_fish[fish_index]->getPosition());
 	fish_vc->_display = display;
 

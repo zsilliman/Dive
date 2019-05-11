@@ -45,9 +45,20 @@ protected:
 	shared_ptr<Texture> texture;
 	shared_ptr<Texture> goal_texture;
 	shared_ptr<TiledTexture> tilesheet;
-	shared_ptr<Texture> urchin_texture;
-	shared_ptr<Texture> fish_texture;
-	shared_ptr<Texture> angler_texture;
+    
+	shared_ptr<Texture> blue_urchin;
+	shared_ptr<Texture> blue_shark;
+	shared_ptr<Texture> blue_angler;
+    shared_ptr<Texture> purple_urchin;
+    shared_ptr<Texture> purple_shark;
+    shared_ptr<Texture> purple_angler;
+    shared_ptr<Texture> red_urchin;
+    shared_ptr<Texture> red_shark;
+    shared_ptr<Texture> red_angler;
+    shared_ptr<Texture> yellow_urchin;
+    shared_ptr<Texture> yellow_shark;
+    shared_ptr<Texture> yellow_angler;
+    
 	shared_ptr<Texture> background_image;
 	shared_ptr<Texture> diving_texture;
 
