@@ -27,8 +27,10 @@ protected:
 //    std::shared_ptr<cugl::Button> _button;
 //    std::shared_ptr<cugl::Label> _label;
     int _counter;
+    int _current = 1;
     
     std::shared_ptr<cugl::Button> downarr;
+     std::shared_ptr<cugl::Button> uparr;
     
     std::shared_ptr<cugl::Button> surface;
     std::shared_ptr<cugl::Button> depths;
@@ -38,6 +40,13 @@ protected:
     std::shared_ptr<cugl::Button> level3;
     std::shared_ptr<cugl::Button> level4;
     std::shared_ptr<cugl::Button> level5;
+    std::shared_ptr<cugl::Button> level6;
+    std::shared_ptr<cugl::Button> level7;
+    std::shared_ptr<cugl::Button> level8;
+    std::shared_ptr<cugl::Button> level9;
+    std::shared_ptr<cugl::Button> level10;
+    std::shared_ptr<cugl::Button> level11;
+    std::shared_ptr<cugl::Button> level12;
     
     
 public:
