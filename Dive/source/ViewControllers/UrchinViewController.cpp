@@ -28,13 +28,12 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
     shared_ptr<UrchinViewController> urchin_vc = make_shared<UrchinViewController>();
     urchin_vc->_urchin_index = urchin_index;
     urchin_vc->_grid_size = display.width / init_state->_map->getWidth();
-	float view_scale = 1.5f;
     urchin_vc->_node = Node::allocWithPosition(Vec2(0, 0));
-    urchin_vc->_oc_node = AnimationNode::alloc(texture,1,1,1);
+    urchin_vc->_oc_node = AnimationNode::alloc(texture,1,16);
     urchin_vc->_oc_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
-    urchin_vc->_oc_node->setScale(view_scale * urchin_vc->_grid_size / texture->getWidth(), view_scale * urchin_vc->_grid_size / texture->getHeight());
-    urchin_vc->_dup_node = AnimationNode::alloc(texture,1,1,1);
-    urchin_vc->_dup_node->setScale(view_scale * urchin_vc->_grid_size / texture->getWidth(), view_scale * urchin_vc->_grid_size / texture->getHeight());
+    urchin_vc->_oc_node->setScale(urchin_vc->_grid_size / texture->getWidth()*22, urchin_vc->_grid_size / texture->getHeight()*1.5);
+    urchin_vc->_dup_node = AnimationNode::alloc(texture,1,16);
+    urchin_vc->_dup_node->setScale(urchin_vc->_grid_size / texture->getWidth()*22, urchin_vc->_grid_size / texture->getHeight()*1.5);
     urchin_vc->_dup_node->setPosition(init_state->_urchins[urchin_index]->getPosition());
     urchin_vc->_display = display;
     
@@ -49,31 +48,35 @@ shared_ptr<UrchinViewController> UrchinViewController::alloc(shared_ptr<GameStat
 
 void UrchinViewController::animateUrchin(){
     bool* cycle = &_mainCycle;
+    if (_cooldown == 0){
+        _cooldown = 4;
     
-    if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
-        *cycle = true;
-    } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
-        *cycle = false;
+        if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _oc_node->setFrame(_oc_node->getFrame()+1);
+        } else {
+            _oc_node->setFrame(_oc_node->getFrame()-1);
+        }
+        
+        if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _dup_node->setFrame(_dup_node->getFrame()+1);
+        } else {
+            _dup_node->setFrame(_dup_node->getFrame()-1);
+        }
+    }else{
+        _cooldown --;
     }
-    
-    //    if (*cycle) {
-    //        _oc_node->setFrame(_oc_node->getFrame()+1);
-    //    } else {
-    //        _oc_node->setFrame(_oc_node->getFrame()-1);
-    //    }
-    //
-    
-    if (_dup_node->getFrame() == 0 || _dup_node->getFrame() == 1) {
-        *cycle = true;
-    } else if (_dup_node->getFrame() == _dup_node->getSize()-1) {
-        *cycle = false;
-    }
-    
-    //    if (*cycle) {
-    //        _dup_node->setFrame(_dup_node->getFrame()+1);
-    //    } else {
-    //        _dup_node->setFrame(_dup_node->getFrame()-1);
-    //    }
 }
 
 

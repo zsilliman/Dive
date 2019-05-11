@@ -10,11 +10,20 @@
         "urchin": {
             "file":      "textures/urchin.png"
         },
+        "urchin_move": {
+            "file":      "textures/BLight_Urchin.png"
+        },
         "fish":{
             "file":      "textures/Shark.png"
         },
+        "shark":{
+            "file":      "textures/BLight_Shark.png"
+        },
         "angler":{
             "file":      "textures/Angler_Fish.png"
+        },
+        "angler_move":{
+            "file":      "textures/BLight_Angler.png"
         },
         "background":{
             "file":      "textures/background_blue.png"
@@ -86,12 +95,17 @@
         "victory": {
             "type":     "sample",
             "file":     "sounds/victory.wav",
-            "volume":   0.2
+            "volume":   0.5
         },
         "lose": {
             "type":     "sample",
             "file":     "sounds/lose2.wav",
-            "volume":   0.2
+            "volume":   0.5
+        },
+        "background_sound": {
+            "type":     "sample",
+            "file":     "sounds/background_music.wav",
+            "volume":   0.5
         }
     },
     "scenes": {
