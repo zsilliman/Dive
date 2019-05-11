@@ -92,6 +92,12 @@
         },
         "level_7": {
             "file":     "levels/level_7.json"
+        },
+        "level_9": {
+            "file":     "levels/level_9.json"
+        },
+        "level_10": {
+            "file":     "levels/level_10.json"
         }
     },
     "fonts": {

@@ -73,7 +73,7 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
     _input->init();
 
 	buildOnce();
-	buildScene("level_1");
+	buildScene("level_10");
 
     return true;
 }
