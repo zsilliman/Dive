@@ -236,6 +236,10 @@ void GameScene::buildOnce() {
 	goal_texture = _assets->get<Texture>("statue");
 	tilesheet = TiledTexture::alloc(texture, 382, 382);
 	tilesheet->setTileIndexOffset(9);
+
+	shared_ptr<Texture> texture_moveable = _assets->get<Texture>("tileset_moveable");
+	tilesheet_moveable = TiledTexture::alloc(texture_moveable, 382, 382);
+	tilesheet_moveable->setTileIndexOffset(9);
     
 	blue_urchin = _assets->get<Texture>("blue_urchin");
 	blue_shark = _assets->get<Texture>("blue_shark");
@@ -314,7 +318,7 @@ void GameScene::buildScene(string level) {
 
 	_world = ObstacleWorld::alloc(physics_bounds, Vec2(0, -9.8));
 	_gamestate->initPhysics(_world);
-    _world->activateCollisionCallbacks(true);
+	    _world->activateCollisionCallbacks(true);
     _world->onBeginContact = [this](b2Contact* contact) {
         beginContact(contact);
     };
@@ -326,7 +330,7 @@ void GameScene::buildScene(string level) {
 	if (_map_vc != nullptr)
 		_map_vc.reset();
 
-	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, goal_texture, size);
+	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, tilesheet_moveable, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
 	if (_player_vc != nullptr)
@@ -501,8 +505,8 @@ void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
     int fishint = num-'0';
     if(_fish_countdown<=0){
         _fish_countdown=10;
-        _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
-    }
+    _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
+	}
 }
 
 void GameScene::fishAnglerCollisions(Obstacle* fish, Obstacle* angler){

@@ -30,6 +30,8 @@ public:
 	vector<Vec2> col_tiles = {};
 	vector<int> adj_values = {};
 
+	float getPlatformSpeed() { return _relative_speed; }
+
 	void parallaxTranslate(float reference_dx);
 
 	void initGrid(vector<int>* collision_data, vector<int>* render_data, Vec2 start, Vec2 map_dimen, bool wrapping);

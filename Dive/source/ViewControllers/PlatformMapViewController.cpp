@@ -61,7 +61,7 @@ void PlatformMapViewController::reset() {
 	}
 }
 
-shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> tilesheet, shared_ptr<Texture> goal_texture, Size display) {
+shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> tilesheet, shared_ptr<TiledTexture> tilesheet_moveable, shared_ptr<Texture> goal_texture, Size display) {
 	shared_ptr<PlatformMapViewController> map = make_shared<PlatformMapViewController>();
     map->_input = _input;
 	map->_node = Node::alloc();
@@ -69,7 +69,14 @@ shared_ptr<PlatformMapViewController> PlatformMapViewController::alloc(shared_pt
 	map->_display = display;
 	map->_grid_size = display.width / init_state->_map->getWidth();
 	for (int i = 0; i < init_state->_map->getPlatformDups().size(); i++) {
-		shared_ptr<PlatformViewController> platform = PlatformViewController::alloc(init_state, tilesheet, map->_grid_size, i);
+		float speed = init_state->_map->getPlatforms()[i]->getPlatformSpeed();
+		shared_ptr<PlatformViewController> platform;
+		if (speed == 0) {
+			platform = PlatformViewController::alloc(init_state, tilesheet, map->_grid_size, i);
+		}
+		else {
+			platform = PlatformViewController::alloc(init_state, tilesheet_moveable, map->_grid_size, i);
+		}
 		map->_node->addChild(platform->getNode(), 1);
 		map->_platforms.push_back(platform);
 	}

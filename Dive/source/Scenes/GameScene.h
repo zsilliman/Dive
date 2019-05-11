@@ -45,6 +45,7 @@ protected:
 	shared_ptr<Texture> texture;
 	shared_ptr<Texture> goal_texture;
 	shared_ptr<TiledTexture> tilesheet;
+	shared_ptr<TiledTexture> tilesheet_moveable;
     
 	shared_ptr<Texture> blue_urchin;
 	shared_ptr<Texture> blue_shark;
