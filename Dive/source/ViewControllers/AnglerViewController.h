@@ -14,6 +14,8 @@ protected:
 	shared_ptr<AnimationNode> _oc_node;
 	shared_ptr<AnimationNode> _dup_node;
     shared_ptr<AnimationNode> _exp_node;
+    shared_ptr<AnimationNode> _exp_dup_node;
+
     
     shared_ptr<Angler> _dead_ang;
 

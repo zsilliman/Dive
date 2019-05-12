@@ -7,6 +7,7 @@ void FishViewController::update(shared_ptr<GameState> state) {
     
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
         _exp_node->setVisible(false);
+        _exp_dup_node->setVisible(false);
         _dead_fish->kill();
         _dead = false;
     }
@@ -22,6 +23,7 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	_oc_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
 	_dup_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
     _exp_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
+    _exp_dup_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
 
 
 	state->_fish[_fish_index]->setLinearVelocity(vel);
@@ -36,6 +38,9 @@ void FishViewController::update(shared_ptr<GameState> state) {
     
     _exp_node->setPosition(state->_fish[_fish_index]->_box->getPosition() * _grid_size);
     _exp_node->setAngle(state->_fish[_fish_index]->_box->getAngle());
+    
+    _exp_dup_node->setPosition(state->_fish[_fish_index]->_box_dup->getPosition() * _grid_size);
+    _exp_dup_node->setAngle(state->_fish[_fish_index]->_box_dup->getAngle());
     
     if(_dead){
         animateDead();
@@ -69,15 +74,21 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
 	fish_vc->_display = display;
     
     fish_vc->_exp_node = AnimationNode::alloc(explosion, 1, 8);
-    fish_vc->_exp_node->setScale(fish_vc->_grid_size / explosion->getHeight()*3, fish_vc->_grid_size / explosion->getHeight()*3);
     fish_vc->_exp_node->setPosition(init_state->_fish[fish_index]->getPosition());
+    fish_vc->_exp_node->setScale(fish_vc->_grid_size / explosion->getHeight()*3, fish_vc->_grid_size / explosion->getHeight()*3);
     fish_vc->_exp_node->setVisible(false);
+    
+    fish_vc->_exp_dup_node = AnimationNode::alloc(explosion, 1, 8);
+    fish_vc->_exp_dup_node->setPosition(init_state->_fish[fish_index]->getPosition());
+    fish_vc->_exp_dup_node->setScale(fish_vc->_grid_size / explosion->getHeight()*3, fish_vc->_grid_size / explosion->getHeight()*3);
+    fish_vc->_exp_dup_node->setVisible(false);
     
     fish_vc->_dead = false;
 
 	fish_vc->_node->addChild(fish_vc->_oc_node);
 	fish_vc->_node->addChild(fish_vc->_dup_node);
     fish_vc->_node->addChild(fish_vc->_exp_node);
+    fish_vc->_node->addChild(fish_vc->_exp_dup_node);
     
     fish_vc->_mainCycle  = true;
     
@@ -86,7 +97,6 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
 
 
 void FishViewController::animateDead() {
-    CULog("animate Dead");
     bool* cycle = &_mainCycle;
     if (_cooldown == 0){
         _cooldown = 1;
@@ -101,6 +111,18 @@ void FishViewController::animateDead() {
             _exp_node->setFrame(_exp_node->getFrame()+1);
         } else {
             _exp_node->setFrame(_exp_node->getFrame()-1);
+        }
+        
+        if (_exp_dup_node->getFrame() == 0 || _exp_dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_exp_dup_node->getFrame() == _exp_dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _exp_dup_node->setFrame(_exp_dup_node->getFrame()+1);
+        } else {
+            _exp_dup_node->setFrame(_exp_dup_node->getFrame()-1);
         }
     } else{
         _cooldown --;
@@ -135,19 +157,6 @@ void FishViewController::animateFish(){
         } else {
             _dup_node->setFrame(_dup_node->getFrame()-1);
         }
-        if (_dead){
-            if (_exp_node->getFrame() == 0 || _exp_node->getFrame() == 1) {
-                *cycle = true;
-            } else if (_exp_node->getFrame() == _exp_node->getSize()-1) {
-                *cycle = false;
-            }
-            
-            if (*cycle) {
-                _exp_node->setFrame(_exp_node->getFrame()+1);
-            } else {
-                _exp_node->setFrame(_exp_node->getFrame()-1);
-            }
-        }
         
     }else {
         _cooldown --;
@@ -160,6 +169,7 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
     _oc_node->setVisible(false);
     _dup_node->setVisible(false);
     _exp_node->setVisible(true);
+    _exp_dup_node->setVisible(true);
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;

@@ -96,7 +96,7 @@ void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, V
 		if (wrapping == false && adj.x < 0 && adj.x >= map_dimen.x)
 			adj.set(current);
 		//Checks whether adj is out of bounds in x direction if wrapping is disabled
-		if (wrapping = false && (adj.x < 0 || adj.x >= map_dimen.x))
+		if (wrapping == false && (adj.x < 0 || adj.x >= map_dimen.x))
 			adj.set(current);
 
 		int blk = render_ref[getIndex(adj, map_dimen)];

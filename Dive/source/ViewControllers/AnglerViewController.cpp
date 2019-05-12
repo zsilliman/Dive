@@ -7,6 +7,7 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
         _exp_node->setVisible(false);
+        _exp_dup_node->setVisible(false);
         _dead_ang->kill();
         _dead = false;
     }
@@ -69,12 +70,13 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	_oc_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
     
     _exp_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
+    _exp_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
 
 	Vec2 lin_vel = state->_anglers[_angler_index]->_box->getLinearVelocity();
 
 	//Set positions/rotations of duplicate according to duplicate physics object
 	_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
-
+    _exp_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
 
 	//Handle rotation of angler
 	float angle = -PI;
@@ -85,15 +87,18 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 		_oc_node->flipVertical(false);
 		_dup_node->flipVertical(false);
         _exp_node->flipVertical(false);
+        _exp_dup_node->flipVertical(false);
 	}
 	else {
 		_oc_node->flipVertical(true);
 		_dup_node->flipVertical(true);
         _exp_node->flipVertical(true);
+        _exp_dup_node->flipVertical(true);
 	}
 	_oc_node->setAngle(angle);
 	_dup_node->setAngle(angle);
     _exp_node->setAngle(angle);
+    _exp_dup_node->setAngle(angle);
     
     if(_dead){
         animateDead();
@@ -126,11 +131,17 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_exp_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_exp_node->setVisible(false);
     
+    angler_vc->_exp_dup_node = AnimationNode::alloc(explosion, 1, 8);
+    angler_vc->_exp_dup_node->setScale(angler_vc->_grid_size / explosion->getHeight()*3, angler_vc->_grid_size / explosion->getHeight()*3);
+    angler_vc->_exp_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
+    angler_vc->_exp_dup_node->setVisible(false);
+    
     angler_vc->_dead = false;
 
 	angler_vc->_node->addChild(angler_vc->_oc_node);
 	angler_vc->_node->addChild(angler_vc->_dup_node);
     angler_vc->_node->addChild(angler_vc->_exp_node);
+    angler_vc->_node->addChild(angler_vc->_exp_dup_node);
 
 	angler_vc->_mainCycle = true;
 
@@ -153,11 +164,22 @@ void AnglerViewController::animateDead() {
         } else {
             _exp_node->setFrame(_exp_node->getFrame()-1);
         }
+        
+        if (_exp_dup_node->getFrame() == 0 || _exp_dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_exp_dup_node->getFrame() == _exp_dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _exp_dup_node->setFrame(_exp_dup_node->getFrame()+1);
+        } else {
+            _exp_dup_node->setFrame(_exp_dup_node->getFrame()-1);
+        }
     } else{
         _cooldown --;
     }
 }
-
 
 void AnglerViewController::animateAngler() {
 	bool* cycle = &_mainCycle;
@@ -201,6 +223,8 @@ void AnglerViewController::kill(shared_ptr<Angler> angler) {
     _oc_node->setVisible(false);
     _dup_node->setVisible(false);
     _exp_node->setVisible(true);
+    _exp_dup_node->setVisible(true);
+    _mainCycle = true;
     _cooldown = 0;
     _dead = true;
 }
