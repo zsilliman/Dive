@@ -221,6 +221,66 @@ string GameScene::cycleLevel(){
     return _next_level;
 }
 
+void GameScene::buildYellow(){
+    _urchin = _assets->get<Texture>("yellow_urchin");
+    _shark = _assets->get<Texture>("yellow_shark");
+    _angler = _assets->get<Texture>("yellow_angler");
+    background_image = _assets->get<Texture>("background");
+    texture = _assets->get<Texture>("tileset");
+}
+
+void GameScene::buildBlue(){
+    _urchin = _assets->get<Texture>("blue_urchin");
+    _shark = _assets->get<Texture>("blue_shark");
+    _angler = _assets->get<Texture>("blue_angler");
+    background_image = _assets->get<Texture>("background");
+    texture = _assets->get<Texture>("tileset");
+}
+
+void GameScene::buildRed(){
+    _urchin = _assets->get<Texture>("red_urchin");
+    _shark = _assets->get<Texture>("red_shark");
+    _angler = _assets->get<Texture>("red_angler");
+    background_image = _assets->get<Texture>("background");
+    texture = _assets->get<Texture>("tileset");
+}
+
+void GameScene::buildPurple(){
+    _urchin = _assets->get<Texture>("purple_urchin");
+    _shark = _assets->get<Texture>("purple_shark");
+    _angler = _assets->get<Texture>("purple_angler");
+    background_image = _assets->get<Texture>("background");
+    texture = _assets->get<Texture>("tileset");
+}
+
+void GameScene::createLevelAssets(){
+    string level = _current_level.substr(6);
+    int level_int = stoi(level);
+    switch (level_int) {
+        case 1: case 2: case 3: case 4:
+            buildBlue();
+            break;
+        case 5: case 6: case 7: case 8:
+            buildBlue();
+            break;
+        case 9: case 10: case 11: case 12:
+            buildBlue();
+            break;
+        default:
+            break;
+    }
+    
+    tilesheet = TiledTexture::alloc(texture, 382, 382);
+    tilesheet->setTileIndexOffset(9);
+    _background = nullptr;
+    _background = PolygonNode::allocWithTexture(background_image);
+    _background->setName("world");
+    _background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
+    float b_scale = SCENE_WIDTH / _background->getWidth();
+    _background->setScale(b_scale);
+}
+
+
 void GameScene::buildOnce() {
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
@@ -232,29 +292,12 @@ void GameScene::buildOnce() {
 
     counter = 0;
     
-	texture = _assets->get<Texture>("tileset");
 	goal_texture = _assets->get<Texture>("statue");
-	tilesheet = TiledTexture::alloc(texture, 382, 382);
-	tilesheet->setTileIndexOffset(9);
 
 	shared_ptr<Texture> texture_moveable = _assets->get<Texture>("tileset_moveable");
 	tilesheet_moveable = TiledTexture::alloc(texture_moveable, 382, 382);
 	tilesheet_moveable->setTileIndexOffset(9);
     
-	blue_urchin = _assets->get<Texture>("blue_urchin");
-	blue_shark = _assets->get<Texture>("blue_shark");
-	blue_angler = _assets->get<Texture>("blue_angler");
-    purple_urchin = _assets->get<Texture>("purple_urchin");
-    purple_shark = _assets->get<Texture>("purple_shark");
-    purple_angler = _assets->get<Texture>("purple_angler");
-    red_urchin = _assets->get<Texture>("red_urchin");
-    red_shark = _assets->get<Texture>("red_shark");
-    red_angler = _assets->get<Texture>("red_angler");
-    yellow_urchin = _assets->get<Texture>("yellow_urchin");
-    yellow_shark = _assets->get<Texture>("yellow_shark");
-    yellow_angler = _assets->get<Texture>("yellow_angler");
-    
-	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
     
     explode = _assets->get<Texture>("explode");
@@ -263,13 +306,6 @@ void GameScene::buildOnce() {
     bubble_sound = _assets->get<Sound>("bubble01");
     victory_sound = _assets->get<Sound>("victory");
     lose_sound = _assets->get<Sound>("lose");
-
-	_background = nullptr;
-	_background = PolygonNode::allocWithTexture(background_image);
-	_background->setName("world");
-	_background->setAnchor(Vec2::ANCHOR_TOP_LEFT);
-	float b_scale = SCENE_WIDTH / _background->getWidth();
-	_background->setScale(b_scale);
 
 	_overlay = InGameOverlay::alloc(_assets, safe);
 	Button::Listener main_menu_callback = [=](const std::string& name, bool down) { if (!down) { CULog("MAIN MENU PRESSED"); } };
@@ -288,7 +324,6 @@ void GameScene::buildOnce() {
     //AudioChannels::get()->playMusic(background_music);
     AudioChannels::get()->playEffect("background", background_music);
     AudioChannels::get()->setEffectLoop("background", true);
-
 }
 
 void GameScene::buildScene(string level) {
@@ -314,6 +349,8 @@ void GameScene::buildScene(string level) {
 	this->removeAllChildren();
 
 	_gamestate = _assets->get<GameState>(level);
+    
+    createLevelAssets();
 
 	if (_world != nullptr)
 		_world.reset();
@@ -327,7 +364,6 @@ void GameScene::buildScene(string level) {
     _world->onEndContact = [this](b2Contact* contact) {
         endContact(contact);
     };
-	
 
 	if (_map_vc != nullptr)
 		_map_vc.reset();
@@ -344,7 +380,7 @@ void GameScene::buildScene(string level) {
 	_urchin_vcs.clear();
 	//Create Urchin viewcontrollers
     for (int i = 0; i < _gamestate->_urchins.size();i++) {
-        shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, blue_urchin, size, i);
+        shared_ptr<UrchinViewController> urchin_vc = UrchinViewController::alloc(_gamestate, _urchin, size, i);
         _map_vc->getNode()->addChild(urchin_vc->getNode(), 1);
         _urchin_vcs.push_back(urchin_vc);
     }
@@ -352,7 +388,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
     for (int i = 0; i < _gamestate->_fish.size(); i++) {
-        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, blue_shark, explode, size, i);
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, explode, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
     }
@@ -360,7 +396,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, blue_angler, explode, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, explode, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}

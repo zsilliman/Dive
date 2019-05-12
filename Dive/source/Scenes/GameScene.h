@@ -47,18 +47,9 @@ protected:
 	shared_ptr<TiledTexture> tilesheet;
 	shared_ptr<TiledTexture> tilesheet_moveable;
     
-	shared_ptr<Texture> blue_urchin;
-	shared_ptr<Texture> blue_shark;
-	shared_ptr<Texture> blue_angler;
-    shared_ptr<Texture> purple_urchin;
-    shared_ptr<Texture> purple_shark;
-    shared_ptr<Texture> purple_angler;
-    shared_ptr<Texture> red_urchin;
-    shared_ptr<Texture> red_shark;
-    shared_ptr<Texture> red_angler;
-    shared_ptr<Texture> yellow_urchin;
-    shared_ptr<Texture> yellow_shark;
-    shared_ptr<Texture> yellow_angler;
+	shared_ptr<Texture> _urchin;
+	shared_ptr<Texture> _shark;
+	shared_ptr<Texture> _angler;
     
     shared_ptr<Texture> explode;
     
@@ -70,8 +61,6 @@ protected:
     std::shared_ptr<Sound> victory_sound;
     std::shared_ptr<Sound> lose_sound;
     std::shared_ptr<Sound> background_music;
-
-
     
 	std::shared_ptr<cugl::Node> _background = nullptr;
 	std::shared_ptr<InputController> _input = nullptr;
@@ -115,7 +104,12 @@ protected:
 	bool _playerFloor;
 
 	//Setting up the scene
-	void buildOnce();
+	void buildYellow();
+    void buildRed();
+    void buildBlue();
+    void buildPurple();
+    void createLevelAssets();
+    void buildOnce();
 	void buildScene(string level);
     
 public:
