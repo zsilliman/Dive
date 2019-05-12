@@ -150,7 +150,7 @@ void Entity::initEntity(Vec2 pos, Vec2 size, Rect map_rect) {
 	_position = Vec2(pos + size / 2);
 	_start_pos = Vec2(pos + size / 2);
 	_dimensions = Size(size.x, size.y);
-	_box = WheelObstacle::alloc(_start_pos, size.x/2);
-	_box_dup = WheelObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size.x/2);
+	_box = CapsuleObstacle::alloc(_position, size);
+	_box_dup = CapsuleObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size);
 	_can_float = false;
 }

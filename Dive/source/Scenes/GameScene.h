@@ -45,6 +45,7 @@ protected:
 	shared_ptr<Texture> texture;
 	shared_ptr<Texture> goal_texture;
 	shared_ptr<TiledTexture> tilesheet;
+	shared_ptr<TiledTexture> tilesheet_moveable;
     
 	shared_ptr<Texture> blue_urchin;
 	shared_ptr<Texture> blue_shark;
@@ -107,7 +108,7 @@ protected:
 	int _player_side_count;
     string _current_level;
     string _next_level;
-    int final_level = 7;
+    int final_level = 10;
     int counter;
 
 	int frame_counter = 0;

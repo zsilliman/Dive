@@ -7,6 +7,13 @@
             "wrapS":    "clamp",
             "wrapT":    "clamp"
         },
+        "tileset_moveable": {
+            "file":     "textures/tileset_moveable.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
+        },
         "blue_urchin": {
             "file":      "textures/enemies/BLight_Urchin.png"
         },
@@ -95,6 +102,9 @@
         },
         "level_7": {
             "file":     "levels/level_7.json"
+        },
+        "level_8": {
+            "file":     "levels/level_8.json"
         },
         "level_9": {
             "file":     "levels/level_9.json"

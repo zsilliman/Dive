@@ -235,7 +235,7 @@ void TitleProgrammedScene::update(float progress) {
 		}
 	}
 
-	if (_animated && _loaded && _idled) {
+	if (_animated && _loaded) {
 		_finished = true;
 	}
 
