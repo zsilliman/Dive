@@ -80,7 +80,6 @@ void PlayerViewController::animatePlayer(){
         bool* cycle = &_mainCycle;
         if (_cooldown == 0){
             _cooldown = 4;
-            if (_oc_node)
             if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
                 *cycle = true;
             } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {

@@ -59,6 +59,8 @@ protected:
     shared_ptr<Texture> yellow_shark;
     shared_ptr<Texture> yellow_angler;
     
+    shared_ptr<Texture> explode;
+    
 	shared_ptr<Texture> background_image;
 	shared_ptr<Texture> diving_texture;
 

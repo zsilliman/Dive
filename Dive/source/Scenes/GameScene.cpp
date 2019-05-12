@@ -252,6 +252,8 @@ void GameScene::buildOnce() {
     
 	background_image = _assets->get<Texture>("background");
 	diving_texture = _assets->get<Texture>("walking");
+    
+    explode = _assets->get<Texture>("explode");
 
     background_music = _assets->get<Sound>("background_sound");
     bubble_sound = _assets->get<Sound>("bubble01");
@@ -346,7 +348,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
     for (int i = 0; i < _gamestate->_fish.size(); i++) {
-        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, blue_shark, size, i);
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, blue_shark, explode, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
     }
@@ -354,7 +356,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, blue_angler, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, blue_angler, explode, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}

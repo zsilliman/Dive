@@ -49,6 +49,9 @@
         "background_clear":{
             "file":      "textures/background_blue_seethrough.png"
         },
+        "explode" : {
+            "file":      "textures/collision.png"
+        },
         "title": {
             "file":      "animations/dive.jpg"
         },
