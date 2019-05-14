@@ -20,6 +20,7 @@ LOCAL_SRC_FILES := \
 	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/Scenes/*.cpp)) \
 	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/ViewControllers/*.cpp)) \
 	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/World/*.cpp)) \
+	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/Loaders/*.cpp)) \
 	$(subst $(LOCAL_PATH)/,, $(wildcard $(PROJ_PATH)/source/*.cpp))
 
 	

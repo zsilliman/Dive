@@ -34,12 +34,19 @@ shared_ptr<GameState> GameState::allocFromJson(shared_ptr<JsonValue> json) {
 				//Urchin
 				shared_ptr<Urchin> urchin = Urchin::alloc(Vec2(x, y), state->_map->getMapRect());
 				state->_urchins.push_back(urchin);
-			} else if (data[index] == FISH_TILE_ID) {
+			} else if (data[index] == FISH_LEFT_TILE_ID) {
 				//Fish
 				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect(), fish_counter);
 				state->_fish.push_back(fish);
                 fish_counter++;
-			} else if (data[index] == ANGLER_TILE_ID) {
+			} else if (data[index] == FISH_RIGHT_TILE_ID) {
+				//Fish
+				shared_ptr<Fish> fish = Fish::alloc(Vec2(x, y), state->_map->getMapRect(), fish_counter);
+				fish->setLeft(false);
+				state->_fish.push_back(fish);
+				fish_counter++;
+			}
+			else if (data[index] == ANGLER_TILE_ID) {
 				//Angler fish
 				shared_ptr<Angler> angler = Angler::alloc(Vec2(x, y), state->_map->getMapRect(), angler_counter);
 				state->_anglers.push_back(angler);
@@ -70,6 +77,9 @@ void GameState::reset() {
 	for (int i = 0; i < _anglers.size(); i++) {
 		_anglers[i]->reset();
 	}
+}
+
+void GameState::setLevel(string level){
 }
 
 void GameState::initPhysics(const shared_ptr<ObstacleWorld> world) {

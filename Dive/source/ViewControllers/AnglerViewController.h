@@ -13,17 +13,27 @@ protected:
 	Size _display;
 	shared_ptr<AnimationNode> _oc_node;
 	shared_ptr<AnimationNode> _dup_node;
+    shared_ptr<AnimationNode> _exp_node;
+    shared_ptr<AnimationNode> _exp_dup_node;
+
+    
+    shared_ptr<Angler> _dead_ang;
 
 	float accelleration = 1.5f;
 	float max_speed = 0.8f;
 	float _grid_size = 1;
 	int _angler_index = 0;
-
+    
+    int _cooldown = 3;
 	bool _mainCycle;
+    
+    bool _dead;
 
 public:
 
 	void animateAngler();
+    
+    void animateDead();
 
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;
 
@@ -33,7 +43,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display, int angler_index);
+	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> explosion, Size display, int angler_index);
 
 	void kill(shared_ptr<Angler> angler);
 

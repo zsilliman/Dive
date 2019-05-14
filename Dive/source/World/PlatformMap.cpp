@@ -158,6 +158,29 @@ vector<float> getPropertyFloatList(shared_ptr<JsonValue> properties, string key)
 	return {};
 }
 
+//Read custom properties from Tiled
+bool getPropertyBool(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			return prop->get("value")->asBool();
+		}
+	}
+	CULog("Could not read integer property");
+	return false;
+}
+
+bool containsProperty(shared_ptr<JsonValue> properties, string key) {
+	for (int i = 0; i < properties->size(); i++) {
+		shared_ptr<JsonValue> prop = properties->get(i);
+		string jsonKey = prop->get("name")->asString();
+		if (jsonKey.compare(key) == 0) {
+			return true;
+		}
+	}
+	return false;
+}
 
 /*
 * Parse a map from a json file generated with map editor software named "Tiled"
@@ -177,6 +200,9 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
 	map->asset_name = getPropertyString(properties, "asset");
 
 	float goal_speed = getPropertyFloat(properties, "goalspeed");
+	bool wrap = true;
+	if (containsProperty(properties, "platform_wrapping"))
+		bool wrap = getPropertyBool(properties, "platform_wrapping");
 
 	//Layer properties
 	shared_ptr<JsonValue> layers = json->get("layers");
@@ -206,7 +232,7 @@ shared_ptr<PlatformMap> PlatformMap::parseFromJSON(shared_ptr<JsonValue> json) {
                 //for(int i=index+1; i<)
 				//Create platform from this and adjacent blocks
 				Vec2 start = Vec2(x, y);
-				shared_ptr<Platform> platform = Platform::allocWithGrid(&collision_data, &render_data, start, map_dimen);
+				shared_ptr<Platform> platform = Platform::allocWithGrid(&collision_data, &render_data, start, map_dimen, wrap);
 				platform->setRelativeSpeed(speed_data[map->platform_dups.size()]);
 				map->platforms.push_back(platform);
 				//Create duplicate platform for edges of map

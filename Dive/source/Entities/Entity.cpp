@@ -15,6 +15,16 @@ void Entity::setPosition(Vec2 position) {
 	_box_dup->setPosition(Vec2(-_dimensions.width * 10, position.y));
 }
 
+void Entity::initPhysics(shared_ptr<ObstacleWorld> world) {
+	world->addObstacle(_box);
+	world->addObstacle(_box_dup);
+}
+
+void Entity::setLinearVelocity(Vec2 velocity) {
+	_box->setLinearVelocity(velocity);
+	_box_dup->setLinearVelocity(velocity);
+}
+
 bool Entity::canFloat() { return _can_float; }
 
 void Entity::setCanFloat(bool floats) { _can_float = floats; }
@@ -51,6 +61,13 @@ void Entity::reset() {
     _box_dup->setLinearVelocity(Vec2(0,0));
     
 	revive();
+}
+
+void Entity::changeDirection() {
+    int x = _box->getLinearVelocity().x;
+    int y = _box->getLinearVelocity().y;
+    _box->setLinearVelocity(Vec2(-x, y));
+    _box_dup->setLinearVelocity(Vec2(-x, y));
 }
 
 Rect Entity::getBoxRect(shared_ptr<Obstacle> box) {
@@ -133,7 +150,7 @@ void Entity::initEntity(Vec2 pos, Vec2 size, Rect map_rect) {
 	_position = Vec2(pos + size / 2);
 	_start_pos = Vec2(pos + size / 2);
 	_dimensions = Size(size.x, size.y);
-	_box = WheelObstacle::alloc(_start_pos, size.x/2);
-	_box_dup = WheelObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size.x/2);
+	_box = CapsuleObstacle::alloc(_position, size);
+	_box_dup = CapsuleObstacle::alloc(_position + Vec2(map_rect.size.width, 0), size);
 	_can_float = false;
 }

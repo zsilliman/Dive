@@ -67,6 +67,9 @@ void DiveApp::onStartup() {
 	_assets->attach<Node>(SceneLoader::alloc()->getHook());
 	_assets->attach<GameState>(GamestateLoader::alloc()->getHook());
 	_assets->attach<JsonValue>(JsonLoader::alloc()->getHook());
+    _assets->attach<Sound>(SoundLoader::alloc()->getHook());
+    
+    AudioChannels::start(24);
 
     // Activate mouse or touch screen input as appropriate
     // We have to do this BEFORE the scene, because the scene has a button
@@ -81,14 +84,13 @@ void DiveApp::onStartup() {
 	setClearColor(Color4(229, 229, 229, 255));
 
 	// Create a "loading" screen
+	_title.init(_assets);
 	_loaded = false;
-	_loading.init(_assets);
 
 	// This reads the given JSON file and uses it to load all other assets
-	_assets->loadDirectory("json/assets.json");
-    
     _animated = false;
     _menued = false;
+	_assets->loadDirectoryAsync("json/assets.json", nullptr);
 
     Application::onStartup();
 }
@@ -105,6 +107,7 @@ void DiveApp::onStartup() {
  * causing the application to be deleted.
  */
 void DiveApp::onShutdown() {
+    AudioChannels::stop();
     // Delete all smart pointers
     _batch = nullptr;
     _assets = nullptr;
@@ -131,6 +134,7 @@ void DiveApp::onShutdown() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void DiveApp::update(float timestep) {
+<<<<<<< HEAD
 
 //    if (!_loaded && _loading.isActive()) {
 //        _loading.update(0.01f);
@@ -185,7 +189,7 @@ void DiveApp::update(float timestep) {
 void DiveApp::draw() {
     // This takes care of begin/end
 	if (!_loaded) {
-		_loading.render(_batch);
+		_title.render(_batch);
 	}
     else if (!_animated){
         _title.render(_batch);

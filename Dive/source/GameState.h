@@ -37,6 +37,8 @@ public:
 	void dispose();
     
     void reset();
+    
+    void setLevel(string level);
 
 };
 

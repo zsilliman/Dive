@@ -24,12 +24,12 @@
 #include "../ViewControllers/AnglerViewController.h"
 #include "../ViewControllers/GoalViewController.h"
 #include "../ViewControllers/InputController.h"
+#include "InGameOverlay.h"
+#include "../Util.h"
 #include <cugl/cugl.h>
 #include <Box2D/Dynamics/b2WorldCallbacks.h>
 #include <vector>
 
-//Step world AI once every 20 frames
-#define UPDATE_STEP 20
 /**
  * This class is the primary gameplay constroller for the demo.
  *
@@ -41,55 +41,81 @@ class GameScene : public cugl::Scene {
 protected:
     /** The asset manager for this game mode. */
     std::shared_ptr<cugl::AssetManager> _assets;
+    //Stuff that gets loaded once for all levels
+	shared_ptr<Texture> texture;
+	shared_ptr<Texture> goal_texture;
+	shared_ptr<TiledTexture> tilesheet;
+	shared_ptr<TiledTexture> tilesheet_moveable;
     
+	shared_ptr<Texture> _urchin;
+	shared_ptr<Texture> _shark;
+	shared_ptr<Texture> _angler;
+    
+    shared_ptr<Texture> explode;
+    
+	shared_ptr<Texture> background_image;
+	shared_ptr<Texture> diving_texture;
+
+    //sounds
+    std::shared_ptr<Sound> bubble_sound;
+    std::shared_ptr<Sound> victory_sound;
+    std::shared_ptr<Sound> lose_sound;
+    std::shared_ptr<Sound> background_music;
+    std::shared_ptr<Sound> ocean_sound;
+    std::shared_ptr<Sound> shark_sound;
+
+    int waveCounter;
 
     
+	std::shared_ptr<cugl::Node> _background = nullptr;
+	std::shared_ptr<InputController> _input = nullptr;
+	std::shared_ptr<InGameOverlay> _overlay = nullptr;
 
-	//MODELS
-    // Gamestate contains all necessary models
-	std::shared_ptr<GameState> _gamestate;
-    
-	std::shared_ptr<cugl::Node> _background;
-
+	//Loaded again for each new level
+	//Gamestate contains all necessary models
+	std::shared_ptr<GameState> _gamestate = nullptr;
 	float scale;
 
     // COUPLED VIEW + CONTROLLERS
 	/** controller that manages how the user controls world translations */
-	std::shared_ptr<PlatformMapViewController> _map_vc;
-    std::shared_ptr<PlayerViewController> _player_vc;
-	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs;
-	std::vector<std::shared_ptr<FishViewController>> _fish_vcs;
-	std::vector<std::shared_ptr<AnglerViewController>> _angler_vcs;
+	std::shared_ptr<PlatformMapViewController> _map_vc = nullptr;
+    std::shared_ptr<PlayerViewController> _player_vc = nullptr;
+	std::vector<std::shared_ptr<UrchinViewController>> _urchin_vcs = {};
+	std::vector<std::shared_ptr<FishViewController>> _fish_vcs = {};
+	std::vector<std::shared_ptr<AnglerViewController>> _angler_vcs = {};
 
     //input controller
-    std::shared_ptr<InputController> _input;
-    
-	std::shared_ptr<ObstacleWorld> _world;
-    std::shared_ptr<cugl::Label> _winnode;
-    std::shared_ptr<cugl::Label> _losenode;
+	std::shared_ptr<ObstacleWorld> _world = nullptr;
 
-	enum State { WIN, LOSE, PLAY };
+	//Non-shared_ptr fields
 	State prev_state = PLAY;
 	State current_state = PLAY;
 	bool _complete = false;
 
-    int _countdown;
     int _block_counter;
     int _animation_counter;
     int _diver_angle;
     int _prev_diver_angle;
     int _fish_remove;
 	int _angler_remove;
-
-    //std::shared_ptr<FishViewController> _to_remove;
-    //std::shared_ptr<FishViewController> _dummy_fish;
+    int _fish_countdown;
+	int _player_side_count;
+    string _current_level;
+    string _next_level;
+    int final_level = 10;
+    int counter;
 
 	int frame_counter = 0;
+	bool _playerFloor;
 
 	//Setting up the scene
-	void buildScene();
-    
-    bool _playerFloor;
+	void buildYellow();
+    void buildRed();
+    void buildBlue();
+    void buildPurple();
+    void createLevelAssets();
+    void buildOnce();
+	void buildScene(string level);
     
 public:
 #pragma mark -
@@ -158,7 +184,20 @@ public:
      */
     void beginContact(b2Contact* contact);
     
+	void playerSidePlatformCollisions(Obstacle* player_side, Obstacle* platform, bool left);
+
+    void fishPlatformCollisions(Obstacle* fish, Obstacle* platform);
     
+    void diverPlatformCollisions(Obstacle* diver, Obstacle* platform);
+    
+    void fishAnglerCollisions(Obstacle* fish, Obstacle* angler);
+    
+    void fishUrchinCollisions(Obstacle* fish, Obstacle* urchin);
+    
+    void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
+
+    string cycleLevel();
+
     /**
      * Handles any modifications necessary before collision resolution
      *

@@ -32,8 +32,9 @@
 #include <cugl/cugl.h>
 #include "Scenes/GameScene.h"
 #include "Scenes/LoadingScene.h"
-#include "Scenes/TitleAnimationScene.hpp"
+//#include "Scenes/TitleAnimationScene.hpp"
 #include "Scenes/MainMenuScene.hpp"
+#include "Scenes/TitleProgrammedScene.h"
 #include <vector>
 
 /**
@@ -52,17 +53,18 @@ protected:
 
 	/** The controller for the game screen */
 	GameScene _gameplay;
+
 	/** The controller for the loading screen */
 	LoadingScene _loading;
-    /** Title Animation Scene */
-    TitleAnimationScene _title;
+    /** Title Animation Scene / Loading Scene */
+    TitleProgrammedScene _title;
     /** Controller for the main menu */
     MainMenuScene _menu;
     
-    bool _loaded;
     bool _animated;
     bool _menued;
     
+    bool _loaded = false;
     float scale;
     
 public:

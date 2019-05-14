@@ -1,47 +1,54 @@
 {
-	"textures": {
-		"icon": {
-			"file":     "textures/dive_icon.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"close-normal": {
-			"file":     "textures/CloseNormal.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"close-selected": {
-			"file":     "textures/CloseSelected.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-		"tileset": {
-			"file":     "textures/Tileset_light.png",
-			"minfilter":"nearest",
-			"magfilter":"linear",
-			"wrapS":    "clamp",
-			"wrapT":    "clamp"
-		},
-        "goal": {
-            "file":      "textures/goaldoor.png"
+    "textures": {
+        "tileset": {
+            "file":     "textures/Tileset_light.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
         },
-        "urchin": {
-            "file":      "textures/urchin.png"
+        "tileset_moveable": {
+            "file":     "textures/tileset_moveable.png",
+            "minfilter":"nearest",
+            "magfilter":"linear",
+            "wrapS":    "clamp",
+            "wrapT":    "clamp"
         },
-        "fish":{
-            "file":      "textures/Shark.png"
+        "blue_urchin": {
+            "file":      "textures/enemies/BLight_Urchin.png"
         },
-        "angler":{
-            "file":      "textures/Angler_Fish.png"
+        "blue_shark":{
+            "file":      "textures/enemies/BLight_Shark.png"
         },
-        "diver":{
-            "file":      "textures/diver.png"
+        "blue_angler":{
+            "file":      "textures/enemies/BLight_Angler.png"
+        },
+        "purple_urchin": {
+            "file":      "textures/enemies/BDark_Urchin.png"
+        },
+        "purple_shark":{
+            "file":      "textures/enemies/BDark_Shark.png"
+        },
+        "purple_angler":{
+            "file":      "textures/enemies/BDark_Angler.png"
+        },
+        "red_urchin": {
+            "file":      "textures/enemies/G_Urchin.png"
+        },
+        "red_shark":{
+            "file":      "textures/enemies/G_Shark.png"
+        },
+        "red_angler":{
+            "file":      "textures/enemies/G_Angler.png"
+        },
+        "yellow_urchin": {
+            "file":      "textures/enemies/P_Urchin.png"
+        },
+        "yellow_shark":{
+            "file":      "textures/enemies/P_Shark.png"
+        },
+        "yellow_angler":{
+            "file":      "textures/enemies/P_Angler.png"
         },
         "background":{
             "file":      "textures/background_blue.png"
@@ -52,20 +59,23 @@
         "ui":{
             "file":      "textures/ui.png"
         },
-        "platform1":{
-            "file":      "textures/platform1.png"
+        "background_clear":{
+            "file":      "textures/background_blue_seethrough.png"
+        },
+        "explode" : {
+            "file":      "textures/collision.png"
         },
         "title": {
             "file":      "animations/dive.jpg"
         },
-        "diving": {
-            "file":      "textures/diving.png"
-        },
-        "dying": {
-            "file":      "textures/dying.png"
-        },
         "statue": {
-            "file":     "textures/statue.png"
+            "file":     "textures/Statue.png"
+        },
+        "walking": {
+            "file":     "textures/walking.png"
+        },
+        "UI_window": {
+            "file":     "textures/ui/window.png"
         },
         "divemain":{
             "file":     "textures/buttons/divemain.png"
@@ -120,18 +130,90 @@
         },
         "lvl12":{
             "file":     "textures/buttons/lvl12.png"
+        },
+        "UI_pause_up": {
+            "file":     "textures/ui/pause-button.png"
+        },
+        "UI_pause_down": {
+            "file":     "textures/ui/pause-button_down.png"
         }
-	},
-	"levels": {
-		"sample_level": {
-			"file":     "levels/sample_level.json"
-		}
-	},
-	"fonts": {
-		"charlemagne": {
-			"file":     "fonts/Charlemagne.ttf",
-			"size":     64
-		}
+    },
+    "levels": {
+        "sample_level": {
+            "file":     "levels/sample_level.json"
+        },
+        "level_1": {
+            "file":     "levels/level_1.json"
+        },
+        "level_2": {
+            "file":     "levels/level_2.json"
+        },
+        "level_3": {
+            "file":     "levels/level_3.json"
+        },
+        "level_4": {
+            "file":     "levels/level_4.json"
+        },
+        "level_5": {
+            "file":     "levels/level_5.json"
+        },
+        "level_6": {
+            "file":     "levels/level_6.json"
+        },
+        "level_7": {
+            "file":     "levels/level_7.json"
+        },
+        "level_8": {
+            "file":     "levels/level_8.json"
+        },
+        "level_9": {
+            "file":     "levels/level_9.json"
+        },
+        "level_10": {
+            "file":     "levels/level_10.json"
+        }
+    },
+    "fonts": {
+        "charlemagne": {
+            "file":     "fonts/Charlemagne.ttf",
+            "size":     64
+        },
+        "OldKlarheit": {
+            "file":     "fonts/OldKlarheit-Regular.ttf",
+            "size":     128
+        }
+    },
+    "sounds": {
+        "bubble01": {
+            "type":     "sample",
+            "file":     "sounds/bubble01.wav",
+            "volume":   0.2
+        },
+        "victory": {
+            "type":     "sample",
+            "file":     "sounds/victory2.wav",
+            "volume":   0.5
+        },
+        "lose": {
+            "type":     "sample",
+            "file":     "sounds/lose2.wav",
+            "volume":   0.5
+        },
+        "background_sound": {
+            "type":     "sample",
+            "file":     "sounds/background_music.wav",
+            "volume":   0.5
+        },
+        "ocean": {
+            "type":     "sample",
+            "file":     "sounds/OceanWave.wav",
+            "volume":   0.5
+        },
+        "shark": {
+            "type":     "sample",
+            "file":     "sounds/shark.wav",
+            "volume":   1
+        }
     },
     "scenes": {
         "animation" : {

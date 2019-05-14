@@ -27,6 +27,6 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<PlatformMapViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> texture, shared_ptr<Texture> goal_texture, Size display);
+	static shared_ptr<PlatformMapViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<InputController> _input, shared_ptr<TiledTexture> tileset, shared_ptr<TiledTexture> tileset_moveable, shared_ptr<Texture> goal_texture, Size display);
 
 };

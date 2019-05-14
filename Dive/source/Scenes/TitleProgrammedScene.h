@@ -23,12 +23,19 @@ protected:
 	std::shared_ptr<cugl::Label> _E_node;
 
 	cugl::Size _dimen;
-	float _t = 0, _dive_width, _dive_height;
+	float _t = 0, _dive_width, _dive_height, _progress = 0;
 
-	bool _stall = false;
+	bool _loaded = false;
+	bool _idled = false;
+	bool _animated = false;
 	bool _finished = false;
 
 	void dive_func(float t);
+
+
+	void idle_func(std::shared_ptr<cugl::Node> letter, float t);
+
+	void idle_blend_func(float t, float offset);
 
 	void parallax_func1(float t);
 

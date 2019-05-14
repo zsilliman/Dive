@@ -19,6 +19,8 @@ protected:
 	float _grid_size = 1;
 	int _urchin_index = 0;
     
+    int _cooldown = 3;
+    
      bool _mainCycle;
 
 public:
