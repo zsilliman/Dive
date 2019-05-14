@@ -152,13 +152,20 @@ void GameScene::update(float timestep) {
 			_angler_remove = -1;
 		}
 		_fish_countdown--;
+        waveCounter++;
+        if(waveCounter >= 500){
+            AudioChannels::get()->playEffect("ocean", ocean_sound);
+            waveCounter = -200;
+        }
         
-        if(!AudioChannels::get()->isActiveEffect("victory") && !AudioChannels::get()->isActiveEffect("lose")){
-            if(!AudioChannels::get()->isActiveEffect("background")){
-                CULog("resuming update");
-                AudioChannels::get()->playEffect("background", background_music);
-                AudioChannels::get()->setEffectLoop("background", true);
+        for (int i = 0; i < _fish_vcs.size(); i++){
+            float dist = _gamestate->_player->_box->getPosition().distance(_gamestate->_fish[i]->_box->getPosition());
+            CULog("sharky %f", dist);
+            if(dist < 4 && !AudioChannels::get()->isActiveEffect("shark")){
+                AudioChannels::get()->stopAllEffects();
+                AudioChannels::get()->playEffect("shark", shark_sound);
             }
+
         }
 	}
 	else if (current_state == LOSE) {
@@ -170,6 +177,7 @@ void GameScene::update(float timestep) {
 	else { //PAUSED
 		//probably nothing
         AudioChannels::get()->stopAllEffects();
+        //AudioChannels::get()->stopMusic();
 	}
 }
 
@@ -178,18 +186,17 @@ void GameScene::setState(State state) {
 		return;
 	bool changed = state != current_state;
 	if (state == WIN && current_state != LOSE && changed) {
-        if(AudioChannels::get()->isActiveEffect("background")){
-            AudioChannels::get()->stopEffect("background");
-        }
+        AudioChannels::get()->stopAllEffects();
+        AudioChannels::get()->stopMusic();
 		AudioChannels::get()->playEffect("victory", victory_sound);
 		_overlay->setState(WIN);
 		current_state = WIN;
 	}
 	else if (state == LOSE && current_state != WIN && changed) {
-        if(AudioChannels::get()->isActiveEffect("background")){
-            AudioChannels::get()->stopEffect("background");
-        }
-		AudioChannels::get()->playEffect("lose", lose_sound);
+        AudioChannels::get()->stopAllEffects();
+        CULog("stopping music");
+        AudioChannels::get()->stopMusic();
+        AudioChannels::get()->playEffect("lose", lose_sound);
 		_overlay->setState(LOSE);
 		current_state = LOSE;
 	} else if (state == PLAY) {
@@ -291,7 +298,7 @@ void GameScene::buildOnce() {
 	safe.size *= scale;
 
     counter = 0;
-    
+    waveCounter = 0;
 	goal_texture = _assets->get<Texture>("statue");
 
 	shared_ptr<Texture> texture_moveable = _assets->get<Texture>("tileset_moveable");
@@ -306,6 +313,8 @@ void GameScene::buildOnce() {
     bubble_sound = _assets->get<Sound>("bubble01");
     victory_sound = _assets->get<Sound>("victory");
     lose_sound = _assets->get<Sound>("lose");
+    ocean_sound = _assets->get<Sound>("ocean");
+    shark_sound = _assets->get<Sound>("shark");
 
 	_overlay = InGameOverlay::alloc(_assets, safe);
 	Button::Listener main_menu_callback = [=](const std::string& name, bool down) { if (!down) { CULog("MAIN MENU PRESSED"); } };
@@ -321,9 +330,7 @@ void GameScene::buildOnce() {
 
 	_overlay->setState(PLAY);
     
-    //AudioChannels::get()->playMusic(background_music);
-    AudioChannels::get()->playEffect("background", background_music);
-    AudioChannels::get()->setEffectLoop("background", true);
+    AudioChannels::get()->playMusic(background_music, true, background_music->getVolume());
 }
 
 void GameScene::buildScene(string level) {
@@ -406,6 +413,7 @@ void GameScene::buildScene(string level) {
 	sortZOrder();
 	setState(PLAY);
     Application::get()->setClearColor(Color4f::CORNFLOWER);
+    AudioChannels::get()->playMusic(background_music, true, background_music->getVolume());
 }
 
 void GameScene::reset() {

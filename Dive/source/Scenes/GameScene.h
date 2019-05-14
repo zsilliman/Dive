@@ -61,6 +61,11 @@ protected:
     std::shared_ptr<Sound> victory_sound;
     std::shared_ptr<Sound> lose_sound;
     std::shared_ptr<Sound> background_music;
+    std::shared_ptr<Sound> ocean_sound;
+    std::shared_ptr<Sound> shark_sound;
+
+    int waveCounter;
+
     
 	std::shared_ptr<cugl::Node> _background = nullptr;
 	std::shared_ptr<InputController> _input = nullptr;

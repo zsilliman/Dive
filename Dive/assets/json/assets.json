@@ -131,7 +131,7 @@
         },
         "victory": {
             "type":     "sample",
-            "file":     "sounds/victory.wav",
+            "file":     "sounds/victory2.wav",
             "volume":   0.5
         },
         "lose": {
@@ -143,6 +143,16 @@
             "type":     "sample",
             "file":     "sounds/background_music.wav",
             "volume":   0.5
+        },
+        "ocean": {
+            "type":     "sample",
+            "file":     "sounds/OceanWave.wav",
+            "volume":   0.5
+        },
+        "shark": {
+            "type":     "sample",
+            "file":     "sounds/shark.wav",
+            "volume":   1
         }
     },
     "scenes": {
