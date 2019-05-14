@@ -16,6 +16,7 @@ void Urchin::initUrchin(Vec2 start_pos, Rect map_rect) {
 	_box->setDensity(URCHIN_DENSITY);
 	_box->setLinearDamping(URCHIN_LIN_DAMP);
 	_box->setBodyType(b2BodyType::b2_dynamicBody);
+    _box->setGravityScale(URCHIN_DROP);
 
 	_box_dup = WheelObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), _dimensions.width/2);
 	_box_dup->setFriction(URCHIN_FRICTION);
@@ -24,6 +25,7 @@ void Urchin::initUrchin(Vec2 start_pos, Rect map_rect) {
 	_box_dup->setDensity(URCHIN_DENSITY);
 	_box_dup->setLinearDamping(URCHIN_LIN_DAMP);
 	_box_dup->setBodyType(b2BodyType::b2_dynamicBody);
+    _box_dup->setGravityScale(URCHIN_DROP);
 }
 
 shared_ptr<Urchin> Urchin::alloc(Vec2 start_pos, Rect map_rect) {

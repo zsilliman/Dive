@@ -3,6 +3,8 @@
 using namespace cugl;
 using namespace std;
 
+#define PLAYER_DROP 1
+
 shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	shared_ptr<Player> player = make_shared<Player>();
 	Size size = Vec2(.6, 1.43);
@@ -10,8 +12,8 @@ shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	player->_box->setFriction(0);
 	player->_box_dup->setFriction(0);
 	player->setName("player");
-    player->_box->setGravityScale(0);
-    player->_box_dup->setGravityScale(0);
+    player->_box->setGravityScale(PLAYER_DROP);
+    player->_box_dup->setGravityScale(PLAYER_DROP);
 	player->_box->setRestitution(0);
 	player->_box_dup->setRestitution(0);
 	//Side sensor detection
