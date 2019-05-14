@@ -134,8 +134,6 @@ void DiveApp::onShutdown() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void DiveApp::update(float timestep) {
-<<<<<<< HEAD
-
 //    if (!_loaded && _loading.isActive()) {
 //        _loading.update(0.01f);
 //    }
