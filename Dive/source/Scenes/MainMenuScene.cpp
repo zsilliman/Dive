@@ -8,22 +8,22 @@
 using namespace cugl;
 
 /** The ID for the button listener */
-#define MAIN_TO_CREDITS 1
-#define MAIN_TO_LEVELS 2
-#define CREDITS_TO_MAIN 3
-#define LEVELS_TO_MAIN 4
-#define LEVEL_ONE 5
-#define LEVEL_TWO 6
-#define LEVEL_THREE 7
-#define LEVEL_FOUR 8
-#define LEVEL_FIVE 9
-#define LEVEL_SIX 10
-#define LEVEL_SEVEN 11
-#define LEVEL_EIGHT 12
-#define LEVEL_NINE 13
-#define LEVEL_TEN 14
-#define LEVEL_ELEVEN 15
-#define LEVEL_TWELVE 16
+#define MAIN_TO_CREDITS 9
+#define MAIN_TO_LEVELS 10
+#define CREDITS_TO_MAIN 11
+#define LEVELS_TO_MAIN 12
+#define LEVEL_ONE 13
+#define LEVEL_TWO 14
+#define LEVEL_THREE 15
+#define LEVEL_FOUR 16
+#define LEVEL_FIVE 17
+#define LEVEL_SIX 18
+#define LEVEL_SEVEN 19
+#define LEVEL_EIGHT 20
+#define LEVEL_NINE 21
+#define LEVEL_TEN 22
+#define LEVEL_ELEVEN 23
+#define LEVEL_TWELVE 24
 
 #define MAIN_MENU 1
 #define LEVEL_SELECT 2
