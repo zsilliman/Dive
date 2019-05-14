@@ -191,7 +191,7 @@
         },
         "victory": {
             "type":     "sample",
-            "file":     "sounds/victory2.wav",
+            "file":     "sounds/victory3.wav",
             "volume":   0.5
         },
         "lose": {

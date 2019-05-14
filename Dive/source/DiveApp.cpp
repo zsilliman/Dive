@@ -134,18 +134,6 @@ void DiveApp::onShutdown() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void DiveApp::update(float timestep) {
-//    if (!_loaded && _loading.isActive()) {
-//        _loading.update(0.01f);
-//    }
-//    else if (!_loaded) {
-//        _loading.dispose(); // Disables the input listeners in this mode
-//        _gameplay.init(_assets);
-//        _loaded = true;
-//    }
-//    else {
-//        _gameplay.update(timestep);
-//    }
-
     if (!_loaded && _loading.isActive()) {
         _loading.update(0.01f);
     }
@@ -166,8 +154,9 @@ void DiveApp::update(float timestep) {
         _menu.update(timestep);
     }
     else if (!_menued){
+        int level = _menu.getLevelSelected();
         _menu.dispose();
-        _gameplay.init(_assets);
+        _gameplay.init(_assets, level);
         _menued = true;
     }
     else{

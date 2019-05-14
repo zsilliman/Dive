@@ -53,7 +53,7 @@ using namespace std;
  *
  * @return true if the controller is initialized properly, false otherwise.
  */
-bool GameScene::init(const shared_ptr<AssetManager>& assets) {
+bool GameScene::init(const shared_ptr<AssetManager>& assets, int level) {
 	Size size = Application::get()->getDisplaySize();
 //    CULog("height is: %d", size.getIHeight());
 //    CULog("width is: %d", size.getIWidth());
@@ -71,9 +71,10 @@ bool GameScene::init(const shared_ptr<AssetManager>& assets) {
 	_assets = assets;
     _input = make_shared<InputController>();
     _input->init();
-
+    
+    string level_name = "level_"+std::to_string(level);
 	buildOnce();
-	buildScene("level_1");
+	buildScene(level_name);
 
     return true;
 }

@@ -27,6 +27,7 @@ protected:
 //    std::shared_ptr<cugl::Button> _button;
 //    std::shared_ptr<cugl::Label> _label;
     int _counter;
+    int _level_selected=0;
     int _current = 1;
     
     std::shared_ptr<cugl::Button> downarr;
@@ -107,6 +108,8 @@ public:
      * @return true if loading is complete, but the player has not pressed play
      */
     bool isPending( ) const;
+    
+    int getLevelSelected();
 };
 
 #endif /* MainMenuScene_hpp */

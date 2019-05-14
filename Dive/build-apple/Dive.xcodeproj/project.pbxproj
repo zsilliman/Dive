@@ -450,12 +450,12 @@
 		EBBF18881D74904A008E2001 = {
 			isa = PBXGroup;
 			children = (
+				EB4EB19D1E3404F3007BCF09 /* CUGL.xcodeproj */,
 				EBBF18B11D749176008E2001 /* Source */,
 				EB2BE9B71D749870002FE78B /* Assets */,
-				EBBF18931D74904A008E2001 /* Resources */,
 				EB4880FC1D74AAB600EFC946 /* Frameworks */,
 				EBBF18921D74904A008E2001 /* Products */,
-				EB4EB19D1E3404F3007BCF09 /* CUGL.xcodeproj */,
+				EBBF18931D74904A008E2001 /* Resources */,
 			);
 			sourceTree = "<group>";
 		};
@@ -486,15 +486,15 @@
 		EBBF18B11D749176008E2001 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				EFDB541E228B479D00424C70 /* DiveApp.cpp */,
 				EFDB541B228B479D00424C70 /* DiveApp.h */,
-				EFDB53F7228B479D00424C70 /* Entities */,
-				EFDB541C228B479D00424C70 /* GameState.cpp */,
+				EFDB541E228B479D00424C70 /* DiveApp.cpp */,
 				EFDB541A228B479D00424C70 /* GameState.h */,
-				EFDB541F228B479D00424C70 /* Loaders */,
+				EFDB541C228B479D00424C70 /* GameState.cpp */,
 				EFDB541D228B479D00424C70 /* main.cpp */,
-				EFDB53DB228B479D00424C70 /* Scenes */,
 				EFDB53DA228B479D00424C70 /* Util.h */,
+				EFDB53F7228B479D00424C70 /* Entities */,
+				EFDB541F228B479D00424C70 /* Loaders */,
+				EFDB53DB228B479D00424C70 /* Scenes */,
 				EFDB5402228B479D00424C70 /* ViewControllers */,
 				EFDB53E8228B479D00424C70 /* World */,
 			);
@@ -505,18 +505,18 @@
 		EFDB53DB228B479D00424C70 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				EFDB53DC228B479D00424C70 /* MainMenuScene.cpp */,
-				EFDB53DD228B479D00424C70 /* GameScene.h */,
-				EFDB53DE228B479D00424C70 /* TitleProgrammedScene.cpp */,
-				EFDB53DF228B479D00424C70 /* LoadingScene.h */,
-				EFDB53E0228B479D00424C70 /* InGameOverlay.h */,
-				EFDB53E1228B479D00424C70 /* TitleAnimationScene.hpp */,
-				EFDB53E2228B479D00424C70 /* LoadingScene.cpp */,
-				EFDB53E3228B479D00424C70 /* TitleProgrammedScene.h */,
-				EFDB53E4228B479D00424C70 /* InGameOverlay.cpp */,
-				EFDB53E5228B479D00424C70 /* TitleAnimationScene.cpp */,
 				EFDB53E6228B479D00424C70 /* GameScene.cpp */,
+				EFDB53DD228B479D00424C70 /* GameScene.h */,
+				EFDB53E4228B479D00424C70 /* InGameOverlay.cpp */,
+				EFDB53E0228B479D00424C70 /* InGameOverlay.h */,
+				EFDB53E2228B479D00424C70 /* LoadingScene.cpp */,
+				EFDB53DF228B479D00424C70 /* LoadingScene.h */,
+				EFDB53DC228B479D00424C70 /* MainMenuScene.cpp */,
 				EFDB53E7228B479D00424C70 /* MainMenuScene.hpp */,
+				EFDB53E5228B479D00424C70 /* TitleAnimationScene.cpp */,
+				EFDB53E1228B479D00424C70 /* TitleAnimationScene.hpp */,
+				EFDB53DE228B479D00424C70 /* TitleProgrammedScene.cpp */,
+				EFDB53E3228B479D00424C70 /* TitleProgrammedScene.h */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -524,20 +524,20 @@
 		EFDB53E8228B479D00424C70 /* World */ = {
 			isa = PBXGroup;
 			children = (
-				EFDB53E9228B479D00424C70 /* TiledTexture.cpp */,
+				EFDB53F4228B479D00424C70 /* Goal.cpp */,
+				EFDB53F2228B479D00424C70 /* Goal.h */,
+				EFDB53ED228B479D00424C70 /* GridMap.cpp */,
+				EFDB53EC228B479D00424C70 /* GridMap.h */,
+				EFDB53F1228B479D00424C70 /* GridRow.cpp */,
+				EFDB53EE228B479D00424C70 /* GridRow.h */,
+				EFDB53F0228B479D00424C70 /* Platform.cpp */,
+				EFDB53F6228B479D00424C70 /* Platform.h */,
+				EFDB53F5228B479D00424C70 /* PlatformMap.cpp */,
+				EFDB53EF228B479D00424C70 /* PlatformMap.h */,
 				EFDB53EA228B479D00424C70 /* PlatformObstacle.cpp */,
 				EFDB53EB228B479D00424C70 /* PlatformObstacle.h */,
-				EFDB53EC228B479D00424C70 /* GridMap.h */,
-				EFDB53ED228B479D00424C70 /* GridMap.cpp */,
-				EFDB53EE228B479D00424C70 /* GridRow.h */,
-				EFDB53EF228B479D00424C70 /* PlatformMap.h */,
-				EFDB53F0228B479D00424C70 /* Platform.cpp */,
-				EFDB53F1228B479D00424C70 /* GridRow.cpp */,
-				EFDB53F2228B479D00424C70 /* Goal.h */,
+				EFDB53E9228B479D00424C70 /* TiledTexture.cpp */,
 				EFDB53F3228B479D00424C70 /* TiledTexture.h */,
-				EFDB53F4228B479D00424C70 /* Goal.cpp */,
-				EFDB53F5228B479D00424C70 /* PlatformMap.cpp */,
-				EFDB53F6228B479D00424C70 /* Platform.h */,
 			);
 			path = World;
 			sourceTree = "<group>";
@@ -546,15 +546,15 @@
 			isa = PBXGroup;
 			children = (
 				EFDB53F8228B479D00424C70 /* Angler.cpp */,
-				EFDB53F9228B479D00424C70 /* Player.cpp */,
-				EFDB53FA228B479D00424C70 /* Fish.cpp */,
+				EFDB5400228B479D00424C70 /* Angler.h */,
 				EFDB53FB228B479D00424C70 /* Entity.cpp */,
+				EFDB53FF228B479D00424C70 /* Entity.h */,
+				EFDB53FA228B479D00424C70 /* Fish.cpp */,
+				EFDB5401228B479D00424C70 /* Fish.h */,
+				EFDB53F9228B479D00424C70 /* Player.cpp */,
 				EFDB53FC228B479D00424C70 /* Player.h */,
 				EFDB53FD228B479D00424C70 /* Urchin.cpp */,
 				EFDB53FE228B479D00424C70 /* Urchin.h */,
-				EFDB53FF228B479D00424C70 /* Entity.h */,
-				EFDB5400228B479D00424C70 /* Angler.h */,
-				EFDB5401228B479D00424C70 /* Fish.h */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -672,7 +672,7 @@
 					};
 					EBBF18901D74904A008E2001 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = 2R2SQSPH3U;
+						DevelopmentTeam = A8CZTHRJN9;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -1105,7 +1105,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
@@ -1122,7 +1122,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 2R2SQSPH3U;
+				DEVELOPMENT_TEAM = A8CZTHRJN9;
 				INFOPLIST_FILE = "$(SRCROOT)/Resources/Mac-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.10;
