@@ -34,9 +34,9 @@ void PlatformMapViewController::update(shared_ptr<GameState> state) {
 	Rect visible_rect = Rect(Vec2(0, -_node->getPosition().y / _grid_size), _display / _grid_size);
 
     if (_input->goingLeft()){
-		parallaxTranslateVisible(state->_map, visible_rect, 2);
+		parallaxTranslateVisible(state->_map, visible_rect, PLATFORM_SHIFT_SPEED);
     }else if (_input->goingRight()){
-		parallaxTranslateVisible(state->_map, visible_rect, -2);
+		parallaxTranslateVisible(state->_map, visible_rect, -PLATFORM_SHIFT_SPEED);
     }else{
 		parallaxTranslateVisible(state->_map, visible_rect, 0);
     }
