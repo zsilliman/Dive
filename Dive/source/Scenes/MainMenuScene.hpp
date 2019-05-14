@@ -110,6 +110,8 @@ public:
     bool isPending( ) const;
     
     int getLevelSelected();
+    
+    void setLevelSelected(int level);
 };
 
 #endif /* MainMenuScene_hpp */

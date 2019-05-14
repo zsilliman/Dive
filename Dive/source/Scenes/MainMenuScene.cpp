@@ -318,3 +318,7 @@ bool MainMenuScene::isPending( ) const {
 int MainMenuScene::getLevelSelected(){
     return _level_selected;
 }
+
+void MainMenuScene::setLevelSelected(int level){
+    _level_selected = level;
+}

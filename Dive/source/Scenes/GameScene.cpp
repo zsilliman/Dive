@@ -161,7 +161,6 @@ void GameScene::update(float timestep) {
         
         for (int i = 0; i < _fish_vcs.size(); i++){
             float dist = _gamestate->_player->_box->getPosition().distance(_gamestate->_fish[i]->_box->getPosition());
-            CULog("sharky %f", dist);
             if(dist < 4 && !AudioChannels::get()->isActiveEffect("shark")){
                 AudioChannels::get()->stopAllEffects();
                 AudioChannels::get()->playEffect("shark", shark_sound);
@@ -227,6 +226,10 @@ string GameScene::cycleLevel(){
         _next_level = "level_1";
     }
     return _next_level;
+}
+
+void GameScene::startLevel(int level){
+    buildScene("level_"+std::to_string(level));
 }
 
 void GameScene::buildYellow(){
@@ -318,7 +321,12 @@ void GameScene::buildOnce() {
     shark_sound = _assets->get<Sound>("shark");
 
 	_overlay = InGameOverlay::alloc(_assets, safe);
-	Button::Listener main_menu_callback = [=](const std::string& name, bool down) { if (!down) { CULog("MAIN MENU PRESSED"); } };
+	Button::Listener main_menu_callback = [=](const std::string& name, bool down) {
+        if (!down) {
+            CULog("MAIN MENU PRESSED");
+            this->setActive(false);
+        }
+    };
 	_overlay->setMainMenuCallback(main_menu_callback);
 	Button::Listener resume_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PLAY); CULog("RESUME PRESSED"); } };
 	_overlay->setResumeCallback(resume_callback);

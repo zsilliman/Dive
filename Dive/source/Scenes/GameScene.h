@@ -197,6 +197,8 @@ public:
     void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
 
     string cycleLevel();
+    
+    void startLevel(int level);
 
     /**
      * Handles any modifications necessary before collision resolution

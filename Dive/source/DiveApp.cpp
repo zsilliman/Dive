@@ -155,12 +155,26 @@ void DiveApp::update(float timestep) {
     }
     else if (!_menued){
         int level = _menu.getLevelSelected();
-        _menu.dispose();
-        _gameplay.init(_assets, level);
+        //_menu.dispose();
+        if(first){
+            first = false;
+            _gameplay.init(_assets, level);
+        }
+        else{
+            _gameplay.setActive(true);
+            _gameplay.startLevel(level);
+        }
         _menued = true;
     }
-    else{
+    else if (_gameplay.isActive()){
         _gameplay.update(timestep);
+    }
+    else{
+        CULog("back to menu");
+        _menued = false;
+        _menu.setActive(true);
+        _menu.setLevelSelected(0);
+
     }
 }
 
