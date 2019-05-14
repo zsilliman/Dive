@@ -128,61 +128,73 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     level1->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 1 selected");
+            _counter++;
         }
     });
     level2->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 2 selected");
+            _counter++;
         }
     });
     level3->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 3 selected");
+            _counter++;
         }
     });
     level4->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 4 selected");
+            _counter++;
         }
     });
     level5->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 5 selected");
+            _counter++;
         }
     });
     level6->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 6 selected");
+            _counter++;
         }
     });
     level7->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 7 selected");
+            _counter++;
         }
     });
     level8->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 8 selected");
+            _counter++;
         }
     });
     level9->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 9 selected");
+            _counter++;
         }
     });
     level10->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 10 selected");
+            _counter++;
         }
     });
     level11->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 11 selected");
+            _counter++;
         }
     });
     level12->setListener([=](const std::string& name, bool down) {
         if (down && _current == LEVEL_SELECT) {
             CULog("level 12 selected");
+            _counter++;
         }
     });
     
@@ -289,7 +301,7 @@ void MainMenuScene::dispose() {
  * @param timestep  The amount of time (in seconds) since the last frame
  */
 void MainMenuScene::update(float progress) {
-    if (_counter>=5){
+    if (_counter>=1){
         this->_active = false;
     }
 }
