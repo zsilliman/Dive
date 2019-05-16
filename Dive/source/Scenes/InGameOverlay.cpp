@@ -139,11 +139,9 @@ void InGameOverlay::Window::update() {
 		_button2->setScale(_button_start_scale);
 	}
 	if (_button3 == nullptr) {
-		CULog("Button3 is null??");
 		return;
 	}
 	if (_button3->isDown()) {
-		CULog("Button3 down");
 		_button3->setScale(_button_end_scale);
 	}
 	else {
