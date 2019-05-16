@@ -199,9 +199,9 @@
         }
     },
     "sounds": {
-        "bubble01": {
+        "bubble": {
             "type":     "sample",
-            "file":     "sounds/bubble01.wav",
+            "file":     "sounds/bubble.wav",
             "volume":   0.2
         },
         "victory": {
@@ -211,7 +211,7 @@
         },
         "lose": {
             "type":     "sample",
-            "file":     "sounds/lose2.wav",
+            "file":     "sounds/lose.wav",
             "volume":   0.5
         },
         "background_sound": {

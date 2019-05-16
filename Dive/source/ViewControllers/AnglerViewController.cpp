@@ -57,7 +57,7 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	}
 
 	//If the angler fish falls below the player's y coordinate and is within 5 tiles then it is active
-	if (closest_player.y < closest_angler.y && closest_angler.y - closest_player.y < 5) {
+	if (closest_player.y < closest_angler.y && closest_angler.y - closest_player.y < 6) {
 		//Compute vector pointing from angler to the player
 		Vec2 diff = closest_player - closest_angler;
 		//Prevent divide by zero error

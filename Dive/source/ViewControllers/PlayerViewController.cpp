@@ -5,7 +5,6 @@
 void PlayerViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) {}
 
 void PlayerViewController::update(shared_ptr<GameState> state) {
-    //state->_player->setLinearVelocity(Vec2(1.9, -1.9));
 	state->_player->rotateEntity(state->_map->getMapRect());
 	_oc_node->setPosition(state->_player->_box->getPosition() * _grid_size);
 	_oc_node->setAngle(state->_player->_box->getAngle());

@@ -34,6 +34,9 @@ protected:
 	shared_ptr<Window> _pause_node, _lose_node, _win_node;
 	shared_ptr<Button> _pause_button;
 	Button::Listener _pause_callback;
+    
+    std::shared_ptr<cugl::Sound> bubble_sound;
+
 	
 	State _current_state;
 	
