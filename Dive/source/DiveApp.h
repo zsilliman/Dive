@@ -50,16 +50,6 @@ protected:
 
 	/** spritebatch used to render the scenes */
 	std::shared_ptr<cugl::SpriteBatch> _batch;
-
-	/** The controller for the game screen */
-	GameScene _gameplay;
-
-	/** The controller for the loading screen */
-	LoadingScene _loading;
-    /** Title Animation Scene / Loading Scene */
-    TitleProgrammedScene _title;
-    /** Controller for the main menu */
-    MainMenuScene _menu;
     
     bool _animated;
     bool _menued;
@@ -67,6 +57,15 @@ protected:
     
     bool _loaded = false;
     float scale;
+
+	/** The controller for the loading screen */
+	LoadingScene _loading;
+	/** Title Animation Scene / Loading Scene */
+	TitleProgrammedScene _title;
+	/** Controller for the main menu */
+	MainMenuScene _menu;
+	/** The controller for the game screen */
+	GameScene _gameplay; //Note that this line needs to be at the bottom otherwise will not compile on Windows
     
 public:
     /**

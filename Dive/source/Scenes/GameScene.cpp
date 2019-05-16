@@ -465,6 +465,9 @@ void GameScene::buildScene(string level) {
 	setState(PLAY);
     Application::get()->setClearColor(Color4f::BLACK);
     AudioChannels::get()->playMusic(background_music, true, background_music->getVolume());
+
+	_gamestate->reset();
+	_player_vc->setAIDirection(_gamestate, "down");
 }
 
 void GameScene::reset() {

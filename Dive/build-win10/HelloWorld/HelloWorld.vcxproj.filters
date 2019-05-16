@@ -141,6 +141,9 @@
     <ClInclude Include="..\..\source\Scenes\InGameOverlay.h">
       <Filter>Header Files\Scenes</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\source\Scenes\MainMenuScene.hpp">
+      <Filter>Header Files\Scenes</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\source\main.cpp">
@@ -231,6 +234,9 @@
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
     <ClCompile Include="..\..\source\Scenes\InGameOverlay.cpp">
+      <Filter>Source Files\Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\source\Scenes\MainMenuScene.cpp">
       <Filter>Source Files\Scenes</Filter>
     </ClCompile>
   </ItemGroup>
