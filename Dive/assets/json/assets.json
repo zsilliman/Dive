@@ -133,6 +133,54 @@
         },
         "lvl12":{
             "file":     "textures/buttons/lvl12.png"
+        },
+        "surfaceP":{
+            "file":     "textures/buttons/surfaceP.png"
+        },
+        "depthsP":{
+            "file":     "textures/buttons/depthsP.png"
+        },
+        "downP":{
+            "file":     "textures/buttons/downP.png"
+        },
+        "upP":{
+            "file":     "textures/buttons/upP.png"
+        },
+        "lvl1P":{
+            "file":     "textures/buttons/lvl1P.png"
+        },
+        "lvl2P":{
+            "file":     "textures/buttons/lvl2P.png"
+        },
+        "lvl3P":{
+            "file":     "textures/buttons/lvl3P.png"
+        },
+        "lvl4P":{
+            "file":     "textures/buttons/lvl4P.png"
+        },
+        "lvl5P":{
+            "file":     "textures/buttons/lvl5P.png"
+        },
+        "lvl6P":{
+            "file":     "textures/buttons/lvl6P.png"
+        },
+        "lvl7P":{
+            "file":     "textures/buttons/lvl7P.png"
+        },
+        "lvl8P":{
+            "file":     "textures/buttons/lvl8P.png"
+        },
+        "lvl9P":{
+            "file":     "textures/buttons/lvl9P.png"
+        },
+        "lvl10P":{
+            "file":     "textures/buttons/lvl10P.png"
+        },
+        "lvl11P":{
+            "file":     "textures/buttons/lvl11P.png"
+        },
+        "lvl12P":{
+            "file":     "textures/buttons/lvl12P.png"
         }
     },
     "levels": {
@@ -292,7 +340,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "surface"
+                                "texture"  : "surfaceP"
                             }
                         }
                     },
@@ -322,7 +370,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "depths"
+                                "texture"  : "depthsP"
                             }
                         }
                     },
@@ -367,7 +415,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "down"
+                                "texture"  : "downP"
                             }
                         }
                     },
@@ -446,7 +494,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "up"
+                                "texture"  : "upP"
                             }
                         }
                     },
@@ -461,6 +509,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -474,12 +523,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl1"
+                                "texture"  : "lvl1P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level2" : {
@@ -488,6 +537,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -501,12 +551,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl2"
+                                "texture"  : "lvl2P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level3" : {
@@ -515,6 +565,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -528,12 +579,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl3"
+                                "texture"  : "lvl3P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level4" : {
@@ -542,6 +593,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -555,12 +607,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl4"
+                                "texture"  : "lvl4P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level5" : {
@@ -569,6 +621,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -582,12 +635,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl5"
+                                "texture"  : "lvl5P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level6" : {
@@ -596,6 +649,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -609,12 +663,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl6"
+                                "texture"  : "lvl6P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level7" : {
@@ -623,6 +677,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -636,12 +691,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl7"
+                                "texture"  : "lvl7P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level8" : {
@@ -650,6 +705,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -663,12 +719,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl8"
+                                "texture"  : "lvl8P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level9" : {
@@ -677,6 +733,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -690,12 +747,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl9"
+                                "texture"  : "lvl9P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level10" : {
@@ -704,6 +761,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -717,12 +775,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl10"
+                                "texture"  : "lvl10P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level11" : {
@@ -731,6 +789,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -744,12 +803,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl11"
+                                "texture"  : "lvl11P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level12" : {
@@ -758,6 +817,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -771,12 +831,12 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl12"
+                                "texture"  : "lvl12P"
                             }
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 }
             },

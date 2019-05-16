@@ -29,7 +29,7 @@ using namespace cugl;
 #define LEVEL_SELECT 2
 #define CREDITS 3
 /** This is adjusted by screen aspect ratio to get the height */
-#define SCENE_WIDTH 1024
+#define SCENE_WIDTH 600
 
 #pragma mark -
 #pragma mark Constructors
@@ -48,7 +48,7 @@ using namespace cugl;
 bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     // Initialize the scene to a locked width
     Size dimen = Application::get()->getDisplaySize();
-    dimen *= SCENE_WIDTH/dimen.width; // Lock the game to a reasonable resolution
+//    dimen *= SCENE_WIDTH/dimen.width; // Lock the game to a reasonable resolution
     if (assets == nullptr) {
         return false;
     } else if (!Scene::init(dimen)) {
@@ -104,35 +104,38 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
     
     depths->setListener([=](const std::string& name, bool down) {
-        if (down && _current == MAIN_MENU) {
+        if (down && _current == MAIN_MENU && !_alreadyTriggeredInput) {
             CULog("go from main to level select");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             mainMenuLayer->setVisible(false);
             levelSelectLayer->setVisible(true);
             _current = LEVEL_SELECT;
+            _alreadyTriggeredInput = true;
         }
     });
 
     downarr->setListener([=](const std::string& name, bool down) {
-        if (down && _current == CREDITS) {
+        if (down && _current == CREDITS && !_alreadyTriggeredInput) {
             CULog("go from credits to main");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             creditsLayer->setVisible(false);
             mainMenuLayer->setVisible(true);
             _current = MAIN_MENU;
+            _alreadyTriggeredInput = true;
         }
     });
     
     uparr->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (down && _current == LEVEL_SELECT && !_alreadyTriggeredInput) {
             CULog("go from level select to main");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             levelSelectLayer->setVisible(false);
             mainMenuLayer->setVisible(true);
             _current = MAIN_MENU;
+            _alreadyTriggeredInput = true;
         }
     });
     
@@ -275,27 +278,46 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
 //    CULog("safe width and heigth: %f, %f", safe_width, safe_height);
 //    CULog("Button 1 NEW position: (%f,%f)", x_min+x_safe_offset+safe_width/2, y_min+y_safe_offset+safe_height/12*9);
     
-    int Y_LIFT = 850;
-    int X_LIFT = 300;
-    surface->setPositionY(surface->getPositionY()+y_max*2/3);
-    depths->setPositionY(depths->getPositionY()-y_max*2/3);
+//    surface->setPositionY(surface->getPositionY()+y_max*1/2);
+//    depths->setPositionY(depths->getPositionY()-y_max*1/2);
+    
+    surface->setPositionY(y_max-100);
+    depths->setPositionY(100);
+
     
     downarr->setPositionY(y_max / 12);
     CULog("POSITION: %f", downarr->getPositionY());
     
-    uparr->setPositionY(y_max + y_max + y_max/2);
-    level1->setPosition(x_max, y_max*2/12*12);
-    level2->setPosition(x_max, y_max*2/12*11);
-    level3->setPosition(x_max, y_max*2/12*10);
-    level4->setPosition(x_max, y_max*2/12*9);
-    level5->setPosition(x_max, y_max*2/12*8);
-    level6->setPosition(x_max, y_max*2/12*7);
-    level7->setPosition(x_max, y_max*2/12*6);
-    level8->setPosition(x_max, y_max*2/12*5);
-    level9->setPosition(x_max, y_max*2/12*4);
-    level10->setPosition(x_max, y_max*2/12*3);
-    level11->setPosition(x_max, y_max*2/12*2);
-    level12->setPosition(x_max, y_max*2/12*1);
+//    uparr->setPositionY(y_max + y_max + y_max/2);
+//    level1->setPosition(x_max, y_max*2/12*12);
+//    level2->setPosition(x_max, y_max*2/12*11);
+//    level3->setPosition(x_max, y_max*2/12*10);
+//    level4->setPosition(x_max, y_max*2/12*9);
+//    level5->setPosition(x_max, y_max*2/12*8);
+//    level6->setPosition(x_max, y_max*2/12*7);
+//    level7->setPosition(x_max, y_max*2/12*6);
+//    level8->setPosition(x_max, y_max*2/12*5);
+//    level9->setPosition(x_max, y_max*2/12*4);
+//    level10->setPosition(x_max, y_max*2/12*3);
+//    level11->setPosition(x_max, y_max*2/12*2);
+//    level12->setPosition(x_max, y_max*2/12*1);
+    
+    uparr->setPositionY(y_max_safe);
+    level1->setPosition(level1->getPositionX()-144,y_max_safe/14*12);
+    level2->setPosition(level2->getPositionX()-144,y_max_safe/14*11);
+    level3->setPosition(level3->getPositionX()-144,y_max_safe/14*10);
+    level4->setPosition(level4->getPositionX()-144,y_max_safe/14*9);
+    level5->setPosition(level5->getPositionX()-144,y_max_safe/14*8);
+    level6->setPosition(level6->getPositionX()-144,y_max_safe/14*7);
+    level7->setPosition(level7->getPositionX()-144,y_max_safe/14*6);
+    level8->setPosition(level8->getPositionX()-144,y_max_safe/14*5);
+    level9->setPosition(level9->getPositionX()-144,y_max_safe/14*4);
+    level10->setPosition(level10->getPositionX()-144,y_max_safe/14*3);
+    level11->setPosition(level11->getPositionX()-144,y_max_safe/14*2);
+    level12->setPosition(level12->getPositionX()-144,y_max_safe/14*1);
+    
+    
+    
     
     // XNA nostalgia
     Application::get()->setClearColor(Color4f::BLACK);
@@ -339,6 +361,7 @@ void MainMenuScene::update(float progress) {
     if (_level_selected>=1){
         this->_active = false;
     }
+    _alreadyTriggeredInput = false;
 }
 
 /**

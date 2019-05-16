@@ -29,6 +29,7 @@ protected:
     int _counter;
     int _level_selected=0;
     int _current = 1;
+    bool _alreadyTriggeredInput = false;
     
     std::shared_ptr<cugl::Button> downarr;
      std::shared_ptr<cugl::Button> uparr;
