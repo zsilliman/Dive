@@ -44,6 +44,9 @@
         "purple_angler":{
             "file":      "textures/enemies/BDark_Angler.png"
         },
+        "purple_angler_see":{
+            "file":      "textures/enemies/BDark_AnglerSeeDiver.png"
+        },
         "purple_shark_left":{
             "file":      "textures/enemies/BDark_Shark-left.png"
         },
@@ -56,6 +59,9 @@
         "red_angler":{
             "file":      "textures/enemies/G_Angler.png"
         },
+        "red_angler_see":{
+            "file":      "textures/enemies/G_AnglerSeeDiver.png"
+        },
         "red_shark_left":{
             "file":      "textures/enemies/G_Shark-left.png"
         },
@@ -67,6 +73,9 @@
         },
         "yellow_angler":{
             "file":      "textures/enemies/P_Angler.png"
+        },
+        "yellow_angler_see":{
+            "file":      "textures/enemies/P_AnglerSeeDiver.png"
         },
         "yellow_shark-left":{
             "file":      "textures/enemies/P_Shark-left.png"
