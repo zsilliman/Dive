@@ -152,7 +152,9 @@ void GameScene::update(float timestep) {
 			_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
 			_angler_remove = -1;
 		}
-		_fish_countdown--;
+        for (int i = 0; i < _fish_vcs.size(); i++){
+            _fish_countdown[i]--;
+        }
         waveCounter++;
         if(waveCounter >= 500){
             AudioChannels::get()->playEffect("ocean", ocean_sound);
@@ -387,7 +389,7 @@ void GameScene::buildScene(string level) {
     _prev_diver_angle = 179;
     _fish_remove = -1;
 	_angler_remove = -1;
-    _fish_countdown = 10;
+    //_fish_countdown = 10;
     _current_level = level;
 
 	this->removeAllChildren();
@@ -437,6 +439,10 @@ void GameScene::buildScene(string level) {
         shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, explode, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
+    }
+    
+    for (int i = 0; i < _gamestate->_fish.size(); i++) {
+        _fish_countdown[i] =10;
     }
 
 	//Create Fish viewcontrollers
@@ -588,10 +594,18 @@ void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* pl
 void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
     char num = fish->getName().back();
     int fishint = num-'0';
-    if(_fish_countdown<=0){
-        _fish_countdown=10;
-    _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
-	}
+    CULog("dir before %d", _gamestate->_fish[fishint]->isLeft());
+    if(_fish_countdown[fishint]<=0){
+        _fish_countdown[fishint]=10;
+        _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
+        _gamestate->_fish[fishint]->setLeft(!_gamestate->_fish[fishint]->isLeft());
+
+    }
+    
+    //_fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
+    //_gamestate->_fish[fishint]->setLeft(!_gamestate->_fish[fishint]->isLeft());
+    
+    CULog("dir after %d", _gamestate->_fish[fishint]->isLeft());
 }
 
 void GameScene::fishAnglerCollisions(Obstacle* fish, Obstacle* angler){

@@ -64,6 +64,7 @@ void Entity::reset() {
 }
 
 void Entity::changeDirection() {
+    CULog("in change direction");
     int x = _box->getLinearVelocity().x;
     int y = _box->getLinearVelocity().y;
     _box->setLinearVelocity(Vec2(-x, y));
