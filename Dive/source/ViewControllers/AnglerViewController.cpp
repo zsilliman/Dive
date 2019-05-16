@@ -55,14 +55,17 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 		closest_player = player_pos_dup;
 		closest_angler = closest_angler2;
 	}
-
+    
 	//If the angler fish falls below the player's y coordinate and is within 5 tiles then it is active
 	if (closest_player.y < closest_angler.y && closest_angler.y - closest_player.y < 6) {
-		//Compute vector pointing from angler to the player
-		Vec2 diff = closest_player - closest_angler;
-		//Prevent divide by zero error
-		if (diff.length() > 0.001)
-			state->_anglers[_angler_index]->setLinearVelocity(ANGLER_MAX_SPEED * diff / diff.length());
+        if (_see == false){
+            _see = true;
+        }
+//        Compute vector pointing from angler to the player
+//        Vec2 diff = closest_player - closest_angler;
+//        //Prevent divide by zero error
+//        if (diff.length() > 0.001)
+//            state->_anglers[_angler_index]->setLinearVelocity(ANGLER_MAX_SPEED * diff / diff.length());
 	}
 
 	//new version:
@@ -71,13 +74,17 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     
     _exp_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
     _exp_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
+    
+    _see_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
+    _see_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
 
 	Vec2 lin_vel = state->_anglers[_angler_index]->_box->getLinearVelocity();
 
 	//Set positions/rotations of duplicate according to duplicate physics object
 	_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
     _exp_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
-
+    _see_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
+    
 	//Handle rotation of angler
 	float angle = -PI;
 	if (lin_vel.length() > 0.01)
@@ -88,22 +95,51 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 		_dup_node->flipVertical(false);
         _exp_node->flipVertical(false);
         _exp_dup_node->flipVertical(false);
+        _see_node->flipVertical(false);
+        _see_dup_node->flipVertical(false);
 	}
 	else {
 		_oc_node->flipVertical(true);
 		_dup_node->flipVertical(true);
         _exp_node->flipVertical(true);
         _exp_dup_node->flipVertical(true);
+        _see_node->flipVertical(true);
+        _see_dup_node->flipVertical(true);
 	}
 	_oc_node->setAngle(angle);
 	_dup_node->setAngle(angle);
     _exp_node->setAngle(angle);
     _exp_dup_node->setAngle(angle);
+    _see_node->setAngle(angle);
+    _see_dup_node->setAngle(angle);
+    
+    if(_see && _see_node->getFrame() == _see_node->getSize()-1){
+        CULog("animation done");
+        _see_dup_node->setFrame(0);
+        _see_node->setFrame(0);
+        _sCycle = true;
+        s_cooldown = 0;
+        _see = false;
+    }
     
     if(_dead){
         animateDead();
     }else{
-        animateAngler();
+        if (_see){
+            CULog("animate see");
+            animateSee();
+            _oc_node->setVisible(false);
+            _dup_node->setVisible(false);
+            _see_node->setVisible(true);
+            _see_dup_node->setVisible(true);
+        }else{
+            animateAngler();
+            _oc_node->setVisible(true);
+            _dup_node->setVisible(true);
+            _see_node->setVisible(false);
+            _see_dup_node->setVisible(false);
+            
+        }
     }
 }
 
@@ -113,7 +149,7 @@ void AnglerViewController::reset() {
 
 }
 
-shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  Size display, int angler_index) {
+shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  shared_ptr<Texture> see, Size display, int angler_index) {
 	shared_ptr<AnglerViewController> angler_vc = make_shared<AnglerViewController>();
 	angler_vc->_angler_index = angler_index;
 	angler_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -127,16 +163,28 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
 	angler_vc->_display = display;
     
     angler_vc->_exp_node = AnimationNode::alloc(explosion, 1, 8);
-    angler_vc->_exp_node->setScale(angler_vc->_grid_size / explosion->getHeight()*3, angler_vc->_grid_size / explosion->getHeight()*3);
+    angler_vc->_exp_node->setScale(angler_vc->_grid_size / explosion->getHeight()*10, angler_vc->_grid_size / explosion->getHeight()*10);
     angler_vc->_exp_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_exp_node->setVisible(false);
     
     angler_vc->_exp_dup_node = AnimationNode::alloc(explosion, 1, 8);
-    angler_vc->_exp_dup_node->setScale(angler_vc->_grid_size / explosion->getHeight()*3, angler_vc->_grid_size / explosion->getHeight()*3);
+    angler_vc->_exp_dup_node->setScale(angler_vc->_grid_size / explosion->getHeight()*10, angler_vc->_grid_size / explosion->getHeight()*10);
     angler_vc->_exp_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_exp_dup_node->setVisible(false);
     
+    angler_vc->_see_node = AnimationNode::alloc(see, 1, 5);
+    angler_vc->_see_node->setScale(angler_vc->_grid_size / see->getHeight()*2, angler_vc->_grid_size / see->getHeight()*2);
+    angler_vc->_see_node->setPosition(init_state->_anglers[angler_index]->getPosition());
+    angler_vc->_see_node->setVisible(false);
+    
+    angler_vc->_see_dup_node = AnimationNode::alloc(see, 1, 5);
+    angler_vc->_see_dup_node->setScale(angler_vc->_grid_size / see->getHeight()*2, angler_vc->_grid_size / see->getHeight()*2);
+    angler_vc->_see_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
+    angler_vc->_see_dup_node->setVisible(false);
+    
     angler_vc->_dead = false;
+    
+    angler_vc->_see = false;
     
     angler_vc->normal = texture;
     angler_vc->rev = reverse;
@@ -145,10 +193,46 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
 	angler_vc->_node->addChild(angler_vc->_dup_node);
     angler_vc->_node->addChild(angler_vc->_exp_node);
     angler_vc->_node->addChild(angler_vc->_exp_dup_node);
+    angler_vc->_node->addChild(angler_vc->_see_node);
+    angler_vc->_node->addChild(angler_vc->_see_dup_node);
 
 	angler_vc->_mainCycle = true;
+    angler_vc->_sCycle = true;
 
 	return angler_vc;
+}
+
+void AnglerViewController::animateSee() {
+    bool* cycle = &_sCycle;
+    if (s_cooldown == 0){
+        s_cooldown = 5;
+        
+        if (_see_node->getFrame() == 0 || _see_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_see_node->getFrame() == _see_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _see_node->setFrame(_see_node->getFrame()+1);
+        } else {
+            _see_node->setFrame(_see_node->getFrame()-1);
+        }
+        
+        if (_see_dup_node->getFrame() == 0 || _see_dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_see_dup_node->getFrame() == _see_dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _see_dup_node->setFrame(_see_dup_node->getFrame()+1);
+        } else {
+            _see_dup_node->setFrame(_see_dup_node->getFrame()-1);
+        }
+    } else{
+        s_cooldown --;
+    }
 }
 
 void AnglerViewController::animateDead() {

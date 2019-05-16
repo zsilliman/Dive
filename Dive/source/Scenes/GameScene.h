@@ -51,6 +51,9 @@ protected:
 	shared_ptr<Texture> _shark;
     shared_ptr<Texture> _shark_left;
 	shared_ptr<Texture> _angler;
+    shared_ptr<Texture> _angler_see;
+    shared_ptr<Texture> _shark_skel;
+    shared_ptr<Texture> _angler_skel;
     
     shared_ptr<Texture> explode;
     

@@ -14,6 +14,12 @@
             "wrapS":    "clamp",
             "wrapT":    "clamp"
         },
+        "angler_skel": {
+            "file":      "textures/enemies/anglerSkeleton.png"
+        },
+        "shark_skel":{
+            "file":      "textures/enemies/sharkSkeleton.png"
+        },
         "blue_urchin": {
             "file":      "textures/enemies/BLight_Urchin.png"
         },
@@ -22,6 +28,9 @@
         },
         "blue_angler":{
             "file":      "textures/enemies/BLight_Angler.png"
+        },
+        "blue_angler_see":{
+            "file":      "textures/enemies/BLight_AnglerSeeDiver.png"
         },
         "blue_shark_left":{
             "file":      "textures/enemies/BLight_Shark-left.png"

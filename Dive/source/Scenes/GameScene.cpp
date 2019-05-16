@@ -245,7 +245,10 @@ void GameScene::buildBlue(){
     _urchin = _assets->get<Texture>("blue_urchin");
     _shark = _assets->get<Texture>("blue_shark");
     _shark_left = _assets->get<Texture>("blue_shark_left");
+    _shark_skel = _assets->get<Texture>("shark_skel");
     _angler = _assets->get<Texture>("blue_angler");
+    _angler_skel = _assets->get<Texture>("angler_skel");
+    _angler_see = _assets->get<Texture>("blue_angler_see");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
 }
@@ -440,7 +443,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
     for (int i = 0; i < _gamestate->_fish.size(); i++) {
-        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, _shark_left, explode, size, i);
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, _shark_left, explode, _shark_skel, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
     }
@@ -448,7 +451,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, _angler, explode, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, _angler, explode, _angler_see, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}
