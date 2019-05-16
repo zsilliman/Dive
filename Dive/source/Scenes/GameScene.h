@@ -55,7 +55,7 @@ protected:
     
 	shared_ptr<Texture> background_image;
 	shared_ptr<Texture> diving_texture;
-
+    shared_ptr<Texture> diving_left_texture;
     //sounds
     std::shared_ptr<Sound> bubble_sound;
     std::shared_ptr<Sound> victory_sound;

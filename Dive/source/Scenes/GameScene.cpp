@@ -306,6 +306,7 @@ void GameScene::buildOnce() {
 	tilesheet_moveable->setTileIndexOffset(9);
     
 	diving_texture = _assets->get<Texture>("walking");
+    diving_left_texture = _assets->get<Texture>("walking_left");
     
     explode = _assets->get<Texture>("explode");
 
@@ -380,7 +381,8 @@ void GameScene::buildScene(string level) {
     
 	if (_player_vc != nullptr)
 		_player_vc.reset();
-	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
+    
+	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
     _playerFloor = false;
 
@@ -395,7 +397,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
     for (int i = 0; i < _gamestate->_fish.size(); i++) {
-        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, explode, size, i);
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, _shark, explode, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
     }
@@ -403,7 +405,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, explode, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, _angler, explode, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}

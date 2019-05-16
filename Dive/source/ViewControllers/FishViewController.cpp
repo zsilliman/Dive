@@ -20,11 +20,14 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	if (state->_fish[_fish_index]->isLeft()) {
 		vel = vel * -1;
 	}
-	_oc_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
-	_dup_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
-    _exp_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
-    _exp_dup_node->flipHorizontal(!state->_fish[_fish_index]->isLeft());
-
+    
+    if (state->_fish[_fish_index]->isLeft()){
+        _oc_node->setTexture(rev);
+        _dup_node->setTexture(rev);
+    }else{
+        _oc_node->setTexture(normal);
+        _dup_node->setTexture(normal);
+    }
 
 	state->_fish[_fish_index]->setLinearVelocity(vel);
 	state->_fish[_fish_index]->rotateEntity(state->_map->getMapRect());
@@ -60,7 +63,7 @@ void FishViewController::reset() {
     CULog("fish vc reset");
 }
 
-shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> explosion, Size display, int fish_index) {
+shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, Size display, int fish_index) {
 	shared_ptr<FishViewController> fish_vc = make_shared<FishViewController>();
 	fish_vc->_fish_index = fish_index;
 	fish_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -84,6 +87,9 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
     fish_vc->_exp_dup_node->setVisible(false);
     
     fish_vc->_dead = false;
+    
+    fish_vc->normal = texture;
+    fish_vc->rev = reverse;
 
 	fish_vc->_node->addChild(fish_vc->_oc_node);
 	fish_vc->_node->addChild(fish_vc->_dup_node);

@@ -113,7 +113,7 @@ void AnglerViewController::reset() {
 
 }
 
-shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> explosion,  Size display, int angler_index) {
+shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  Size display, int angler_index) {
 	shared_ptr<AnglerViewController> angler_vc = make_shared<AnglerViewController>();
 	angler_vc->_angler_index = angler_index;
 	angler_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -137,6 +137,9 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_exp_dup_node->setVisible(false);
     
     angler_vc->_dead = false;
+    
+    angler_vc->normal = texture;
+    angler_vc->rev = reverse;
 
 	angler_vc->_node->addChild(angler_vc->_oc_node);
 	angler_vc->_node->addChild(angler_vc->_dup_node);

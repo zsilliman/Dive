@@ -74,6 +74,9 @@
         "walking": {
             "file":     "textures/walking.png"
         },
+        "walking_left": {
+            "file":     "textures/walking-left.png"
+        },
         "UI_window": {
             "file":     "textures/ui/window.png"
         },
