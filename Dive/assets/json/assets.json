@@ -23,6 +23,9 @@
         "blue_angler":{
             "file":      "textures/enemies/BLight_Angler.png"
         },
+        "blue_shark_left":{
+            "file":      "textures/enemies/BLight_Shark-left.png"
+        },
         "purple_urchin": {
             "file":      "textures/enemies/BDark_Urchin.png"
         },
@@ -31,6 +34,9 @@
         },
         "purple_angler":{
             "file":      "textures/enemies/BDark_Angler.png"
+        },
+        "purple_shark_left":{
+            "file":      "textures/enemies/BDark_Shark-left.png"
         },
         "red_urchin": {
             "file":      "textures/enemies/G_Urchin.png"
@@ -41,6 +47,9 @@
         "red_angler":{
             "file":      "textures/enemies/G_Angler.png"
         },
+        "red_shark_left":{
+            "file":      "textures/enemies/G_Shark-left.png"
+        },
         "yellow_urchin": {
             "file":      "textures/enemies/P_Urchin.png"
         },
@@ -50,11 +59,17 @@
         "yellow_angler":{
             "file":      "textures/enemies/P_Angler.png"
         },
+        "yellow_shark-left":{
+            "file":      "textures/enemies/P_Shark-left.png"
+        },
         "background":{
             "file":      "textures/background_blue.png"
         },
         "background-green":{
             "file":     "textures/background_green_2.png"
+        },
+        "background-purple":{
+            "file":     "textures/Purple.png"
         },
         "background_clear":{
             "file":      "textures/background_blue_seethrough.png"
@@ -69,7 +84,7 @@
             "file":     "textures/Statue.png"
         },
         "walking": {
-            "file":     "textures/walking.png"
+            "file":     "textures/DiverAnimation_new.png"
         },
         "walking_left": {
             "file":     "textures/walking-left.png"

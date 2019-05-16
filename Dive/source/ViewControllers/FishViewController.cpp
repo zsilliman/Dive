@@ -22,11 +22,11 @@ void FishViewController::update(shared_ptr<GameState> state) {
 	}
     
     if (state->_fish[_fish_index]->isLeft()){
-        _oc_node->setTexture(rev);
-        _dup_node->setTexture(rev);
-    }else{
         _oc_node->setTexture(normal);
         _dup_node->setTexture(normal);
+    }else{
+        _oc_node->setTexture(rev);
+        _dup_node->setTexture(rev);
     }
 
 	state->_fish[_fish_index]->setLinearVelocity(vel);
@@ -78,12 +78,12 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
     
     fish_vc->_exp_node = AnimationNode::alloc(explosion, 1, 8);
     fish_vc->_exp_node->setPosition(init_state->_fish[fish_index]->getPosition());
-    fish_vc->_exp_node->setScale(fish_vc->_grid_size / explosion->getHeight()*3, fish_vc->_grid_size / explosion->getHeight()*3);
+    fish_vc->_exp_node->setScale(fish_vc->_grid_size / explosion->getHeight()*10, fish_vc->_grid_size / explosion->getHeight()*10);
     fish_vc->_exp_node->setVisible(false);
     
     fish_vc->_exp_dup_node = AnimationNode::alloc(explosion, 1, 8);
     fish_vc->_exp_dup_node->setPosition(init_state->_fish[fish_index]->getPosition());
-    fish_vc->_exp_dup_node->setScale(fish_vc->_grid_size / explosion->getHeight()*3, fish_vc->_grid_size / explosion->getHeight()*3);
+    fish_vc->_exp_dup_node->setScale(fish_vc->_grid_size / explosion->getHeight()*10, fish_vc->_grid_size / explosion->getHeight()*10);
     fish_vc->_exp_dup_node->setVisible(false);
     
     fish_vc->_dead = false;

@@ -49,6 +49,7 @@ protected:
     
 	shared_ptr<Texture> _urchin;
 	shared_ptr<Texture> _shark;
+    shared_ptr<Texture> _shark_left;
 	shared_ptr<Texture> _angler;
     
     shared_ptr<Texture> explode;
