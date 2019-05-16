@@ -600,18 +600,12 @@ void GameScene::playerSidePlatformCollisions(Obstacle* player_side, Obstacle* pl
 void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
     char num = fish->getName().back();
     int fishint = num-'0';
-    CULog("dir before %d", _gamestate->_fish[fishint]->isLeft());
     if(_fish_countdown[fishint]<=0){
         _fish_countdown[fishint]=10;
         _fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
         _gamestate->_fish[fishint]->setLeft(!_gamestate->_fish[fishint]->isLeft());
 
     }
-    
-    //_fish_vcs[fishint]->setDirection(_gamestate->_fish[fishint]);
-    //_gamestate->_fish[fishint]->setLeft(!_gamestate->_fish[fishint]->isLeft());
-    
-    CULog("dir after %d", _gamestate->_fish[fishint]->isLeft());
 }
 
 void GameScene::fishAnglerCollisions(Obstacle* fish, Obstacle* angler){
