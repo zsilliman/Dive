@@ -49,6 +49,8 @@ protected:
     std::shared_ptr<cugl::Button> level11;
     std::shared_ptr<cugl::Button> level12;
     
+    std::shared_ptr<cugl::Sound> bubble_sound;
+
     
 public:
 #pragma mark -

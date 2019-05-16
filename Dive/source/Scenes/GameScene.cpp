@@ -314,7 +314,7 @@ void GameScene::buildOnce() {
     explode = _assets->get<Texture>("explode");
 
     background_music = _assets->get<Sound>("background_sound");
-    bubble_sound = _assets->get<Sound>("bubble01");
+    bubble_sound = _assets->get<Sound>("bubble");
     victory_sound = _assets->get<Sound>("victory");
     lose_sound = _assets->get<Sound>("lose");
     ocean_sound = _assets->get<Sound>("ocean");
@@ -328,13 +328,41 @@ void GameScene::buildOnce() {
         }
     };
 	_overlay->setMainMenuCallback(main_menu_callback);
-	Button::Listener resume_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PLAY); CULog("RESUME PRESSED"); } };
+	Button::Listener resume_callback = [=](const std::string& name, bool down) {
+        if (!down) {
+            this->setState(PLAY); CULog("RESUME PRESSED");
+            AudioChannels::get()->stopAllEffects();
+            AudioChannels::get()->playEffect("bubble", bubble_sound);
+        }
+    };
 	_overlay->setResumeCallback(resume_callback);
-	Button::Listener retry_callback = [=](const std::string& name, bool down) { if (!down) { this->reset();  this->setState(PLAY); CULog("RETRY PRESSED"); } };
+	Button::Listener retry_callback = [=](const std::string& name, bool down) {
+        if (!down) {
+            AudioChannels::get()->stopAllEffects();
+            AudioChannels::get()->playEffect("bubble", bubble_sound);
+            this->reset();
+            this->setState(PLAY);
+            CULog("RETRY PRESSED");
+        }
+    };
 	_overlay->setRetryCallback(retry_callback);
-	Button::Listener continue_callback = [=](const std::string& name, bool down) { if (!down) { this->reset(); CULog("CONTINUE PRESSED"); } };
+	Button::Listener continue_callback = [=](const std::string& name, bool down) {
+        if (!down) {
+            AudioChannels::get()->stopAllEffects();
+            AudioChannels::get()->playEffect("bubble", bubble_sound);
+            this->reset();
+            CULog("CONTINUE PRESSED");
+        }
+    };
 	_overlay->setContinueCallback(continue_callback);
-	Button::Listener pause_callback = [=](const std::string& name, bool down) { if (!down) { this->setState(PAUSE); CULog("PAUSE GAME PRESSED"); } };
+	Button::Listener pause_callback = [=](const std::string& name, bool down) {
+        if (!down) {
+            AudioChannels::get()->stopAllEffects();
+            AudioChannels::get()->playEffect("bubble", bubble_sound);
+            this->setState(PAUSE);
+            CULog("PAUSE GAME PRESSED");
+        }
+    };
 	_overlay->setPauseCallback(pause_callback);
 
 	_overlay->setState(PLAY);
