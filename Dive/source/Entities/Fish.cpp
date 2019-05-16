@@ -15,10 +15,10 @@ using namespace std;
 //Note start pos center
 void Fish::initFish(Vec2 start_pos, Rect map_rect) {
 	_dimensions = Size(2, 1);
-	_position = Vec2(start_pos + _dimensions / 2) + Vec2(0,0.05);
-	_start_pos = Vec2(start_pos + _dimensions / 2);
-	_box = CapsuleObstacle::alloc(_start_pos, Size(2,0.9));
-	_box_dup = CapsuleObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(2,0.9));
+	_position = Vec2(start_pos + _dimensions / 2) + Vec2(0,0.15);
+	_start_pos = Vec2(start_pos + _dimensions / 2) + Vec2(0, 0.15);
+	_box = CapsuleObstacle::alloc(_start_pos, Size(2,0.7));
+	_box_dup = CapsuleObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(2,0.7));
 	_can_float = false;
 	_box->setFriction(FISH_FRICTION);
     _box->setFixedRotation(true);
