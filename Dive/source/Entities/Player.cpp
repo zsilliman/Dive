@@ -3,7 +3,7 @@
 using namespace cugl;
 using namespace std;
 
-#define PLAYER_DROP 1
+#define PLAYER_DROP .4
 
 shared_ptr<Player> Player::alloc(Vec2 start_pos, Rect map_rect) {
 	shared_ptr<Player> player = make_shared<Player>();
