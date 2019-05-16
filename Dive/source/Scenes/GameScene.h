@@ -194,6 +194,8 @@ public:
     void diverPlatformCollisions(Obstacle* diver, Obstacle* platform);
     
     void fishAnglerCollisions(Obstacle* fish, Obstacle* angler);
+
+	void fishFishCollisions(Obstacle* fish, Obstacle* fish2);
     
     void fishUrchinCollisions(Obstacle* fish, Obstacle* urchin);
     
