@@ -87,7 +87,7 @@
             "file":     "textures/DiverAnimation_new.png"
         },
         "walking_left": {
-            "file":     "textures/walking-left.png"
+            "file":     "textures/DiverAnimation_right.png"
         },
         "UI_window": {
             "file":     "textures/ui/window.png"

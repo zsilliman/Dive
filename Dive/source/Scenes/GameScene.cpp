@@ -235,7 +235,7 @@ void GameScene::startLevel(int level){
 void GameScene::buildYellow(){
     _urchin = _assets->get<Texture>("yellow_urchin");
     _shark = _assets->get<Texture>("yellow_shark");
-    _shark_left = _assets->get<Texture>("blue_shark_left");
+    _shark_left = _assets->get<Texture>("yellow_shark_left");
     _angler = _assets->get<Texture>("yellow_angler");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
@@ -253,7 +253,7 @@ void GameScene::buildBlue(){
 void GameScene::buildRed(){
     _urchin = _assets->get<Texture>("red_urchin");
     _shark = _assets->get<Texture>("red_shark");
-    _shark_left = _assets->get<Texture>("blue_shark_left");
+    _shark_left = _assets->get<Texture>("red_shark_left");
     _angler = _assets->get<Texture>("red_angler");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
@@ -262,7 +262,7 @@ void GameScene::buildRed(){
 void GameScene::buildPurple(){
     _urchin = _assets->get<Texture>("purple_urchin");
     _shark = _assets->get<Texture>("purple_shark");
-    _shark_left = _assets->get<Texture>("blue_shark_left");
+    _shark_left = _assets->get<Texture>("purple_shark_left");
     _angler = _assets->get<Texture>("purple_angler");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");

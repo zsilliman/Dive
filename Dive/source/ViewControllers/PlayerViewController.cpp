@@ -18,8 +18,8 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
         _dup_node->setTexture(rev);
 	}
 	else {
-        _oc_node->setTexture(rev);
-        _dup_node->setTexture(rev);
+        _oc_node->setTexture(normal);
+        _dup_node->setTexture(normal);
 	}
 
 	state->_player->updateSensors();
