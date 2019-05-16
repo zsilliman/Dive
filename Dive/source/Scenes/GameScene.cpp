@@ -524,7 +524,7 @@ void GameScene::beginContact(b2Contact* contact) {
             _player_vc->setAIDirection(_gamestate, _player_vc->getAIDirection());
             _playerFloor = true;
         }
-        else if(bd2->getName() == "goal"){
+        else if(bd2->getName() == "goal") {
 			setState(WIN);
         }
     }
@@ -552,6 +552,9 @@ void GameScene::beginContact(b2Contact* contact) {
         else if (bd2->getName() == "platform"){
             fishPlatformCollisions(bd1, bd2);
         }
+		else if (bd2->getName().find("fish") != string::npos) {
+			fishFishCollisions(bd1, bd2);
+		}
     }
 	else if (bd1->getName().find("angler") != string::npos) {
 		if (bd2->getName() == "player") {
@@ -609,6 +612,27 @@ void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
         _gamestate->_fish[fishint]->setLeft(!_gamestate->_fish[fishint]->isLeft());
 
     }
+}
+
+void GameScene::fishFishCollisions(Obstacle* fish, Obstacle* fish2) {
+	CULog("SHARK COLLIDE");
+	char num1 = fish->getName().back();
+	int fishint1 = num1 - '0';
+
+	if (_fish_countdown[fishint1] <= 0) {
+		_fish_countdown[fishint1] = 10;
+		_fish_vcs[fishint1]->setDirection(_gamestate->_fish[fishint1]);
+		_gamestate->_fish[fishint1]->setLeft(!_gamestate->_fish[fishint1]->isLeft());
+	}
+
+	char num2 = fish2->getName().back();
+	int fishint2 = num2 - '0';
+	if (_fish_countdown[fishint2] <= 0) {
+		_fish_countdown[fishint2] = 10;
+		_fish_vcs[fishint2]->setDirection(_gamestate->_fish[fishint2]);
+		_gamestate->_fish[fishint2]->setLeft(!_gamestate->_fish[fishint2]->isLeft());
+	}
+	
 }
 
 void GameScene::fishAnglerCollisions(Obstacle* fish, Obstacle* angler){
