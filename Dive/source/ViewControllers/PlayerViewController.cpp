@@ -15,8 +15,8 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	_dup_node->setAngle(state->_player->_box_dup->getAngle());
 
 	if (_direction == "right") {
-        _oc_node->setTexture(normal);
-        _dup_node->setTexture(normal);
+        _oc_node->setTexture(rev);
+        _dup_node->setTexture(rev);
 	}
 	else {
         _oc_node->setTexture(rev);
