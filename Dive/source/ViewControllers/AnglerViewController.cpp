@@ -8,8 +8,19 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
         _exp_node->setVisible(false);
         _exp_dup_node->setVisible(false);
-        _dead_ang->kill();
+        _mainCycle = true;
+        _cooldown = 0;
+        _skel_node->setVisible(true);
+        _skel_node->setVisible(true);
+        _skel = true;
         _dead = false;
+    }
+    
+    if (_skel == true && _skel_node->getFrame() == _skel_node->getSize()-1){
+        _dead_ang->kill();
+        _skel = false;
+        _skel_node->setVisible(false);
+        _skel_dup_node->setVisible(false);
     }
     
 	_node->setVisible(state->_anglers[_angler_index]->isAlive());
@@ -62,10 +73,10 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
             _see = true;
         }
 //        Compute vector pointing from angler to the player
-//        Vec2 diff = closest_player - closest_angler;
-//        //Prevent divide by zero error
-//        if (diff.length() > 0.001)
-//            state->_anglers[_angler_index]->setLinearVelocity(ANGLER_MAX_SPEED * diff / diff.length());
+        Vec2 diff = closest_player - closest_angler;
+        //Prevent divide by zero error
+        if (diff.length() > 0.001)
+            state->_anglers[_angler_index]->setLinearVelocity(ANGLER_MAX_SPEED * diff / diff.length());
 	}
 
 	//new version:
@@ -77,6 +88,9 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     
     _see_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
     _see_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
+    
+    _skel_node->setPosition(state->_anglers[_angler_index]->_box->getPosition() * _grid_size);
+    _skel_node->setAngle(state->_anglers[_angler_index]->_box->getAngle());
 
 	Vec2 lin_vel = state->_anglers[_angler_index]->_box->getLinearVelocity();
 
@@ -84,6 +98,7 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 	_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
     _exp_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
     _see_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
+    _skel_dup_node->setPosition(state->_anglers[_angler_index]->_box_dup->getPosition() * _grid_size);
     
 	//Handle rotation of angler
 	float angle = -PI;
@@ -97,6 +112,8 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
         _exp_dup_node->flipVertical(false);
         _see_node->flipVertical(false);
         _see_dup_node->flipVertical(false);
+        _skel_node->flipVertical(false);
+        _skel_dup_node->flipVertical(false);
 	}
 	else {
 		_oc_node->flipVertical(true);
@@ -105,6 +122,8 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
         _exp_dup_node->flipVertical(true);
         _see_node->flipVertical(true);
         _see_dup_node->flipVertical(true);
+        _skel_node->flipVertical(true);
+        _skel_dup_node->flipVertical(true);
 	}
 	_oc_node->setAngle(angle);
 	_dup_node->setAngle(angle);
@@ -112,6 +131,8 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     _exp_dup_node->setAngle(angle);
     _see_node->setAngle(angle);
     _see_dup_node->setAngle(angle);
+    _skel_node->setAngle(angle);
+    _skel_dup_node->setAngle(angle);
     
     if(_see && _see_node->getFrame() == _see_node->getSize()-1){
         CULog("animation done");
@@ -149,7 +170,7 @@ void AnglerViewController::reset() {
 
 }
 
-shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  shared_ptr<Texture> see, Size display, int angler_index) {
+shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  shared_ptr<Texture> see, shared_ptr<Texture> skel ,Size display, int angler_index) {
 	shared_ptr<AnglerViewController> angler_vc = make_shared<AnglerViewController>();
 	angler_vc->_angler_index = angler_index;
 	angler_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -182,9 +203,19 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_see_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_see_dup_node->setVisible(false);
     
-    angler_vc->_dead = false;
+    angler_vc->_skel_node = AnimationNode::alloc(skel, 1, 10);
+    angler_vc->_skel_node->setPosition(init_state->_fish[angler_index]->getPosition());
+    angler_vc->_skel_node->setScale(angler_vc->_grid_size / skel->getHeight()*3, angler_vc->_grid_size / skel->getHeight()*3);
+    angler_vc->_skel_node->setVisible(false);
     
+    angler_vc->_skel_dup_node = AnimationNode::alloc(skel, 1, 10);
+    angler_vc->_skel_dup_node->setPosition(init_state->_fish[angler_index]->getPosition());
+    angler_vc->_skel_dup_node->setScale(angler_vc->_grid_size / skel->getHeight()*3, angler_vc->_grid_size / skel->getHeight()*3);
+    angler_vc->_skel_dup_node->setVisible(false);
+    
+    angler_vc->_dead = false;
     angler_vc->_see = false;
+    angler_vc->_skel = false;
     
     angler_vc->normal = texture;
     angler_vc->rev = reverse;
@@ -195,12 +226,49 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_node->addChild(angler_vc->_exp_dup_node);
     angler_vc->_node->addChild(angler_vc->_see_node);
     angler_vc->_node->addChild(angler_vc->_see_dup_node);
+    angler_vc->_node->addChild(angler_vc->_skel_node);
+    angler_vc->_node->addChild(angler_vc->_skel_dup_node);
 
 	angler_vc->_mainCycle = true;
     angler_vc->_sCycle = true;
 
 	return angler_vc;
 }
+
+
+void AnglerViewController::animateSkel() {
+    bool* cycle = &_mainCycle;
+    if (_cooldown == 0){
+        _cooldown = 3;
+        
+        if (_skel_node->getFrame() == 0 || _skel_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_skel_node->getFrame() == _skel_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _skel_node->setFrame(_skel_node->getFrame()+1);
+        } else {
+            _skel_node->setFrame(_skel_node->getFrame()-1);
+        }
+        
+        if (_skel_dup_node->getFrame() == 0 || _skel_dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_skel_dup_node->getFrame() == _skel_dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _skel_dup_node->setFrame(_skel_dup_node->getFrame()+1);
+        } else {
+            _skel_dup_node->setFrame(_skel_dup_node->getFrame()-1);
+        }
+    } else{
+        _cooldown --;
+    }
+}
+
 
 void AnglerViewController::animateSee() {
     bool* cycle = &_sCycle;
@@ -314,6 +382,8 @@ void AnglerViewController::kill(shared_ptr<Angler> angler) {
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;
+    _dead_ang->_box->setActive(false);
+    _dead_ang->_box_dup->setActive(false);
 }
 
 void AnglerViewController::revive(shared_ptr<Angler> angler) {

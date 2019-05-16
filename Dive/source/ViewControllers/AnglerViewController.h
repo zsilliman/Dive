@@ -17,6 +17,8 @@ protected:
     shared_ptr<AnimationNode> _exp_dup_node;
     shared_ptr<AnimationNode> _see_node;
     shared_ptr<AnimationNode> _see_dup_node;
+    shared_ptr<AnimationNode> _skel_node;
+    shared_ptr<AnimationNode> _skel_dup_node;
     
     shared_ptr<Texture> rev;
     shared_ptr<Texture> normal;
@@ -35,6 +37,7 @@ protected:
     
     bool _dead;
     bool _see;
+    bool _skel;
 
 public:
 
@@ -43,6 +46,8 @@ public:
     void animateDead();
     
     void animateSee();
+    
+    void animateSkel();
 
 	void draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameState> state) override;
 
@@ -52,7 +57,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> see, Size display, int angler_index);
+	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> see, shared_ptr<Texture> skel, Size display, int angler_index);
 
 	void kill(shared_ptr<Angler> angler);
 

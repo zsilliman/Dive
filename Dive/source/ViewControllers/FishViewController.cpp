@@ -6,6 +6,7 @@ void FishViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameStat
 void FishViewController::update(shared_ptr<GameState> state) {
     
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
+        CULog("skel");
         _exp_node->setVisible(false);
         _exp_dup_node->setVisible(false);
         _mainCycle = true;
@@ -59,7 +60,6 @@ void FishViewController::update(shared_ptr<GameState> state) {
     
     _skel_dup_node->setPosition(state->_fish[_fish_index]->_box_dup->getPosition() * _grid_size);
     _skel_dup_node->setAngle(state->_fish[_fish_index]->_box_dup->getAngle());
-
     
     if(_dead){
         animateDead();
@@ -244,6 +244,8 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;
+    _dead_fish->_box->setActive(false);
+    _dead_fish->_box_dup->setActive(false);
 }
 
 void FishViewController::revive(shared_ptr<Fish> fish) {
