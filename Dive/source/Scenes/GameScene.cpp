@@ -239,7 +239,8 @@ void GameScene::buildYellow(){
     _shark = _assets->get<Texture>("yellow_shark");
     _shark_left = _assets->get<Texture>("yellow_shark_left");
     _angler = _assets->get<Texture>("yellow_angler");
-    background_image = _assets->get<Texture>("background");
+    _angler_see = _assets->get<Texture>("yellow_angler_see");
+    background_image = _assets->get<Texture>("background-purple");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -248,6 +249,7 @@ void GameScene::buildBlue(){
     _shark = _assets->get<Texture>("blue_shark");
     _shark_left = _assets->get<Texture>("blue_shark_left");
     _angler = _assets->get<Texture>("blue_angler");
+    _angler_see = _assets->get<Texture>("blue_angler_see");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
 }
@@ -257,7 +259,8 @@ void GameScene::buildRed(){
     _shark = _assets->get<Texture>("red_shark");
     _shark_left = _assets->get<Texture>("red_shark_left");
     _angler = _assets->get<Texture>("red_angler");
-    background_image = _assets->get<Texture>("background");
+    _angler_see = _assets->get<Texture>("red_angler_see");
+    background_image = _assets->get<Texture>("background-green");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -266,6 +269,7 @@ void GameScene::buildPurple(){
     _shark = _assets->get<Texture>("purple_shark");
     _shark_left = _assets->get<Texture>("purple_shark_left");
     _angler = _assets->get<Texture>("purple_angler");
+    _angler_see = _assets->get<Texture>("purple_angler_see");
     background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
 }
@@ -278,10 +282,10 @@ void GameScene::createLevelAssets(){
             buildBlue();
             break;
         case 5: case 6: case 7: case 8:
-            buildBlue();
+            buildRed();
             break;
         case 9: case 10: case 11: case 12:
-			buildBlue();
+            buildYellow();
             break;
         default:
             break;
@@ -317,6 +321,9 @@ void GameScene::buildOnce() {
     
 	diving_texture = _assets->get<Texture>("walking");
     diving_left_texture = _assets->get<Texture>("walking_left");
+    
+    _shark_skel = _assets->get<Texture>("shark_skel");
+    _angler_skel = _assets->get<Texture>("angler_skel");
     
     explode = _assets->get<Texture>("explode");
 
@@ -444,7 +451,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_fish_vcs.clear();
     for (int i = 0; i < _gamestate->_fish.size(); i++) {
-        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, _shark_left, explode, size, i);
+        shared_ptr<FishViewController> _fish_vc = FishViewController::alloc(_gamestate, _shark, _shark_left, explode, _shark_skel, size, i);
         _map_vc->getNode()->addChild(_fish_vc->getNode(), 1);
         _fish_vcs.push_back(_fish_vc);
     }
@@ -456,7 +463,7 @@ void GameScene::buildScene(string level) {
 	//Create Fish viewcontrollers
 	_angler_vcs.clear();
 	for (int i = 0; i < _gamestate->_anglers.size(); i++) {
-		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, _angler, explode, size, i);
+		shared_ptr<AnglerViewController> _angler_vc = AnglerViewController::alloc(_gamestate, _angler, _angler, explode, _angler_see, _angler_skel, size, i);
 		_map_vc->getNode()->addChild(_angler_vc->getNode(), 1);
 		_angler_vcs.push_back(_angler_vc);
 	}

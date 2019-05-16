@@ -6,10 +6,20 @@ void FishViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameStat
 void FishViewController::update(shared_ptr<GameState> state) {
     
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
+        CULog("skel");
         _exp_node->setVisible(false);
         _exp_dup_node->setVisible(false);
-        _dead_fish->kill();
+        _mainCycle = true;
+        _cooldown = 0;
+        _skel_node->setVisible(true);
+        _skel_node->setVisible(true);
+        _skel = true;
         _dead = false;
+    }
+    
+    if (_skel == true && _skel_node->getFrame() == _skel_node->getSize()-1){
+        _dead_fish->kill();
+        _skel = false;
     }
     
 	_node->setVisible(state->_fish[_fish_index]->isAlive());
@@ -45,12 +55,19 @@ void FishViewController::update(shared_ptr<GameState> state) {
     _exp_dup_node->setPosition(state->_fish[_fish_index]->_box_dup->getPosition() * _grid_size);
     _exp_dup_node->setAngle(state->_fish[_fish_index]->_box_dup->getAngle());
     
+    _skel_node->setPosition(state->_fish[_fish_index]->_box->getPosition() * _grid_size);
+    _skel_node->setAngle(state->_fish[_fish_index]->_box->getAngle());
+    
+    _skel_dup_node->setPosition(state->_fish[_fish_index]->_box_dup->getPosition() * _grid_size);
+    _skel_dup_node->setAngle(state->_fish[_fish_index]->_box_dup->getAngle());
+    
     if(_dead){
         animateDead();
-    }else{
+    }else if(_skel){
+        animateSkel();
+    }else {
         animateFish();
     }
-
 }
 
 void FishViewController::setInitialVelocity(shared_ptr<GameState> state, Vec2 vel){
@@ -63,7 +80,7 @@ void FishViewController::reset() {
     CULog("fish vc reset");
 }
 
-shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, Size display, int fish_index) {
+shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> skel, Size display, int fish_index) {
 	shared_ptr<FishViewController> fish_vc = make_shared<FishViewController>();
 	fish_vc->_fish_index = fish_index;
 	fish_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -86,7 +103,19 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
     fish_vc->_exp_dup_node->setScale(fish_vc->_grid_size / explosion->getHeight()*10, fish_vc->_grid_size / explosion->getHeight()*10);
     fish_vc->_exp_dup_node->setVisible(false);
     
+    
+    fish_vc->_skel_node = AnimationNode::alloc(skel, 1, 10);
+    fish_vc->_skel_node->setPosition(init_state->_fish[fish_index]->getPosition());
+    fish_vc->_skel_node->setScale(fish_vc->_grid_size / skel->getHeight()*3, fish_vc->_grid_size / skel->getHeight()*3);
+    fish_vc->_skel_node->setVisible(false);
+    
+    fish_vc->_skel_dup_node = AnimationNode::alloc(skel, 1, 10);
+    fish_vc->_skel_dup_node->setPosition(init_state->_fish[fish_index]->getPosition());
+    fish_vc->_skel_dup_node->setScale(fish_vc->_grid_size / skel->getHeight()*3, fish_vc->_grid_size / skel->getHeight()*3);
+    fish_vc->_skel_dup_node->setVisible(false);
+    
     fish_vc->_dead = false;
+    fish_vc->_skel = false;
     
     fish_vc->normal = texture;
     fish_vc->rev = reverse;
@@ -95,6 +124,8 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
 	fish_vc->_node->addChild(fish_vc->_dup_node);
     fish_vc->_node->addChild(fish_vc->_exp_node);
     fish_vc->_node->addChild(fish_vc->_exp_dup_node);
+    fish_vc->_node->addChild(fish_vc->_skel_node);
+    fish_vc->_node->addChild(fish_vc->_skel_dup_node);
     
     fish_vc->_mainCycle  = true;
     
@@ -129,6 +160,40 @@ void FishViewController::animateDead() {
             _exp_dup_node->setFrame(_exp_dup_node->getFrame()+1);
         } else {
             _exp_dup_node->setFrame(_exp_dup_node->getFrame()-1);
+        }
+    } else{
+        _cooldown --;
+    }
+}
+
+
+void FishViewController::animateSkel() {
+    bool* cycle = &_mainCycle;
+    if (_cooldown == 0){
+        _cooldown = 3;
+        
+        if (_skel_node->getFrame() == 0 || _skel_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_skel_node->getFrame() == _skel_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _skel_node->setFrame(_skel_node->getFrame()+1);
+        } else {
+            _skel_node->setFrame(_skel_node->getFrame()-1);
+        }
+        
+        if (_skel_dup_node->getFrame() == 0 || _skel_dup_node->getFrame() == 1) {
+            *cycle = true;
+        } else if (_skel_dup_node->getFrame() == _skel_dup_node->getSize()-1) {
+            *cycle = false;
+        }
+        
+        if (*cycle) {
+            _skel_dup_node->setFrame(_skel_dup_node->getFrame()+1);
+        } else {
+            _skel_dup_node->setFrame(_skel_dup_node->getFrame()-1);
         }
     } else{
         _cooldown --;
@@ -179,6 +244,8 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;
+    _dead_fish->_box->setActive(false);
+    _dead_fish->_box_dup->setActive(false);
 }
 
 void FishViewController::revive(shared_ptr<Fish> fish) {
