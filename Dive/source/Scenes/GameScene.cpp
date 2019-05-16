@@ -281,7 +281,7 @@ void GameScene::createLevelAssets(){
             buildBlue();
             break;
         case 9: case 10: case 11: case 12:
-            buildBlue();
+			buildBlue();
             break;
         default:
             break;
@@ -378,6 +378,8 @@ void GameScene::buildOnce() {
 }
 
 void GameScene::buildScene(string level) {
+	CULog("Loading Level:");
+	CULog(level.c_str());
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
@@ -386,7 +388,7 @@ void GameScene::buildScene(string level) {
 	safe.origin *= scale;
 	safe.size *= scale;
 
-	Rect physics_bounds = Rect(-100, -100, 200, 200);
+	Rect physics_bounds = Rect(-1000, -1000, 2000, 2000);
     
     _block_counter = 0;
     _animation_counter = 10;

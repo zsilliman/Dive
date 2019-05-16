@@ -183,6 +183,9 @@
         },
         "level_10": {
             "file":     "levels/level_10.json"
+        },
+        "level_11": {
+            "file":     "levels/level_11.json"
         }
     },
     "fonts": {
