@@ -93,7 +93,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     bubble_sound = _assets->get<Sound>("bubble");
 
     surface->setListener([=](const std::string& name, bool down) {
-        if (down && _current == MAIN_MENU) {
+        if (!down&& _current == MAIN_MENU) {
             CULog("go from main to credits");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -104,7 +104,8 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
     
     depths->setListener([=](const std::string& name, bool down) {
-        if (down && _current == MAIN_MENU && !_alreadyTriggeredInput) {
+
+        if (!down && _current == MAIN_MENU && !_alreadyTriggeredInput) {
             CULog("go from main to level select");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -116,7 +117,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
 
     downarr->setListener([=](const std::string& name, bool down) {
-        if (down && _current == CREDITS && !_alreadyTriggeredInput) {
+        if (!down && _current == CREDITS && !_alreadyTriggeredInput) {
             CULog("go from credits to main");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -128,7 +129,8 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
     
     uparr->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT && !_alreadyTriggeredInput) {
+
+        if (!down && _current == LEVEL_SELECT && !_alreadyTriggeredInput) {
             CULog("go from level select to main");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -140,7 +142,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
     });
     
     level1->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 1 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -148,7 +150,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level2->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 2 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -156,7 +158,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level3->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 3 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -164,7 +166,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level4->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 4 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -172,7 +174,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level5->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 5 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -180,7 +182,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level6->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 6 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -188,7 +190,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level7->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 7 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -196,7 +198,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level8->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 8 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -204,7 +206,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level9->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 9 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -212,7 +214,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level10->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 10 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -220,7 +222,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level11->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 11 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
@@ -228,7 +230,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         }
     });
     level12->setListener([=](const std::string& name, bool down) {
-        if (down && _current == LEVEL_SELECT) {
+        if (!down&& _current == LEVEL_SELECT) {
             CULog("level 12 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);

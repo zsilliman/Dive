@@ -14,12 +14,12 @@ void PlayerViewController::update(shared_ptr<GameState> state) {
 	_dup_node->setAngle(state->_player->_box_dup->getAngle());
 
 	if (_direction == "right") {
-		_oc_node->flipHorizontal(false);
-		_dup_node->flipHorizontal(false);
+        _oc_node->setTexture(rev);
+        _dup_node->setTexture(rev);
 	}
 	else {
-        _oc_node->flipHorizontal(true);
-        _dup_node->flipHorizontal(true);
+        _oc_node->setTexture(normal);
+        _dup_node->setTexture(normal);
 	}
 
 	state->_player->updateSensors();
@@ -37,7 +37,7 @@ void PlayerViewController::lose(shared_ptr<Texture> texture){
 
 }
 
-shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display) {
+shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, Size display) {
 	shared_ptr<PlayerViewController> player_vc = make_shared<PlayerViewController>();
 	player_vc->_grid_size = display.width / init_state->_map->getWidth();
 	player_vc->_node = Node::allocWithPosition(Vec2(0, 0));
@@ -48,6 +48,9 @@ shared_ptr<PlayerViewController> PlayerViewController::alloc(shared_ptr<GameStat
 	player_vc->_dup_node->setScale(player_vc->_grid_size / texture->getHeight()*3, player_vc->_grid_size / texture->getHeight()*3);
 	player_vc->_dup_node->setPosition(init_state->_player->getPosition());
     player_vc->_display = display;
+    
+    player_vc->normal = texture;
+    player_vc->rev = reverse;
     
 	player_vc->_node->addChild(player_vc->_oc_node);
 	player_vc->_node->addChild(player_vc->_dup_node);
@@ -65,20 +68,12 @@ void PlayerViewController::setFloor(bool f){
 
 void PlayerViewController::animatePlayer(){
     if (_floor == false){
-        if (_oc_node->isFlipHorizontal()){
-            _oc_node->setFrame(4);
-        }else{
-            _oc_node->setFrame(5);
-        }
-        if (_dup_node->isFlipHorizontal()){
-            _dup_node->setFrame(4);
-        }else {
-            _dup_node->setFrame(5);
-        }
+        _oc_node->setFrame(5);
+        _dup_node->setFrame(5);
     }else{
         bool* cycle = &_mainCycle;
         if (_cooldown == 0){
-            _cooldown = 4;
+            _cooldown = 3;
             if (_oc_node->getFrame() == 0 || _oc_node->getFrame() == 1) {
                 *cycle = true;
             } else if (_oc_node->getFrame() == _oc_node->getSize()-1) {

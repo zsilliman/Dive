@@ -15,7 +15,9 @@ protected:
 	shared_ptr<AnimationNode> _dup_node;
     shared_ptr<AnimationNode> _exp_node;
     shared_ptr<AnimationNode> _exp_dup_node;
-
+    
+    shared_ptr<Texture> rev;
+    shared_ptr<Texture> normal;
     
     shared_ptr<Angler> _dead_ang;
 
@@ -43,7 +45,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> explosion, Size display, int angler_index);
+	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, Size display, int angler_index);
 
 	void kill(shared_ptr<Angler> angler);
 

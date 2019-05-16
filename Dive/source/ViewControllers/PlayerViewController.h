@@ -15,6 +15,8 @@ protected:
 	shared_ptr<AnimationNode> _dup_node;
 	string _direction = "right";
 
+    shared_ptr<Texture> rev;
+    shared_ptr<Texture> normal;
     float accelleration = 1.5f;
     float max_speed = 0.8f;
 	float _grid_size = 1;
@@ -43,7 +45,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, Size display);
+	static shared_ptr<PlayerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, Size display);
     
     int getCollision(shared_ptr<GameState> state);
     

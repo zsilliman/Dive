@@ -197,6 +197,7 @@
     <ClInclude Include="..\..\source\Scenes\GameScene.h" />
     <ClInclude Include="..\..\source\Scenes\InGameOverlay.h" />
     <ClInclude Include="..\..\source\Scenes\LoadingScene.h" />
+    <ClInclude Include="..\..\source\Scenes\MainMenuScene.hpp" />
     <ClInclude Include="..\..\source\Scenes\TitleAnimationScene.hpp" />
     <ClInclude Include="..\..\source\Scenes\TitleProgrammedScene.h" />
     <ClInclude Include="..\..\source\Util.h" />
@@ -232,6 +233,7 @@
     <ClCompile Include="..\..\source\Scenes\GameScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\InGameOverlay.cpp" />
     <ClCompile Include="..\..\source\Scenes\LoadingScene.cpp" />
+    <ClCompile Include="..\..\source\Scenes\MainMenuScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\TitleAnimationScene.cpp" />
     <ClCompile Include="..\..\source\Scenes\TitleProgrammedScene.cpp" />
     <ClCompile Include="..\..\source\ViewControllers\AnglerViewController.cpp" />

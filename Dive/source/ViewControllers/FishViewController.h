@@ -18,6 +18,9 @@ protected:
     
     shared_ptr<Fish> _dead_fish;
     
+    shared_ptr<Texture> rev;
+    shared_ptr<Texture> normal;
+    
 	float accelleration = 1.5f;
 	float max_speed = 0.8f;
 	float _grid_size = 1;
@@ -42,7 +45,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<FishViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> explosion, Size display, int fish_index);
+	static shared_ptr<FishViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, Size display, int fish_index);
 
 	void kill(shared_ptr<Fish> fish);
 

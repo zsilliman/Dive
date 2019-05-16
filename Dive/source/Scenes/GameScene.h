@@ -49,13 +49,14 @@ protected:
     
 	shared_ptr<Texture> _urchin;
 	shared_ptr<Texture> _shark;
+    shared_ptr<Texture> _shark_left;
 	shared_ptr<Texture> _angler;
     
     shared_ptr<Texture> explode;
     
 	shared_ptr<Texture> background_image;
 	shared_ptr<Texture> diving_texture;
-
+    shared_ptr<Texture> diving_left_texture;
     //sounds
     std::shared_ptr<Sound> bubble_sound;
     std::shared_ptr<Sound> victory_sound;
@@ -98,7 +99,6 @@ protected:
     int _prev_diver_angle;
     int _fish_remove;
 	int _angler_remove;
-    int _fish_countdown;
 	int _player_side_count;
     string _current_level;
     string _next_level;
@@ -222,6 +222,9 @@ public:
      * @param  contact  The two bodies that collided
      */
     void endContact(b2Contact* contact);
+    
+    int _fish_countdown [];
+
 };
 
 #endif /* __GAME_SCENE_H__ */
