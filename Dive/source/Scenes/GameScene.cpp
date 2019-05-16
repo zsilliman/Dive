@@ -415,9 +415,11 @@ void GameScene::buildScene(string level) {
 	_map_vc = PlatformMapViewController::alloc(_gamestate, _input, tilesheet, tilesheet_moveable, goal_texture, size);
 	addChild(_map_vc->getNode(), 1);
     
-	if (_player_vc != nullptr)
-		_player_vc.reset();
-	_player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
+    if (_player_vc != nullptr){
+        _player_vc.reset();
+        CULog("resetting player");
+    }
+    _player_vc = PlayerViewController::alloc(_gamestate, diving_texture, size);
     _map_vc->getNode()->addChild(_player_vc->getNode(),1);
     _playerFloor = false;
 
@@ -449,7 +451,7 @@ void GameScene::buildScene(string level) {
 	addChild(_overlay->_root_node, 4);
 	sortZOrder();
 	setState(PLAY);
-    Application::get()->setClearColor(Color4f::CORNFLOWER);
+    Application::get()->setClearColor(Color4f::BLACK);
     AudioChannels::get()->playMusic(background_music, true, background_music->getVolume());
 }
 
