@@ -77,9 +77,6 @@
         "explode" : {
             "file":      "textures/collision.png"
         },
-        "title": {
-            "file":      "animations/dive.jpg"
-        },
         "statue": {
             "file":     "textures/Statue.png"
         },
@@ -151,54 +148,6 @@
         },
         "lvl12":{
             "file":     "textures/buttons/lvl12.png"
-        },
-        "surfaceP":{
-            "file":     "textures/buttons/surfaceP.png"
-        },
-        "depthsP":{
-            "file":     "textures/buttons/depthsP.png"
-        },
-        "downP":{
-            "file":     "textures/buttons/downP.png"
-        },
-        "upP":{
-            "file":     "textures/buttons/upP.png"
-        },
-        "lvl1P":{
-            "file":     "textures/buttons/lvl1P.png"
-        },
-        "lvl2P":{
-            "file":     "textures/buttons/lvl2P.png"
-        },
-        "lvl3P":{
-            "file":     "textures/buttons/lvl3P.png"
-        },
-        "lvl4P":{
-            "file":     "textures/buttons/lvl4P.png"
-        },
-        "lvl5P":{
-            "file":     "textures/buttons/lvl5P.png"
-        },
-        "lvl6P":{
-            "file":     "textures/buttons/lvl6P.png"
-        },
-        "lvl7P":{
-            "file":     "textures/buttons/lvl7P.png"
-        },
-        "lvl8P":{
-            "file":     "textures/buttons/lvl8P.png"
-        },
-        "lvl9P":{
-            "file":     "textures/buttons/lvl9P.png"
-        },
-        "lvl10P":{
-            "file":     "textures/buttons/lvl10P.png"
-        },
-        "lvl11P":{
-            "file":     "textures/buttons/lvl11P.png"
-        },
-        "lvl12P":{
-            "file":     "textures/buttons/lvl12P.png"
         }
     },
     "levels": {
@@ -358,7 +307,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "surfaceP"
+                                "texture"  : "surface"
                             }
                         }
                     },
@@ -388,7 +337,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "depthsP"
+                                "texture"  : "depths"
                             }
                         }
                     },
@@ -433,7 +382,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "downP"
+                                "texture"  : "down"
                             }
                         }
                     },
@@ -512,7 +461,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "upP"
+                                "texture"  : "up"
                             }
                         }
                     },
@@ -541,7 +490,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl1P"
+                                "texture"  : "lvl1"
                             }
                         }
                     },
@@ -569,7 +518,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl2P"
+                                "texture"  : "lvl2"
                             }
                         }
                     },
@@ -597,7 +546,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl3P"
+                                "texture"  : "lvl3"
                             }
                         }
                     },
@@ -625,7 +574,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl4P"
+                                "texture"  : "lvl4"
                             }
                         }
                     },
@@ -653,7 +602,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl5P"
+                                "texture"  : "lvl5"
                             }
                         }
                     },
@@ -681,7 +630,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl6P"
+                                "texture"  : "lvl6"
                             }
                         }
                     },
@@ -709,7 +658,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl7P"
+                                "texture"  : "lvl7"
                             }
                         }
                     },
@@ -737,7 +686,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl8P"
+                                "texture"  : "lvl8"
                             }
                         }
                     },
@@ -765,7 +714,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl9P"
+                                "texture"  : "lvl9"
                             }
                         }
                     },
@@ -793,7 +742,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl10P"
+                                "texture"  : "lvl10"
                             }
                         }
                     },
@@ -821,7 +770,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl11P"
+                                "texture"  : "lvl11"
                             }
                         }
                     },
@@ -849,7 +798,7 @@
                         "down"       : {
                             "type"   : "Image",
                             "data"   : {
-                                "texture"  : "lvl12P"
+                                "texture"  : "lvl12"
                             }
                         }
                     },
