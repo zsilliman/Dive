@@ -63,6 +63,7 @@ protected:
     
     bool _animated;
     bool _menued;
+    bool first = true;
     
     bool _loaded = false;
     float scale;

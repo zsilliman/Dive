@@ -56,9 +56,6 @@
         "background-green":{
             "file":     "textures/background_green_2.png"
         },
-        "ui":{
-            "file":      "textures/ui.png"
-        },
         "background_clear":{
             "file":      "textures/background_blue_seethrough.png"
         },
@@ -82,6 +79,12 @@
         },
         "divemain":{
             "file":     "textures/buttons/divemain.png"
+        },
+        "UI_pause_up": {
+            "file":     "textures/ui/pause-button.png"
+        },
+        "UI_pause_down": {
+            "file":     "textures/ui/pause-button_down.png"
         },
         "surface":{
             "file":     "textures/buttons/surface.png"
@@ -133,12 +136,6 @@
         },
         "lvl12":{
             "file":     "textures/buttons/lvl12.png"
-        },
-        "UI_pause_up": {
-            "file":     "textures/ui/pause-button.png"
-        },
-        "UI_pause_down": {
-            "file":     "textures/ui/pause-button_down.png"
         }
     },
     "levels": {
@@ -194,7 +191,7 @@
         },
         "victory": {
             "type":     "sample",
-            "file":     "sounds/victory2.wav",
+            "file":     "sounds/victory3.wav",
             "volume":   0.5
         },
         "lose": {

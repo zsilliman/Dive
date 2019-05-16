@@ -8,6 +8,7 @@
 #define URCHIN_ANG_DAMP 0.3
 #define URCHIN_LIN_DAMP 4
 #define URCHIN_DENSITY 99999
+#define URCHIN_DROP 1.5
 
 using namespace cugl;
 using namespace std;

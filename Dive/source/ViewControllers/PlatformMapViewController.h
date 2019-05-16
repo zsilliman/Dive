@@ -7,6 +7,8 @@
 using namespace cugl;
 using namespace std;
 
+#define PLATFORM_SHIFT_SPEED 3
+
 class PlatformMapViewController : public ViewController {
 
 	vector<shared_ptr<PlatformViewController>> _platforms;

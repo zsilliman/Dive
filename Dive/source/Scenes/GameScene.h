@@ -152,7 +152,7 @@ public:
      *
      * @return true if the controller is initialized properly, false otherwise.
      */
-    bool init(const std::shared_ptr<cugl::AssetManager>& assets);
+    bool init(const std::shared_ptr<cugl::AssetManager>& assets, int level);
 
 	void setState(State state);
     
@@ -197,6 +197,8 @@ public:
     void anglerUrchinCollisions(Obstacle* angler, Obstacle* urchin);
 
     string cycleLevel();
+    
+    void startLevel(int level);
 
     /**
      * Handles any modifications necessary before collision resolution
