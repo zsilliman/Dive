@@ -86,9 +86,6 @@
         "explode" : {
             "file":      "textures/collision.png"
         },
-        "title": {
-            "file":      "animations/dive.jpg"
-        },
         "statue": {
             "file":     "textures/Statue.png"
         },
@@ -488,6 +485,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -506,7 +504,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level2" : {
@@ -515,6 +513,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -533,7 +532,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level3" : {
@@ -542,6 +541,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -560,7 +560,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level4" : {
@@ -569,6 +569,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -587,7 +588,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level5" : {
@@ -596,6 +597,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -614,7 +616,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level6" : {
@@ -623,6 +625,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -641,7 +644,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level7" : {
@@ -650,6 +653,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -668,7 +672,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level8" : {
@@ -677,6 +681,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -695,7 +700,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level9" : {
@@ -704,6 +709,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -722,7 +728,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level10" : {
@@ -731,6 +737,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -749,7 +756,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level11" : {
@@ -758,6 +765,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -776,7 +784,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 },
                 "level12" : {
@@ -785,6 +793,7 @@
                         "type" : "Anchored"
                     },
                     "data"   : {
+                        "anchor"   : [0,0.5],
                         "upnode"  : "up",
                         "downnode" : "down"
                     },
@@ -803,7 +812,7 @@
                         }
                     },
                     "layout":{
-                        "x_anchor": "middle"
+                        "x_anchor": "center"
                     }
                 }
             },

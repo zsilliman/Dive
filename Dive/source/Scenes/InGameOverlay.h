@@ -11,23 +11,27 @@ protected:
 
 	class Window {
 	protected:
-		shared_ptr<Node> _root;
+		shared_ptr<Node> _root, _background, _button_container;
 		shared_ptr<Label> _title;
-		shared_ptr<Button> _button1, _button2;
-		float _button_start_scale = 1.2;
-		float _button_end_scale = 1.4;
+		shared_ptr<Button> _button1, _button2, _button3 = nullptr;
+		float _button_start_scale = 1;
+		float _button_end_scale = 1;
 		float _title_scale = 1.6;
-		Button::Listener _callback1, _callback2;
+		float text_height;
+		Button::Listener _callback1, _callback2, _callback3;
 		
 	public:
 		static shared_ptr<Window> alloc(shared_ptr<Texture> back_img, Rect safe_area, shared_ptr<Font> font, string title, string label1, string label2);
+		void addButton(shared_ptr<Texture> back_img, Rect safe_area, shared_ptr<Font> font, string label);
 		void init(shared_ptr<Texture> back_img, Rect safe_area, shared_ptr<Font> font, string title, string label1, string label2);
 		shared_ptr<Node> getRoot() { return _root; }
 		void activate(int listener1, int listener2) { _button1->activate(listener1); _button2->activate(listener2); }
+		void activate3(int listener3) { _button3->activate(listener3); }
 		void setActive(bool active);
 		void update();
 		void setCallback1(Button::Listener callback1);
 		void setCallback2(Button::Listener callback2);
+		void setCallback3(Button::Listener callback2);
 	};
 
 	shared_ptr<Node> _ingame_node;
@@ -57,6 +61,7 @@ public:
 	void setResumeCallback(Button::Listener resume_callback);
 	void setContinueCallback(Button::Listener continue_callback);
 	void setPauseCallback(Button::Listener pause_callback);
+	void setRestartCallback(Button::Listener restart_callback);
 
 	State getState() { return _current_state; }
 
