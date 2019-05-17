@@ -249,7 +249,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
         level4->activate(LEVEL_FOUR);
         level5->activate(LEVEL_FIVE);
         level6->activate(LEVEL_SIX);
-        level5->activate(LEVEL_SEVEN);
+        level7->activate(LEVEL_SEVEN);
         level8->activate(LEVEL_EIGHT);
         level9->activate(LEVEL_NINE);
         level10->activate(LEVEL_TEN);

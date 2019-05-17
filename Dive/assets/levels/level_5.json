@@ -54,10 +54,10 @@
         {
          "name":"speeds",
          "type":"string",
-         "value":"[0,1,1,1,0]"
+         "value":"[0,1,1,1,0,0]"
         }],
  "renderorder":"right-down",
- "tiledversion":"1.2.3",
+ "tiledversion":"1.2.2",
  "tileheight":382,
  "tilesets":[
         {
