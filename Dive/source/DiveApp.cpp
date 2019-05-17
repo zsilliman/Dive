@@ -170,7 +170,6 @@ void DiveApp::update(float timestep) {
         _gameplay.update(timestep);
     }
     else{
-        CULog("back to menu");
         _menued = false;
         _menu.setActive(true);
         _menu.setLevelSelected(0);

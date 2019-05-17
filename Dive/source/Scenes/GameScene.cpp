@@ -141,14 +141,11 @@ void GameScene::update(float timestep) {
 
 		//else if (bd2->getName().find("fish") != string::npos) {
 		if (_fish_remove != -1) {
-			CULog("setting dead fish %d", _fish_remove);
 			_fish_vcs[_fish_remove]->kill(_gamestate->_fish[_fish_remove]);
 			_fish_remove = -1;
-			CULog("fish dead num  %d", _fish_remove);
 		}
 		//remove angler fish
 		if (_angler_remove != -1) {
-			CULog("setting dead angler %d", _angler_remove);
 			_angler_vcs[_angler_remove]->kill(_gamestate->_anglers[_angler_remove]);
 			_angler_remove = -1;
 		}
@@ -199,7 +196,6 @@ void GameScene::setState(State state) {
 	}
 	else if (state == LOSE && current_state != WIN && changed) {
         AudioChannels::get()->stopAllEffects();
-        CULog("stopping music");
         AudioChannels::get()->stopMusic();
         AudioChannels::get()->playEffect("lose", lose_sound);
 		_overlay->setState(LOSE);
@@ -345,14 +341,13 @@ void GameScene::buildOnce() {
 	_overlay = InGameOverlay::alloc(_assets, _input, safe, size);
 	Button::Listener main_menu_callback = [=](const std::string& name, bool down) {
         if (!down) {
-            CULog("MAIN MENU PRESSED");
             this->setActive(false);
         }
     };
 	_overlay->setMainMenuCallback(main_menu_callback);
 	Button::Listener resume_callback = [=](const std::string& name, bool down) {
         if (!down) {
-            this->setState(PLAY); CULog("RESUME PRESSED");
+            this->setState(PLAY);
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
         }
@@ -364,7 +359,6 @@ void GameScene::buildOnce() {
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             this->reset();
             this->setState(PLAY);
-            CULog("RETRY PRESSED");
         }
     };
 	_overlay->setRetryCallback(retry_callback);
@@ -373,7 +367,6 @@ void GameScene::buildOnce() {
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             this->reset();
-            CULog("CONTINUE PRESSED");
         }
     };
 	_overlay->setContinueCallback(continue_callback);
@@ -382,7 +375,6 @@ void GameScene::buildOnce() {
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
             this->setState(PAUSE);
-            CULog("PAUSE GAME PRESSED");
         }
     };
 	_overlay->setPauseCallback(pause_callback);
@@ -390,7 +382,6 @@ void GameScene::buildOnce() {
 		AudioChannels::get()->stopAllEffects();
 		AudioChannels::get()->playEffect("bubble", bubble_sound);
 		this->setState(PLAY);
-		CULog("TUTORIAL END PRESSED");
 	};
 	_overlay->setTutorialCallback(tutorial_callback);
 
@@ -400,8 +391,6 @@ void GameScene::buildOnce() {
 }
 
 void GameScene::buildScene(string level) {
-	CULog("Loading Level:");
-	CULog(level.c_str());
 	Size  size = Application::get()->getDisplaySize();
 	scale = SCENE_WIDTH / size.width;
 	size *= scale;
@@ -448,7 +437,6 @@ void GameScene::buildScene(string level) {
     
     if (_player_vc != nullptr){
         _player_vc.reset();
-        CULog("resetting player");
     }
     _player_vc = PlayerViewController::alloc(_gamestate, diving_texture, diving_left_texture, size);
 
@@ -508,7 +496,6 @@ void GameScene::reset() {
     _gamestate->reset();
     _player_vc->setAIDirection(_gamestate, "down");
 
-    CULog("Reset");
     buildScene(_current_level);
 }
 
@@ -646,7 +633,6 @@ void GameScene::fishPlatformCollisions(Obstacle* fish, Obstacle* platform){
 }
 
 void GameScene::fishFishCollisions(Obstacle* fish, Obstacle* fish2) {
-	CULog("SHARK COLLIDE");
 	char num1 = fish->getName().back();
 	int fishint1 = num1 - '0';
 

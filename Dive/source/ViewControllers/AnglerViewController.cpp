@@ -136,7 +136,6 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
     _skel_dup_node->setAngle(angle);
     
     if(_see && _see_node->getFrame() == _see_node->getSize()-1){
-        CULog("animation done");
         _see_dup_node->setFrame(0);
         _see_node->setFrame(0);
         _sCycle = true;
@@ -148,7 +147,6 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
         animateDead();
     }else{
         if (_see){
-            CULog("animate see");
             animateSee();
             _oc_node->setVisible(false);
             _dup_node->setVisible(false);
@@ -377,7 +375,6 @@ void AnglerViewController::animateAngler() {
 }
 
 void AnglerViewController::kill(shared_ptr<Angler> angler) {
-	CULog("killing angler fish");
     _dead_ang = angler;
     _oc_node->setVisible(false);
     _dup_node->setVisible(false);
@@ -391,6 +388,5 @@ void AnglerViewController::kill(shared_ptr<Angler> angler) {
 }
 
 void AnglerViewController::revive(shared_ptr<Angler> angler) {
-	CULog("reviving angler fish");
 	angler->revive();
 }

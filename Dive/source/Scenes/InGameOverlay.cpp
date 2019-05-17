@@ -21,8 +21,6 @@ void InGameOverlay::Window::init(shared_ptr<Texture> back_img, Rect safe_area, s
 	_root->addChild(_background);
 
 	text_height = _background->getHeight() / 6;
-	CULog("TEXT HEIGHT!");
-	CULog(std::to_string(text_height).c_str());
 
 	Color4 white = Color4(Vec3(1, 1, 1));
 	_title = Label::alloc(title, font);

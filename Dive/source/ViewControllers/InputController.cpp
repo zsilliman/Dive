@@ -265,7 +265,6 @@ void InputController::touchBeganCB(const cugl::TouchEvent& event, bool focus) {
                 _ltouch.position = event.position;
                 _ltouch.touchids.insert(event.touch);
                 _keyLeft = true;
-                CULog("left is pressed");
             }
             break;
         case Zone::RIGHT:
@@ -275,7 +274,6 @@ void InputController::touchBeganCB(const cugl::TouchEvent& event, bool focus) {
                 _rtouch.position = event.position;
                 _rtouch.touchids.insert(event.touch);
                 _keyRight = true;
-                CULog("right is pressed");
             }
             break;
         default:
@@ -300,11 +298,9 @@ void InputController::touchEndedCB(const cugl::TouchEvent& event, bool focus) {
     if (_ltouch.touchids.find(event.touch) != _ltouch.touchids.end()) {
         _ltouch.touchids.clear();
         _keyLeft = false;
-        CULog("left is UNpressed");
     } else if (_rtouch.touchids.find(event.touch) != _rtouch.touchids.end()) {
         _rtouch.touchids.clear();
         _keyRight = false;
-        CULog("right is UNpressed");
     }
     _dbtaptime = event.timestamp;
 }

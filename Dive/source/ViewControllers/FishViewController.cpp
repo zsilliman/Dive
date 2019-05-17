@@ -6,7 +6,6 @@ void FishViewController::draw(shared_ptr<SpriteBatch> batch, shared_ptr<GameStat
 void FishViewController::update(shared_ptr<GameState> state) {
     
     if (_dead == true && _exp_node->getFrame() == _exp_node->getSize()-1){
-        CULog("skel");
         _exp_node->setVisible(false);
         _exp_dup_node->setVisible(false);
         _dead = false;
@@ -84,7 +83,6 @@ void FishViewController::setInitialVelocity(shared_ptr<GameState> state, Vec2 ve
 void FishViewController::dispose() {}
 
 void FishViewController::reset() {
-    CULog("fish vc reset");
 }
 
 shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> skel, shared_ptr<Texture> reverse_skel, Size display, int fish_index) {
@@ -245,7 +243,6 @@ void FishViewController::animateFish(){
 }
 
 void FishViewController::kill(shared_ptr<Fish> fish) {
-	CULog("killing fish");
     _dead_fish = fish;
     _oc_node->setVisible(false);
     _dup_node->setVisible(false);
@@ -259,11 +256,9 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
 }
 
 void FishViewController::revive(shared_ptr<Fish> fish) {
-	CULog("reviving fish");
 	fish->revive();
 }
 
 void FishViewController::setDirection(shared_ptr<Fish> fish) {
-    CULog("changing fish direction");
     fish->changeDirection();
 }
