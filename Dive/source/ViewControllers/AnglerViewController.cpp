@@ -193,12 +193,12 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_exp_dup_node->setVisible(false);
     
     angler_vc->_see_node = AnimationNode::alloc(see, 1, 5);
-    angler_vc->_see_node->setScale(angler_vc->_grid_size / see->getHeight(), angler_vc->_grid_size / see->getHeight());
+    angler_vc->_see_node->setScale(angler_vc->_grid_size / see->getHeight()*1.5, angler_vc->_grid_size / see->getHeight()*1.5);
     angler_vc->_see_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_see_node->setVisible(false);
     
     angler_vc->_see_dup_node = AnimationNode::alloc(see, 1, 5);
-    angler_vc->_see_dup_node->setScale(angler_vc->_grid_size / see->getHeight(), angler_vc->_grid_size / see->getHeight());
+    angler_vc->_see_dup_node->setScale(angler_vc->_grid_size / see->getHeight()*1.5, angler_vc->_grid_size / see->getHeight()*1.5);
     angler_vc->_see_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_see_dup_node->setVisible(false);
     
