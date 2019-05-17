@@ -7,7 +7,7 @@
 #include <cugl/cugl.h>
 #include "Entity.h"
 
-#define PLAYER_HORIZONTAL_SPEED 1.8
+#define PLAYER_HORIZONTAL_SPEED 2.2 //1.8
 #define PLAYER_VERTICAL_SPEED 2
 
 using namespace cugl;

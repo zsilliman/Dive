@@ -246,6 +246,8 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
     _dead = true;
     _dead_fish->_box->setActive(false);
     _dead_fish->_box_dup->setActive(false);
+	fish->_box->setActive(false);
+	fish->_box_dup->setActive(false);
 }
 
 void FishViewController::revive(shared_ptr<Fish> fish) {

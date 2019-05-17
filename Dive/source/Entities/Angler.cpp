@@ -9,8 +9,8 @@ void Angler::initAngler(Vec2 start_pos, Rect map_rect) {
 	_dimensions = Size(1, 1);
 	_position = Vec2(start_pos + _dimensions / 2);
 	_start_pos = Vec2(start_pos + _dimensions / 2);
-	_box = BoxObstacle::alloc(_start_pos, Size(0.9, 0.9));
-	_box_dup = BoxObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), Size(0.9, 0.9));
+	_box = WheelObstacle::alloc(_start_pos, 0.4);
+	_box_dup = WheelObstacle::alloc(_start_pos + Vec2(map_rect.size.width, 0), 0.4);
 	_can_float = false;
 	_box->setFriction(ANGLER_FRICTION);
 	_box->setFixedRotation(true);

@@ -75,8 +75,9 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
 //        Compute vector pointing from angler to the player
         Vec2 diff = closest_player - closest_angler;
         //Prevent divide by zero error
-        if (diff.length() > 0.001)
-            state->_anglers[_angler_index]->setLinearVelocity(ANGLER_MAX_SPEED * diff / diff.length());
+		if (diff.length() > 0.001) {
+			Vec2 diff_norm = diff / diff.length();
+			state->_anglers[_angler_index]->setLinearVelocity(Vec2(diff_norm.x * ANGLER_HORI_MAX_SPEED, diff_norm.y * ANGLER_VERT_MAX_SPEED));		}
 	}
 
 	//new version:
@@ -204,12 +205,12 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     angler_vc->_see_dup_node->setVisible(false);
     
     angler_vc->_skel_node = AnimationNode::alloc(skel, 1, 10);
-    angler_vc->_skel_node->setPosition(init_state->_fish[angler_index]->getPosition());
+    angler_vc->_skel_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_skel_node->setScale(angler_vc->_grid_size / skel->getHeight()*3, angler_vc->_grid_size / skel->getHeight()*3);
     angler_vc->_skel_node->setVisible(false);
     
     angler_vc->_skel_dup_node = AnimationNode::alloc(skel, 1, 10);
-    angler_vc->_skel_dup_node->setPosition(init_state->_fish[angler_index]->getPosition());
+    angler_vc->_skel_dup_node->setPosition(init_state->_anglers[angler_index]->getPosition());
     angler_vc->_skel_dup_node->setScale(angler_vc->_grid_size / skel->getHeight()*3, angler_vc->_grid_size / skel->getHeight()*3);
     angler_vc->_skel_dup_node->setVisible(false);
     

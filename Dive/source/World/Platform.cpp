@@ -93,8 +93,6 @@ void Platform::rec_init(vector<int>* collision_data, vector<int>* render_data, V
 		//Checks whether adj is out of bounds in y direction.
 		if (adj.y < 0 || adj.y >= map_dimen.y)
 			adj.set(current);
-		if (wrapping == false && adj.x < 0 && adj.x >= map_dimen.x)
-			adj.set(current);
 		//Checks whether adj is out of bounds in x direction if wrapping is disabled
 		if (wrapping == false && (adj.x < 0 || adj.x >= map_dimen.x))
 			adj.set(current);

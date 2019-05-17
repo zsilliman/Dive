@@ -8,7 +8,8 @@
 #define ANGLER_ANG_DAMP 0.0
 #define ANGLER_LIN_DAMP 0.0
 #define ANGLER_DENSITY 0
-#define ANGLER_MAX_SPEED 3.5
+#define ANGLER_HORI_MAX_SPEED 2.8
+#define ANGLER_VERT_MAX_SPEED 6.5
 #define ANGLER_VIEW_DIST 5
 
 using namespace cugl;
