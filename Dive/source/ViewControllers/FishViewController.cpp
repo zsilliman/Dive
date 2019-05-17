@@ -36,13 +36,17 @@ void FishViewController::update(shared_ptr<GameState> state) {
     if (state->_fish[_fish_index]->isLeft()){
         _oc_node->setTexture(normal);
         _dup_node->setTexture(normal);
-        _skel_node->setTexture(normal_skel);
-        _skel_dup_node->setTexture(normal_skel);
+        if (_skel == false){
+            _skel_node->setTexture(normal_skel);
+            _skel_dup_node->setTexture(normal_skel);
+        }
     }else{
         _oc_node->setTexture(rev);
         _dup_node->setTexture(rev);
-        _skel_node->setTexture(rev_skel);
-        _skel_dup_node->setTexture(rev_skel);
+        if (_skel == false){
+            _skel_node->setTexture(rev_skel);
+            _skel_dup_node->setTexture(rev_skel);
+        }
     }
 
 	state->_fish[_fish_index]->setLinearVelocity(vel);
