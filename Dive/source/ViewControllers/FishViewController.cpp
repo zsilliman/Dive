@@ -9,16 +9,19 @@ void FishViewController::update(shared_ptr<GameState> state) {
         CULog("skel");
         _exp_node->setVisible(false);
         _exp_dup_node->setVisible(false);
+        _dead = false;
         _mainCycle = true;
         _cooldown = 0;
         _skel_node->setVisible(true);
-        _skel_node->setVisible(true);
+        _skel_dup_node->setVisible(true);
         _skel = true;
-        _dead = false;
+        
     }
     
     if (_skel == true && _skel_node->getFrame() == _skel_node->getSize()-1){
         _dead_fish->kill();
+        _skel_node->setVisible(false);
+        _skel_dup_node->setVisible(false);
         _skel = false;
     }
     
@@ -34,9 +37,13 @@ void FishViewController::update(shared_ptr<GameState> state) {
     if (state->_fish[_fish_index]->isLeft()){
         _oc_node->setTexture(normal);
         _dup_node->setTexture(normal);
+        _skel_node->setTexture(normal_skel);
+        _skel_dup_node->setTexture(normal_skel);
     }else{
         _oc_node->setTexture(rev);
         _dup_node->setTexture(rev);
+        _skel_node->setTexture(rev_skel);
+        _skel_dup_node->setTexture(rev_skel);
     }
 
 	state->_fish[_fish_index]->setLinearVelocity(vel);
@@ -80,7 +87,7 @@ void FishViewController::reset() {
     CULog("fish vc reset");
 }
 
-shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> skel, Size display, int fish_index) {
+shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> skel, shared_ptr<Texture> reverse_skel, Size display, int fish_index) {
 	shared_ptr<FishViewController> fish_vc = make_shared<FishViewController>();
 	fish_vc->_fish_index = fish_index;
 	fish_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -119,6 +126,9 @@ shared_ptr<FishViewController> FishViewController::alloc(shared_ptr<GameState> i
     
     fish_vc->normal = texture;
     fish_vc->rev = reverse;
+    
+    fish_vc->normal_skel = skel;
+    fish_vc->rev_skel = reverse_skel;
 
 	fish_vc->_node->addChild(fish_vc->_oc_node);
 	fish_vc->_node->addChild(fish_vc->_dup_node);
@@ -244,8 +254,6 @@ void FishViewController::kill(shared_ptr<Fish> fish) {
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;
-    _dead_fish->_box->setActive(false);
-    _dead_fish->_box_dup->setActive(false);
 	fish->_box->setActive(false);
 	fish->_box_dup->setActive(false);
 }

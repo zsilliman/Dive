@@ -29,6 +29,12 @@
         "shark_skel":{
             "file":      "textures/enemies/sharkSkeleton.png"
         },
+        "angler_skel_rev": {
+            "file":      "textures/enemies/anglerSkeleton_right.png"
+        },
+        "shark_skel_rev":{
+            "file":      "textures/enemies/sharkSkeleton_right.png"
+        },
         "blue_urchin": {
             "file":      "textures/enemies/BLight_Urchin.png"
         },

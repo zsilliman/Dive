@@ -23,6 +23,9 @@ protected:
     shared_ptr<Texture> rev;
     shared_ptr<Texture> normal;
     
+    shared_ptr<Texture> rev_skel;
+    shared_ptr<Texture> normal_skel;
+    
     shared_ptr<Angler> _dead_ang;
 
 	float accelleration = 1.5f;
@@ -57,7 +60,7 @@ public:
 
 	void reset() override;
 
-	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> see, shared_ptr<Texture> skel, Size display, int angler_index);
+	static shared_ptr<AnglerViewController> alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion, shared_ptr<Texture> see, shared_ptr<Texture> skel, shared_ptr<Texture> skel_reverse, Size display, int angler_index);
 
 	void kill(shared_ptr<Angler> angler);
 

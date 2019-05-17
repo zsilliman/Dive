@@ -11,7 +11,7 @@ void AnglerViewController::update(shared_ptr<GameState> state) {
         _mainCycle = true;
         _cooldown = 0;
         _skel_node->setVisible(true);
-        _skel_node->setVisible(true);
+        _skel_dup_node->setVisible(true);
         _skel = true;
         _dead = false;
     }
@@ -171,7 +171,7 @@ void AnglerViewController::reset() {
 
 }
 
-shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  shared_ptr<Texture> see, shared_ptr<Texture> skel ,Size display, int angler_index) {
+shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameState> init_state, shared_ptr<Texture> texture, shared_ptr<Texture> reverse, shared_ptr<Texture> explosion,  shared_ptr<Texture> see, shared_ptr<Texture> skel, shared_ptr<Texture> skel_reverse, Size display, int angler_index) {
 	shared_ptr<AnglerViewController> angler_vc = make_shared<AnglerViewController>();
 	angler_vc->_angler_index = angler_index;
 	angler_vc->_grid_size = display.width / init_state->_map->getWidth();
@@ -220,6 +220,9 @@ shared_ptr<AnglerViewController> AnglerViewController::alloc(shared_ptr<GameStat
     
     angler_vc->normal = texture;
     angler_vc->rev = reverse;
+    
+    angler_vc->normal_skel = skel;
+    angler_vc->rev_skel = skel_reverse;
 
 	angler_vc->_node->addChild(angler_vc->_oc_node);
 	angler_vc->_node->addChild(angler_vc->_dup_node);
@@ -383,8 +386,8 @@ void AnglerViewController::kill(shared_ptr<Angler> angler) {
     _mainCycle = true;
     _cooldown = 0;
     _dead = true;
-    _dead_ang->_box->setActive(false);
-    _dead_ang->_box_dup->setActive(false);
+    angler->_box->setActive(false);
+    angler->_box_dup->setActive(false);
 }
 
 void AnglerViewController::revive(shared_ptr<Angler> angler) {
