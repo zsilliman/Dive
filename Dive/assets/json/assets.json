@@ -77,7 +77,7 @@
         "yellow_angler_see":{
             "file":      "textures/enemies/P_AnglerSeeDiver.png"
         },
-        "yellow_shark-left":{
+        "yellow_shark_left":{
             "file":      "textures/enemies/P_Shark-left.png"
         },
         "background":{
