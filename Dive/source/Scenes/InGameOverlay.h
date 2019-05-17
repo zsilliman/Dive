@@ -2,6 +2,7 @@
 
 #include <cugl/cugl.h>
 #include "../Util.h"
+#include "../ViewControllers/InputController.h"
 
 using namespace cugl;
 using namespace std;
@@ -34,16 +35,19 @@ protected:
 		void setCallback3(Button::Listener callback2);
 	};
 
-	shared_ptr<Node> _ingame_node;
+	shared_ptr<Node> _ingame_node, tutorial_node;
 	shared_ptr<Window> _pause_node, _lose_node, _win_node;
 	shared_ptr<Button> _pause_button;
-	Button::Listener _pause_callback;
+	shared_ptr<InputController> _input;
+	Button::Listener _pause_callback, _tutorial_callback;
+	bool _tutorial_active = false, pressed_prev = false;
     
     std::shared_ptr<cugl::Sound> bubble_sound;
 
-	
 	State _current_state;
 	
+	void buildTutorialNode(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area, Size display);
+
 	void setPauseActive(bool active);
 
 public:
@@ -52,16 +56,16 @@ public:
 	InGameOverlay() {}
 	~InGameOverlay() { dispose(); }
 
-	static shared_ptr<InGameOverlay> alloc(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area);
+	static shared_ptr<InGameOverlay> alloc(const std::shared_ptr<cugl::AssetManager>& assets, shared_ptr<InputController> _input, Rect safe_area, Size display);
 
-	void init(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area);
+	void init(const std::shared_ptr<cugl::AssetManager>& assets, shared_ptr<InputController> _input, Rect safe_area, Size display);
 
 	void setMainMenuCallback(Button::Listener menu_callback);
 	void setRetryCallback(Button::Listener retry_callback);
 	void setResumeCallback(Button::Listener resume_callback);
 	void setContinueCallback(Button::Listener continue_callback);
 	void setPauseCallback(Button::Listener pause_callback);
-	void setRestartCallback(Button::Listener restart_callback);
+	void setTutorialCallback(Button::Listener tutorial_callback);
 
 	State getState() { return _current_state; }
 

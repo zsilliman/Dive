@@ -149,13 +149,15 @@ void InGameOverlay::Window::update() {
 	}
 }
 
-shared_ptr<InGameOverlay> InGameOverlay::alloc(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area) {
+shared_ptr<InGameOverlay> InGameOverlay::alloc(const std::shared_ptr<cugl::AssetManager>& assets, shared_ptr<InputController> _input, Rect safe_area, Size display) {
 	shared_ptr<InGameOverlay> overlay = make_shared<InGameOverlay>();
-	overlay->init(assets, safe_area);
+	overlay->init(assets, _input, safe_area, display);
 	return overlay;
 }
 
-void InGameOverlay::init(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area) {
+void InGameOverlay::init(const std::shared_ptr<cugl::AssetManager>& assets, shared_ptr<InputController> input, Rect safe_area, Size display) {
+	_input = input;
+	
 	_root_node = Node::alloc();
 
 	//Get view assets
@@ -187,12 +189,40 @@ void InGameOverlay::init(const std::shared_ptr<cugl::AssetManager>& assets, Rect
 	_ingame_node = Node::alloc();
 	_ingame_node->addChild(_pause_button);
 	_root_node->addChild(_ingame_node);
+	buildTutorialNode(assets, safe_area, display);
 
 	_pause_node->activate(2,3);
 	_pause_node->activate3(100);
 	_win_node->activate(4,5);
 	_lose_node->activate(6,7);
 	_pause_button->activate(8);
+}
+
+void InGameOverlay::buildTutorialNode(const std::shared_ptr<cugl::AssetManager>& assets, Rect safe_area, Size display) {
+	shared_ptr<Texture> background_tex = assets->get<Texture>("touch_loc");
+	shared_ptr<Texture> anywhere_tex = assets->get<Texture>("touch_anywhere");
+	shared_ptr<Texture> either_tex = assets->get<Texture>("touch_either");
+
+	tutorial_node = Node::alloc();
+	tutorial_node->setName("tutorial node");
+	shared_ptr<PolygonNode> _background = PolygonNode::allocWithTexture(background_tex);
+	_background->setAnchor(Vec2::ANCHOR_BOTTOM_LEFT);
+	_background->setScale(display.width/background_tex->getWidth(), display.height/background_tex->getHeight());
+
+	shared_ptr<PolygonNode> _touch_either = PolygonNode::allocWithTexture(either_tex);
+	_touch_either->setAnchor(Vec2::ANCHOR_CENTER);
+	_touch_either->setPosition(safe_area.getMidX(), safe_area.getMidY());
+	_touch_either->setScale(safe_area.size.width*0.8 / either_tex->getWidth());
+	
+	shared_ptr<PolygonNode> _touch_anywhere = PolygonNode::allocWithTexture(anywhere_tex);
+	_touch_anywhere->setAnchor(Vec2::ANCHOR_BOTTOM_CENTER);
+	_touch_anywhere->setPosition(safe_area.getMidX(), safe_area.getMinY() + safe_area.size.height*0.1);
+	_touch_anywhere->setScale(safe_area.size.width*0.6 / anywhere_tex->getWidth());
+
+	tutorial_node->addChild(_background);
+	tutorial_node->addChild(_touch_anywhere);
+	tutorial_node->addChild(_touch_either);
+	_root_node->addChild(tutorial_node);
 }
 
 void InGameOverlay::setMainMenuCallback(Button::Listener menu_callback) {
@@ -219,6 +249,10 @@ void InGameOverlay::setPauseCallback(Button::Listener pause_callback) {
 	_pause_button->setListener(pause_callback);
 }
 
+void InGameOverlay::setTutorialCallback(Button::Listener tutorial_callback) {
+	_tutorial_callback = tutorial_callback;
+}
+
 void InGameOverlay::dispose() {
 	_ingame_node = nullptr;
 	_pause_node = nullptr;
@@ -242,6 +276,8 @@ void InGameOverlay::setState(State state) {
 	_lose_node->setActive(false);
 	setPauseActive(false);
 	_current_state = state;
+	tutorial_node->setVisible(false);
+	_tutorial_active = false;
 
 	if (state == PLAY) {
 		setPauseActive(true);
@@ -255,12 +291,23 @@ void InGameOverlay::setState(State state) {
 	else if (state == PAUSE) {
 		_pause_node->setActive(true);
 	}
+	else if (state == TUTORIAL) {
+		tutorial_node->setVisible(true);
+		_tutorial_active = true;
+		pressed_prev = false;
+	}
 }
 
 void InGameOverlay::update(float timestep) {
 	_pause_node->update();
 	_win_node->update();
 	_lose_node->update();
+
+	bool pressed_current = (_input->goingLeft() || _input->goingRight());
+	if (_current_state == TUTORIAL && !pressed_current && pressed_prev) {
+		_tutorial_callback("", true);
+	}
+	pressed_prev = pressed_current;
 }
 
 void InGameOverlay::reset() {

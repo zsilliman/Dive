@@ -176,6 +176,9 @@ void GameScene::update(float timestep) {
 	else if (current_state == WIN) {
 		//YOU WIN ANIMATION (OVERLAY ALREADY IMPLEMENTED)
 	}
+	else if (current_state == TUTORIAL) {
+		//ANY TUTORIAL-SPECIFIC CODE (OVERLAY ALREADY IMPLEMENTED)
+	}
 	else { //PAUSED
 		//probably nothing
         AudioChannels::get()->stopAllEffects();
@@ -215,6 +218,10 @@ void GameScene::setState(State state) {
 	else if (state == PAUSE) {
 		_overlay->setState(PAUSE);
 		current_state = PAUSE;
+	}
+	else if (state == TUTORIAL) {
+		_overlay->setState(TUTORIAL);
+		current_state = TUTORIAL;
 	}
 }
 
@@ -334,7 +341,7 @@ void GameScene::buildOnce() {
     ocean_sound = _assets->get<Sound>("ocean");
     shark_sound = _assets->get<Sound>("shark");
 
-	_overlay = InGameOverlay::alloc(_assets, safe);
+	_overlay = InGameOverlay::alloc(_assets, _input, safe, size);
 	Button::Listener main_menu_callback = [=](const std::string& name, bool down) {
         if (!down) {
             CULog("MAIN MENU PRESSED");
@@ -378,6 +385,13 @@ void GameScene::buildOnce() {
         }
     };
 	_overlay->setPauseCallback(pause_callback);
+	Button::Listener tutorial_callback = [=](const std::string& name, bool down) {
+		AudioChannels::get()->stopAllEffects();
+		AudioChannels::get()->playEffect("bubble", bubble_sound);
+		this->setState(PLAY);
+		CULog("TUTORIAL END PRESSED");
+	};
+	_overlay->setTutorialCallback(tutorial_callback);
 
 	_overlay->setState(PLAY);
     
@@ -471,7 +485,14 @@ void GameScene::buildScene(string level) {
 	addChild(_background, 0);
 	addChild(_overlay->_root_node, 4);
 	sortZOrder();
-	setState(PLAY);
+
+	if (_current_level == "level_1") {
+		setState(TUTORIAL);
+	}
+	else {
+		setState(PLAY);
+	}
+
     Application::get()->setClearColor(Color4f::BLACK);
     AudioChannels::get()->playMusic(background_music, true, background_music->getVolume());
 

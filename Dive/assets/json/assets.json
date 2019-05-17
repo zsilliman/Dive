@@ -14,6 +14,15 @@
             "wrapS":    "clamp",
             "wrapT":    "clamp"
         },
+        "touch_loc": {
+            "file":      "textures/tutorial/touch_loc.png"
+        },
+        "touch_anywhere": {
+            "file":      "textures/tutorial/touch_anywhere.png"
+        },
+        "touch_either": {
+            "file":      "textures/tutorial/touch_either.png"
+        },
         "angler_skel": {
             "file":      "textures/enemies/anglerSkeleton.png"
         },

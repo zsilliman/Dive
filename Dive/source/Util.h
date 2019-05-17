@@ -11,7 +11,7 @@
 #define GOAL_TILE_ID        5+OFFSET
 #define FISH_RIGHT_TILE_ID  6+OFFSET
 
-enum State { WIN, LOSE, PLAY, PAUSE };
+enum State { WIN, LOSE, PLAY, PAUSE, TUTORIAL };
 
 class Util {
 
