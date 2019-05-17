@@ -234,7 +234,7 @@ bool MainMenuScene::init(const std::shared_ptr<cugl::AssetManager>& assets) {
             CULog("level 12 selected");
             AudioChannels::get()->stopAllEffects();
             AudioChannels::get()->playEffect("bubble", bubble_sound);
-            _level_selected = 10; //CHANGE THIS
+            _level_selected = 12;
         }
     });
     

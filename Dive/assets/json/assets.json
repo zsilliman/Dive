@@ -204,6 +204,9 @@
         },
         "level_11": {
             "file":     "levels/level_11.json"
+        },
+        "level_12": {
+            "file":     "levels/level_12.json"
         }
     },
     "fonts": {
