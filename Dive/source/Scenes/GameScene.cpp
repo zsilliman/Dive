@@ -247,7 +247,6 @@ void GameScene::buildYellow(){
     _shark_left = _assets->get<Texture>("yellow_shark_left");
     _angler = _assets->get<Texture>("yellow_angler");
     _angler_see = _assets->get<Texture>("yellow_angler_see");
-    background_image = _assets->get<Texture>("background-purple");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -257,7 +256,6 @@ void GameScene::buildBlue(){
     _shark_left = _assets->get<Texture>("blue_shark_left");
     _angler = _assets->get<Texture>("blue_angler");
     _angler_see = _assets->get<Texture>("blue_angler_see");
-    background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -267,7 +265,6 @@ void GameScene::buildRed(){
     _shark_left = _assets->get<Texture>("red_shark_left");
     _angler = _assets->get<Texture>("red_angler");
     _angler_see = _assets->get<Texture>("red_angler_see");
-    background_image = _assets->get<Texture>("background-green");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -277,7 +274,6 @@ void GameScene::buildPurple(){
     _shark_left = _assets->get<Texture>("purple_shark_left");
     _angler = _assets->get<Texture>("purple_angler");
     _angler_see = _assets->get<Texture>("purple_angler_see");
-    background_image = _assets->get<Texture>("background");
     texture = _assets->get<Texture>("tileset");
 }
 
@@ -287,12 +283,15 @@ void GameScene::createLevelAssets(){
     switch (level_int) {
         case 1: case 2: case 3: case 4:
             buildBlue();
+            background_image = _assets->get<Texture>("background");
             break;
         case 5: case 6: case 7: case 8:
-            buildRed();
+            buildBlue();
+            background_image = _assets->get<Texture>("background-green");
             break;
         case 9: case 10: case 11: case 12:
             buildYellow();
+            background_image = _assets->get<Texture>("background-purple");
             break;
         default:
             break;
